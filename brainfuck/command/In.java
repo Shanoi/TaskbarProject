@@ -5,17 +5,27 @@ import brainfuck.ComputationalModel;
 
 public class In implements Command {
 
+    static int cnt = 0;
+    static String str;
+    static int str_length = 0;
+    static int state;
+
     @Override
     public void execute() {
         ComputationalModel cm = new ComputationalModel();
-        Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
-        sc.close();
-        if (str.length() == 0 || str.length() > 1) {
-            System.exit(3);
-        } else {
-            char a = str.charAt(0);
+        if (state == 0) {
+            Scanner sc = new Scanner(System.in);
+            str = sc.nextLine();
+            sc.close();
+            str_length = str.length();
+            state = 1;
+        }
+        if (cnt < str_length) {
+            char a = str.charAt(cnt);
             cm.setCurrentCaseValue((byte) a);
+            cnt++;
+        } else {
+            System.exit(3);
         }
 
     }
