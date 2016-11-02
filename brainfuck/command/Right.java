@@ -13,6 +13,12 @@ import brainfuck.ComputationalModel;
  */
 public class Right implements Command {
 
+    private final String color = "0000ff";
+
+    public String getColor() {
+        return color;
+    }
+
     /**
      * Change the current cell of the memory, taking the cell at the right of
      * the current cell

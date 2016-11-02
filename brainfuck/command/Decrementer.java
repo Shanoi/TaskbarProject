@@ -13,6 +13,12 @@ import brainfuck.ComputationalModel;
  */
 public class Decrementer implements Command {
 
+    private final String color = "4b0082";
+
+    public String getColor() {
+        return color;
+    }
+
     /**
      * Decrement the value of the current cell of the memory
      *
