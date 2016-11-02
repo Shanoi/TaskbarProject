@@ -9,7 +9,7 @@ import brainfuck.ComputationalModel;
 
 /**
  *
- * @author Olivier
+ * @author TeamTaskbar
  */
 public class Incrementer implements Command {
 
@@ -39,3 +39,6 @@ public class Incrementer implements Command {
     }
 
 }
+
+
+
