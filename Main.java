@@ -8,7 +8,8 @@ public class Main {
 
         Text T;
         T = new Text(args[args.length - 1]);
-        T.launchInterpreter();
+       	T.wellformed();
+	T.launchInterpreter();
         if (isPresent(args, "-p")) {
             ComputationalModel.affichememoire();
         }

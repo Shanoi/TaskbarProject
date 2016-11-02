@@ -12,5 +12,5 @@ abstract class Interpreter {
      */
     protected ComputationalModel cm = new ComputationalModel();
     protected HashMap<String, Command> Instructions;
-
+    protected String path = new String();
 }

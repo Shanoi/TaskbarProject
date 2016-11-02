@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 public class Text extends Interpreter {
 
-    BufferedReader memoryOfFile;
+    
 
     /**
      * Initialize the different command
@@ -28,7 +28,7 @@ public class Text extends Interpreter {
      */
     public Text(String directory) throws FileNotFoundException {
 
-        this.memoryOfFile = new BufferedReader(new FileReader(directory));
+	this.path = directory;
         ComputationalModel.init();
 
         Instructions = new HashMap<>();
@@ -55,8 +55,8 @@ public class Text extends Interpreter {
      * the mixed synthaxe
      *
      */
-    public void launchInterpreter() {
-
+    public void launchInterpreter() throws IOException, FileNotFoundException{
+	BufferedReader memoryOfFile = new BufferedReader(new FileReader(path));
         String line = new String();
 
         try {
@@ -73,7 +73,7 @@ public class Text extends Interpreter {
         } catch (IOException ex) {
             Logger.getLogger(Text.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+	memoryOfFile.close();
     }
 
     public void readShort(String line) {
@@ -94,7 +94,7 @@ public class Text extends Interpreter {
      */
     public void rewrite() throws IOException {
         String line = new String();
-
+	BufferedReader memoryOfFile = new BufferedReader(new FileReader(path));
         while ((line = memoryOfFile.readLine()) != null) {
 
             if ((line.charAt(0) >= 'A') && (line.charAt(0) <= 'Z')) {
@@ -104,6 +104,15 @@ public class Text extends Interpreter {
             }
 
         }
+	memoryOfFile.close();
+    }
+    public void wellformed() throws IOException
+    {
+	BufferedReader memoryOfFile = new BufferedReader(new FileReader(path));
+
+       	String str = memoryOfFile.readLine();
+
+	memoryOfFile.close();
     }
 
 }
