@@ -12,6 +12,7 @@ public class In implements Command {
     static int str_length = 0;
     static int state;
 
+    @Override
     public String getColor() {
         return color;
     }

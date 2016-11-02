@@ -17,4 +17,6 @@ public interface Command {
 
     void printShort();
 
+    String getColor();
+    
 }

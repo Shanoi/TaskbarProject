@@ -6,6 +6,7 @@ public class Out implements Command {
 
     private final String color = "00ff00";
 
+    @Override
     public String getColor() {
         return color;
     }

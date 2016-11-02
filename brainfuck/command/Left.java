@@ -15,6 +15,7 @@ public class Left implements Command {
 
     private final String color = "9400d3";
 
+    @Override
     public String getColor() {
         return color;
     }
