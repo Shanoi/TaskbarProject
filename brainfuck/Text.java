@@ -1,5 +1,5 @@
 package brainfuck;
-//test
+
 import brainfuck.command.AfficheMemory;
 import brainfuck.command.Decrementer;
 import brainfuck.command.In;
