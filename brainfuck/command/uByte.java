@@ -1,4 +1,4 @@
-package brainfuck.v5.command;
+package brainfuck.command;
 
 /**
  * This class convert a signed Byte to an unsigned byte
@@ -12,12 +12,11 @@ public class uByte {
     public uByte() {
         this.a = 0;
     }
-    
+
     public uByte(byte a) {
         this.a = a;
     }
 
-  
     public void set(byte n) {
         this.a = n;
     }

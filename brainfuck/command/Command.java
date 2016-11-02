@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package brainfuck.v5.command;
+package brainfuck.command;
 
 /**
- * Interface of the command pattern
- * Define method for the diffrent object of the command pattern
- * 
+ * Interface of the command pattern Define method for the diffrent object of the
+ * command pattern
+ *
  * @author Olivier
  */
 public interface Command {
 
     void execute();
+
     void printShort();
 
 }

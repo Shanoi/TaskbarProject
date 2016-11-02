@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package brainfuck.v5;
+package brainfuck;
 
-import brainfuck.v5.command.AfficheMemory;
-import brainfuck.v5.command.Command;
-import brainfuck.v5.command.Decrementer;
-import brainfuck.v5.command.In;
-import brainfuck.v5.command.Incrementer;
-import brainfuck.v5.command.Left;
-import brainfuck.v5.command.Out;
-import brainfuck.v5.command.Right;
+import brainfuck.command.AfficheMemory;
+import brainfuck.command.Command;
+import brainfuck.command.Decrementer;
+import brainfuck.command.In;
+import brainfuck.command.Incrementer;
+import brainfuck.command.Left;
+import brainfuck.command.Out;
+import brainfuck.command.Right;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -28,8 +28,8 @@ public class Image extends Interpreter {
     private String filename;
 
     /**
-     * Constructor
-     * Initialize the Command to modify the memory
+     * Constructor Initialize the Command to modify the memory
+     *
      * @param filename The image file to read and execute
      */
     public Image(String filename) {
@@ -51,7 +51,7 @@ public class Image extends Interpreter {
         Instructions.put("AFF", new AfficheMemory());
 
     }
- 
+
     /**
      * Read the image file and execute the program in it
      */
@@ -89,7 +89,6 @@ public class Image extends Interpreter {
 
                         }
 
-                        
                         String rgb = String.format("%02x", pixelcolorBase.getRed());
                         rgb += String.format("%02x", pixelcolorBase.getGreen());
                         rgb += String.format("%02x", pixelcolorBase.getBlue());
@@ -99,7 +98,7 @@ public class Image extends Interpreter {
                         if (tempinstruction != null) {
 
                             System.out.println("INSTR : " + tempinstruction);
-                            
+
                             tempinstruction.execute();
 
                         } else {
@@ -111,7 +110,6 @@ public class Image extends Interpreter {
                         System.out.println("cpt : " + compteur);
                         compteur++;
 
-                  
                     }
 
                 }
@@ -126,5 +124,5 @@ public class Image extends Interpreter {
         System.out.println("Compteur " + compteur);
 
     }
-    
+
 }

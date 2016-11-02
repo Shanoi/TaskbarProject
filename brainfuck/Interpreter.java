@@ -1,10 +1,10 @@
-package brainfuck.v5;
+package brainfuck;
 
-import brainfuck.v5.command.Command;
+import brainfuck.command.Command;
 import java.util.HashMap;
 
 abstract class Interpreter {
-    
+
     /*
      *
      *  attributes

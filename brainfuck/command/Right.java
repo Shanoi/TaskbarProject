@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package brainfuck.v5.command;
+package brainfuck.command;
 
-import brainfuck.v5.ComputationalModel;
+import brainfuck.ComputationalModel;
 
 /**
  *
@@ -14,13 +14,14 @@ import brainfuck.v5.ComputationalModel;
 public class Right implements Command {
 
     /**
-     * Change the current cell of the memory, taking the cell at the right of the current cell
-     * 
+     * Change the current cell of the memory, taking the cell at the right of
+     * the current cell
+     *
      */
     @Override
     public void execute() {
         ComputationalModel cm = new ComputationalModel();
-        if (cm.getCurrentIndice() < 30000) {
+        if (cm.getCurrentIndice() < cm.getMemorySize()) {
             cm.setCurrentIndice(cm.getCurrentIndice() + 1);
             cm.setI(cm.getI() + 1);
         } else {
@@ -30,7 +31,7 @@ public class Right implements Command {
 
     /**
      * Print the instruction in short syntax for the rewrite instruction
-     * 
+     *
      */
     @Override
     public void printShort() {

@@ -1,13 +1,13 @@
-package brainfuck.v5.command;
+package brainfuck.command;
 
-import brainfuck.v5.ComputationalModel;
+import brainfuck.ComputationalModel;
 
 public class AfficheMemory implements Command {
 
     @Override
     public void execute() {
         ComputationalModel cm = new ComputationalModel();
-        cm.affichememoire();
+        ComputationalModel.affichememoire();
     }
 
     @Override

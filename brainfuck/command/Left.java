@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package brainfuck.v5.command;
+package brainfuck.command;
 
-import brainfuck.v5.ComputationalModel;
+import brainfuck.ComputationalModel;
 
 /**
  *
@@ -14,8 +14,9 @@ import brainfuck.v5.ComputationalModel;
 public class Left implements Command {
 
     /**
-     * Change the current cell of the memory, taking the cell at the left of the current cell
-     * 
+     * Change the current cell of the memory, taking the cell at the left of the
+     * current cell
+     *
      */
     @Override
     public void execute() {
@@ -30,7 +31,7 @@ public class Left implements Command {
 
     /**
      * Print the instruction in short syntax for the rewrite instruction
-     * 
+     *
      */
     @Override
     public void printShort() {

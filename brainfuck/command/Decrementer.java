@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package brainfuck.v5.command;
+package brainfuck.command;
 
-import brainfuck.v5.ComputationalModel;
+import brainfuck.ComputationalModel;
 
 /**
  *
@@ -15,13 +15,13 @@ public class Decrementer implements Command {
 
     /**
      * Decrement the value of the current cell of the memory
-     * 
+     *
      */
     @Override
     public void execute() {
         ComputationalModel cm = new ComputationalModel();
-        if (cm.getCurrentCase() > 0) {
-            cm.setCurrentCase((byte) (cm.getCurrentCase() - 1));
+        if (cm.getCurrentCaseValue() > 0) {
+            cm.setCurrentCaseValue((byte) (cm.getCurrentCaseValue() - 1));
             cm.setI(cm.getI() + 1);
         } else {
             System.exit(1);
@@ -30,7 +30,7 @@ public class Decrementer implements Command {
 
     /**
      * Print the instruction in short syntax for the rewrite instruction
-     * 
+     *
      */
     @Override
     public void printShort() {

@@ -1,7 +1,7 @@
-package brainfuck.v5.command;
+package brainfuck.command;
 
 import java.util.Scanner;
-import brainfuck.v5.ComputationalModel;
+import brainfuck.ComputationalModel;
 
 public class In implements Command {
 
@@ -15,14 +15,14 @@ public class In implements Command {
             System.exit(3);
         } else {
             char a = str.charAt(0);
-            cm.setCurrentCase((byte) a);
+            cm.setCurrentCaseValue((byte) a);
         }
 
     }
 
     /**
      * Print the instruction in short syntax for the rewrite instruction
-     * 
+     *
      */
     @Override
     public void printShort() {

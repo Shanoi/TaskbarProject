@@ -1,8 +1,7 @@
-package brainfuck.v5;
+package brainfuck;
 
-import brainfuck.v5.command.uByte;
+import brainfuck.command.uByte;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class ComputationalModel {
 
@@ -85,7 +84,7 @@ public class ComputationalModel {
     /**
      * Display the memory in row
      */
-    public void affichememoire() {
+    public static void affichememoire() {
         /*for (int j = 0; j < 30000; j++) {
          System.out.print(" | " + memory[j].byteToInt());
          }*/
