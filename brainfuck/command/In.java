@@ -5,11 +5,18 @@ import brainfuck.ComputationalModel;
 
 public class In implements Command {
 
+    private final String color = "ffff00";
+
     static int cnt = 0;
     static String str;
     static int str_length = 0;
     static int state;
 
+    @Override
+    public String getColor() {
+        return color;
+    }
+    
     @Override
     public void execute() {
         ComputationalModel cm = new ComputationalModel();

@@ -13,6 +13,13 @@ import brainfuck.ComputationalModel;
  */
 public class Incrementer implements Command {
 
+    private final String color = "ffffff";
+
+    @Override
+    public String getColor() {
+        return color;
+    }
+
     /**
      * Increment the value of the current cell of the memory
      *
@@ -39,6 +46,3 @@ public class Incrementer implements Command {
     }
 
 }
-
-
-

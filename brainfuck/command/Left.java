@@ -13,6 +13,13 @@ import brainfuck.ComputationalModel;
  */
 public class Left implements Command {
 
+    private final String color = "9400d3";
+
+    @Override
+    public String getColor() {
+        return color;
+    }
+
     /**
      * Change the current cell of the memory, taking the cell at the left of the
      * current cell

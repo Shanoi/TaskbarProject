@@ -4,6 +4,13 @@ import brainfuck.ComputationalModel;
 
 public class Out implements Command {
 
+    private final String color = "00ff00";
+
+    @Override
+    public String getColor() {
+        return color;
+    }
+
     @Override
     public void execute() {
         ComputationalModel cm = new ComputationalModel();
