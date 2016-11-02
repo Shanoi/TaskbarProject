@@ -9,7 +9,7 @@ import brainfuck.ComputationalModel;
 
 /**
  *
- * @author Olivier
+ * @author TeamTaskbar
  */
 public class Right implements Command {
 

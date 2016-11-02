@@ -9,7 +9,7 @@ package brainfuck.command;
  * Interface of the command pattern Define method for the diffrent object of the
  * command pattern
  *
- * @author Olivier
+ * @author TeamTaskbar
  */
 public interface Command {
 

@@ -3,7 +3,7 @@ package brainfuck.command;
 /**
  * This class convert a signed Byte to an unsigned byte
  *
- * @author Olivier
+ * @author TeamTaskbar
  */
 public class uByte {
 
