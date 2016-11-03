@@ -20,20 +20,30 @@ public class InText implements Command {
         this.file=file;
     }
     @Override
-    public void execute() throws IOException {
+    public void execute() {
         ComputationalModel cm = new ComputationalModel();
         File inputFile= new File(file);
-        FileReader in = new FileReader(inputFile);
-        for(int i=0;i<=cnt;i++){
-            temp=in.read();
+        FileReader in = null;
+        try {
+            in = new FileReader(inputFile);
+
+            for(int i=0;i<=cnt;i++){
+                temp=in.read();
+            }
+            if(temp!=-1) {
+                cm.setCurrentCaseValue((byte) (char) temp);
+                cnt++;
+            }
+            else{
+                System.exit(3);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        if(temp!=-1) {
-            cm.setCurrentCaseValue((byte) (char) temp);
-            cnt++;
-        }
-        else{
-            System.exit(3);
-        }
+
     }
 
     @Override
