@@ -9,7 +9,7 @@ public class Main {
         Text T;
         T = new Text(args[args.length - 1]);
        	T.wellformed();
-	T.launchInterpreter();
+	/*T.launchInterpreter();
         if (isPresent(args, "-p")) {
             ComputationalModel.affichememoire();
         }
@@ -17,7 +17,11 @@ public class Main {
             T = new Text(args[args.length - 1]);
             T.rewrite();
 
-        }
+	    }*/
+	if (isPresent(args, "--check"))
+	    {
+		T.wellformed();
+	    }
 
     }
 
