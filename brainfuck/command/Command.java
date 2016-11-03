@@ -13,7 +13,7 @@ package brainfuck.command;
  */
 public interface Command {
 
-    void execute();
+    void execute() throws IOException;
 
     void printShort();
 
