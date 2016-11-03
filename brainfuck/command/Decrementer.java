@@ -15,6 +15,7 @@ public class Decrementer implements Command {
 
     private final String color = "4b0082";
 
+    @Override
     public String getColor() {
         return color;
     }

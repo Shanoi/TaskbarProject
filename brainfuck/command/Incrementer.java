@@ -15,6 +15,7 @@ public class Incrementer implements Command {
 
     private final String color = "ffffff";
 
+    @Override
     public String getColor() {
         return color;
     }

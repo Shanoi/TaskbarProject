@@ -15,6 +15,7 @@ public class Right implements Command {
 
     private final String color = "0000ff";
 
+    @Override
     public String getColor() {
         return color;
     }

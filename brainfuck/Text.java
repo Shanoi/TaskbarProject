@@ -14,10 +14,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Stack;
 
 public class Text extends Interpreter {
 
-    BufferedReader memoryOfFile;
+    private Stack<Character> stack = new Stack<Character>();
 
     /**
      * Initialize the different command
@@ -26,9 +27,10 @@ public class Text extends Interpreter {
      * @throws FileNotFoundException The exception if the file is not found by
      * the program
      */
-    public Text(String directory) throws FileNotFoundException {
+    public Text(String path) throws FileNotFoundException {
 
-        this.memoryOfFile = new BufferedReader(new FileReader(directory));
+	this.path = path;
+	
         ComputationalModel.init();
 
         Instructions = new HashMap<>();
@@ -47,6 +49,11 @@ public class Text extends Interpreter {
         Instructions.put(".", new Out());
         Instructions.put(",", new In());
         Instructions.put("AFF", new AfficheMemory());
+
+	Instructions.put("[", new Out());
+		Instructions.put("]", new Out());
+			Instructions.put("JUMP", new Out());
+				Instructions.put("BACK", new Out());
     }
 
     /**
@@ -55,8 +62,8 @@ public class Text extends Interpreter {
      * the mixed synthaxe
      *
      */
-    public void launchInterpreter() {
-
+    public void launchInterpreter() throws IOException, FileNotFoundException{
+	BufferedReader memoryOfFile = new BufferedReader(new FileReader(path));
         String line = new String();
 
         try {
@@ -73,7 +80,7 @@ public class Text extends Interpreter {
         } catch (IOException ex) {
             Logger.getLogger(Text.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+	memoryOfFile.close();
     }
 
     public void readShort(String line) {
@@ -86,15 +93,35 @@ public class Text extends Interpreter {
             i++;
         }
     }
+    public void verifyShort(String line){
 
-    /**
+        int i = 0;
+        int n = line.length();
+        while (i < n) {
+
+	    if (Instructions.containsKey(Character.toString(line.charAt(i))) == false)
+		System.exit(4);
+	    if (line.charAt(i) == '[')
+		stack.push((Character) '[');
+	    if (line.charAt(i) == ']')
+	    {
+		if( stack.empty())
+		    System.exit(4);
+		else
+		    stack.pop();
+	    }
+            i++;
+        }
+
+    }
+     /**
      *
      * Rewrite the code with short syntax
      *
      */
     public void rewrite() throws IOException {
         String line = new String();
-
+	BufferedReader memoryOfFile = new BufferedReader(new FileReader(path));
         while ((line = memoryOfFile.readLine()) != null) {
 
             if ((line.charAt(0) >= 'A') && (line.charAt(0) <= 'Z')) {
@@ -104,6 +131,38 @@ public class Text extends Interpreter {
             }
 
         }
+	memoryOfFile.close();
     }
+    public void wellformed() throws IOException
+    {
+	BufferedReader memoryOfFile = new BufferedReader(new FileReader(path));
 
+	String line = new String();
+        while ((line = memoryOfFile.readLine()) != null) {
+
+            if ((line.charAt(0) >= 'A') && (line.charAt(0) <= 'Z')) {
+		if(Instructions.containsKey(line) == false)
+		    System.exit(4);
+		if(line.equals("JUMP"))
+		    stack.push((Character) '[');
+		if(line.equals("BACK"))
+		    {
+			if(stack.empty())
+			    System.exit(4);
+			else
+			    stack.pop();
+		    }
+		   
+	    } else{
+                    this.verifyShort(line);
+            }
+	    
+	    
+        }
+	memoryOfFile.close();
+
+    
+    if (!stack.empty())
+	System.exit(4);
+    }
 }

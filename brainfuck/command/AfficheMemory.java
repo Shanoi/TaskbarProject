@@ -15,4 +15,9 @@ public class AfficheMemory implements Command {
         System.out.print("");
     }
 
+    @Override
+    public String getColor() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
