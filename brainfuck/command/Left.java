@@ -30,7 +30,6 @@ public class Left implements Command {
         ComputationalModel cm = new ComputationalModel();
         if (cm.getCurrentIndice() > 0) {
             cm.setCurrentIndice(cm.getCurrentIndice() - 1);
-            cm.setI(cm.getI() + 1);
         } else {
             System.exit(2);
         }

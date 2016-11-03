@@ -7,10 +7,8 @@ public class In implements Command {
 
     private final String color = "ffff00";
 
-    static int cnt = 0;
-    static String str;
-    static int str_length = 0;
-    static int state;
+    private  String str;
+
 
     @Override
     public String getColor() {
@@ -20,18 +18,12 @@ public class In implements Command {
     @Override
     public void execute() {
         ComputationalModel cm = new ComputationalModel();
-        if (state == 0) {
-            Scanner sc = new Scanner(System.in);
-            str = sc.nextLine();
-            sc.close();
-            str_length = str.length();
-            state = 1;
+        Scanner sc= new Scanner(System.in);
+        str=sc.nextLine();
+        if(str.length()>0) {
+            cm.setCurrentCaseValue((byte) str.charAt(0));
         }
-        if (cnt < str_length) {
-            char a = str.charAt(cnt);
-            cm.setCurrentCaseValue((byte) a);
-            cnt++;
-        } else {
+        else{
             System.exit(3);
         }
 

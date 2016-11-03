@@ -12,7 +12,9 @@ import brainfuck.command.Incrementer;
 import brainfuck.command.Left;
 import brainfuck.command.Out;
 import brainfuck.command.Right;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -26,12 +28,16 @@ import java.util.logging.Logger;
  */
 public class ImageEncod extends Interpreter {
 
-    BufferedReader memoryOfFile;
+    //private BufferedReader memoryOfFile;
+    //private BufferedImage img;
+    private String directory;
 
     public ImageEncod(String directory) {
 
+        this.directory = directory;
+
         try {
-            this.memoryOfFile = new BufferedReader(new FileReader(directory));
+            BufferedReader memoryOfFile = new BufferedReader(new FileReader(directory));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ImageEncod.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -60,6 +66,8 @@ public class ImageEncod extends Interpreter {
         String line = "";
 
         try {
+            BufferedReader memoryOfFile = new BufferedReader(new FileReader(directory));
+
             while ((line = memoryOfFile.readLine()) != null) {
 
                 if ((line.charAt(0) >= 'A') && (line.charAt(0) <= 'Z')) {
@@ -69,6 +77,9 @@ public class ImageEncod extends Interpreter {
                 }
 
             }
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ImageEncod.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ImageEncod.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -85,6 +96,19 @@ public class ImageEncod extends Interpreter {
 
             i++;
         }
+    }
+
+    private void draw(String color) {
+        
+        //Ecriture d'un pixel ou d'un groupe de 9 pixels
+        
+    }
+
+    private int defTaille() {
+
+        //TODO comptage du nombre d'instruction et définition de la résoltion de l'image
+        return 0;
+
     }
 
 }
