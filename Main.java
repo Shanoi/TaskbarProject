@@ -7,21 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException, FileNotFoundException {
 
         Text T;
-        T = new Text(args[args.length - 1]);
-       	T.wellformed();
-	/*T.launchInterpreter();
-        if (isPresent(args, "-p")) {
-            ComputationalModel.affichememoire();
-        }
-        if (isPresent(args, "--rewrite")) {
-            T = new Text(args[args.length - 1]);
-            T.rewrite();
-
-	    }*/
-	if (isPresent(args, "--check"))
-	    {
-		T.wellformed();
-	    }
+        T = new Text(args[args.length - 1], args);
 
     }
 

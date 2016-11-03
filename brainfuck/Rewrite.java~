@@ -1,0 +1,19 @@
+public class Rewrite{
+
+    /*
+     *
+     *attribute
+     *
+     */
+    BufferedReader file = new BufferedReader(new FileReader(path));
+
+    @Overrride
+    public void execute()
+    {
+	
+	
+    }
+
+    
+
+}

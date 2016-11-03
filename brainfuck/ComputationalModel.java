@@ -73,11 +73,11 @@ public class ComputationalModel {
         this.p = p;
     }
 
-    public int getI() {
+    static public int getI() {
         return i;
     }
 
-    public void setI(int i) {
+    static public void setI(int i) {
         this.i = i;
     }
 
