@@ -1,5 +1,5 @@
 package brainfuck;
-
+//test
 import brainfuck.command.Command;
 import java.util.HashMap;
 import java.util.ArrayList;
