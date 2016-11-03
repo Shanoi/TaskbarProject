@@ -141,19 +141,19 @@ public class Text extends Interpreter {
         while ((line = memoryOfFile.readLine()) != null) {
 
             if ((line.charAt(0) >= 'A') && (line.charAt(0) <= 'Z')) {
-		if(Instructions.containsKey(line) == false)
-		    System.exit(4);
-		if(line.equals("JUMP"))
-		    stack.push((Character) '[');
-		if(line.equals("BACK"))
-		    {
-			if(stack.empty())
-			    System.exit(4);
-			else
-			    stack.pop();
-		    }
+		        if(Instructions.containsKey(line) == false)
+		            System.exit(4);
+		        if(line.equals("JUMP"))
+		            stack.push((Character) '[');
+		        if(line.equals("BACK"))
+		        {
+			        if(stack.empty())
+			            System.exit(4);
+			        else
+			        stack.pop();
+		        }
 		   
-	    } else{
+	            } else{
                     this.verifyShort(line);
             }
 	    
