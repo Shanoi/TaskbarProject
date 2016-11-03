@@ -29,7 +29,6 @@ public class Decrementer implements Command {
         ComputationalModel cm = new ComputationalModel();
         if (cm.getCurrentCaseValue() > 0) {
             cm.setCurrentCaseValue((byte) (cm.getCurrentCaseValue() - 1));
-            cm.setI(cm.getI() + 1);
         } else {
             System.exit(1);
         }

@@ -30,7 +30,6 @@ public class Right implements Command {
         ComputationalModel cm = new ComputationalModel();
         if (cm.getCurrentIndice() < cm.getMemorySize()) {
             cm.setCurrentIndice(cm.getCurrentIndice() + 1);
-            cm.setI(cm.getI() + 1);
         } else {
             System.exit(2);
         }
