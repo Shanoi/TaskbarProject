@@ -1,0 +1,20 @@
+public class Wellformed extends Lecture{
+
+    BufferedReader file = new BufferedReader(new FileReader(path));
+    
+    @Override
+    public void execute()
+    {
+	Syntaxe line = new Syntaxe();
+	while( (line = file.readLine()) != null )
+	    {
+		if(line.isShort())
+		    ShortSyntaxe.verify();
+		else
+		    LongSyntaxe.verify();
+	    }
+
+    }
+
+
+}

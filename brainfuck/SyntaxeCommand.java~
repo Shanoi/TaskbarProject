@@ -1,0 +1,7 @@
+public interface SyntaxeCommand
+{
+    public abstract run();
+    public abstract verify();
+    public abstract translate();
+
+}
