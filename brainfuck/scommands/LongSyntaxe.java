@@ -15,7 +15,7 @@ public class LongSyntaxe implements SyntaxeCommand
     @Override
     public void translate(String line)
     {
-	EnumCommands.toCommand(line).getShort();
+	System.out.print(EnumCommands.toCommand(line).getShort());
     }
 
     @Override
