@@ -41,14 +41,11 @@ public class Text extends Interpreter {
      */
     public void launchInterpreter() throws IOException, FileNotFoundException {
 
-<<<<<<< HEAD
 
-	Lecture test2 = new Verify(path);
+
+	Lecture test2 = new Rewrite(path);
 	test2.execute();
-=======
-        Lecture test2 = new Rewrite(path);
-        test2.execute();
->>>>>>> eb50e9a5813f9d8b1c15647038e478fb6688c825
+
     }
 
 }

@@ -10,12 +10,12 @@ import java.util.Stack;
 public class Wellformed extends Lecture{
 
     static private Stack<String> stack = new Stack<>();
-    
+
     public Wellformed(String path)
     {
 	super(path);
     }
-    
+
     @Override
     public void execute() throws IOException, FileNotFoundException
     {
@@ -30,25 +30,23 @@ public class Wellformed extends Lecture{
 	    }
 	file.close();
     }
-<<<<<<< HEAD
-    static public popStack()
-=======
+
+
+
     public void popStack()
->>>>>>> eb50e9a5813f9d8b1c15647038e478fb6688c825
+
+
     {
 	stack.pop();
     }
-<<<<<<< HEAD
-    static public pushStack(String line)
-=======
+
+
+
     public void pushStack(String line)
->>>>>>> eb50e9a5813f9d8b1c15647038e478fb6688c825
+
+
     {
 	stack.push(line);
-    }
-    static public boolean emptyStack()
-    {
-	return stack.empty();
     }
     public void load()
     {
