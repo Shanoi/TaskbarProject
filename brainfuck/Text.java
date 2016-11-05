@@ -43,7 +43,7 @@ public class Text extends Interpreter {
 
 <<<<<<< HEAD
 
-	Lecture test2 = new Verify(path);
+	Lecture test2 = new Rewrite(path);
 	test2.execute();
 =======
         Lecture test2 = new Rewrite(path);

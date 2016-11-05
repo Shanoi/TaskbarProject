@@ -9,12 +9,7 @@ public class LongSyntaxe implements SyntaxeCommand
     {
 	if(!EnumCommands.isCommand(line))
 	    System.exit(4);
-	if(Character.toString(line.charAt(i)).equals("JUMP"))
-	    Run.pushStack("[");
-	if(Character.toString(line.charAt(i)).equals("BACK") && !emptyStack())
-	    Run.popStack();
-	if(Character.toString(line.charAt(i)).equals("BACK") && !emptyStack())
-	    System.exit(4);
+
     }
 
     @Override
