@@ -8,6 +8,8 @@ import brainfuck.Syntaxe;
 
 public class Wellformed extends Lecture{
 
+    static private Stack stack = new Stack();
+    
     public Wellformed(String path)
     {
 	super(path);
@@ -25,7 +27,14 @@ public class Wellformed extends Lecture{
        		longSyntaxe.verify(line);
 	    }
 	file.close();
-
+    }
+    public popStack()
+    {
+	pop.stack();
+    }
+    public pushStack(String line)
+    {
+	stack.push(line);
     }
     public void load()
     {

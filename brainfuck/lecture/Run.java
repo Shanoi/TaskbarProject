@@ -36,6 +36,16 @@ public class Run extends Lecture{
 	file.close();
     }
 
+    public int getNbI()
+    {
+	return list.size();
+    }
+
+    public List<String> getInstructions()
+    {
+	return this.list;
+    }
+    
     @Override
     public void execute() throws IOException, FileNotFoundException
     {
