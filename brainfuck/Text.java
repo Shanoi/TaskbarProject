@@ -39,9 +39,9 @@ public class Text extends Interpreter {
      */
     public void launchInterpreter() throws IOException, FileNotFoundException {
 
-	Lecture test = new Run(path);
-	test.load();
-	test.execute();
+
+	Lecture test2 = new Wellformed(path);
+	test2.execute();
     }
 
     
