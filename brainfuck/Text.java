@@ -1,50 +1,54 @@
 package brainfuck;
 
-import brainfuck.command.AfficheMemory;
-import brainfuck.command.Decrementer;
-import brainfuck.command.In;
-import brainfuck.command.Incrementer;
-import brainfuck.command.Left;
-import brainfuck.command.Out;
-import brainfuck.command.Right;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Arrays;
 import brainfuck.lecture.*;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.util.List;
 
 public class Text extends Interpreter {
 
+    private String file = "";
 
     /**
      * Initialize the different command
      *
-     * @param directory The file to reead and execute
-     * @throws FileNotFoundException The exception if the file is not found by
-     * the program
+     * @param path
+     * @param args
      */
+    public Text(String path, String[] args) {
 
-    public Text(String path, String [] args) {
-	
-	super(path, Arrays.asList(args));
-	
+        super(path, Arrays.asList(args));
+
+    }
+
+    public Text(String file, String path, List<String> args) {
+        super(path, args);
+        this.file = file;
+    }
+
+    public String getFile() {
+        return file;
     }
 
     /**
      * This method read the content of the file and execute the different
      * Command associate This method can read long and short synthaxe and also
-     * the mixed synthaxe
+     * the mixed syntaxe
      *
+     * @throws java.io.IOException
+     * @throws java.io.FileNotFoundException
      */
     public void launchInterpreter() throws IOException, FileNotFoundException {
 
+<<<<<<< HEAD
 
 	Lecture test2 = new Verify(path);
 	test2.execute();
+=======
+        Lecture test2 = new Rewrite(path);
+        test2.execute();
+>>>>>>> eb50e9a5813f9d8b1c15647038e478fb6688c825
     }
 
-    
-
-    
 }
