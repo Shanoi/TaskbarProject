@@ -9,14 +9,13 @@ import java.util.Stack;
 
 public class Wellformed extends Lecture{
 
-    static private Stack<String> stack = new Stack<>();
-
+    static private Stack<String> stack = new Stack<String>();
+    
     public Wellformed(String path)
     {
 	super(path);
     }
-
-    @Override
+    
     public void execute() throws IOException, FileNotFoundException
     {
 	BufferedReader file = new BufferedReader(new FileReader(path));
@@ -30,23 +29,17 @@ public class Wellformed extends Lecture{
 	    }
 	file.close();
     }
-
-
-
-    public void popStack()
-
-
+    static public void popStack()
     {
 	stack.pop();
     }
-
-
-
-    public void pushStack(String line)
-
-
+    static public void pushStack(String line)
     {
 	stack.push(line);
+    }
+    static public boolean emptyStack()
+    {
+	return stack.empty();
     }
     public void load()
     {

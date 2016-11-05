@@ -43,7 +43,7 @@ public class Text extends Interpreter {
 
 
 
-	Lecture test2 = new Rewrite(path);
+	Lecture test2 = new Wellformed(path);
 	test2.execute();
 
     }
