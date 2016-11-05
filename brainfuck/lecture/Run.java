@@ -46,11 +46,11 @@ public class Run extends Lecture{
 	return this.list;
     }
 
-    public static int jumpAssoc()
+    public static int jumpAssoc(int i)
     {
 	return 1;
     }
-    public static int backAssoc()
+    public static int backAssoc(int i)
     {
 	return 1;
     }
