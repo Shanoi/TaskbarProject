@@ -23,7 +23,7 @@ import javax.imageio.ImageIO;
  *
  * @author TeamTaskbar
  */
-public class Image extends Interpreter {
+public class Image {
 
     private String filename;
 
@@ -34,11 +34,11 @@ public class Image extends Interpreter {
      */
     public Image(String filename) {
         this.filename = filename;
-        this.cm = new ComputationalModel();
+        //this.cm = new ComputationalModel();
 
         ComputationalModel.init();
 
-        Instructions = new HashMap<>();
+       /* Instructions = new HashMap<>();
 
         Instructions.put("ffffff", new Incrementer());
         Instructions.put("4b0082", new Decrementer());
@@ -48,7 +48,7 @@ public class Image extends Interpreter {
         Instructions.put("ffff00", new In());
         /*Instructions.put("ff7f00", new Jump());
          Instructions.put("ff0000", new Back());*/
-        Instructions.put("AFF", new AfficheMemory());
+       // Instructions.put("AFF", new AfficheMemory());
 
     }
 
@@ -93,7 +93,7 @@ public class Image extends Interpreter {
                         rgb += String.format("%02x", pixelcolorBase.getGreen());
                         rgb += String.format("%02x", pixelcolorBase.getBlue());
 
-                        Command tempinstruction = Instructions.get(rgb);
+                       /* Command tempinstruction = Instructions.get(rgb);
 
                         if (tempinstruction != null) {
 
@@ -105,7 +105,7 @@ public class Image extends Interpreter {
 
                             System.exit(9);
 
-                        }
+                        }*/
 
                         System.out.println("cpt : " + compteur);
                         compteur++;
@@ -119,7 +119,7 @@ public class Image extends Interpreter {
             System.out.println("ERROR" + e);
         }
 
-        Instructions.get("AFF").execute();
+       // Instructions.get("AFF").execute();
 
         System.out.println("Compteur " + compteur);
 

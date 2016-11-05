@@ -1,3 +1,8 @@
+package brainfuck.lecture;
+
+import brainfuck.scommands.ShortSyntaxe;
+import brainfuck.scommands.LongSyntaxe;
+
 public abstract class Lecture
 {
 

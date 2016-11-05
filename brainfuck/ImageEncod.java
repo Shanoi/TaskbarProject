@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  *
  * @author Olivier
  */
-public class ImageEncod extends Interpreter {
+public class ImageEncod {
 
     //private BufferedReader memoryOfFile;
     //private BufferedImage img;
@@ -42,10 +42,10 @@ public class ImageEncod extends Interpreter {
             Logger.getLogger(ImageEncod.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Instructions = new HashMap<>();
+        //Instructions = new HashMap<>();
 
         //initialistaion de la Hashmap
-        Instructions.put("INCR", new Incrementer());
+        /*Instructions.put("INCR", new Incrementer());
         Instructions.put("DECR", new Decrementer());
         Instructions.put("LEFT", new Left());
         Instructions.put("RIGHT", new Right());
@@ -57,7 +57,7 @@ public class ImageEncod extends Interpreter {
         Instructions.put(">", new Right());
         Instructions.put(".", new Out());
         Instructions.put(",", new In());
-        Instructions.put("AFF", new AfficheMemory());
+        Instructions.put("AFF", new AfficheMemory());*/
 
     }
 
@@ -70,11 +70,11 @@ public class ImageEncod extends Interpreter {
 
             while ((line = memoryOfFile.readLine()) != null) {
 
-                if ((line.charAt(0) >= 'A') && (line.charAt(0) <= 'Z')) {
+              /*  if ((line.charAt(0) >= 'A') && (line.charAt(0) <= 'Z')) {
                     (Instructions.get(line)).execute();
                 } else {
                     readShort(line);
-                }
+                }*/
 
             }
 
@@ -92,7 +92,7 @@ public class ImageEncod extends Interpreter {
         int n = line.length();
         while (i < n) {
 
-            (Instructions.get(Character.toString(line.charAt(i)))).getColor();
+           // (Instructions.get(Character.toString(line.charAt(i)))).getColor();
 
             i++;
         }

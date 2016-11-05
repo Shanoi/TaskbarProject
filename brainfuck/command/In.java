@@ -1,43 +1,82 @@
 package brainfuck.command;
 
-import java.util.Scanner;
 import brainfuck.ComputationalModel;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * Created by sebde on 05/11/2016.
+ */
 public class In implements Command {
 
     private final String color = "ffff00";
-
-    private  String str;
-
+    private static String file;
+    private String str;
+    private static int cnt = 0;
+    private int temp = 0;
+    private int text_length = 0;
+    private static int state = 0;
+    private static ArrayList<Integer> text_list = new ArrayList<Integer>();
 
     @Override
     public String getColor() {
         return color;
     }
-    
-    @Override
-    public void execute() {
-        ComputationalModel cm = new ComputationalModel();
-        Scanner sc= new Scanner(System.in);
-        str=sc.nextLine();
-        if(str.length()>0) {
-            cm.setCurrentCaseValue((byte) str.charAt(0));
-        }
-        else{
-            System.exit(3);
-        }
 
-    }
-
-    /**
-     * Print the instruction in short syntax for the rewrite instruction
-     *
-     */
     @Override
     public void printShort() {
         System.out.print(",");
     }
 
+    @Override
+    public void execute(String file) {
+
+        if (file.equals("")) {
+            ComputationalModel cm = new ComputationalModel();
+            Scanner sc = new Scanner(System.in);
+            str = sc.nextLine();
+            if (str.length() > 0) {
+                cm.setCurrentCaseValue((byte) str.charAt(0));
+            } else {
+                System.exit(3);
+            }
+        } else {
+            ComputationalModel cm = new ComputationalModel();
+            File inputFile = new File(file);
+            FileReader in = null;
+            try {
+                in = new FileReader(inputFile);
+
+                if (state == 0) {
+                    temp = in.read();
+                    while (temp != -1) {
+                        text_list.add(temp);
+                        temp = in.read();
+                    }
+                    text_length = text_list.size();
+                    state = 1;
+                }
+
+                if (cnt < text_length - 1) {
+                    cm.setCurrentCaseValue((byte) (char) text_list.get(cnt).intValue());
+                    cnt++;
+                } else {
+                    System.exit(3);
+                }
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }
 
 

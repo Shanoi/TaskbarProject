@@ -8,7 +8,7 @@ public class Main {
 
         Text T;
         T = new Text(args[args.length - 1], args);
-
+	T.launchInterpreter();
     }
 
     public static boolean isPresent(String[] args, String str) {

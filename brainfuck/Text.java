@@ -9,6 +9,10 @@ import brainfuck.command.Out;
 import brainfuck.command.Right;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
+import brainfuck.lecture.*;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Text extends Interpreter {
 
@@ -20,11 +24,10 @@ public class Text extends Interpreter {
      * @throws FileNotFoundException The exception if the file is not found by
      * the program
      */
+
     public Text(String path, String [] args) {
-	List<String> arg = new ArrayList<String>();
-	for( int i =0; i < args.length; i++)
-	    arg.add(args[i]);
-	super(path, arg);
+	
+	super(path, Arrays.asList(args));
 	
     }
 
@@ -34,10 +37,11 @@ public class Text extends Interpreter {
      * the mixed synthaxe
      *
      */
-    public void launchInterpreter() {
+    public void launchInterpreter() throws IOException, FileNotFoundException {
 
-	Lecture test = new Run(path);
 
+	Lecture test2 = new Rewrite(path);
+	test2.execute();
     }
 
     

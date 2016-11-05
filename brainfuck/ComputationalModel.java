@@ -77,8 +77,8 @@ public class ComputationalModel {
         return i;
     }
 
-    static public void setI(int i) {
-        this.i = i;
+    static public void setI(int d) {
+        i = d;
     }
 
     /**
