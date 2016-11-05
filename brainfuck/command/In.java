@@ -1,6 +1,7 @@
 package brainfuck.command;
 
 import brainfuck.ComputationalModel;
+import brainfuck.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +15,7 @@ import java.util.Scanner;
  */
 public class In implements Command {
     private final String color = "ffff00";
-    private static String file;
+    private String file;
     private String str;
     private static int cnt=0;
     private int temp=0;
@@ -38,6 +39,7 @@ public class In implements Command {
 
     @Override
     public void execute() {
+        file=Text.getFile();
         if(file.equals("")){
             ComputationalModel cm = new ComputationalModel();
             Scanner sc= new Scanner(System.in);

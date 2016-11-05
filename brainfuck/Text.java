@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Text extends Interpreter {
 
-    private String file = "";
+    private static String file = "";
 
     /**
      * Initialize the different command
@@ -27,7 +27,7 @@ public class Text extends Interpreter {
         this.file = file;
     }
 
-    public String getFile() {
+    public static String getFile() {
         return file;
     }
 
@@ -41,8 +41,11 @@ public class Text extends Interpreter {
      */
     public void launchInterpreter() throws IOException, FileNotFoundException {
 
-        Lecture test2 = new Rewrite(path);
-        test2.execute();
+
+
+	Lecture test2 = new Wellformed(path);
+	test2.execute();
+
     }
 
 }

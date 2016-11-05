@@ -45,12 +45,18 @@ public class Run extends Lecture{
     {
 	return this.list;
     }
-    
+
+    public static int jumpAssoc()
+    {
+	return 1;
+    }
+    public static int backAssoc()
+    {
+	return 1;
+    }
     @Override
     public void execute() throws IOException, FileNotFoundException
     {
-	//BufferedReader file = new BufferedReader(new FileReadder(path));
-	//	String line = new Syntaxe();
 	ComputationalModel.init();
         
 	while(ComputationalModel.getI() < list.size())
