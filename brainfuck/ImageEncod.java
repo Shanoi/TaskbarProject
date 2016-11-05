@@ -5,20 +5,10 @@
  */
 package brainfuck;
 
-import brainfuck.command.AfficheMemory;
-import brainfuck.command.Decrementer;
-import brainfuck.command.In;
-import brainfuck.command.Incrementer;
-import brainfuck.command.Left;
-import brainfuck.command.Out;
-import brainfuck.command.Right;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,23 +32,6 @@ public class ImageEncod {
             Logger.getLogger(ImageEncod.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        //Instructions = new HashMap<>();
-
-        //initialistaion de la Hashmap
-        /*Instructions.put("INCR", new Incrementer());
-        Instructions.put("DECR", new Decrementer());
-        Instructions.put("LEFT", new Left());
-        Instructions.put("RIGHT", new Right());
-        Instructions.put("OUT", new Out());
-        Instructions.put("IN", new In());
-        Instructions.put("+", new Incrementer());
-        Instructions.put("-", new Decrementer());
-        Instructions.put("<", new Left());
-        Instructions.put(">", new Right());
-        Instructions.put(".", new Out());
-        Instructions.put(",", new In());
-        Instructions.put("AFF", new AfficheMemory());*/
-
     }
 
     public void Encod() {
@@ -70,12 +43,11 @@ public class ImageEncod {
 
             while ((line = memoryOfFile.readLine()) != null) {
 
-              /*  if ((line.charAt(0) >= 'A') && (line.charAt(0) <= 'Z')) {
-                    (Instructions.get(line)).execute();
-                } else {
-                    readShort(line);
-                }*/
-
+                /*  if ((line.charAt(0) >= 'A') && (line.charAt(0) <= 'Z')) {
+                 (Instructions.get(line)).execute();
+                 } else {
+                 readShort(line);
+                 }*/
             }
 
         } catch (FileNotFoundException ex) {
@@ -93,15 +65,13 @@ public class ImageEncod {
         while (i < n) {
 
            // (Instructions.get(Character.toString(line.charAt(i)))).getColor();
-
             i++;
         }
     }
 
     private void draw(String color) {
-        
+
         //Ecriture d'un pixel ou d'un groupe de 9 pixels
-        
     }
 
     private int defTaille() {
