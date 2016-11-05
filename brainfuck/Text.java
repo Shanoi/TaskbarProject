@@ -40,7 +40,7 @@ public class Text extends Interpreter {
     public void launchInterpreter() throws IOException, FileNotFoundException {
 
 
-	Lecture test2 = new Rewrite(path);
+	Lecture test2 = new Verify(path);
 	test2.execute();
     }
 

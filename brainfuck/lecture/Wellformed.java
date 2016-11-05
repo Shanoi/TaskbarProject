@@ -28,13 +28,17 @@ public class Wellformed extends Lecture{
 	    }
 	file.close();
     }
-    public popStack()
+    static public popStack()
     {
 	pop.stack();
     }
-    public pushStack(String line)
+    static public pushStack(String line)
     {
 	stack.push(line);
+    }
+    static public boolean emptyStack()
+    {
+	return stack.empty();
     }
     public void load()
     {
