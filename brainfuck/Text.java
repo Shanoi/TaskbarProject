@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Text extends Interpreter {
 
-    private String file = "";
+    private static String file = "";
 
     /**
      * Initialize the different command
@@ -27,7 +27,7 @@ public class Text extends Interpreter {
         this.file = file;
     }
 
-    public String getFile() {
+    public static String getFile() {
         return file;
     }
 
