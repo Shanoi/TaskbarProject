@@ -34,10 +34,14 @@ public class Wellformed extends Lecture{
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     static public popStack()
 =======
     public void popStack()
 >>>>>>> eb50e9a5813f9d8b1c15647038e478fb6688c825
+=======
+    public popStack()
+>>>>>>> parent of 2109bc4... -fix
 =======
     public popStack()
 >>>>>>> parent of 2109bc4... -fix
@@ -54,10 +58,14 @@ public class Wellformed extends Lecture{
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     static public pushStack(String line)
 =======
     public void pushStack(String line)
 >>>>>>> eb50e9a5813f9d8b1c15647038e478fb6688c825
+=======
+    public pushStack(String line)
+>>>>>>> parent of 2109bc4... -fix
 =======
     public pushStack(String line)
 >>>>>>> parent of 2109bc4... -fix
