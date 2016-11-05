@@ -1,3 +1,5 @@
+package brainfuck.scommands;
+
 public class LongSyntaxe implements SyntaxeCommand
 {
     @Override
