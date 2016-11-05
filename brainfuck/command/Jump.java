@@ -1,7 +1,8 @@
 package brainfuck.command;
 
 import brainfuck.ComputationalModel;
-import brainfuck.command.Command;
+import static brainfuck.ComputationalModel.getI;
+import brainfuck.lecture.Lecture;
 
 /**
  * @author TeamTaskbar
@@ -12,8 +13,8 @@ public class Jump implements Command {
     @Override
     public void execute() {
         ComputationalModel cm = new ComputationalModel();
-        if(cm.getCurrentCaseValue() = 0){
-            setI(Lecture.JumpAssoc(getI));
+        if(cm.getCurrentCaseValue() == 0){
+            setI(Lecture.JumpAssoc(getI()));
         }
 
     }

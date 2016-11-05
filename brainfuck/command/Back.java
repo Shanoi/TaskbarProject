@@ -1,6 +1,8 @@
 package brainfuck.command;
 
 import brainfuck.ComputationalModel;
+import static brainfuck.ComputationalModel.getI;
+import brainfuck.lecture.Lecture;
 
 /**
  *
@@ -13,7 +15,7 @@ public class Back implements Command {
     public void execute() {
         ComputationalModel cm = new ComputationalModel();
         if(cm.getCurrentCaseValue() > 0) {
-            setI(Lecture.BackAssoc(getI));
+            setI(Lecture.BackAssoc(getI()));
         }
 
 
