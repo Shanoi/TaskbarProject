@@ -11,6 +11,13 @@ public class ShortSyntaxe implements SyntaxeCommand
 	{
 	    if(!EnumCommands.isCommand(Character.toString(line.charAt(i))))
 		System.exit(4);
+	    if(Character.toString(line.charAt(i)).equals("["))
+		Run.pushStack("[");
+	    if(Character.toString(line.charAt(i)).equals("]") && !emptyStack())
+		Run.popStack();
+	    if(Character.toString(line.charAt(i)).equals("]") && !emptyStack())
+		System.exit(4);
+	    
 	}
     }
 
