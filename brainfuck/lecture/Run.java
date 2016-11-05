@@ -27,8 +27,8 @@ public class Run extends Lecture{
 	    {
 		if( Syntaxe.isShort(line))
 		    {
-			for(int i = 0; i < line.length(); i++)
-			    list.add(Character.toString(line.charAt(i)));
+			for(int j = 0; j < line.length(); j++)
+			    list.add(Character.toString(line.charAt(j)));
 		    }
 		else
 		    list.add(line);
