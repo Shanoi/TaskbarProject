@@ -5,16 +5,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import brainfuck.Syntaxe;
+import java.util.Stack;
 
 public class Wellformed extends Lecture{
 
-    static private Stack stack = new Stack();
+    static private Stack<String> stack = new Stack<>();
     
     public Wellformed(String path)
     {
 	super(path);
     }
     
+    @Override
     public void execute() throws IOException, FileNotFoundException
     {
 	BufferedReader file = new BufferedReader(new FileReader(path));
@@ -28,11 +30,11 @@ public class Wellformed extends Lecture{
 	    }
 	file.close();
     }
-    public popStack()
+    public void popStack()
     {
-	pop.stack();
+	stack.pop();
     }
-    public pushStack(String line)
+    public void pushStack(String line)
     {
 	stack.push(line);
     }
