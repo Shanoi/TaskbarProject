@@ -23,7 +23,9 @@ public enum EnumCommands {
     IN("IN", ",", "ffff00", new In()),
     LEFT("LEFT", ">", "9400d3", new Left()),
     RIGHT("RIGHT", ">", "0000ff", new Right()),
-    OUT("OUT", ".", "00ff00", new Out());
+    OUT("OUT", ".", "00ff00", new Out()),
+    JUMP("JUMP", "[", "ff7f00", new Jump()),
+    BACK("BACK", "]", "ff0000", new Back());
 
     private final String Long;
     private final String Short;

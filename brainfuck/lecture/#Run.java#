@@ -13,6 +13,7 @@ public class Run extends Lecture{
 
     private List<String> list = new ArrayList<String>();
     private static int i = 0;
+    
 
     public Run(String path)
     {
@@ -27,8 +28,8 @@ public class Run extends Lecture{
 	    {
 		if( Syntaxe.isShort(line))
 		    {
-			for(int j = 0; j < line.length(); j++)
-			    list.add(Character.toString(line.charAt(j)));
+			for(int i = 0; i < line.length(); i++)
+			    list.add(Character.toString(line.charAt(i)));
 		    }
 		else
 		    list.add(line);
@@ -46,11 +47,11 @@ public class Run extends Lecture{
 	return this.list;
     }
 
-    public static int jumpAssoc(int i)
+    public static int jumpAssoc()
     {
 	return 1;
     }
-    public static int backAssoc(int i)
+    public static int backAssoc()
     {
 	return 1;
     }
