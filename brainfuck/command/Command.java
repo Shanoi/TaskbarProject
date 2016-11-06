@@ -17,8 +17,4 @@ public interface Command {
 
     void execute();
 
-    void printShort();
-
-    String getColor();
-    
 }

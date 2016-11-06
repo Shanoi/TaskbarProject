@@ -1,4 +1,5 @@
 package brainfuck.command;
+
 import brainfuck.ComputationalModel;
 
 import java.io.BufferedReader;
@@ -11,30 +12,30 @@ import java.io.File;
  * Created by sebde on 03/11/2016.
  */
 public class InText implements Command {
-    private final String color = "ffff00";
-    private String file;
-    private static int cnt=0;
-    private int temp=0;
 
-    public void InText(String file){
-        this.file=file;
+    private String file;
+    private static int cnt = 0;
+    private int temp = 0;
+
+    public void InText(String file) {
+        this.file = file;
     }
+
     @Override
     public void execute() {
         ComputationalModel cm = new ComputationalModel();
-        File inputFile= new File(file);
+        File inputFile = new File(file);
         FileReader in = null;
         try {
             in = new FileReader(inputFile);
 
-            for(int i=0;i<=cnt;i++){
-                temp=in.read();
+            for (int i = 0; i <= cnt; i++) {
+                temp = in.read();
             }
-            if(temp!=-1) {
+            if (temp != -1) {
                 cm.setCurrentCaseValue((byte) (char) temp);
                 cnt++;
-            }
-            else{
+            } else {
                 System.exit(3);
             }
 
@@ -46,14 +47,4 @@ public class InText implements Command {
 
     }
 
-    @Override
-    public String getColor() {
-        return color;
-    }
-
-
-    @Override
-    public void printShort() {
-        System.out.print(",");
-    }
 }

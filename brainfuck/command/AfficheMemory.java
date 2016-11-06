@@ -10,14 +10,5 @@ public class AfficheMemory implements Command {
         ComputationalModel.affichememoire();
     }
 
-    @Override
-    public void printShort() {
-        System.out.print("");
-    }
-
-    @Override
-    public String getColor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }
