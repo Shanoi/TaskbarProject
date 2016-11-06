@@ -1,4 +1,10 @@
-public enum EnumArg{
+package brainfuck.lecture;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public enum EnumArg {
 
     PRINT("-p"),
     REWRITE("--rewrite"),
@@ -7,21 +13,20 @@ public enum EnumArg{
     OUTF("-o"),
     CHECK("--check");
 
-    private String arg;
-    Map< String, EnumArg> comArg = new hashmap<String, EnumArg>();
+    private final String arg;
+    static final Map< String, EnumArg> comArg = new HashMap<>();
 
-    static{
-	Arrays.asList(EnumArg.values()).forEach( val -> comArg.put(val.toString(), val));
+    static {
+        Arrays.asList(EnumArg.values()).forEach(val -> comArg.put(val.toString(), val));
     }
-    
-    EnumArg(String arg){
-	this.arg = arg;
+
+    EnumArg(String arg) {
+        this.arg = arg;
     }
 
     @Override
-    public String toString(){
-	return this.arg;
+    public String toString() {
+        return this.arg;
     }
 
-    
 }
