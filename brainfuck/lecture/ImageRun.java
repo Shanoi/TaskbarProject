@@ -91,11 +91,9 @@ public class ImageRun extends Lecture {
 
                         }
 
-                        String rgb = String.format("%02x", pixelcolorBase.getRed());
-                        rgb += String.format("%02x", pixelcolorBase.getGreen());
-                        rgb += String.format("%02x", pixelcolorBase.getBlue());
+                        
 
-                        list.add(toCommand(rgb));
+                        list.add(toCommand(Integer.toString(pixelcolorBase.getRGB())));
 
                         /* Command tempinstruction = Instructions.get(rgb);
 

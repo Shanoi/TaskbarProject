@@ -19,16 +19,7 @@ public class Back implements Command {
 
     }
 
-    @Override
-    public void printShort() {
-        System.out.print("]");
 
-    }
-
-    @Override
-    public String getColor() {
-        return null;
-    }
 }
 
 
