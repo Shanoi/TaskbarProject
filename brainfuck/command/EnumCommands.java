@@ -18,7 +18,6 @@ import java.util.Set;
  */
 public enum EnumCommands {
     
-    INCR("INCR", "+", "#ffffff", new Incrementer()),
     DECR("DECR", "-", "#4b0082", new Decrementer()),
     IN("IN", ",", "#ffff00", new In()),
     LEFT("LEFT", ">", "#9400d3", new Left()),

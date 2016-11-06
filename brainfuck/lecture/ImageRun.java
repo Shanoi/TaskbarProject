@@ -93,7 +93,7 @@ public class ImageRun extends Lecture {
 
                         
 
-                        //list.add(toCommand(rgb));
+                        list.add(toCommand(Integer.toString(pixelcolorBase.getRGB())));
 
                         /* Command tempinstruction = Instructions.get(rgb);
 
