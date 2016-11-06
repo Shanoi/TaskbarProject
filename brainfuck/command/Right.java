@@ -13,13 +13,6 @@ import brainfuck.ComputationalModel;
  */
 public class Right implements Command {
 
-    private final String color = "0000ff";
-
-    @Override
-    public String getColor() {
-        return color;
-    }
-
     /**
      * Change the current cell of the memory, taking the cell at the right of
      * the current cell
@@ -33,15 +26,6 @@ public class Right implements Command {
         } else {
             System.exit(2);
         }
-    }
-
-    /**
-     * Print the instruction in short syntax for the rewrite instruction
-     *
-     */
-    @Override
-    public void printShort() {
-        System.out.print(">");
     }
 
 }

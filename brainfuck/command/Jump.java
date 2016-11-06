@@ -11,24 +11,13 @@ import brainfuck.lecture.Run;
  */
 public class Jump implements Command {
 
-
     @Override
     public void execute() {
         ComputationalModel cm = new ComputationalModel();
-        if(cm.getCurrentCaseValue() == 0){
+        if (cm.getCurrentCaseValue() == 0) {
             setI(Run.jumpAssoc(getI()));
         }
 
     }
 
-    @Override
-    public void printShort() {
-        System.out.print("[");
-    }
-
-    @Override
-    public String getColor() {
-        return null;
-    }
 }
-

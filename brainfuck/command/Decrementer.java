@@ -13,13 +13,6 @@ import brainfuck.ComputationalModel;
  */
 public class Decrementer implements Command {
 
-    private final String color = "4b0082";
-
-    @Override
-    public String getColor() {
-        return color;
-    }
-
     /**
      * Decrement the value of the current cell of the memory
      *
@@ -34,13 +27,5 @@ public class Decrementer implements Command {
         }
     }
 
-    /**
-     * Print the instruction in short syntax for the rewrite instruction
-     *
-     */
-    @Override
-    public void printShort() {
-        System.out.print("-");
-    }
 
 }
