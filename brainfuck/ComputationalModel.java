@@ -44,7 +44,7 @@ public class ComputationalModel {
     /**
      * Change the value of a cell
      *
-     * @param n the value of the cell
+     * @param n the value of the cell pointed
      */
     public void setCurrentCaseValue(byte n) {
         //(memory[p]).set(n);
