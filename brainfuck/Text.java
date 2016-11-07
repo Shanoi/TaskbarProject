@@ -8,7 +8,8 @@ import java.util.List;
 
 public class Text extends Interpreter {
 
-    private static String file = "";
+    private static String filein = "";
+    private static String fileout = "";
 
     /**
      * Initialize the different command
@@ -24,11 +25,15 @@ public class Text extends Interpreter {
 
     public Text(String file, String path, List<String> args) {
         super(path, args);
-        this.file = file;
+        this.filein = file;
     }
 
-    public static String getFile() {
-        return file;
+    public static String getFileIn() {
+        return filein;
+    }
+
+    public static String getFileOut(){
+        return fileout;
     }
 
     /**

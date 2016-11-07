@@ -29,7 +29,7 @@ public class In implements Command {
 
     @Override
     public void execute() {
-        file = Text.getFile();
+        file = Text.getFileIn();
         if (file.equals("")) {
             ComputationalModel cm = new ComputationalModel();
             Scanner sc = new Scanner(System.in);
