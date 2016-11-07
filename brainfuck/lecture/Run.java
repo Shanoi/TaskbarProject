@@ -8,7 +8,6 @@ import brainfuck.Syntaxe;
 import brainfuck.ComputationalModel;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Stack;
 
 public class Run extends Lecture{
 
@@ -50,30 +49,30 @@ public class Run extends Lecture{
     public static int jumpAssoc(int i)
     {
 	Stack<String> stack = new Stack<String>();
-	int k = ComputationalModel.getI();
-	stack.push(list.get(k));
+	int i = ComputationalModel.getI();
+	stack.push(list.get(i));
 	while( !stack.isEmpty() ){
-	    k++;
-	    if( list.get(k).equals("["))
+	    i++;
+	    if( list.get(i).equals("["))
 		stack.push("[");
-	    if( list.get(k).equals("]"))
+	    if( list.get(i).equals("]"))
 		stack.pop();
 	}
-	return k;
+	return i;
     }
     public static int backAssoc(int i)
     {
 	Stack<String> stack = new Stack<String>();
-	int k = ComputationalModel.getI();
-	stack.push(list.get(k));
+	int i = ComputationalModel.getI();
+	stack.push(list.get(i));
 	while( !stack.isEmpty() ){
-	    k--;
-	    if( list.get(k).equals("["))
+	    i--;
+	    if( list.get(i).equals("["))
 		stack.pop();
-	    if( list.get(k).equals("]"))
+	    if( list.get(i).equals("]"))
 		stack.push("]");
 	}
-	return k;
+	return i;
     }
     @Override
     public void execute() throws IOException, FileNotFoundException
