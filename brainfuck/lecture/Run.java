@@ -48,11 +48,31 @@ public class Run extends Lecture{
 
     public static int jumpAssoc(int i)
     {
-	return 1;
+	Stack<String> stack = new Stack<String>();
+	int i = ComputationalModel.getI();
+	stack.push(list.get(i));
+	while( !stack.isEmpty() ){
+	    i++;
+	    if( list.get(i).equals("["))
+		stack.push("[");
+	    if( list.get(i).equals("]"))
+		stack.pop();
+	}
+	return i;
     }
     public static int backAssoc(int i)
     {
-	return 1;
+	Stack<String> stack = new Stack<String>();
+	int i = ComputationalModel.getI();
+	stack.push(list.get(i));
+	while( !stack.isEmpty() ){
+	    i--;
+	    if( list.get(i).equals("["))
+		stack.pop();
+	    if( list.get(i).equals("]"))
+		stack.push("]");
+	}
+	return i;
     }
     @Override
     public void execute() throws IOException, FileNotFoundException
