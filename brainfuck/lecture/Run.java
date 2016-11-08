@@ -8,10 +8,11 @@ import brainfuck.Syntaxe;
 import brainfuck.ComputationalModel;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Stack;
 
 public class Run extends Lecture{
 
-    private List<String> list = new ArrayList<String>();
+    private static List<String> list = new ArrayList<String>();
     private static int i = 0;
 
     public Run(String path)
@@ -49,30 +50,30 @@ public class Run extends Lecture{
     public static int jumpAssoc(int i)
     {
 	Stack<String> stack = new Stack<String>();
-	int i = ComputationalModel.getI();
-	stack.push(list.get(i));
+	int o = ComputationalModel.getI();
+	stack.push(list.get(o));
 	while( !stack.isEmpty() ){
-	    i++;
-	    if( list.get(i).equals("["))
+	    o++;
+	    if( list.get(o).equals("["))
 		stack.push("[");
-	    if( list.get(i).equals("]"))
+	    if( list.get(o).equals("]"))
 		stack.pop();
 	}
-	return i;
+	return o;
     }
     public static int backAssoc(int i)
     {
 	Stack<String> stack = new Stack<String>();
-	int i = ComputationalModel.getI();
-	stack.push(list.get(i));
+	int o = ComputationalModel.getI();
+	stack.push(list.get(o));
 	while( !stack.isEmpty() ){
-	    i--;
-	    if( list.get(i).equals("["))
+	    o--;
+	    if( list.get(o).equals("["))
 		stack.pop();
-	    if( list.get(i).equals("]"))
+	    if( list.get(o).equals("]"))
 		stack.push("]");
 	}
-	return i;
+	return o;
     }
     @Override
     public void execute() throws IOException, FileNotFoundException
