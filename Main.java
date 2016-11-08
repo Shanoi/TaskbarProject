@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException, FileNotFoundException {
-//test
+
         Text T;
         T = new Text(args[args.length - 1], args);
         T.launchInterpreter();
