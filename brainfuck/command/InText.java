@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.File;
 
 /**
- * Created by sebde on 03/11/2016.
+ * @author TeamTaskbar
  */
 public class InText implements Command {
 

@@ -10,9 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Created by sebde on 05/11/2016.
- */
 public class In implements Command {
 
     private String file;

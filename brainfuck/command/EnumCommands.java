@@ -27,7 +27,7 @@ public enum EnumCommands {
     BACK("BACK", "]", "#ff0000", new Back());
 
     private final String Long;
-    private final String Short;£§
+    private final String Short;
     private final String color;
 
     private final Command command;

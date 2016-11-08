@@ -2,6 +2,8 @@ package brainfuck.lecture;
 
 import brainfuck.scommands.ShortSyntaxe;
 import brainfuck.scommands.LongSyntaxe;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
