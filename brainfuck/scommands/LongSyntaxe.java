@@ -12,10 +12,11 @@ public class LongSyntaxe implements SyntaxeCommand
 	    System.exit(4);
 	if(line.equals("JUMP"))
 	    Wellformed.pushStack("[");
-	if(line.equals("BACK") && !Wellformed.emptyStack())
+    if(line.equals("BACK") && Wellformed.emptyStack())
+        System.exit(4);
+    if(line.equals("BACK") && !Wellformed.emptyStack())
 	    Wellformed.popStack();
-	if(line.equals("BACK") && !Wellformed.emptyStack())
-	    System.exit(4);
+	
     }
 
     @Override

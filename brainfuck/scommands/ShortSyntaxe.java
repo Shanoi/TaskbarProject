@@ -14,10 +14,11 @@ public class ShortSyntaxe implements SyntaxeCommand
 		System.exit(4);
 	    if(Character.toString(line.charAt(i)).equals("["))
 		Wellformed.pushStack("[");
-	    if(Character.toString(line.charAt(i)).equals("]") && !Wellformed.emptyStack())
+        if(Character.toString(line.charAt(i)).equals("]") && Wellformed.emptyStack())
+            System.exit(4);
+        if(Character.toString(line.charAt(i)).equals("]") && !Wellformed.emptyStack())
 		Wellformed.popStack();
-	    if(Character.toString(line.charAt(i)).equals("]") && !Wellformed.emptyStack())
-		System.exit(4);
+	    
 	    
 	}
     }
