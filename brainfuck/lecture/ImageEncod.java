@@ -69,7 +69,15 @@ public class ImageEncod {
 
                     for (int l = j, cpt2 = 0; cpt2 < pixelSize; l++, cpt2++) {
 
-                        res.setRGB(k, l, Color.decode(toCommand(run.getInstructions().get(i)).getColor()).getRGB());
+                        if (i+j > run.getNbI()){
+                        
+                        res.setRGB(k, l, Color.decode(toCommand(run.getInstructions().get(i+j)).getColor()).getRGB());
+                        
+                        }else{
+                            
+                            res.setRGB(k, l, Color.decode("#000000").getRGB());
+                            
+                        }
 
                     }
                 }
