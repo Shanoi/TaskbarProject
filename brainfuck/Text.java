@@ -4,6 +4,7 @@ import java.util.Arrays;
 import brainfuck.lecture.*;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Text extends Interpreter {
@@ -21,18 +22,29 @@ public class Text extends Interpreter {
 
         super(path, Arrays.asList(args));
 
-    }
+        for (int i = 0; i < args.length; i++) {
 
-    public Text(String file, String path, List<String> args) {
-        super(path, args);
-        this.filein = file;
+            if (args[i].equals("-o")) {
+
+                fileout = args[i + 1];
+
+            }
+
+            if (args[i].equals("-i")) {
+
+                filein = args[i + 1];
+
+            }
+
+        }
+
     }
 
     public static String getFileIn() {
         return filein;
     }
 
-    public static String getFileOut(){
+    public static String getFileOut() {
         return fileout;
     }
 
@@ -46,10 +58,8 @@ public class Text extends Interpreter {
      */
     public void launchInterpreter() throws IOException, FileNotFoundException {
 
-
-
-	Lecture test2 = new Wellformed(path);
-	test2.execute();
+        Lecture test2 = new Wellformed(path);
+        test2.execute();
 
     }
 
