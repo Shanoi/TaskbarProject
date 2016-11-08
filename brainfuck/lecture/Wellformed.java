@@ -23,9 +23,9 @@ public class Wellformed extends Lecture{
 	while( (line = file.readLine()) != null )
 	    {
       	    if(Syntaxe.isShort(line))
-		shortSyntaxe.verify(line);
-	    else
-       		longSyntaxe.verify(line);
+		        shortSyntaxe.verify(line);
+	        else
+       		    longSyntaxe.verify(line);
 	    }
 	file.close();
     }
