@@ -1,6 +1,7 @@
 package brainfuck.scommands;
 
 import brainfuck.command.EnumCommands;
+import brainfuck.lecture.Wellformed;
 
 public class ShortSyntaxe implements SyntaxeCommand
 {
@@ -11,6 +12,13 @@ public class ShortSyntaxe implements SyntaxeCommand
 	{
 	    if(!EnumCommands.isCommand(Character.toString(line.charAt(i))))
 		System.exit(4);
+	    if(Character.toString(line.charAt(i)).equals("["))
+		Wellformed.pushStack("[");
+	    if(Character.toString(line.charAt(i)).equals("]") && !Wellformed.emptyStack())
+		Wellformed.popStack();
+	    if(Character.toString(line.charAt(i)).equals("]") && !Wellformed.emptyStack())
+		System.exit(4);
+	    
 	}
     }
 

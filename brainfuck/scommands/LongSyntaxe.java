@@ -1,6 +1,7 @@
 package brainfuck.scommands;
 
 import brainfuck.command.EnumCommands;
+import brainfuck.lecture.Wellformed;
 
 public class LongSyntaxe implements SyntaxeCommand
 {
@@ -9,7 +10,12 @@ public class LongSyntaxe implements SyntaxeCommand
     {
 	if(!EnumCommands.isCommand(line))
 	    System.exit(4);
-
+	if(line.equals("JUMP"))
+	    Wellformed.pushStack("[");
+	if(line.equals("BACK") && !Wellformed.emptyStack())
+	    Wellformed.popStack();
+	if(line.equals("BACK") && !Wellformed.emptyStack())
+	    System.exit(4);
     }
 
     @Override
