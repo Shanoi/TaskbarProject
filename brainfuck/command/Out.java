@@ -3,10 +3,7 @@ package brainfuck.command;
 import brainfuck.ComputationalModel;
 import brainfuck.Text;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class Out implements Command {
     private String file;
@@ -31,9 +28,12 @@ public class Out implements Command {
                 inputFile.write(tempString);
                 inputFile.close();
                 tampon.close();
-            }
-            catch(IOException e){
-                e.printStackTrace();
+
+            } catch(FileNotFoundException e){
+                System.exit(3);
+
+            } catch(IOException e){
+                System.exit(3);
             }
         }
 

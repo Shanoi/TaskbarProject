@@ -61,9 +61,11 @@ public class In implements Command {
                 }
 
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                System.exit(3);
+
             } catch (IOException e) {
-                e.printStackTrace();
+                System.exit(3);
+                
             }
         }
 
