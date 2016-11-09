@@ -5,10 +5,17 @@ import brainfuck.Text;
 
 import java.io.*;
 
+/**
+ * This class is used to print the character associated to the ASCII value in the current memory case
+ * it an take a file to store different characters of different OUT
+ */
 public class Out implements Command {
     private String file;
     private static String tempString="";
 
+    /**
+     * execute the Out function
+     */
     @Override
     public void execute() {
         ComputationalModel cm = new ComputationalModel();

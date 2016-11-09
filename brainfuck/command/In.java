@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class is used to put a ASCII character's values to the current memory case pointed.
+ * it can take an input file with different character or ask a character.
+ */
 public class In implements Command {
 
     private String file;
@@ -20,10 +24,18 @@ public class In implements Command {
     private static int state = 0;
     private static ArrayList<Integer> text_list = new ArrayList<Integer>();
 
+    /**
+     * parameter file contain the input file adress.
+     * if not, the program will be executed asking a new character for each IN in the program.
+     * @param file
+     */
     public void In(String file) {
         this.file = file;
     }
 
+    /**
+     * method execute the IN function
+     */
     @Override
     public void execute() {
         file = Text.getFileIn();
