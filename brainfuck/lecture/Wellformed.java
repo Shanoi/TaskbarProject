@@ -28,7 +28,7 @@ public class Wellformed extends Lecture {
             String ext = path.substring(path.lastIndexOf("."));
 
             // Si le fichier n'est pas en .txt on le met en .txt
-            if (!".bmp".equals(ext)) {
+            if (".bmp".equals(ext)) {
 
                 wellFormedBMP();
 
