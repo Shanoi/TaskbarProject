@@ -115,11 +115,11 @@ public class Run extends Lecture{
 
     public void afficheStats(){
 		System.out.println("Nombre d'instructions: "+nbInstructions());
-		System.out.println("Temps d'execution: "+EXEC_TIME);
-		System.out.println("Nombre de déplacement du pointeur d'instruction: "+EXEC_MOVE);
-		System.out.println("Nombre de déplacement dans la mémoire: "+DATA_MOVE);
-		System.out.println("Nombre d'éciture dans la mémoire: "+DATA_WRITE);
-		System.out.println("Nombre de lecture dans la mémoire: "+DATA_READ);
+		System.out.println("Temps d'executions: "+EXEC_TIME);
+		System.out.println("Nombre de déplacements du pointeur d'instruction: "+EXEC_MOVE);
+		System.out.println("Nombre de déplacements dans la mémoire: "+DATA_MOVE);
+		System.out.println("Nombre d'écritures dans la mémoire: "+DATA_WRITE);
+		System.out.println("Nombre de lectures dans la mémoire: "+DATA_READ);
 	}
 
 
