@@ -2,6 +2,7 @@ package brainfuck.command;
 
 import brainfuck.ComputationalModel;
 import brainfuck.Text;
+import brainfuck.lecture.Run;
 
 import java.io.File;
 import java.io.FileNotFoundException;
