@@ -1,6 +1,7 @@
 package brainfuck.command;
 
 import brainfuck.ComputationalModel;
+import brainfuck.lecture.Run;
 
 /**
  *
@@ -14,6 +15,7 @@ public class Incrementer implements Command {
      */
     @Override
     public void execute() {
+        Run.EXEC_MOVE++;
         ComputationalModel cm = new ComputationalModel();
         if (cm.getCurrentCaseValue() < 255) {
             cm.setCurrentCaseValue((byte) (cm.getCurrentCaseValue() + 1));

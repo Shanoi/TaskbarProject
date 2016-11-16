@@ -2,6 +2,7 @@ package brainfuck.command;
 
 import brainfuck.ComputationalModel;
 import brainfuck.Text;
+import brainfuck.lecture.Run;
 
 import java.io.*;
 
@@ -18,6 +19,7 @@ public class Out implements Command {
      */
     @Override
     public void execute() {
+        Run.EXEC_MOVE++;
         ComputationalModel cm = new ComputationalModel();
         if(file.equals("")){
             System.out.println((char) cm.getCurrentCaseValue());
