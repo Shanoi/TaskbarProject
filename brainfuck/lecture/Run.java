@@ -14,7 +14,8 @@ public class Run extends Lecture{
 
     private static List<String> list = new ArrayList<String>();
     private static int i = 0;
-
+    private static long EXEC_TIME = 0;
+    
     public Run(String path)
     {
 	super(path);
@@ -41,7 +42,10 @@ public class Run extends Lecture{
     {
 	return list.size();
     }
-
+    public long getExecTime()
+    {
+	return EXEC_TIME;
+    }
     public int nbInstructions()
     {
 	return list.size();
@@ -53,7 +57,7 @@ public class Run extends Lecture{
     {
 	return this.list;
     }
-
+    
     public static int jumpAssoc(int i)
     {
 	Stack<String> stack = new Stack<String>();
@@ -85,6 +89,8 @@ public class Run extends Lecture{
     @Override
     public void execute() throws IOException, FileNotFoundException
     {
+	long instantA = System.currentTimeMillis(); //
+	    
 	ComputationalModel.init();
         
 	while(ComputationalModel.getI() < list.size())
@@ -97,7 +103,9 @@ public class Run extends Lecture{
 		ComputationalModel.setI(i);
 	    }
 
-
+	long instantB = System.currentTimeMillis();
+	EXEC_TIME = instantB - instantA;
+	
     }
 
 
