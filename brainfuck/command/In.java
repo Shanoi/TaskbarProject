@@ -38,6 +38,7 @@ public class In implements Command {
      */
     @Override
     public void execute() {
+        Run.EXEC_MOVE++;
         file = Text.getFileIn();
         if (file.equals("")) {
             ComputationalModel cm = new ComputationalModel();
