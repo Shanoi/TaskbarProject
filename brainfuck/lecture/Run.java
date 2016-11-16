@@ -42,6 +42,13 @@ public class Run extends Lecture{
 	return list.size();
     }
 
+    public int nbInstructions()
+    {
+	return list.size();
+    }
+    
+	    
+    
     public List<String> getInstructions()
     {
 	return this.list;
