@@ -40,6 +40,7 @@ public class In implements Command {
     @Override
     public void execute() {
         Run.EXEC_MOVE++;
+        Run.DATA_WRITE++;
         file = Text.getFileIn();
         if (file.equals("")) {
             ComputationalModel cm = new ComputationalModel();

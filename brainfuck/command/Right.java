@@ -17,6 +17,7 @@ public class Right implements Command {
     @Override
     public void execute() {
         Run.EXEC_MOVE++;
+        Run.DATA_MOVE++;
         ComputationalModel cm = new ComputationalModel();
         if (cm.getCurrentIndice() < cm.getMemorySize()) {
             cm.setCurrentIndice(cm.getCurrentIndice() + 1);

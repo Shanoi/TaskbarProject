@@ -14,6 +14,7 @@ public class Jump implements Command {
     @Override
     public void execute() {
         Run.EXEC_MOVE++;
+        Run.DATA_READ++;
         ComputationalModel cm = new ComputationalModel();
         if (cm.getCurrentCaseValue() == 0) {
             setI(Run.jumpAssoc(getI()));

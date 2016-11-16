@@ -20,6 +20,7 @@ public class Out implements Command {
     @Override
     public void execute() {
         Run.EXEC_MOVE++;
+        Run.DATA_READ++;
         ComputationalModel cm = new ComputationalModel();
         if(file.equals("")){
             System.out.println((char) cm.getCurrentCaseValue());

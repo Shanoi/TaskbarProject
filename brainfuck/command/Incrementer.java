@@ -16,6 +16,7 @@ public class Incrementer implements Command {
     @Override
     public void execute() {
         Run.EXEC_MOVE++;
+        Run.DATA_WRITE++;
         ComputationalModel cm = new ComputationalModel();
         if (cm.getCurrentCaseValue() < 255) {
             cm.setCurrentCaseValue((byte) (cm.getCurrentCaseValue() + 1));
