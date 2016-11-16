@@ -16,6 +16,9 @@ public class Run extends Lecture{
     private static int i = 0;
     private static long EXEC_TIME = 0;
 	public static int EXEC_MOVE = 0;
+	public static int DATA_MOVE=0;
+	public static int DATA_WRITE=0;
+	public static int DATA_READ=0;
     
     public Run(String path)
     {
