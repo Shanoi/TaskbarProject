@@ -15,6 +15,7 @@ public class Run extends Lecture{
     private static List<String> list = new ArrayList<String>();
     private static int i = 0;
     private static long EXEC_TIME = 0;
+	public static int EXEC_MOVE = 0;
     
     public Run(String path)
     {

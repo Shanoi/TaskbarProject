@@ -2,6 +2,7 @@ package brainfuck.command;
 
 import brainfuck.ComputationalModel;
 import brainfuck.Text;
+import brainfuck.lecture.Run;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,6 +39,7 @@ public class In implements Command {
      */
     @Override
     public void execute() {
+        Run.EXEC_MOVE++;
         file = Text.getFileIn();
         if (file.equals("")) {
             ComputationalModel cm = new ComputationalModel();
