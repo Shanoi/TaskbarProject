@@ -1,9 +1,6 @@
 package brainfuck.command;
 
-import brainfuck.ComputationalModel;
-import static brainfuck.ComputationalModel.getI;
-import static brainfuck.ComputationalModel.setI;
-import brainfuck.lecture.Lecture;
+import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
 
 /**
@@ -13,11 +10,16 @@ public class Jump implements Command {
 
     @Override
     public void execute() {
-        Run.EXEC_MOVE++;
-        Run.DATA_READ++;
-        ComputationalModel cm = new ComputationalModel();
-        if (cm.getCurrentCaseValue() == 0) {
-            setI(Run.jumpAssoc(getI()));
+
+        Fichiers tempfile = new Fichiers("");
+
+        Run.IncrEXEC_MOVE();
+        Run.IncrDATA_READ();
+
+        if (tempfile.getCm().getCurrentCaseValue() == 0) {
+
+            tempfile.getCm().setI(tempfile.jumpAssoc(tempfile.getCm().getI()));
+
         }
 
     }

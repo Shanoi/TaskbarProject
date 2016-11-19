@@ -1,48 +1,47 @@
 package brainfuck.command;
 
-import brainfuck.ComputationalModel;
-import brainfuck.Text;
+import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
+import brainfuck.memory.Interpreter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
-import java.io.*;
-
-/**
- * This class is used to print the character associated to the ASCII value in the current memory case
- * it an take a file to store different characters of different OUT
- */
 public class Out implements Command {
-    private String file;
-    private static String tempString="";
 
-    /**
-     * execute the Out function
-     */
+    private String file;
+    private static String tempString = "";
+
     @Override
     public void execute() {
-        Run.EXEC_MOVE++;
-        Run.DATA_READ++;
-        ComputationalModel cm = new ComputationalModel();
-        if(file.equals("")){
-            System.out.println((char) cm.getCurrentCaseValue());
-        }
-        else{
-            file= Text.getFileOut();
+
+        Run.IncrEXEC_MOVE();
+        Run.IncrDATA_READ();
+
+        Fichiers tempfile = new Fichiers("");
+
+        if (file.equals("")) {
+            System.out.println((char) tempfile.getCm().getCurrentCaseValue());
+        } else {
+            file = Interpreter.getFileOut();
             try {
                 FileWriter inputFile = new FileWriter(new File(file));
-                FileReader tampon=new FileReader(new File(file));
-                int temp=tampon.read();
-                while(temp!=-1){
-                    tempString+=(char)temp;
+                FileReader tampon = new FileReader(new File(file));
+                int temp = tampon.read();
+                while (temp != -1) {
+                    tempString += (char) temp;
                 }
-                tempString+=(char)cm.getCurrentCaseValue();
+                tempString += (char) tempfile.getCm().getCurrentCaseValue();
                 inputFile.write(tempString);
                 inputFile.close();
                 tampon.close();
 
-            } catch(FileNotFoundException e){
+            } catch (FileNotFoundException e) {
                 System.exit(3);
 
-            } catch(IOException e){
+            } catch (IOException e) {
                 System.exit(3);
             }
         }

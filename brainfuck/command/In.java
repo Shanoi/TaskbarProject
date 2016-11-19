@@ -1,9 +1,8 @@
 package brainfuck.command;
 
-import brainfuck.ComputationalModel;
-import brainfuck.Text;
+import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
-
+import brainfuck.memory.Interpreter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,10 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * This class is used to put a ASCII character's values to the current memory case pointed.
- * it can take an input file with different character or ask a character.
- */
 public class In implements Command {
 
     private String file;
@@ -23,36 +18,30 @@ public class In implements Command {
     private int temp = 0;
     private int text_length = 0;
     private static int state = 0;
-    private static ArrayList<Integer> text_list = new ArrayList<Integer>();
+    private static ArrayList<Integer> text_list = new ArrayList<>();
 
-    /**
-     * parameter file contain the input file adress.
-     * if not, the program will be executed asking a new character for each IN in the program.
-     * @param file
-     */
     public void In(String file) {
         this.file = file;
     }
 
-    /**
-     * method execute the IN function
-     */
     @Override
     public void execute() {
-        Run.EXEC_MOVE++;
-        Run.DATA_WRITE++;
-        file = Text.getFileIn();
+
+        Run.IncrEXEC_MOVE();
+        Run.IncrDATA_WRITE();
+
+        file = Interpreter.getFileIn();
         if (file.equals("")) {
-            ComputationalModel cm = new ComputationalModel();
+            Fichiers tempfile = new Fichiers("");
             Scanner sc = new Scanner(System.in);
             str = sc.nextLine();
             if (str.length() > 0) {
-                cm.setCurrentCaseValue((byte) str.charAt(0));
+                tempfile.getCm().setCurrentCaseValue((byte) str.charAt(0));
             } else {
                 System.exit(3);
             }
         } else {
-            ComputationalModel cm = new ComputationalModel();
+            Fichiers tempfile = new Fichiers("");
             File inputFile = new File(file);
             FileReader in = null;
             try {
@@ -69,7 +58,7 @@ public class In implements Command {
                 }
 
                 if (cnt < text_length - 1) {
-                    cm.setCurrentCaseValue((byte) (char) text_list.get(cnt).intValue());
+                    tempfile.getCm().setCurrentCaseValue((byte) (char) text_list.get(cnt).intValue());
                     cnt++;
                 } else {
                     System.exit(3);
@@ -80,7 +69,7 @@ public class In implements Command {
 
             } catch (IOException e) {
                 System.exit(3);
-                
+
             }
         }
 

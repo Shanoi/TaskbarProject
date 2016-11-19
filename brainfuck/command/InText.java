@@ -1,12 +1,11 @@
 package brainfuck.command;
 
-import brainfuck.ComputationalModel;
-
-import java.io.BufferedReader;
+import brainfuck.lecture.Fichiers;
+import brainfuck.lecture.Run;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.File;
 
 /**
  * @author TeamTaskbar
@@ -23,9 +22,14 @@ public class InText implements Command {
 
     @Override
     public void execute() {
-        ComputationalModel cm = new ComputationalModel();
+
+        Run.IncrEXEC_MOVE();
+        Run.IncrDATA_WRITE();
+
+        Fichiers tempfile = new Fichiers("");
         File inputFile = new File(file);
         FileReader in = null;
+
         try {
             in = new FileReader(inputFile);
 
@@ -33,7 +37,7 @@ public class InText implements Command {
                 temp = in.read();
             }
             if (temp != -1) {
-                cm.setCurrentCaseValue((byte) (char) temp);
+                tempfile.getCm().setCurrentCaseValue((byte) (char) temp);
                 cnt++;
             } else {
                 System.exit(3);

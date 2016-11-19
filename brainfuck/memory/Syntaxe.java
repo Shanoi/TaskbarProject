@@ -1,4 +1,4 @@
-package brainfuck;
+package brainfuck.memory;
 
 public class Syntaxe {
 

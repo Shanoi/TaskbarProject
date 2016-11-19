@@ -17,7 +17,7 @@ import java.util.Set;
  * @author TeamTaskbar
  */
 public enum EnumCommands {
-    
+
     INCR("INCR", "+", "#ffffff", new Incrementer()),
     DECR("DECR", "-", "#4b0082", new Decrementer()),
     IN("IN", ",", "#ffff00", new In()),
@@ -135,5 +135,5 @@ public enum EnumCommands {
         return command;
 
     }
-    
+
 }
