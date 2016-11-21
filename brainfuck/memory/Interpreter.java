@@ -8,6 +8,7 @@ public class Interpreter {
 
     //private ComputationalModel cm = new ComputationalModel();
     private String path = new String();
+    private String[] args;
     //private List<String> args;
 
     private static String filein = "";
@@ -18,12 +19,17 @@ public class Interpreter {
      *
      * @param path
      * @param args
-     * @throws java.io.IOException
      */
-    public Interpreter(String path, String[] args) throws IOException {
+    public Interpreter(String path, String[] args) {
 
         this.path = path;
-        //this.args = new ArrayList(Arrays.asList(args));
+        this.args = args;
+
+    }
+    
+    public void lauchInterpreter() throws IOException{
+        
+         //this.args = new ArrayList(Arrays.asList(args));
 
         Run run = new Run(path);
 
@@ -75,7 +81,7 @@ public class Interpreter {
         }
 
         run.execute();
-
+        
     }
 
     public static String getFileIn() {
