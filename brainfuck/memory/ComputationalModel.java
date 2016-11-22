@@ -80,7 +80,7 @@ public class ComputationalModel {
     /**
      * Display the memory in row
      */
-    public void affichememoire() {
+    public static void affichememoire() {
 
         _memory.stream().forEach((_memory1) -> {
             System.out.print(" | " + _memory1.byteToInt());

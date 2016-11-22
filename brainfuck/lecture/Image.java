@@ -20,7 +20,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author Olivier
+ * @author TeamTaskbar
  */
 public class Image extends Fichiers {
 

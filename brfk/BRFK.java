@@ -5,6 +5,7 @@
  */
 package brfk;
 
+import brainfuck.memory.Interpreter;
 import brainfuck.lecture.Image;
 import brainfuck.lecture.Text;
 import java.io.IOException;
@@ -20,9 +21,11 @@ public class BRFK {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        /*Text txt = new Text("D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt");
+        
+        Interpreter interpreter = new Interpreter(args[args.length-1], args);
+        interpreter.lauchInterpreter();/*Text txt = new Text("D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt");
 
         try {
             txt.Read();

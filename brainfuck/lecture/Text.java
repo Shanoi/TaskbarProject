@@ -15,7 +15,7 @@ import java.io.IOException;
 
 /**
  *
- * @author Olivier
+ * @author TeamTaskbar
  */
 public class Text extends Fichiers {
 
