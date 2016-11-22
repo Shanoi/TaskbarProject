@@ -1,4 +1,4 @@
-package brainfuck.memory;
+ package brainfuck.memory;
 
 import brainfuck.lecture.Run;
 import brainfuck.lecture.Text;
@@ -50,7 +50,7 @@ public class Interpreter {
 
             if (args[i].equals("--check")) {
 
-               // new Wellformed((ArrayList<EnumCommands>) run.getInstructions());
+               new Wellformed((ArrayList<EnumCommands>) run.getInstructions());
             }
 
         }
@@ -59,9 +59,18 @@ public class Interpreter {
 
             if (args[i].equals("--translate")) {
 
-                //run.EncodImage();
+                run.EncodImage();
             }
 
+        }
+        
+        for (int i = 0; i < args.length; i++) {
+            
+            if (args[i].equals("-p")) {
+                
+                ComputationalModel.affichememoire();
+            }
+            
         }
 
         for (int i = 0; i < args.length; i++) {
