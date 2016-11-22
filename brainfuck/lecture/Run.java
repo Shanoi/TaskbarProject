@@ -106,8 +106,6 @@ public class Run {
         System.out.println("Nombre de lectures dans la mémoire: " + DATA_READ);
 
     }
-    
-    
 
     public Fichiers getFichier() {
 
