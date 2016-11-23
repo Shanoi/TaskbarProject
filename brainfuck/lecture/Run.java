@@ -119,14 +119,17 @@ public class Run {
         System.out.println("Nombre de lectures dans la mémoire: " + DATA_READ);
 
     }
-<<<<<<< HEAD
-    public void getI
+
+    public int setTrace(int trace1)
+    {
+        
+        trace = trace1;
+    }
     public Fichiers getFichier() {
         
         return this.fichier;
     }
-=======
->>>>>>> bfb12f26ecb79d6352109a1d7aef75df8406deb7
+
 
     public Fichiers getFichier() {
 
