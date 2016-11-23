@@ -90,6 +90,20 @@ public class ComputationalModel {
 
     }
     
-
+    @Override
+    public String toString(){
+        
+        StringBuilder memory = new StringBuilder();
+        
+        _memory.stream().forEach((_memory1) -> {
+            
+            memory.append(" | ").append(_memory1.byteToInt());
+            
+        });
+        
+        
+        return memory.toString();
+        
+    }
 
 }

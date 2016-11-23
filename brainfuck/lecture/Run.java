@@ -63,7 +63,6 @@ public class Run {
             } else {
 
                 fichier = new Text(path);
-                
 
             }
 
@@ -72,18 +71,22 @@ public class Run {
             fichier = new Text(path);
 
         }
-        
-        fichier.Read();
 
         fichier.Read();
 
     }
+
     
     
     
     
-    public String execute() throws IOException, FileNotFoundException {
+    public void execute() throws IOException, FileNotFoundException {
         String str; // the execution step number (starting at one), the location of the execution pointer after the execution of this step, the location of the data pointer at the very same time, and a snapshot of the memory.
+
+
+
+
+
         long instantA = System.currentTimeMillis();
         
         cm.init();
@@ -116,16 +119,18 @@ public class Run {
         System.out.println("Nombre de lectures dans la mémoire: " + DATA_READ);
 
     }
+<<<<<<< HEAD
     public void getI
     public Fichiers getFichier() {
         
         return this.fichier;
     }
+=======
+>>>>>>> bfb12f26ecb79d6352109a1d7aef75df8406deb7
 
     public Fichiers getFichier() {
 
         return this.fichier;
-
     }
 
 }
