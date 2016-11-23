@@ -3,6 +3,8 @@ package brainfuck.lecture;
 import brainfuck.memory.ComputationalModel;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 
 public class Run {
 
@@ -11,7 +13,7 @@ public class Run {
     private static int DATA_MOVE = 0;
     private static int DATA_WRITE = 0;
     private static int DATA_READ = 0;
-
+    private static boolean trace = false;
     protected final String path;
 
     private final ComputationalModel cm;
@@ -76,20 +78,35 @@ public class Run {
 
     }
 
+    
+    
+    
+    
     public void execute() throws IOException, FileNotFoundException {
+        String str; // the execution step number (starting at one), the location of the execution pointer after the execution of this step, the location of the data pointer at the very same time, and a snapshot of the memory.
+
+
+
+
 
         long instantA = System.currentTimeMillis();
-
+        
         cm.init();
 
         while (cm.getI() < Fichiers.list.size()) {
 
             Fichiers.list.get(i).getCommand().execute();
+            if (trace)
+                str += ("Execution step number: " + EXEC_MOVE  +" \nPointer of the execution: "  + cm.getI()  +" \nLocation of the data pointer: " + cm.getCurrentIndice() + " Affichage de la mémoire\n"+cm.toString() +"\n" );
 
             i = (cm.getI() + 1);
             cm.setI(i);
         }
-
+        
+        
+        PrintWriter writer = new PrintWriter("results.txt", "UTF-8");
+        writer.println(str);
+        
         long instantB = System.currentTimeMillis();
         EXEC_TIME = instantB - instantA;
         afficheStats();
@@ -107,6 +124,11 @@ public class Run {
 
     }
 
+    public void setTrace(boolean trace1)
+    {
+        
+        trace = trace1;
+    }
     public Fichiers getFichier() {
 
         return this.fichier;
