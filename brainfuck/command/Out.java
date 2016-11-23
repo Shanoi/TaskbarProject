@@ -21,7 +21,7 @@ public class Out implements Command {
         Run.IncrDATA_READ();
 
         Fichiers tempfile = new Fichiers("");
-
+        file = Interpreter.getFileOut();
         if (file.equals("")) {
             System.out.println((char) tempfile.getCm().getCurrentCaseValue());
         } else {

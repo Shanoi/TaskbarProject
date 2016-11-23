@@ -57,7 +57,7 @@ public class In implements Command {
                     state = 1;
                 }
 
-                if (cnt < text_length - 1) {
+                if (cnt < text_length) {
                     tempfile.getCm().setCurrentCaseValue((byte) (char) text_list.get(cnt).intValue());
                     cnt++;
                 } else {
@@ -65,9 +65,11 @@ public class In implements Command {
                 }
 
             } catch (FileNotFoundException e) {
+
                 System.exit(3);
 
             } catch (IOException e) {
+
                 System.exit(3);
 
             }

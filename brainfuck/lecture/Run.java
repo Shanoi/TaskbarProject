@@ -63,6 +63,7 @@ public class Run {
             } else {
 
                 fichier = new Text(path);
+                
 
             }
 
@@ -71,11 +72,16 @@ public class Run {
             fichier = new Text(path);
 
         }
+        
+        fichier.Read();
 
         fichier.Read();
 
     }
-
+    
+    
+    
+    
     public void execute() throws IOException, FileNotFoundException {
 
         long instantA = System.currentTimeMillis();
@@ -105,6 +111,11 @@ public class Run {
         System.out.println("Nombre d'écritures dans la mémoire: " + DATA_WRITE);
         System.out.println("Nombre de lectures dans la mémoire: " + DATA_READ);
 
+    }
+    
+    public Fichiers getFichier() {
+        
+        return this.fichier;
     }
 
     public Fichiers getFichier() {

@@ -40,7 +40,6 @@ public class Text extends Fichiers {
                         list.add(toCommand((Character.toString(line.charAt(j)))));
 
                     } else {
-
                         System.exit(4);
 
                     }

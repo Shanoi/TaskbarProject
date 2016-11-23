@@ -21,7 +21,6 @@ public class Wellformed {
     }
 
     public void execute() throws IOException, FileNotFoundException {
-
         for (int i = 0; i < commands.size(); i++) {
             EnumCommands get = commands.get(i);
 
@@ -32,7 +31,7 @@ public class Wellformed {
 
                 System.exit(4);
             }
-            if (get == BACK && !IsemptyStack()) {
+            if (get == BACK) {
                 popStack();
             }
 

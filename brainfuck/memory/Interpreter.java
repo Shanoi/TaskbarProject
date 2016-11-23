@@ -53,7 +53,7 @@ public class Interpreter {
 
             if (args[i].equals("--check")) {
 
-               new Wellformed((ArrayList<EnumCommands>) new Fichiers(path).getInstructions());
+               new Wellformed((ArrayList<EnumCommands>) run.getFichier().getInstructions()).execute();
             }
 
         }
@@ -67,14 +67,7 @@ public class Interpreter {
 
         }
         
-        for (int i = 0; i < args.length; i++) {
-            
-            if (args[i].equals("-p")) {
-                
-                ComputationalModel.affichememoire();
-            }
-            
-        }
+        
 
         for (int i = 0; i < args.length; i++) {
 
@@ -93,6 +86,8 @@ public class Interpreter {
         }
 
         run.execute();
+        ComputationalModel.affichememoire();
+
         
     }
 
