@@ -124,7 +124,7 @@ public class Run {
 
     }
 
-    public int setTrace(boolean trace1)
+    public void setTrace(boolean trace1)
     {
         
         trace = trace1;
