@@ -13,6 +13,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+
+
+
 /**
  *
  * @author TeamTaskbar
@@ -30,13 +33,13 @@ public class Text extends Fichiers {
         String line = new String();
 
         while ((line = file.readLine()) != null) {
-
+            
             if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
 
                 for (int j = 0; j < line.length(); j++) {
 
                     if (isCommand(Character.toString(line.charAt(j)))) {
-
+                        line = this.deleteCom(line);
                         list.add(toCommand((Character.toString(line.charAt(j)))));
 
                     } else {
@@ -46,10 +49,14 @@ public class Text extends Fichiers {
 
                 }
 
-            } else {
-
+            }
+            else if((line.charAt(0) == '#') || (line.charAt(0) == '\t')){
+            
+            }
+            else{
+                
                 if (isCommand(line)) {
-
+                    line = this.deleteCom(line);
                     list.add(toCommand(line));
 
                 } else {
@@ -76,5 +83,22 @@ public class Text extends Fichiers {
 
         }
 
+    }
+    
+    public String deleteCom(String line)
+    {
+        String str2;
+        for( int i = 0; i < line.length(); i++)
+        {
+            if ( line.charAt(i) == '#' )
+                return str2;
+            if( !(line.charAt(i) == '\t') )
+            {
+                str2 += Character.toString(line.charAt(i));
+            }
+        }
+        return str2;
+        
+        
     }
 }
