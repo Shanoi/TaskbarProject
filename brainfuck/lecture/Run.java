@@ -3,6 +3,8 @@ package brainfuck.lecture;
 import brainfuck.memory.ComputationalModel;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 
 public class Run {
 
@@ -101,7 +103,9 @@ public class Run {
             cm.setI(i);
         }
         
-        //File file = new File(getCacheDirectory() + "\\results.txt");
+        
+        //PrintWriter writer = new PrintWriter("results.txt", "UTF-8");
+        //writer.println("The first line");
         
         long instantB = System.currentTimeMillis();
         EXEC_TIME = instantB - instantA;
@@ -125,12 +129,6 @@ public class Run {
         
         trace = trace1;
     }
-    public Fichiers getFichier() {
-        
-        return this.fichier;
-    }
-
-
     public Fichiers getFichier() {
 
         return this.fichier;
