@@ -87,7 +87,7 @@ public class Text extends Fichiers {
     
     public String deleteCom(String line)
     {
-        String str2;
+        String str2 = new String();
         for( int i = 0; i < line.length(); i++)
         {
             if ( line.charAt(i) == '#' )

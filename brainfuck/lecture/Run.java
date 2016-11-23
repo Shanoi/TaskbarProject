@@ -104,8 +104,8 @@ public class Run {
         }
         
         
-        //PrintWriter writer = new PrintWriter("results.txt", "UTF-8");
-        //writer.println("The first line");
+        PrintWriter writer = new PrintWriter("results.txt", "UTF-8");
+        writer.println(str);
         
         long instantB = System.currentTimeMillis();
         EXEC_TIME = instantB - instantA;
@@ -124,7 +124,7 @@ public class Run {
 
     }
 
-    public int setTrace(int trace1)
+    public int setTrace(boolean trace1)
     {
         
         trace = trace1;
