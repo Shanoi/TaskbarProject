@@ -1,4 +1,0 @@
-INCR
-INCR
-DECR
-INCR

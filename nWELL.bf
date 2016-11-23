@@ -1,3 +1,0 @@
-JUMP
-BACK
-BACK
