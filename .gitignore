@@ -11,6 +11,10 @@
 #emacs Files#
 .java~
 .java#
+.bf#
+.bf~
+[#]*[#]
+[~]*[~]
 
 #Mac Files#
 .DS_Store
