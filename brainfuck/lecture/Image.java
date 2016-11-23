@@ -108,12 +108,12 @@ public class Image extends Fichiers {
 
                         }
 
-                        if (isCommand(Integer.toString(pixelcolorBase.getRGB())) && pixelcolorBase != Color.BLACK) {
+                        if (isCommand("#"+Integer.toHexString(pixelcolorBase.getRGB()).substring(2)) && pixelcolorBase != Color.BLACK) {
 
-                            list.add(toCommand(Integer.toString(pixelcolorBase.getRGB())));
+                            list.add(toCommand("#"+Integer.toHexString(pixelcolorBase.getRGB()).substring(2)));
 
                         } else {
-
+                            
                             System.exit(4);
 
                         }

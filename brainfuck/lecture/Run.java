@@ -74,8 +74,6 @@ public class Run {
 
         fichier.Read();
 
-        fichier.Read();
-
     }
 
     public void execute() throws IOException, FileNotFoundException {
