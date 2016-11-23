@@ -58,23 +58,28 @@ public class Run {
             // Si le fichier n'est pas en .txt on le met en .txt
             if (".bmp".equals(ext)) {
 
-                Image img = new Image(path);
+                fichier = new Image(path);
 
             } else {
 
                 fichier = new Text(path);
-                fichier.Read();
+                
 
             }
 
         } else {
 
-            new Text(path).Read();
+            fichier = new Text(path);
 
         }
+        
+        fichier.Read();
 
     }
-
+    
+    
+    
+    
     public void execute() throws IOException, FileNotFoundException {
 
         long instantA = System.currentTimeMillis();
@@ -106,6 +111,9 @@ public class Run {
 
     }
     
-    
+    public Fichiers getFichier() {
+        
+        return this.fichier;
+    }
 
 }
