@@ -24,8 +24,11 @@ public class BRFK {
     public static void main(String[] args) throws IOException {
 
         
-        Interpreter interpreter = new Interpreter(args[args.length-1], args);
-        interpreter.lauchInterpreter();/*Text txt = new Text("D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt");
+        /*Interpreter interpreter = new Interpreter(args[args.length-1], args);
+        interpreter.lauchInterpreter();*/
+        
+        
+        Text txt = new Text("D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt");
 
         try {
             txt.Read();
@@ -33,7 +36,7 @@ public class BRFK {
             Logger.getLogger(BRFK.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        System.out.println("TAillel -- " + txt.getNbI());
+        /*System.out.println("TAillel -- " + txt.getNbI());
 
         Image img = new Image("D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt");
 

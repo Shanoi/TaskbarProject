@@ -29,6 +29,27 @@ public class Text extends Fichiers {
         BufferedReader file = new BufferedReader(new FileReader(path));
         String line = new String();
 
+        
+        //////////////////////////////////////////////////////////
+        ////////////////////Lecture des macros////////////////////
+        //////////////////////////////////////////////////////////
+        
+        String temp = "";//line = file.readLine()
+        
+        while(!(temp).equals("---- ENDMACRO")){
+            
+            temp = file.readLine();
+            
+            System.out.println("LINE --- " + temp);
+            
+        }
+        
+        
+        //System.out.println("LINE 23 --- " + file.readLine());
+        
+        //////////////////////////////////////////////////////////
+        ////////////////////Lecture du programme//////////////////
+        //////////////////////////////////////////////////////////
         while ((line = file.readLine()) != null) {
 
             if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
@@ -40,6 +61,8 @@ public class Text extends Fichiers {
                         list.add(toCommand((Character.toString(line.charAt(j)))));
 
                     } else {
+                        
+                        System.out.println("TEST");
                         System.exit(4);
 
                     }
@@ -53,7 +76,7 @@ public class Text extends Fichiers {
                     list.add(toCommand(line));
 
                 } else {
-
+                    System.out.println("TEST2");
                     System.exit(4);
 
                 }
