@@ -83,11 +83,7 @@ public class Run {
     
     
     public void execute() throws IOException, FileNotFoundException {
-        String str; // the execution step number (starting at one), the location of the execution pointer after the execution of this step, the location of the data pointer at the very same time, and a snapshot of the memory.
-
-
-
-        String str = new String();
+        String str = ""; // the execution step number (starting at one), the location of the execution pointer after the execution of this step, the location of the data pointer at the very same time, and a snapshot of the memory.
 
         long instantA = System.currentTimeMillis();
         

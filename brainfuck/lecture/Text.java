@@ -13,9 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-
-
-
 /**
  *
  * @author TeamTaskbar
@@ -32,29 +29,34 @@ public class Text extends Fichiers {
         BufferedReader file = new BufferedReader(new FileReader(path));
         String line = new String();
 
-        
+        line = file.readLine();
+
         //////////////////////////////////////////////////////////
         ////////////////////Lecture des macros////////////////////
         //////////////////////////////////////////////////////////
-        
-        String temp = "";//line = file.readLine()
-        
-        while(!(temp).equals("---- ENDMACRO")){
-            
-            temp = file.readLine();
-            
-            System.out.println("LINE --- " + temp);
-            
+        if (line.equals("---- MACRO")) {
+
+            while (!((line = file.readLine())).equals("---- ENDMACRO")) {
+
+                System.out.println("LINE --- " + line);
+                
+                if (line.charAt(0) == '*'){
+                    
+                    
+                    
+                }
+
+            }
+
+            line = file.readLine();
+
         }
-        
-        
-        //System.out.println("LINE 23 --- " + file.readLine());
-        
+
         //////////////////////////////////////////////////////////
         ////////////////////Lecture du programme//////////////////
         //////////////////////////////////////////////////////////
-        while ((line = file.readLine()) != null) {
-            
+        do {
+
             if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
 
                 for (int j = 0; j < line.length(); j++) {
@@ -64,7 +66,7 @@ public class Text extends Fichiers {
                         list.add(toCommand((Character.toString(line.charAt(j)))));
 
                     } else {
-                        
+
                         System.out.println("TEST");
                         System.exit(4);
 
@@ -72,12 +74,10 @@ public class Text extends Fichiers {
 
                 }
 
-            }
-            else if((line.charAt(0) == '#') || (line.charAt(0) == '\t')){
-            
-            }
-            else{
-                
+            } else if ((line.charAt(0) == '#') || (line.charAt(0) == '\t')) {
+
+            } else {
+
                 if (isCommand(line)) {
                     line = this.deleteCom(line);
                     list.add(toCommand(line));
@@ -89,7 +89,7 @@ public class Text extends Fichiers {
                 }
 
             }
-        }
+        } while ((line = file.readLine()) != null);
 
         file.close();
 
@@ -107,21 +107,18 @@ public class Text extends Fichiers {
         }
 
     }
-    
-    public String deleteCom(String line)
-    {
+
+    public String deleteCom(String line) {
         String str2 = new String();
-        for( int i = 0; i < line.length(); i++)
-        {
-            if ( line.charAt(i) == '#' )
+        for (int i = 0; i < line.length(); i++) {
+            if (line.charAt(i) == '#') {
                 return str2;
-            if( !(line.charAt(i) == '\t') )
-            {
+            }
+            if (!(line.charAt(i) == '\t')) {
                 str2 += Character.toString(line.charAt(i));
             }
         }
         return str2;
-        
-        
+
     }
 }
