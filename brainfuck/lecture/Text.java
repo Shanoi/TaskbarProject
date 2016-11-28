@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  *
@@ -19,8 +20,11 @@ import java.io.IOException;
  */
 public class Text extends Fichiers {
 
+    private HashMap<String, Macro> macros;
+
     public Text(String path) {
         super(path);
+        macros = new HashMap<>();
     }
 
     @Override
@@ -31,6 +35,12 @@ public class Text extends Fichiers {
 
         line = file.readLine();
 
+        String[] separated = {""};
+
+        String previousLine = "";
+
+        Macro macro = new Macro();
+
         //////////////////////////////////////////////////////////
         ////////////////////Lecture des macros////////////////////
         //////////////////////////////////////////////////////////
@@ -39,11 +49,23 @@ public class Text extends Fichiers {
             while (!((line = file.readLine())).equals("---- ENDMACRO")) {
 
                 System.out.println("LINE --- " + line);
-                
-                if (line.charAt(0) == '*'){
-                    
-                    
-                    
+
+                if (line.charAt(0) == '*') {
+
+                    separated = line.split(" ");
+
+                    macro = new Macro(separated[1]);
+
+                    macros.put(separated[1], macro);
+
+                } /*if (line.charAt(0) == '*' && !previousLine.equals("---- MACRO") && separated.length < 4) {
+
+                 macro.repeatMacro();
+
+                 }*/ else {
+
+                    macro.fillCommands(line);
+
                 }
 
             }
@@ -55,43 +77,105 @@ public class Text extends Fichiers {
         //////////////////////////////////////////////////////////
         ////////////////////Lecture du programme//////////////////
         //////////////////////////////////////////////////////////
+        int numParam = 1;
+
         do {
 
-            if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
+            separated = line.split(" ");
 
-                for (int j = 0; j < line.length(); j++) {
+            if (macros.containsKey(separated[0])) {
 
-                    if (isCommand(Character.toString(line.charAt(j)))) {
+                System.out.println("MACRO ----- " + line);
+
+                macro = macros.get(separated[0]);
+
+                if (separated.length == 2) {
+
+                    for (int k = 0; k < Integer.parseInt(separated[1]); k++) {
+
+                        for (int j = 0; j < macro.getCommands().size(); j++) {
+
+                            ReadLine(macro.getCommands().get(j));
+
+                            //list.add(macro.getCommands().get(j));
+                        }
+
+                    }
+
+                } else {
+
+                    for (int j = 0; j < macro.getCommands().size(); j++) {
+
+                        if (numParam >= separated.length) {
+                            ReadLine(macro.getCommands().get(j));
+                            //list.add(macro.getCommands().get(j));
+                        } else {
+                            System.out.println("PARMAS --- " + numParam);
+                            for (int k = 0; k < Integer.parseInt(separated[numParam]); k++) {
+                                ReadLine(macro.getCommands().get(j));
+                                //list.add(macro.getCommands().get(j));
+                            }
+
+                            numParam++;
+                        }
+
+                    }
+
+                    numParam = 1;
+
+                }
+
+            } else {
+
+                System.out.println("PAS MACRO --- " + line);
+
+                if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
+                    System.out.println("S COURTE --- ");
+                    for (int j = 0; j < line.length(); j++) {
+
+                        if (isCommand(Character.toString(line.charAt(j)))) {
+                            line = this.deleteCom(line);
+                            System.out.println("LINE S COURTE ---- " + (Character.toString(line.charAt(j))));
+                            list.add(toCommand((Character.toString(line.charAt(j)))));
+
+                            System.out.println("LIST ----- " + list);
+
+                        } else {
+
+                            System.out.println("TEST");
+                            System.exit(4);
+
+                        }
+
+                    }
+
+                } else if ((line.charAt(0) == '#') || (line.charAt(0) == '\t')) {
+
+                } else {
+
+                    if (isCommand(line)) {
                         line = this.deleteCom(line);
-                        list.add(toCommand((Character.toString(line.charAt(j)))));
+                        list.add(toCommand(line));
 
                     } else {
-
-                        System.out.println("TEST");
+                        System.out.println("TEST2");
                         System.exit(4);
 
                     }
 
                 }
 
-            } else if ((line.charAt(0) == '#') || (line.charAt(0) == '\t')) {
-
-            } else {
-
-                if (isCommand(line)) {
-                    line = this.deleteCom(line);
-                    list.add(toCommand(line));
-
-                } else {
-                    System.out.println("TEST2");
-                    System.exit(4);
-
-                }
-
             }
+
         } while ((line = file.readLine()) != null);
 
         file.close();
+        System.out.println("MALISTE --- " + list);
+        for (int j = 0; j < list.size(); j++) {
+
+            System.out.println("LIST ------ " + list.get(j));
+
+        }
 
     }
 
@@ -119,6 +203,44 @@ public class Text extends Fichiers {
             }
         }
         return str2;
+
+    }
+
+    private void ReadLine(String line) {
+
+        if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
+            System.out.println("S COURTE --- ");
+            for (int j = 0; j < line.length(); j++) {
+
+                if (isCommand(Character.toString(line.charAt(j)))) {
+                    line = this.deleteCom(line);
+                    System.out.println("LINE S COURTE ---- " + (Character.toString(line.charAt(j))));
+                    list.add(toCommand((Character.toString(line.charAt(j)))));
+
+                } else {
+
+                    System.out.println("TEST");
+                    System.exit(4);
+
+                }
+
+            }
+
+        } else if ((line.charAt(0) == '#') || (line.charAt(0) == '\t')) {
+
+        } else {
+
+            if (isCommand(line)) {
+                line = this.deleteCom(line);
+                list.add(toCommand(line));
+
+            } else {
+                System.out.println("TEST2");
+                System.exit(4);
+
+            }
+
+        }
 
     }
 }
