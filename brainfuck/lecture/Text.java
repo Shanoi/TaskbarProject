@@ -46,8 +46,6 @@ public class Text extends Fichiers {
 
             while (!((line = file.readLine())).equals("---- ENDMACRO")) {
 
-                System.out.println("LINE --- " + line);
-
                 if (line.charAt(0) == '*') {
 
                     separated = line.split(" ");
@@ -81,8 +79,6 @@ public class Text extends Fichiers {
 
             } else {
 
-                System.out.println("PAS MACRO --- " + line);
-
                 ReadLine(line);
 
             }
@@ -90,12 +86,6 @@ public class Text extends Fichiers {
         } while ((line = file.readLine()) != null);
 
         file.close();
-        System.out.println("MA LISTE --- " + list);
-        for (int j = 0; j < list.size(); j++) {
-
-            System.out.println("LIST ------ " + list.get(j));
-
-        }
 
     }
 
@@ -129,17 +119,16 @@ public class Text extends Fichiers {
     private void ReadLine(String line) {
 
         if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
-            System.out.println("S COURTE --- ");
+
             for (int j = 0; j < line.length(); j++) {
 
                 if (isCommand(Character.toString(line.charAt(j)))) {
+
                     line = this.deleteCom(line);
-                    System.out.println("LINE S COURTE ---- " + (Character.toString(line.charAt(j))));
                     list.add(toCommand((Character.toString(line.charAt(j)))));
 
                 } else {
 
-                    System.out.println("TEST");
                     System.exit(4);
 
                 }
@@ -151,11 +140,12 @@ public class Text extends Fichiers {
         } else {
 
             if (isCommand(line)) {
+
                 line = this.deleteCom(line);
                 list.add(toCommand(line));
 
             } else {
-                System.out.println("TEST2");
+
                 System.exit(4);
 
             }
@@ -166,8 +156,9 @@ public class Text extends Fichiers {
 
     private void ReadMacro(String[] separated) {
 
-        //System.out.println("MACRO ----- " + line);
         int numParam = 1;
+
+        String[] separatedMacro;
 
         Macro macro = macros.get(separated[0]);
 
@@ -177,7 +168,7 @@ public class Text extends Fichiers {
 
                 for (int j = 0; j < macro.getCommands().size(); j++) {
 
-                    ReadLine(macro.getCommands().get(j));
+                    MacroOrLine(macro, j);
 
                 }
 
@@ -189,14 +180,13 @@ public class Text extends Fichiers {
 
                 if (numParam >= separated.length) {
 
-                    ReadLine(macro.getCommands().get(j));
+                    MacroOrLine(macro, j);
 
                 } else {
 
-                    System.out.println("PARMAS --- " + numParam);
                     for (int k = 0; k < Integer.parseInt(separated[numParam]); k++) {
 
-                        ReadLine(macro.getCommands().get(j));
+                        MacroOrLine(macro, j);
 
                     }
 
@@ -204,6 +194,22 @@ public class Text extends Fichiers {
                 }
 
             }
+
+        }
+
+    }
+
+    private void MacroOrLine(Macro macro, int j) {
+
+        String[] separatedMacro = macro.getCommands().get(j).split(" ");
+
+        if (macros.containsKey(separatedMacro[0])) {
+
+            ReadMacro(separatedMacro);
+
+        } else {
+
+            ReadLine(macro.getCommands().get(j));
 
         }
 
