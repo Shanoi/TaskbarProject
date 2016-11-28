@@ -5,9 +5,6 @@
  */
 package brainfuck.lecture;
 
-import brainfuck.command.EnumCommands;
-import static brainfuck.command.EnumCommands.isCommand;
-import static brainfuck.command.EnumCommands.toCommand;
 import java.util.ArrayList;
 
 /**
@@ -30,7 +27,7 @@ public class Macro {
 
         this.nom = nom;
         this.commands = new ArrayList<>();
-        
+
     }
 
     public String getNom() {
