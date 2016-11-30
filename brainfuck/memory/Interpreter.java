@@ -98,10 +98,18 @@ public class Interpreter {
 
     }
 
+    /**
+     * Getter of the filein
+     * @return
+     */
     public static String getFileIn() {
         return filein;
     }
 
+    /**
+     * Getter of the fileout
+     * @return
+     */
     public static String getFileOut() {
         return fileout;
     }

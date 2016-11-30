@@ -24,6 +24,10 @@ public class Run {
     //protected static final List<EnumCommands> list = new ArrayList<>();
     private int i = 0;
 
+    /**
+     * Allows to run the path
+     * @param path
+     */
     public Run(String path) {
 
         cm = new ComputationalModel();
@@ -31,26 +35,47 @@ public class Run {
 
     }
 
+    /**
+     * Getter of the cm
+     * @return
+     */
     public ComputationalModel getCm() {
         return cm;
     }
 
+    /**
+     * Counter of the EXEC MOVE
+     */
     public static void IncrEXEC_MOVE() {
         Run.EXEC_MOVE++;
     }
 
+    /**
+     * Counter of the DATA MOVE
+     */
     public static void IncrDATA_MOVE() {
         Run.DATA_MOVE++;
     }
 
+    /**
+     * Counter of the DATA WRITE
+     */
     public static void IncrDATA_WRITE() {
         Run.DATA_WRITE++;
     }
 
+    /**
+     * Counter of the DATA READ
+     */
     public static void IncrDATA_READ() {
         Run.DATA_READ++;
     }
 
+    /**
+     * Allows to read a fichier whether it's a .txt or .bmp(converted to .txt)
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
     public void load() throws IOException, FileNotFoundException {
 
         if (path.lastIndexOf(".") > 0) {
@@ -79,6 +104,11 @@ public class Run {
 
     }
 
+    /**
+     * Allows to calculate the different stats related to the executed program
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
     public void execute() throws IOException, FileNotFoundException {
         String str = ""; // the execution step number (starting at one), the location of the execution pointer after the execution of this step, the location of the data pointer at the very same time, and a snapshot of the memory.
         System.out.println("EXEC");
@@ -116,6 +146,9 @@ public class Run {
 
     }
 
+    /**
+     * Allows to display the differents stats related to the executed program
+     */
     public void afficheStats() {
 
         System.out.println("Nombre d'instructions: " + fichier.getNbI());
@@ -127,11 +160,19 @@ public class Run {
 
     }
 
+    /**
+     * Setter of the trace
+     * @param trace1
+     */
     public void setTrace(boolean trace1) {
 
         trace = trace1;
     }
 
+    /**
+     * Getter of fichier
+     * @return
+     */
     public Fichiers getFichier() {
 
         return this.fichier;

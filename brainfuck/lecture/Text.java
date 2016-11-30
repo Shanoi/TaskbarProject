@@ -22,11 +22,20 @@ public class Text extends Fichiers {
 
     private HashMap<String, Macro> macros;
 
+    /**
+     * Constructor of Text
+     * @param path
+     */
     public Text(String path) {
         super(path);
         macros = new HashMap<>();
     }
 
+    /**
+     * Allows to read a file line per line
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     @Override
     public void Read() throws FileNotFoundException, IOException {
 
@@ -199,6 +208,11 @@ public class Text extends Fichiers {
 
     }
 
+    /**
+     *
+     * @param macro
+     * @param j
+     */
     private void MacroOrLine(Macro macro, int j) {
 
         String[] separatedMacro = macro.getCommands().get(j).split(" ");

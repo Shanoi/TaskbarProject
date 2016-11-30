@@ -14,12 +14,21 @@ public class Wellformed {
 
     private ArrayList<EnumCommands> commands;
 
+    /**
+     * Setterof the ArrayList EnumCommands
+     * @param commands
+     */
     public Wellformed(ArrayList<EnumCommands> commands) {
 
         this.commands = commands;
 
     }
 
+    /**
+     *
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
     public void execute() throws IOException, FileNotFoundException {
         for (int i = 0; i < commands.size(); i++) {
             EnumCommands get = commands.get(i);
@@ -45,14 +54,25 @@ public class Wellformed {
 
     }
 
+    /**
+     * Allow to pop the stack
+     */
     private void popStack() {
         stack.pop();
     }
 
+    /**
+     *Allow to push the stack
+     * @param line
+     */
     private void pushStack(String line) {
         stack.push(line);
     }
 
+    /**
+     * Boolean checking whether the stack is empty or not
+     * @return
+     */
     private boolean IsemptyStack() {
         return stack.empty();
     }
