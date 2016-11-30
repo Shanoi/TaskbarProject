@@ -108,7 +108,7 @@ public class Text extends Fichiers {
             if (line.charAt(i) == '#') {
                 return str2;
             }
-            if (!(line.charAt(i) == '\t')) {
+            if (!(line.charAt(i) == '\t' || !(line.charAt(i) == ' '))) {
                 str2 += Character.toString(line.charAt(i));
             }
         }
@@ -117,7 +117,7 @@ public class Text extends Fichiers {
     }
 
     private void ReadLine(String line) {
-
+        line = deleteCom(line);
         if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
 
             for (int j = 0; j < line.length(); j++) {
@@ -135,8 +135,6 @@ public class Text extends Fichiers {
 
             }
 
-        } else if ((line.charAt(0) == '#') || (line.charAt(0) == '\t')) {
-
         } else {
 
             if (isCommand(line)) {
@@ -149,8 +147,8 @@ public class Text extends Fichiers {
                 System.exit(4);
 
             }
-
         }
+        
 
     }
 
