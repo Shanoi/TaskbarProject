@@ -1,4 +1,4 @@
- package brainfuck.memory;
+package brainfuck.memory;
 
 import brainfuck.lecture.*;
 import java.util.ArrayList;
@@ -29,14 +29,24 @@ public class Interpreter {
         this.args = args;
 
     }
-    
-    public void lauchInterpreter() throws IOException{
-        
-         //this.args = new ArrayList(Arrays.asList(args));
 
+    public void lauchInterpreter() throws IOException {
+
+         //this.args = new ArrayList(Arrays.asList(args));
         Run run = new Run(path);
 
         run.load();
+
+        for (int i = 0; i < args.length; i++) {
+
+            if (args[i].equals("--trace")) {
+
+                run.setTrace(true);
+
+                return;
+            }
+
+        }
 
         for (int i = 0; i < args.length; i++) {
 
@@ -53,7 +63,7 @@ public class Interpreter {
 
             if (args[i].equals("--check")) {
 
-               new Wellformed((ArrayList<EnumCommands>) run.getFichier().getInstructions()).execute();
+                new Wellformed((ArrayList<EnumCommands>) run.getFichier().getInstructions()).execute();
             }
 
         }
@@ -66,8 +76,6 @@ public class Interpreter {
             }
 
         }
-        
-        
 
         for (int i = 0; i < args.length; i++) {
 
@@ -88,7 +96,6 @@ public class Interpreter {
         run.execute();
         ComputationalModel.affichememoire();
 
-        
     }
 
     public static String getFileIn() {

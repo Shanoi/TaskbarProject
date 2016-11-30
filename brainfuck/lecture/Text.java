@@ -71,6 +71,8 @@ public class Text extends Fichiers {
         //////////////////////////////////////////////////////////
         do {
 
+            //line = deleteCom(line);
+            
             separated = line.split(" ");
 
             if (macros.containsKey(separated[0])) {
@@ -103,12 +105,15 @@ public class Text extends Fichiers {
     }
 
     private String deleteCom(String line) {
+
         String str2 = new String();
+        
         for (int i = 0; i < line.length(); i++) {
             if (line.charAt(i) == '#') {
+
                 return str2;
             }
-            if (!(line.charAt(i) == '\t' || !(line.charAt(i) == ' '))) {
+            if (!(line.charAt(i) == '\t') || !(line.charAt(i) == ' ')) {
                 str2 += Character.toString(line.charAt(i));
             }
         }
@@ -117,7 +122,7 @@ public class Text extends Fichiers {
     }
 
     private void ReadLine(String line) {
-        line = deleteCom(line);
+
         if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
 
             for (int j = 0; j < line.length(); j++) {
@@ -148,15 +153,12 @@ public class Text extends Fichiers {
 
             }
         }
-        
 
     }
 
     private void ReadMacro(String[] separated) {
 
         int numParam = 1;
-
-        String[] separatedMacro;
 
         Macro macro = macros.get(separated[0]);
 

@@ -1,10 +1,11 @@
 package brainfuck.lecture;
 
 import brainfuck.memory.ComputationalModel;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
 
 public class Run {
 
@@ -78,31 +79,37 @@ public class Run {
 
     }
 
-    
-    
-    
-    
     public void execute() throws IOException, FileNotFoundException {
         String str = ""; // the execution step number (starting at one), the location of the execution pointer after the execution of this step, the location of the data pointer at the very same time, and a snapshot of the memory.
-
+        System.out.println("EXEC");
         long instantA = System.currentTimeMillis();
-        
+
         cm.init();
+
+        FileWriter file;
+
+        if (true) {
+
+            file = new FileWriter("D:/monFichier.txt", true);
+
+        }
 
         while (cm.getI() < Fichiers.list.size()) {
 
             Fichiers.list.get(i).getCommand().execute();
-            if (trace)
-                str += ("Execution step number: " + EXEC_MOVE  +" \nPointer of the execution: "  + cm.getI()  +" \nLocation of the data pointer: " + cm.getCurrentIndice() + " Affichage de la mémoire\n"+cm.toString() +"\n" );
+            if (true) {
+                file.write("Execution step number: " + EXEC_MOVE + " \nPointer of the execution: " + cm.getI() + " \nLocation of the data pointer: " + cm.getCurrentIndice() + "\n Affichage de la mémoire\n" + cm.toString() + "\n");
+            }
 
             i = (cm.getI() + 1);
             cm.setI(i);
         }
-        
-        
-        PrintWriter writer = new PrintWriter("results.txt", "UTF-8");
-        writer.println(str);
-        
+
+        file.close();
+
+        /*File file = new File("D:/res.txt");
+         PrintWriter writer = new PrintWriter("D:/res.txt", "UTF-8");
+         writer.println(str);*/
         long instantB = System.currentTimeMillis();
         EXEC_TIME = instantB - instantA;
         afficheStats();
@@ -120,11 +127,11 @@ public class Run {
 
     }
 
-    public void setTrace(boolean trace1)
-    {
-        
+    public void setTrace(boolean trace1) {
+
         trace = trace1;
     }
+
     public Fichiers getFichier() {
 
         return this.fichier;
