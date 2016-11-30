@@ -24,17 +24,17 @@ public class BRFK {
     public static void main(String[] args) throws IOException {
 
         
-        /*Interpreter interpreter = new Interpreter(args[args.length-1], args);
-        interpreter.lauchInterpreter();*/
+        Interpreter interpreter = new Interpreter(args[args.length-1], args);
+        interpreter.lauchInterpreter();
         
         
-        Text txt = new Text("D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt");
+        /*Text txt = new Text("D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt");
 
         try {
             txt.Read();
         } catch (IOException ex) {
             Logger.getLogger(BRFK.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
 
         /*System.out.println("TAillel -- " + txt.getNbI());
 
