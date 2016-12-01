@@ -212,7 +212,7 @@ public class Text extends Fichiers {
 
         String[] separatedMacro = macro.getCommands().get(j).split(" ");
 
-        System.out.println("LIGNE COMMAND  ---- " + macro.getCommands().get(j));
+        System.out.println(separatedMacro.length + " ------- LIGNE COMMAND  ---- " + macro.getCommands().get(j));
 
         int repete = 1;
 
@@ -237,7 +237,19 @@ public class Text extends Fichiers {
 
             if (macros.containsKey(separatedMacro[0])) {
 
-                ReadMacro(separatedMacro);
+                if (separatedMacro.length == macros.get(separatedMacro[0]).getnbParam() + 1) {
+
+                    ReadMacro(separatedMacro);
+
+                } else {
+                    System.out.println(separatedMacro.length + " ------- LIGNE COMMAND ------  ---- " + macro.getCommands().get(j));
+                    System.out.println(" ---------------------------------------------------------------------------------------------------------------- ");
+                    System.out.println("separatedMacro.length --- " + separatedMacro.length + "        macros.get(separatedMacro[0]).getnbParam() + 1 ---- "
+                            + (macros.get(separatedMacro[0]).getnbParam() + 1));
+
+                    System.exit(10);
+
+                }
 
             } else {
 
