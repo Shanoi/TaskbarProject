@@ -50,7 +50,10 @@ public class Text extends Fichiers {
 
                     separated = line.split(" ");
 
-                    macro = new Macro(separated[1]);
+                    System.out.println("NOM --- " + separated[1]);
+
+                    //macro = new Macro(separated[1]);
+                    macro = new Macro(separated);
 
                     macros.put(separated[1], macro);
 
@@ -72,15 +75,14 @@ public class Text extends Fichiers {
         do {
 
             //line = deleteCom(line);
-            
             separated = line.split(" ");
 
             if (macros.containsKey(separated[0])) {
-
+                System.out.println("LIT MACRO --- " + line);
                 ReadMacro(separated);
 
             } else {
-
+                System.out.println("LIT LINE --- " + line);
                 ReadLine(line);
 
             }
@@ -106,22 +108,28 @@ public class Text extends Fichiers {
 
     private String deleteCom(String line) {
 
+        //System.out.println("LINE --- " + line);
         String str2 = new String();
-        
-        for (int i = 0; i < line.length(); i++) {
-            if (line.charAt(i) == '#') {
 
-                return str2;
-            }
-            if (!(line.charAt(i) == '\t') || !(line.charAt(i) == ' ')) {
-                str2 += Character.toString(line.charAt(i));
-            }
+        int nbSpace = 0;
+
+        int i = 0;
+
+        System.out.println("LINE -- " + line.length());
+
+        while (!Character.isLetter(line.charAt(i))) {
+
+            i++;
+
         }
+
         return str2;
 
     }
 
     private void ReadLine(String line) {
+
+        System.out.println("READ    LINE ----- " + line + "|-");
 
         if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
 
@@ -129,11 +137,11 @@ public class Text extends Fichiers {
 
                 if (isCommand(Character.toString(line.charAt(j)))) {
 
-                    line = this.deleteCom(line);
+                    //line = this.deleteCom(line);
                     list.add(toCommand((Character.toString(line.charAt(j)))));
 
                 } else {
-
+                    System.out.println("MARCHE PAS --- " + line.charAt(j));
                     System.exit(4);
 
                 }
@@ -144,7 +152,7 @@ public class Text extends Fichiers {
 
             if (isCommand(line)) {
 
-                line = this.deleteCom(line);
+                //line = this.deleteCom(line);
                 list.add(toCommand(line));
 
             } else {
@@ -162,13 +170,13 @@ public class Text extends Fichiers {
 
         Macro macro = macros.get(separated[0]);
 
-        if (separated.length == 2) {
+        if (separated.length == 2 && macro.getnbParam() == 0) {
 
             for (int k = 0; k < Integer.parseInt(separated[1]); k++) {
 
                 for (int j = 0; j < macro.getCommands().size(); j++) {
 
-                    MacroOrLine(macro, j);
+                    MacroOrLine(macro, j, separated);
 
                 }
 
@@ -178,40 +186,90 @@ public class Text extends Fichiers {
 
             for (int j = 0; j < macro.getCommands().size(); j++) {
 
-                if (numParam >= separated.length) {
+                MacroOrLine(macro, j, separated);
 
-                    MacroOrLine(macro, j);
+                /*if (numParam >= separated.length) {
 
-                } else {
+                 MacroOrLine(macro, j);
 
-                    for (int k = 0; k < Integer.parseInt(separated[numParam]); k++) {
+                 } else {
 
-                        MacroOrLine(macro, j);
+                 for (int k = 0; k < Integer.parseInt(separated[numParam]); k++) {
 
-                    }
+                 MacroOrLine(macro, j);
 
-                    numParam++;
-                }
+                 }
 
+                 numParam++;
+                 }*/
             }
 
         }
 
     }
 
-    private void MacroOrLine(Macro macro, int j) {
+    private void MacroOrLine(Macro macro, int j, String[] separated) {
 
         String[] separatedMacro = macro.getCommands().get(j).split(" ");
 
-        if (macros.containsKey(separatedMacro[0])) {
+        System.out.println("LIGNE COMMAND  ---- " + macro.getCommands().get(j));
 
-            ReadMacro(separatedMacro);
+        int repete = 1;
 
-        } else {
+        String tmp = "";
 
-            ReadLine(macro.getCommands().get(j));
+        //if (macro.isParam(separatedMacro[0].split(":")[0])) {
+        if (macro.isParam(macro.getCommands().get(j).split(":")[0])) {
+
+            System.out.println("SEPA ---------------- " + macro.getCommands().get(j).split(":")[0]);
+
+            //Récupérer la valeur du paramètre associé
+            repete = macro.getNumParam(separatedMacro[0].split(":")[0]);
+            System.out.println("NULL ---------------------------------------------------- " + repete);
+            repete = Integer.parseInt(separated[repete]);   //Danger d'erreur si on sort du tableau
 
         }
 
+        System.out.println("REPETE ----------------- " + repete);
+
+        //Répéter la ligne autant de fois que le paramètre, sinon la faire qu'une seule fois
+        if (repete == 1) {
+
+            if (macros.containsKey(separatedMacro[0])) {
+
+                ReadMacro(separatedMacro);
+
+            } else {
+
+                ReadLine(macro.getCommands().get(j));
+
+            }
+
+        } else {
+
+            for (int k = 0; k < repete; k++) {
+
+                System.out.println("------------------------------------------------------------------------ " + macro.getCommands().get(j).split(": ")[1]);
+
+                tmp = macro.getCommands().get(j).split(": ")[1];
+
+                separatedMacro = tmp.split(" ");
+
+                System.out.println("+++++++++++++++++++++++++++++" + separatedMacro[0]);
+
+                if (macros.containsKey(separatedMacro[0])) {
+
+                    ReadMacro(separatedMacro);
+
+                } else {
+
+                    ReadLine(macro.getCommands().get(j).split(": ")[1]);
+
+                }
+
+            }
+
+        }
     }
+
 }
