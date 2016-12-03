@@ -7,6 +7,7 @@ package brainfuck.lecture;
 
 import brainfuck.command.EnumCommands;
 import static brainfuck.command.EnumCommands.isCommand;
+import static brainfuck.command.EnumCommands.isShortCommand;
 import static brainfuck.command.EnumCommands.toCommand;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -113,8 +114,6 @@ public class Text extends Fichiers {
         System.out.println("LINE --- " + line);
         String str2 = new String();
 
-        int nbSpace = 0;
-
         char prevChar = ' ';
 
         System.out.println("LINE LENGTH -- " + line.length());
@@ -137,13 +136,16 @@ public class Text extends Fichiers {
                 str2 += line.charAt(k);
 
             }
-            
-            if(line.charAt(k) == ' ' && (prevChar != ' ' && prevChar != '\t')){
-                
+
+            System.out.println("SHORT ??? -- " + isShortCommand(Character.toString(prevChar)));
+
+            if (line.charAt(k) == ' ' && (prevChar != ' ' && prevChar != '\t' && !isShortCommand(Character.toString(prevChar)))) {
+
+                //str2 = str2.replaceAll("[\\+\\>\\<\\-\\.\\,\\[\\]] [\\+\\>\\<\\-\\.\\,\\[\\]]", "");
                 str2 += line.charAt(k);
-                
+
             }
-            
+
             prevChar = line.charAt(k);
 
             /*if(line.charAt(k) == ' '){
