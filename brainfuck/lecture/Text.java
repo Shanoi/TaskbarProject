@@ -44,8 +44,10 @@ public class Text extends Fichiers {
         //////////////////////////////////////////////////////////
         if (line.equals("---- MACRO")) {
 
-            while (!((line = file.readLine())).equals("---- ENDMACRO")) {
-
+            while (!((line = file.readLine())).equals("---- ENDMACRO")) { // On ne gère pas les NullPointerException
+                
+                line = deleteCom(line);
+                
                 if (line.charAt(0) == '*') {
 
                     separated = line.split(" ");
@@ -74,15 +76,15 @@ public class Text extends Fichiers {
         //////////////////////////////////////////////////////////
         do {
 
-            //line = deleteCom(line);
+            line = deleteCom(line);
             separated = line.split(" ");
 
             if (macros.containsKey(separated[0])) {
-                System.out.println("LIT MACRO --- " + line);
+                //System.out.println("LIT MACRO --- " + line);
                 ReadMacro(separated);
 
             } else {
-                System.out.println("LIT LINE --- " + line);
+                //System.out.println("LIT LINE --- " + line);
                 ReadLine(line);
 
             }
@@ -108,20 +110,74 @@ public class Text extends Fichiers {
 
     private String deleteCom(String line) {
 
-        //System.out.println("LINE --- " + line);
+        System.out.println("LINE --- " + line);
         String str2 = new String();
 
         int nbSpace = 0;
 
-        int i = 0;
+        System.out.println("LINE LENGTH -- " + line.length());
 
-        System.out.println("LINE -- " + line.length());
+        for (int k = 0; k < line.length(); k++) {
 
-        while (!Character.isLetter(line.charAt(i))) {
+            //System.out.println("BOUCLE + charAt -- |" + line.charAt(k) + "|");
 
-            i++;
+            if (line.charAt(k) == '#') {
 
+                System.out.println("LINE AVEC COMM --- |" + line + "|");
+                System.out.println("LINE SANS COMM --- |" + str2 + "|");
+                return str2;
+
+            }
+
+            if (line.charAt(k) != '\t' && line.charAt(k) != ' ') {
+
+                System.out.println(" ------------------------------------------ |" + line.charAt(k) + "|");
+
+                str2 += line.charAt(k);
+
+            }
+            
+            if(line.charAt(k) == ' '){
+                
+                
+                
+            }
+
+            //System.out.println("NBSPACE -- " + nbSpace);
+            /*if ((line.charAt(k) == ' ' && nbSpace < 2) || line.charAt(k) != '\t') {
+
+             System.out.println("TEST --- " + (line.charAt(k) == ' ' && nbSpace < 2));*/
+
+            /*System.out.println("CHAR --- " + line.charAt(i) + "-");
+
+             System.out.println("MA STRINGH *------ " + str2 + "-");*/
+            /*str2 += Character.toString(line.charAt(k));
+
+             nbSpace = 0;
+
+             }*/ /*if(line.charAt(i) != '\t' && line.charAt(i) != ' ' && nbSpace < 2){
+             System.out.println("CHAR --- " + line.charAt(i) + "-");
+                
+             System.out.println("MA STRINGH *------ " + str2 + "-");
+                
+             str2 += Character.toString(line.charAt(i));
+                
+             nbSpace = 0;
+                
+             }*//* else {
+             System.out.println("NBSPACE --- " + nbSpace + " LINE " + line);
+             nbSpace++;
+
+             }*/
+
+            /*if (!(line.charAt(i) == '\t') || !(line.charAt(i) == ' ') && nbSpace < 2) {
+             System.out.println("ESPACE / TAB -- " + str2 + "- NBSPACES -- " + nbSpace);
+             str2 += Character.toString(line.charAt(i));
+             nbSpace++;
+             }*/
         }
+
+        System.out.println("LINE SANS COMM2 --- |" + str2 + "|");
 
         return str2;
 
@@ -129,8 +185,7 @@ public class Text extends Fichiers {
 
     private void ReadLine(String line) {
 
-        System.out.println("READ    LINE ----- " + line + "|-");
-
+        //System.out.println("READ    LINE ----- |" + line + "|-");
         if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
 
             for (int j = 0; j < line.length(); j++) {
@@ -212,8 +267,7 @@ public class Text extends Fichiers {
 
         String[] separatedMacro = macro.getCommands().get(j).split(" ");
 
-        System.out.println(separatedMacro.length + " ------- LIGNE COMMAND  ---- " + macro.getCommands().get(j));
-
+        //System.out.println(separatedMacro.length + " ------- LIGNE COMMAND  ---- " + macro.getCommands().get(j));
         int repete = 1;
 
         String tmp = "";
@@ -221,17 +275,15 @@ public class Text extends Fichiers {
         //if (macro.isParam(separatedMacro[0].split(":")[0])) {
         if (macro.isParam(macro.getCommands().get(j).split(":")[0])) {
 
-            System.out.println("SEPA ---------------- " + macro.getCommands().get(j).split(":")[0]);
-
+            //System.out.println("SEPA ---------------- " + macro.getCommands().get(j).split(":")[0]);
             //Récupérer la valeur du paramètre associé
             repete = macro.getNumParam(separatedMacro[0].split(":")[0]);
-            System.out.println("NULL ---------------------------------------------------- " + repete);
+            //System.out.println("NULL ---------------------------------------------------- " + repete);
             repete = Integer.parseInt(separated[repete]);   //Danger d'erreur si on sort du tableau
 
         }
 
-        System.out.println("REPETE ----------------- " + repete);
-
+        //System.out.println("REPETE ----------------- " + repete);
         //Répéter la ligne autant de fois que le paramètre, sinon la faire qu'une seule fois
         if (repete == 1) {
 
@@ -242,10 +294,10 @@ public class Text extends Fichiers {
                     ReadMacro(separatedMacro);
 
                 } else {
-                    System.out.println(separatedMacro.length + " ------- LIGNE COMMAND ------  ---- " + macro.getCommands().get(j));
-                    System.out.println(" ---------------------------------------------------------------------------------------------------------------- ");
-                    System.out.println("separatedMacro.length --- " + separatedMacro.length + "        macros.get(separatedMacro[0]).getnbParam() + 1 ---- "
-                            + (macros.get(separatedMacro[0]).getnbParam() + 1));
+                    /*System.out.println(separatedMacro.length + " ------- LIGNE COMMAND ------  ---- " + macro.getCommands().get(j));
+                     System.out.println(" ---------------------------------------------------------------------------------------------------------------- ");
+                     System.out.println("separatedMacro.length --- " + separatedMacro.length + "        macros.get(separatedMacro[0]).getnbParam() + 1 ---- "
+                     + (macros.get(separatedMacro[0]).getnbParam() + 1));*/
 
                     System.exit(10);
 
@@ -261,14 +313,12 @@ public class Text extends Fichiers {
 
             for (int k = 0; k < repete; k++) {
 
-                System.out.println("------------------------------------------------------------------------ " + macro.getCommands().get(j).split(": ")[1]);
-
+                //System.out.println("------------------------------------------------------------------------ " + macro.getCommands().get(j).split(": ")[1]);
                 tmp = macro.getCommands().get(j).split(": ")[1];
 
                 separatedMacro = tmp.split(" ");
 
-                System.out.println("+++++++++++++++++++++++++++++" + separatedMacro[0]);
-
+                //System.out.println("+++++++++++++++++++++++++++++" + separatedMacro[0]);
                 if (macros.containsKey(separatedMacro[0])) {
 
                     ReadMacro(separatedMacro);
