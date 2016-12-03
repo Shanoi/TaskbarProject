@@ -45,9 +45,9 @@ public class Text extends Fichiers {
         if (line.equals("---- MACRO")) {
 
             while (!((line = file.readLine())).equals("---- ENDMACRO")) { // On ne gère pas les NullPointerException
-                
+
                 line = deleteCom(line);
-                
+
                 if (line.charAt(0) == '*') {
 
                     separated = line.split(" ");
@@ -115,12 +115,13 @@ public class Text extends Fichiers {
 
         int nbSpace = 0;
 
+        char prevChar = ' ';
+
         System.out.println("LINE LENGTH -- " + line.length());
 
         for (int k = 0; k < line.length(); k++) {
 
             //System.out.println("BOUCLE + charAt -- |" + line.charAt(k) + "|");
-
             if (line.charAt(k) == '#') {
 
                 System.out.println("LINE AVEC COMM --- |" + line + "|");
@@ -137,12 +138,19 @@ public class Text extends Fichiers {
 
             }
             
-            if(line.charAt(k) == ' '){
+            if(line.charAt(k) == ' ' && (prevChar != ' ' && prevChar != '\t')){
                 
-                
+                str2 += line.charAt(k);
                 
             }
+            
+            prevChar = line.charAt(k);
 
+            /*if(line.charAt(k) == ' '){
+                
+                
+                
+             }*/
             //System.out.println("NBSPACE -- " + nbSpace);
             /*if ((line.charAt(k) == ' ' && nbSpace < 2) || line.charAt(k) != '\t') {
 
