@@ -47,7 +47,7 @@ public class Text extends Fichiers {
 
             while (!((line = file.readLine())).equals("---- ENDMACRO")) { // On ne gère pas les NullPointerException
 
-                line = deleteCom(line);
+                line = deleteCom(line, file);
 
                 if (line.charAt(0) == '*') {
 
@@ -77,7 +77,7 @@ public class Text extends Fichiers {
         //////////////////////////////////////////////////////////
         do {
 
-            line = deleteCom(line);
+            line = deleteCom(line, file);
             separated = line.split(" ");
 
             if (macros.containsKey(separated[0])) {
@@ -109,7 +109,7 @@ public class Text extends Fichiers {
 
     }
 
-    private String deleteCom(String line) {
+    private String deleteCom(String line, BufferedReader file) throws IOException {
 
         System.out.println("LINE --- " + line);
         String str2 = new String();
@@ -117,6 +117,16 @@ public class Text extends Fichiers {
         char prevChar = ' ';
 
         System.out.println("LINE LENGTH -- " + line.length());
+
+        for (int j = 0; j < line.length() && line.charAt(j) != ' ' && line.charAt(j) != '\t'; j++) {
+
+            if (line.charAt(j) == '#') {
+
+                return deleteCom(file.readLine(), file);
+
+            }
+
+        }
 
         for (int k = 0; k < line.length(); k++) {
 
@@ -137,54 +147,14 @@ public class Text extends Fichiers {
 
             }
 
-            System.out.println("SHORT ??? -- " + isShortCommand(Character.toString(prevChar)));
-
             if (line.charAt(k) == ' ' && (prevChar != ' ' && prevChar != '\t' && !isShortCommand(Character.toString(prevChar)))) {
 
-                //str2 = str2.replaceAll("[\\+\\>\\<\\-\\.\\,\\[\\]] [\\+\\>\\<\\-\\.\\,\\[\\]]", "");
                 str2 += line.charAt(k);
 
             }
 
             prevChar = line.charAt(k);
 
-            /*if(line.charAt(k) == ' '){
-                
-                
-                
-             }*/
-            //System.out.println("NBSPACE -- " + nbSpace);
-            /*if ((line.charAt(k) == ' ' && nbSpace < 2) || line.charAt(k) != '\t') {
-
-             System.out.println("TEST --- " + (line.charAt(k) == ' ' && nbSpace < 2));*/
-
-            /*System.out.println("CHAR --- " + line.charAt(i) + "-");
-
-             System.out.println("MA STRINGH *------ " + str2 + "-");*/
-            /*str2 += Character.toString(line.charAt(k));
-
-             nbSpace = 0;
-
-             }*/ /*if(line.charAt(i) != '\t' && line.charAt(i) != ' ' && nbSpace < 2){
-             System.out.println("CHAR --- " + line.charAt(i) + "-");
-                
-             System.out.println("MA STRINGH *------ " + str2 + "-");
-                
-             str2 += Character.toString(line.charAt(i));
-                
-             nbSpace = 0;
-                
-             }*//* else {
-             System.out.println("NBSPACE --- " + nbSpace + " LINE " + line);
-             nbSpace++;
-
-             }*/
-
-            /*if (!(line.charAt(i) == '\t') || !(line.charAt(i) == ' ') && nbSpace < 2) {
-             System.out.println("ESPACE / TAB -- " + str2 + "- NBSPACES -- " + nbSpace);
-             str2 += Character.toString(line.charAt(i));
-             nbSpace++;
-             }*/
         }
 
         System.out.println("LINE SANS COMM2 --- |" + str2 + "|");
@@ -206,7 +176,7 @@ public class Text extends Fichiers {
                     list.add(toCommand((Character.toString(line.charAt(j)))));
 
                 } else {
-                    System.out.println("MARCHE PAS --- " + line.charAt(j));
+                    System.out.println("MARCHE PAS --- |" + line.charAt(j) + "| " + line);
                     System.exit(4);
 
                 }
@@ -230,8 +200,6 @@ public class Text extends Fichiers {
     }
 
     private void ReadMacro(String[] separated) {
-
-        int numParam = 1;
 
         Macro macro = macros.get(separated[0]);
 
