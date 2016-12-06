@@ -118,6 +118,27 @@ public enum EnumCommands {
 
     }
 
+    public static boolean isShortCommand(String aString) {
+
+        Set wordofCommand = STRING_TO_COMMANDS.keySet();
+
+        Iterator<ArrayList> it = wordofCommand.iterator();
+        while (it.hasNext()) {
+
+            ArrayList temp = it.next();
+
+            if (temp.get(1).equals(aString)) {
+
+                return true;
+
+            }
+
+        }
+
+        return false;
+
+    }
+
     public String getLong() {
         return Long;
     }

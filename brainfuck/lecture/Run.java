@@ -117,13 +117,13 @@ public class Run {
         cm.init();
 
         FileWriter file;
-
+        
         if (true) {
-
+            
             file = new FileWriter("D:/monFichier.txt", true);
-
+            
         }
-
+        
         while (cm.getI() < Fichiers.list.size()) {
 
             Fichiers.list.get(i).getCommand().execute();
@@ -134,6 +134,9 @@ public class Run {
             i = (cm.getI() + 1);
             cm.setI(i);
         }
+
+        System.out.println("STR --- " + str);
+        
 
         file.close();
 
