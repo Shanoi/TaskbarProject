@@ -35,13 +35,9 @@ public class Run {
 
     }
 
-    /**
-     * Getter of the cm
-     * @return
-     */
-    public ComputationalModel getCm() {
-        return cm;
-    }
+    //=================
+    //Counters
+    //=================
 
     /**
      * Counter of the EXEC MOVE
@@ -163,6 +159,10 @@ public class Run {
 
     }
 
+    //=================
+    //Getter and Setter
+    //=================
+
     /**
      * Setter of the trace
      * @param trace1
@@ -179,6 +179,14 @@ public class Run {
     public Fichiers getFichier() {
 
         return this.fichier;
+    }
+
+    /**
+     * Getter of the cm
+     * @return
+     */
+    public ComputationalModel getCm() {
+        return cm;
     }
 
 }

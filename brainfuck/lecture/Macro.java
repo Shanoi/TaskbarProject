@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Olivier
+ * @author Team Taskbar
  */
 public class Macro {
 
@@ -45,22 +45,45 @@ public class Macro {
         
     }
 
+
+    //=================
+    //Getter and Setter
+    //=================
+
+    /**
+     * Getter of the name
+     * @return
+     */
     public String getNom() {
         return nom;
     }
-    
+
+    /**
+     * This method allows to know whether it's a parameter or not
+     * @param param
+     * @return
+     */
     public boolean isParam(String param){
         
         return params.contains(param);
         
     }
-    
+
+    /**
+     * Getter of the quantity of parameters
+     * @return
+     */
     public int getnbParam(){
         
         return params.size();
         
     }
-    
+
+    /**
+     * Getter of the number of the parameters
+     * @param param
+     * @return
+     */
     public int getNumParam(String param){
         
         for (int i = 0; i < params.size(); i++) {
@@ -77,10 +100,18 @@ public class Macro {
         
     }
 
+    /**
+     * Getter of the commands
+     * @return
+     */
     public ArrayList<String> getCommands() {
         return commands;
     }
 
+    /**
+     * This method allows to fill the commands / Should change its location
+     * @param command
+     */
     public void fillCommands(String command) {
 
         commands.add(command);

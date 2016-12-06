@@ -28,6 +28,11 @@ public class Text extends Fichiers {
         macros = new HashMap<>();
     }
 
+    /**
+     * This method allows to read a program(.txt)
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     @Override
     public void Read() throws FileNotFoundException, IOException {
 
@@ -109,6 +114,13 @@ public class Text extends Fichiers {
 
     }
 
+    /**
+     * This method allows to support commentaries in a program
+     * @param line
+     * @param file
+     * @return
+     * @throws IOException
+     */
     private String deleteCom(String line, BufferedReader file) throws IOException {
 
         System.out.println("LINE --- " + line);
@@ -163,6 +175,10 @@ public class Text extends Fichiers {
 
     }
 
+    /**
+     * This method allows to read line per line a program //to check
+     * @param line
+     */
     private void ReadLine(String line) {
 
         //System.out.println("READ    LINE ----- |" + line + "|-");
@@ -199,6 +215,10 @@ public class Text extends Fichiers {
 
     }
 
+    /**
+     * This method allows to support macro in the program
+     * @param separated
+     */
     private void ReadMacro(String[] separated) {
 
         Macro macro = macros.get(separated[0]);

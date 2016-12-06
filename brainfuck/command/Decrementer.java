@@ -10,8 +10,8 @@ import brainfuck.lecture.Run;
 public class Decrementer implements Command {
 
     /**
-     * Decrement the value of the current cell of the memory
-     *
+     * Decr : Decrement the value of the current cell of the memory
+     * This method allows to execute the command DECR
      */
     @Override
     public void execute() {

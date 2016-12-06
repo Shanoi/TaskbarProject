@@ -14,15 +14,6 @@ public class Wellformed {
 
     private ArrayList<EnumCommands> commands;
 
-    /**
-     * Setterof the ArrayList EnumCommands
-     * @param commands
-     */
-    public Wellformed(ArrayList<EnumCommands> commands) {
-
-        this.commands = commands;
-
-    }
 
     /**
      *
@@ -55,14 +46,14 @@ public class Wellformed {
     }
 
     /**
-     * Allow to pop the stack
+     * This method allows to pop the stack
      */
     private void popStack() {
         stack.pop();
     }
 
     /**
-     *Allow to push the stack
+     *This method allows to push the stack
      * @param line
      */
     private void pushStack(String line) {
@@ -75,6 +66,20 @@ public class Wellformed {
      */
     private boolean IsemptyStack() {
         return stack.empty();
+    }
+
+    //=================
+    //Getter and Setter
+    //=================
+
+    /**
+     * Setter of the ArrayList EnumCommands
+     * @param commands
+     */
+    public Wellformed(ArrayList<EnumCommands> commands) {
+
+        this.commands = commands;
+
     }
 
 }

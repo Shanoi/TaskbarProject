@@ -50,6 +50,11 @@ public enum EnumCommands {
 
     }
 
+    /**
+     * Getter of AllSyntaxe
+     * @return
+     */
+    //Should change the location of this method perhaps?
     private ArrayList<String> getAllSyntaxe() {
 
         return new ArrayList<>(Arrays.asList(getLong(), getShort(), getColor()));
@@ -88,7 +93,7 @@ public enum EnumCommands {
     }
 
     /**
-     * Check whether a given String is a valid name word.
+     * Check whether a given String is a valid name word or not.
      *
      * @param aString The string to be checked.
      * @return true if it is valid, false if it isn't.
@@ -118,6 +123,11 @@ public enum EnumCommands {
 
     }
 
+    /**
+     * This method allows to know whether it's a short command or not
+     * @param aString
+     * @return
+     */
     public static boolean isShortCommand(String aString) {
 
         Set wordofCommand = STRING_TO_COMMANDS.keySet();
@@ -139,18 +149,38 @@ public enum EnumCommands {
 
     }
 
+    //=================
+    //Getter and Setter
+    //=================
+
+    /**
+     * Getter of the Long
+     * @return
+     */
     public String getLong() {
         return Long;
     }
 
+    /**
+     * Getter of the Short
+     * @return
+     */
     public String getShort() {
         return Short;
     }
 
+    /**
+     * Getter of the Color
+     * @return
+     */
     public String getColor() {
         return color;
     }
 
+    /**
+     * Getter of the Command
+     * @return
+     */
     public Command getCommand() {
 
         return command;

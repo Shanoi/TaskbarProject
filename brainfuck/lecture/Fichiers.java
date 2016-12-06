@@ -17,7 +17,7 @@ import java.util.Stack;
 
 /**
  *
- * @author Olivier
+ * @author Team Taskbar
  */
 public class Fichiers {
 
@@ -42,18 +42,40 @@ public class Fichiers {
 
     }
 
+
+    //=================
+    //Getter and Setter
+    //=================
+
+    /**
+     * Getter of the size of the list, NbI
+     * @return
+     */
     public int getNbI() {
         return list.size();
     }
 
+    /**
+     * Getter of the instructions
+     * @return
+     */
     public List<EnumCommands> getInstructions() {
         return list;
     }
 
+    /**
+     * Getter of the computational model
+     * @return
+     */
     public ComputationalModel getCm() {
         return cm;
     }
 
+    /**
+     * Getter of the associated Jump
+     * @param i
+     * @return
+     */
     public int jumpAssoc(int i) {
 
         Stack<EnumCommands> stack = new Stack<>();
@@ -80,6 +102,11 @@ public class Fichiers {
         return o;
     }
 
+    /**
+     * This method allows to retrieve the associated back
+     * @param i
+     * @return
+     */
     public int backAssoc(int i) {
 
         Stack<EnumCommands> stack = new Stack<>();

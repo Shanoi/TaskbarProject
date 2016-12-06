@@ -98,6 +98,11 @@ public class Interpreter {
 
     }
 
+
+    //=================
+    //Getter and Setter
+    //=================
+
     /**
      * Getter of the filein
      * @return

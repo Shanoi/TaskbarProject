@@ -29,24 +29,6 @@ public class ComputationalModel {
     }
 
     /**
-     * Getter of the size of the memory
-     * @return
-     */
-    public int getMemorySize() {
-        return memorySize;
-    }
-
-    /**
-     * Getterof the value of the current case
-     * @return
-     */
-    public int getCurrentCaseValue() {
-
-        return _memory.get(p).byteToInt();
-
-    }
-
-    /**
      * Change the value of a cell
      *
      * @param n the value of the cell pointed
@@ -55,14 +37,6 @@ public class ComputationalModel {
 
         _memory.get(p).set(n);
 
-    }
-
-    /**
-     * Getter of the current indice
-     * @return
-     */
-    public int getCurrentIndice() {
-        return p;
     }
 
     /**
@@ -79,22 +53,6 @@ public class ComputationalModel {
         }
 
         this.p = p;
-    }
-
-    /**
-     * Getter of the instruction i
-     * @return
-     */
-    public int getI() {
-        return i;
-    }
-
-    /**
-     * Setter of the instruction i to d
-     * @param d
-     */
-    public void setI(int d) {
-        i = d;
     }
 
     /**
@@ -125,5 +83,54 @@ public class ComputationalModel {
         return memory.toString();
         
     }
+
+    //=================
+    //Getter and Setter
+    //=================
+
+
+    /**
+     * Getter of the instruction i
+     * @return
+     */
+    public int getI() {
+        return i;
+    }
+
+    /**
+     * Setter of the instruction i to d
+     * @param d
+     */
+    public void setI(int d) {
+        i = d;
+    }
+
+
+    /**
+     * Getter of the size of the memory
+     * @return
+     */
+    public int getMemorySize() {
+        return memorySize;
+    }
+
+    /**
+     * Getterof the value of the current case
+     * @return
+     */
+    public int getCurrentCaseValue() {
+
+        return _memory.get(p).byteToInt();
+
+    }
+
+    /**
+     * Getter of the current indice
+     * @return
+     */
+    public int getCurrentIndice() {
+        return p;
+    }
+
 
 }
