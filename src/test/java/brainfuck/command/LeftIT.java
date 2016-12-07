@@ -1,11 +1,14 @@
 package brainfuck.command;
 
+import brainfuck.memory.ComputationalModel;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.contrib.java.lang.system.Assertion;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
 /**
  *
@@ -37,11 +40,11 @@ public class LeftIT {
      */
     @Test
     public void testExecute() {
-        System.out.println("execute");
-        Left instance = new Left();
-        instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ComputationalModel cm=new ComputationalModel();
+        cm.init();
+        Command command=new Left();
+        for(int i=0;i<255;i++)command.execute();
+        command.execute();
     }
     
 }
