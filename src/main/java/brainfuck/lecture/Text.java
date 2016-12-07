@@ -51,7 +51,7 @@ public class Text extends Fichiers {
         //////////////////////////////////////////////////////////
         if (line.equals("---- MACRO")) {
 
-            while (!((line = file.readLine())).equals("---- ENDMACRO")) { // On ne gère pas les NullPointerException
+            while (!((line = file.readLine())).equals("---- ENDMACRO") && (line = file.readLine()) != null) {
 
                 line = deleteCom(line, file);
 
