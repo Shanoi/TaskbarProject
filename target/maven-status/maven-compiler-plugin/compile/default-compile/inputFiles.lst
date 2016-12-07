@@ -1,7 +1,6 @@
 /Users/dev/TaskbarProject/src/main/java/brainfuck/command/uByte.java
 /Users/dev/TaskbarProject/src/main/java/brainfuck/command/AfficheMemory.java
 /Users/dev/TaskbarProject/src/main/java/brainfuck/command/In.java
-/Users/dev/TaskbarProject/src/main/java/brainfuck/lecture/Text.java
 /Users/dev/TaskbarProject/src/main/java/brainfuck/memory/ComputationalModel.java
 /Users/dev/TaskbarProject/src/main/java/brainfuck/memory/Syntaxe.java
 /Users/dev/TaskbarProject/src/main/java/brainfuck/lecture/Image.java
@@ -16,7 +15,6 @@
 /Users/dev/TaskbarProject/src/main/java/brainfuck/command/Left.java
 /Users/dev/TaskbarProject/src/main/java/brainfuck/command/Jump.java
 /Users/dev/TaskbarProject/src/main/java/brainfuck/command/Out.java
-/Users/dev/TaskbarProject/src/main/java/brainfuck/lecture/Fichiers.java
 /Users/dev/TaskbarProject/src/main/java/brainfuck/command/Decrementer.java
 /Users/dev/TaskbarProject/src/main/java/brainfuck/command/Command.java
 /Users/dev/TaskbarProject/src/main/java/brainfuck/memory/Interpreter.java
