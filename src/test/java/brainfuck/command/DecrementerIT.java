@@ -1,11 +1,9 @@
 package brainfuck.command;
 
 import brainfuck.memory.ComputationalModel;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
+
 import static org.junit.Assert.*;
 
 /**
@@ -32,6 +30,8 @@ public class DecrementerIT {
     @After
     public void tearDown() {
     }
+    @Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
     /**
      * Test of execute method, of class Decrementer.
@@ -40,11 +40,9 @@ public class DecrementerIT {
     public void testExecute() {
         ComputationalModel cm = new ComputationalModel();
         cm.init();
-        Command incr = new Incrementer();
         Command decr = new Decrementer();
-        incr.execute();
+        exit.expectSystemExit();
         decr.execute();
-        assertEquals(cm.getCurrentCaseValue(), 0);
 
     }
 }

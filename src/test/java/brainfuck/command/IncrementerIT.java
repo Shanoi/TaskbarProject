@@ -1,12 +1,10 @@
 package brainfuck.command;
 
 import brainfuck.memory.ComputationalModel;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
+
 import static org.junit.Assert.*;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
 
 /**
@@ -33,6 +31,8 @@ public class IncrementerIT {
     @After
     public void tearDown() {
     }
+    @Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
     /**
      * Test of execute method, of class Incrementer.
@@ -52,6 +52,7 @@ public class IncrementerIT {
         cm.init();
         Command command=new Incrementer();
         for(int i=0;i<255;i++)command.execute();
+        exit.expectSystemExit();
         command.execute();
 
     }
