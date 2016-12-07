@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package brainfuck.lecture;
 
 import brainfuck.command.EnumCommands;
@@ -35,9 +40,14 @@ public class Fichiers {
        	for( int i = 0; i < list.size(); i++) {
 	    if( list.get(i) == JUMP )
       		jumpBack.put(i, jumpAssoc(i));
-	    /*	    if( list.get(i) == BACK )
-		    jumpBack.put(i, jumpAssoc(i));*/
+	    if( list.get(i) == BACK )
+		    jumpBack.put(i, backAssoc(i));
 	}
+    }
+    
+
+    public int getTableLoopAssoc(int i) {
+	return jumpBack.get(i);
     }
 
     public Fichiers(String path) {
@@ -55,9 +65,36 @@ public class Fichiers {
     }
 
 
+    //=================
+    //Getter and Setter
+    //=================
 
     /**
-     * This method allows to get the associated Jump (number in the instruction)
+     * Getter of the size of the list, NbI
+     * @return
+     */
+    public int getNbI() {
+        return list.size();
+    }
+
+    /**
+     * Getter of the instructions
+     * @return
+     */
+    public List<EnumCommands> getInstructions() {
+        return list;
+    }
+
+    /**
+     * Getter of the computational model
+     * @return
+     */
+    public ComputationalModel getCm() {
+        return cm;
+    }
+
+    /**
+     * Getter of the associated Jump
      * @param i
      * @return
      */
@@ -118,34 +155,7 @@ public class Fichiers {
         }
         return o;
     }
-
-    //=================
-    //Getter and Setter
-    //=================
-
-    /**
-     * Getter of the size of the list, NbI
-     * @return
-     */
-    public int getNbI() {
-        return list.size();
-    }
-
-    /**
-     * Getter of the instructions
-     * @return
-     */
-    public List<EnumCommands> getInstructions() {
-        return list;
-    }
-
-    /**
-     * Getter of the computational model
-     * @return
-     */
-    public ComputationalModel getCm() {
-        return cm;
-    }
+    
 
     
 

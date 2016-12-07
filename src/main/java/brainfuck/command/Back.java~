@@ -4,12 +4,15 @@ import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
 
 /**
+ *
  * @author TeamTaskbar
  */
-public class Jump implements Command {
+public class Back implements Command {
+
+    int i = 0;
 
     /**
-     * This method allows to execute the command JUMP
+     * This method allows to execute the command BACK
      */
     @Override
     public void execute() {
@@ -19,9 +22,9 @@ public class Jump implements Command {
         Run.IncrEXEC_MOVE();
         Run.IncrDATA_READ();
 
-        if (tempfile.getCm().getCurrentCaseValue() == 0) {
+        if (tempfile.getCm().getCurrentCaseValue() > 0) {
 
-            tempfile.getCm().setI(tempfile.getTableLoopAssoc(tempfile.getCm().getI()));
+            tempfile.getCm().setI(tempfile.backAssoc(tempfile.getCm().getI()));
 
         }
 
