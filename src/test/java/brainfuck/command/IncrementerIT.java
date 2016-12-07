@@ -1,11 +1,13 @@
 package brainfuck.command;
 
+import brainfuck.memory.ComputationalModel;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+
 
 /**
  *
@@ -37,11 +39,23 @@ public class IncrementerIT {
      */
     @Test
     public void testExecute() {
-        System.out.println("execute");
-        Incrementer instance = new Incrementer();
-        instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ComputationalModel cm=new ComputationalModel();
+        cm.init();
+        Command command=new Incrementer();
+        command.execute();
+        assertEquals(cm.getCurrentCaseValue(),1);
     }
+
+    @Test
+    public void TestMaxIncr(){
+        ComputationalModel cm=new ComputationalModel();
+        cm.init();
+        Command command=new Incrementer();
+        for(int i=0;i<255;i++)command.execute();
+        command.execute();
+
+    }
+
+
     
 }
