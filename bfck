@@ -1,3 +1,6 @@
 #!/bin/bash
 
 java -cp bfck.jar brfk.BRFK $@
+
+#jar cvmf META-INF/MANIFEST.MF bfck.jar brfk/BRFK.class brainfuck/lecture/*.class brainfuck/memory/*.class brainfuck/command/*.class
+#

@@ -1,0 +1,36 @@
+/Users/dev/TaskbarProject/test.txt 
+Execution step number: 1 
+Pointer of the execution: 0 
+Location of the data pointer: 0
+ Affichage de la mémoire
+ | 50
+Execution step number: 2 
+Pointer of the execution: 1 
+Location of the data pointer: 0
+ Affichage de la mémoire
+ | 50
+Execution step number: 3 
+Pointer of the execution: 2 
+Location of the data pointer: 0
+ Affichage de la mémoire
+ | 50
+Execution step number: 4 
+Pointer of the execution: 3 
+Location of the data pointer: 0
+ Affichage de la mémoire
+ | 50
+Execution step number: 5 
+Pointer of the execution: 4 
+Location of the data pointer: 0
+ Affichage de la mémoire
+ | 50
+Execution step number: 6 
+Pointer of the execution: 5 
+Location of the data pointer: 0
+ Affichage de la mémoire
+ | 51
+Execution step number: 7 
+Pointer of the execution: 6 
+Location of the data pointer: 0
+ Affichage de la mémoire
+ | 50
