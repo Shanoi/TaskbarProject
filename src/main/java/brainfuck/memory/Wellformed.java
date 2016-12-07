@@ -45,14 +45,25 @@ public class Wellformed {
 
     }
 
+    /**
+     * This method allows to pop the stack
+     */
     private void popStack() {
         stack.pop();
     }
 
+    /**
+     * This method allows to push the stack
+     * @param line
+     */
     private void pushStack(String line) {
         stack.push(line);
     }
 
+    /**
+     * This method allows to know whether the stack is empty or not
+     * @return
+     */
     private boolean IsemptyStack() {
         return stack.empty();
     }

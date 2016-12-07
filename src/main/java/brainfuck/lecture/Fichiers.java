@@ -43,36 +43,9 @@ public class Fichiers {
     }
 
 
-    //=================
-    //Getter and Setter
-    //=================
 
     /**
-     * Getter of the size of the list, NbI
-     * @return
-     */
-    public int getNbI() {
-        return list.size();
-    }
-
-    /**
-     * Getter of the instructions
-     * @return
-     */
-    public List<EnumCommands> getInstructions() {
-        return list;
-    }
-
-    /**
-     * Getter of the computational model
-     * @return
-     */
-    public ComputationalModel getCm() {
-        return cm;
-    }
-
-    /**
-     * Getter of the associated Jump
+     * This method allows to get the associated Jump (number in the instruction)
      * @param i
      * @return
      */
@@ -131,7 +104,34 @@ public class Fichiers {
         }
         return o;
     }
-    
+
+    //=================
+    //Getter and Setter
+    //=================
+
+    /**
+     * Getter of the size of the list, NbI
+     * @return
+     */
+    public int getNbI() {
+        return list.size();
+    }
+
+    /**
+     * Getter of the instructions
+     * @return
+     */
+    public List<EnumCommands> getInstructions() {
+        return list;
+    }
+
+    /**
+     * Getter of the computational model
+     * @return
+     */
+    public ComputationalModel getCm() {
+        return cm;
+    }
 
     
 

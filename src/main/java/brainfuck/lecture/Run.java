@@ -31,9 +31,11 @@ public class Run {
 
     }
 
-    public ComputationalModel getCm() {
-        return cm;
-    }
+
+
+    //=================
+    //Counters
+    //=================
 
     public static void IncrEXEC_MOVE() {
         Run.EXEC_MOVE++;
@@ -124,6 +126,9 @@ public class Run {
 
     }
 
+    /**
+     * This method allows to display the differents stats(counters) of a program
+     */
     public void afficheStats() {
 
         System.out.println("Nombre d'instructions: " + fichier.getNbI());
@@ -135,14 +140,37 @@ public class Run {
 
     }
 
+
+
+
+    //=================
+    //Getter and Setter
+    //=================
+
+    /**
+     * Setter of the Trace
+     */
     public void setTrace(boolean trace1) {
 
         trace = trace1;
     }
 
+    /**
+     * Getter of the file (fichiers)
+     * @return
+     */
     public Fichiers getFichier() {
 
         return this.fichier;
+    }
+
+
+    /**
+     * Getter of the object computational model
+     * @return
+     */
+    public ComputationalModel getCm() {
+        return cm;
     }
 
 }

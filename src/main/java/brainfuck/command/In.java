@@ -24,6 +24,9 @@ public class In implements Command {
         this.file = file;
     }
 
+    /**
+     * This method allows to execute the command IN
+     */
     @Override
     public void execute() {
 

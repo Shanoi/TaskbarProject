@@ -14,6 +14,9 @@ public class Out implements Command {
     private String file;
     private static String tempString = "";
 
+    /**
+     * This method allows to execute the command OUT
+     */
     @Override
     public void execute() {
 

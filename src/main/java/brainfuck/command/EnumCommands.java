@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package brainfuck.command;
 
 import java.util.ArrayList;
@@ -50,11 +45,6 @@ public enum EnumCommands {
 
     }
 
-    private ArrayList<String> getAllSyntaxe() {
-
-        return new ArrayList<>(Arrays.asList(getLong(), getShort(), getColor()));
-
-    }
 
     /**
      * Maps natural language words to enums.
@@ -88,7 +78,7 @@ public enum EnumCommands {
     }
 
     /**
-     * Check whether a given String is a valid name word.
+     * Check whether a given String is a valid name word or not.
      *
      * @param aString The string to be checked.
      * @return true if it is valid, false if it isn't.
@@ -144,21 +134,51 @@ public enum EnumCommands {
 
     }
 
+    //=================
+    //Getter and Setter
+    //=================
+
+    /**
+     * Getter of the Long
+     * @return
+     */
     public String getLong() {
         return Long;
     }
 
+    /**
+     * Getter of the Short
+     * @return
+     */
     public String getShort() {
         return Short;
     }
 
+    /**
+     * Getter of the Color
+     * @return
+     */
     public String getColor() {
         return color;
     }
 
+    /**
+     * Getter of the Command
+     * @return
+     */
     public Command getCommand() {
 
         return command;
+
+    }
+
+    /**
+     * Getter of AllSyntaxe
+     * @return
+     */
+    private ArrayList<String> getAllSyntaxe() {
+
+        return new ArrayList<>(Arrays.asList(getLong(), getShort(), getColor()));
 
     }
 

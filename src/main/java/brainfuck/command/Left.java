@@ -12,7 +12,7 @@ public class Left implements Command {
     /**
      * Change the current cell of the memory, taking the cell at the left of the
      * current cell
-     *
+     * This method allows to execute the command LEFT
      */
     @Override
     public void execute() {
