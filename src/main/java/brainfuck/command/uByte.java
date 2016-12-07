@@ -17,10 +17,18 @@ public class uByte {
         this.a = a;
     }
 
+    /**
+     * Setter of n
+     * @param n
+     */
     public void set(byte n) {
         this.a = n;
     }
 
+    /**
+     * This method allows to cast a byte to an int
+     * @return
+     */
     public int byteToInt() {
         return ((int) a) & 0xFF;
     }

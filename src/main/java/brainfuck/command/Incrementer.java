@@ -11,7 +11,7 @@ public class Incrementer implements Command {
 
     /**
      * Increment the value of the current cell of the memory
-     *
+     * This method allows to execute the command INCR
      */
     @Override
     public void execute() {

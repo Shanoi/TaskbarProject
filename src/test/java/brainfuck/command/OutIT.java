@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package brainfuck.command;
 
+import brainfuck.memory.ComputationalModel;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,12 +10,9 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Olivier
+ * @author TeamTaskbar
  */
 public class OutIT {
-    
-    public OutIT() {
-    }
     
     @BeforeClass
     public static void setUpClass() {
@@ -42,11 +35,15 @@ public class OutIT {
      */
     @Test
     public void testExecute() {
+        ComputationalModel cm=new ComputationalModel();
+
         System.out.println("execute");
         Out instance = new Out();
         instance.execute();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
+
+
     }
     
 }

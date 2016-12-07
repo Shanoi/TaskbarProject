@@ -1,20 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package brainfuck.command;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import brainfuck.memory.ComputationalModel;
+import org.junit.*;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
+
 import static org.junit.Assert.*;
 
 /**
  *
- * @author Olivier
+ * @author TeamTaskbar
  */
 public class RightIT {
     
@@ -36,17 +30,20 @@ public class RightIT {
     @After
     public void tearDown() {
     }
+    @Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
     /**
      * Test of execute method, of class Right.
      */
     @Test
     public void testExecute() {
-        System.out.println("execute");
-        Right instance = new Right();
-        instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ComputationalModel cm=new ComputationalModel();
+        cm.init();
+        Command command=new Right();
+        for(int i=0;i<30000;i++)command.execute();
+        exit.expectSystemExit();
+        command.execute();
     }
     
 }

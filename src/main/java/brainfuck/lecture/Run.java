@@ -31,26 +31,44 @@ public class Run {
 
     }
 
-    public ComputationalModel getCm() {
-        return cm;
-    }
+    //=================
+    //Counters
+    //=================
 
+    /**
+     * Counter of the execution time of the program, in milliseconds
+     */
     public static void IncrEXEC_MOVE() {
         Run.EXEC_MOVE++;
     }
 
+    /**
+     * Counter of the number of time the data pointer was moved to execute this program
+     */
     public static void IncrDATA_MOVE() {
         Run.DATA_MOVE++;
     }
 
+    /**
+     * Counter of the number of time the memory was accessed to change its contents
+     * while executing this program
+     */
     public static void IncrDATA_WRITE() {
         Run.DATA_WRITE++;
     }
 
+    /**
+     * Counter of the number of times the memory was accessed to read its contents
+     */
     public static void IncrDATA_READ() {
         Run.DATA_READ++;
     }
 
+    /**
+     * This method allows to load the given file
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
     public void load() throws IOException, FileNotFoundException {
 
         if (path.lastIndexOf(".") > 0) {
@@ -127,6 +145,9 @@ public class Run {
 
     }
 
+    /**
+     * This method allows to display the differents stats(counters) of a program
+     */
     public void afficheStats() {
 
         System.out.println("Nombre d'instructions: " + fichier.getNbI());
@@ -138,14 +159,35 @@ public class Run {
 
     }
 
+
+    //=================
+    //Getter and Setter
+    //=================
+
+    /**
+     * Setter of the Trace
+     */
     public void setTrace(boolean trace1) {
 
         trace = trace1;
     }
 
+    /**
+     * Getter of the file (fichiers)
+     * @return
+     */
     public Fichiers getFichier() {
 
         return this.fichier;
+    }
+
+
+    /**
+     * Getter of the object computational model
+     * @return
+     */
+    public ComputationalModel getCm() {
+        return cm;
     }
 
 }

@@ -8,6 +8,9 @@ import brainfuck.lecture.Run;
  */
 public class Jump implements Command {
 
+    /**
+     * This method allows to execute the command JUMP
+     */
     @Override
     public void execute() {
 

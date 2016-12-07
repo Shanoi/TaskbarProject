@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package brainfuck.lecture;
 
 import static brainfuck.command.EnumCommands.isCommand;
@@ -32,6 +27,11 @@ public class Image extends Fichiers {
 
     }
 
+    /**
+     * This method allows to create an image from the program (.txt)
+     * @param dim
+     * @return
+     */
     private BufferedImage createImg(int dim) {
 
         final BufferedImage res = new BufferedImage(dim, dim, BufferedImage.TYPE_INT_RGB);
@@ -69,6 +69,12 @@ public class Image extends Fichiers {
 
     }
 
+    /**
+     * This method allows to save the image
+     * @param img
+     * @param path
+     * @throws IOException
+     */
     private void saveImg(final BufferedImage img, String path) throws IOException {
 
         RenderedImage rendImg = img;
@@ -76,6 +82,9 @@ public class Image extends Fichiers {
 
     }
 
+    /**
+     * This method allows to read a program(.bmp)
+     */
     @Override
     public void Read() {
 
@@ -128,6 +137,9 @@ public class Image extends Fichiers {
 
     }
 
+    /**
+     * This method allows to encod an image from a program(.txt)
+     */
     @Override
     public void Encod() {
 

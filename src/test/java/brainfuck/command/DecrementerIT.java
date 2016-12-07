@@ -1,52 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package brainfuck.command;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import brainfuck.memory.ComputationalModel;
+import org.junit.*;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
+
 import static org.junit.Assert.*;
 
 /**
  *
- * @author Olivier
+ * @author TeamTaskbar
  */
 public class DecrementerIT {
-    
+
     public DecrementerIT() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
+    @Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
     /**
      * Test of execute method, of class Decrementer.
      */
     @Test
     public void testExecute() {
-        System.out.println("execute");
-        Decrementer instance = new Decrementer();
-        instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ComputationalModel cm = new ComputationalModel();
+        cm.init();
+        Command decr = new Decrementer();
+        exit.expectSystemExit();
+        decr.execute();
+
     }
-    
 }

@@ -30,6 +30,10 @@ public class Interpreter {
 
     }
 
+    /**
+     * This method allows to launch the interpreter
+     * @throws IOException
+     */
     public void lauchInterpreter() throws IOException {
 
          //this.args = new ArrayList(Arrays.asList(args));
@@ -98,10 +102,23 @@ public class Interpreter {
 
     }
 
+    //=================
+    //Getter and Setter
+    //=================
+
+
+    /**
+     * Getter of the input File
+     * @return
+     */
     public static String getFileIn() {
         return filein;
     }
 
+    /**
+     * Getter of the output File
+     * @return
+     */
     public static String getFileOut() {
         return fileout;
     }

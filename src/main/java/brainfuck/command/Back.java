@@ -11,6 +11,9 @@ public class Back implements Command {
 
     int i = 0;
 
+    /**
+     * This method allows to execute the command BACK
+     */
     @Override
     public void execute() {
 

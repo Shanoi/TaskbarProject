@@ -262,6 +262,12 @@ public class Text extends Fichiers {
 
     }
 
+    /**
+     * This method allows to
+     * @param macro
+     * @param j
+     * @param separated
+     */
     private void MacroOrLine(Macro macro, int j, String[] separated) {
 
         System.out.println("MACRO --- " + macro.getNom());
