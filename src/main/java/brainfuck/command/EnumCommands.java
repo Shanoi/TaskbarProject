@@ -117,6 +117,32 @@ public enum EnumCommands {
         return false;
 
     }
+    
+    /**
+     * This method allows to know whether it's a short command or not
+     * @param aString
+     * @return
+     */
+    public static boolean isShortCommand(String aString) {
+
+        Set wordofCommand = STRING_TO_COMMANDS.keySet();
+
+        Iterator<ArrayList> it = wordofCommand.iterator();
+        while (it.hasNext()) {
+
+            ArrayList temp = it.next();
+
+            if (temp.get(1).equals(aString)) {
+
+                return true;
+
+            }
+
+        }
+
+        return false;
+
+    }
 
     public String getLong() {
         return Long;
