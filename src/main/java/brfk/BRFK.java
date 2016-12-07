@@ -24,8 +24,8 @@ public class BRFK {
      */
     public static void main(String[] args) throws IOException {
 
-        Interpreter interpreter = new Interpreter(args[args.length-1], args);
-         interpreter.lauchInterpreter();
+       /* Interpreter interpreter = new Interpreter(args[args.length-1], args);
+         interpreter.lauchInterpreter();*/
         /*Text txt = new Text("D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt");
 
          try {
@@ -40,7 +40,7 @@ public class BRFK {
 
          img.Encod();*/
         
-        /*Run run = new Run("D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt");
+        Run run = new Run("D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt");
 
         try {
             run.load();
@@ -53,7 +53,7 @@ public class BRFK {
         } catch (IOException ex) {
             Logger.getLogger(BRFK.class.getName()).log(Level.SEVERE, null, ex);
         }
-        run.getCm().affichememoire();*/
+        run.getCm().affichememoire();
         // Wellformed WF = new Wellformed((ArrayList<EnumCommands>) run.getInstructions());
         /* try {
          WF.execute();
