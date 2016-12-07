@@ -1,0 +1,7 @@
+Brainf*ck :
+La construction et l'éxécution du logiciel se fait grâce à la commande ./bfck
+
+Par exemple:
+./bfck --check [lien_vers_le_code_source_brainf*ck]
+
+
