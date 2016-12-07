@@ -130,7 +130,7 @@ public class Text extends Fichiers {
      * @throws IOException
      */
     private String deleteCom(String line) throws IOException {
-System.out.println(" LINE ---------------- " + line);
+        System.out.println(" LINE ---------------- " + line);
         String str2 = "";
 
         char prevChar = ' ';
@@ -160,7 +160,7 @@ System.out.println(" LINE ---------------- " + line);
         }
 
         System.out.println(" LINE ---------------- " + str2);
-        
+
         return str2;
 
     }
@@ -259,8 +259,6 @@ System.out.println(" LINE ---------------- " + line);
         //System.out.println(separatedMacro.length + " ------- LIGNE COMMAND  ---- " + macro.getCommands().get(j));
         int repete = 1;
 
-        String tmp = "";
-
         //if (macro.isParam(separatedMacro[0].split(":")[0])) {
         if (macro.isParam(macro.getCommands().get(j).split(":")[0])) {
 
@@ -332,11 +330,8 @@ System.out.println(" LINE ---------------- " + line);
             for (int k = 0; k < repete; k++) {
 
                 //System.out.println("------------------------------------------------------------------------ " + macro.getCommands().get(j).split(": ")[1]);
-                tmp = macro.getCommands().get(j).split(": ")[1];
+                separatedMacro = macro.getCommands().get(j).split(": ")[1].split(" ");
 
-                separatedMacro = tmp.split(" ");
-
-                //System.out.println("+++++++++++++++++++++++++++++" + separatedMacro[0]);
                 if (macros.containsKey(separatedMacro[0])) {
 
                     ReadMacro(separatedMacro);
