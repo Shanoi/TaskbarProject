@@ -51,9 +51,9 @@ public class Text extends Fichiers {
         //////////////////////////////////////////////////////////
         if (line.equals("---- MACRO")) {
 
-            while (!((line = file.readLine())).equals("---- ENDMACRO") && (line = file.readLine()) != null) {
+            while (!((line = file.readLine())).equals("---- ENDMACRO") && line != null) {
 
-                line = deleteCom(line, file);
+                line = deleteCom(line);
 
                 if (line.charAt(0) == '*') {
 
@@ -61,7 +61,6 @@ public class Text extends Fichiers {
 
                     System.out.println("NOM --- " + separated[1]);
 
-                    //macro = new Macro(separated[1]);
                     macro = new Macro(separated);
 
                     macros.put(separated[1], macro);
@@ -83,7 +82,7 @@ public class Text extends Fichiers {
         //////////////////////////////////////////////////////////
         while (line != null) {
 
-            line = deleteCom(line, file);
+            line = deleteCom(line);
 
             if (!line.equals("")) {
 
@@ -130,8 +129,8 @@ public class Text extends Fichiers {
      * @return
      * @throws IOException
      */
-    private String deleteCom(String line, BufferedReader file) throws IOException {
-
+    private String deleteCom(String line) throws IOException {
+System.out.println(" LINE ---------------- " + line);
         String str2 = "";
 
         char prevChar = ' ';
@@ -160,6 +159,8 @@ public class Text extends Fichiers {
 
         }
 
+        System.out.println(" LINE ---------------- " + str2);
+        
         return str2;
 
     }
