@@ -102,7 +102,6 @@ public class Interpreter {
 
     }
 
-
     //=================
     //Getter and Setter
     //=================

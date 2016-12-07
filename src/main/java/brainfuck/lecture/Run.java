@@ -31,28 +31,44 @@ public class Run {
 
     }
 
-
-
     //=================
     //Counters
     //=================
 
+    /**
+     * Counter of the execution time of the program, in milliseconds
+     */
     public static void IncrEXEC_MOVE() {
         Run.EXEC_MOVE++;
     }
 
+    /**
+     * Counter of the number of time the data pointer was moved to execute this program
+     */
     public static void IncrDATA_MOVE() {
         Run.DATA_MOVE++;
     }
 
+    /**
+     * Counter of the number of time the memory was accessed to change its contents
+     * while executing this program
+     */
     public static void IncrDATA_WRITE() {
         Run.DATA_WRITE++;
     }
 
+    /**
+     * Counter of the number of times the memory was accessed to read its contents
+     */
     public static void IncrDATA_READ() {
         Run.DATA_READ++;
     }
 
+    /**
+     * This method allows to load the given file
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
     public void load() throws IOException, FileNotFoundException {
 
         if (path.lastIndexOf(".") > 0) {
@@ -139,8 +155,6 @@ public class Run {
         System.out.println("Nombre de lectures dans la mémoire: " + DATA_READ);
 
     }
-
-
 
 
     //=================
