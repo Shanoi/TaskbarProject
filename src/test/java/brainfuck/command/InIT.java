@@ -1,10 +1,16 @@
 package brainfuck.command;
 
+import brainfuck.memory.ComputationalModel;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import static org.junit.Assert.*;
 
 /**
@@ -32,29 +38,20 @@ public class InIT {
     public void tearDown() {
     }
 
-    /**
-     * Test of In method, of class In.
-     */
-    @Test
-    public void testIn() {
-        System.out.println("In");
-        String file = "";
-        In instance = new In();
-        instance.In(file);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of execute method, of class In.
      */
     @Test
     public void testExecute() {
-        System.out.println("execute");
-        In instance = new In();
-        instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ComputationalModel cm=new ComputationalModel();
+        cm.init();
+        Command command=new In();
+        InputStream in=new ByteArrayInputStream("a".getBytes());
+        System.setIn(in);
+        command.execute();
+        assertEquals(cm.getCurrentCaseValue(),97);
+
     }
     
 }
