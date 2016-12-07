@@ -53,5 +53,10 @@ public class InIT {
         assertEquals(cm.getCurrentCaseValue(),97);
 
     }
+
+    @Test
+    public void testExecuteFile(){
+
+    }
     
 }
