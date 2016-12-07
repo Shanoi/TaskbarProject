@@ -1,6 +1,9 @@
 #!/bin/bash
-
+mvn clean package
+mvn compile
+rm -f bfck.jar
+cp target/brainfuck_Taskbar-1.0-SNAPSHOT.jar bfck.jar
 java -cp bfck.jar brfk.BRFK $@
-
+rm -f bfck.jar
 #jar cvmf META-INF/MANIFEST.MF bfck.jar brfk/BRFK.class brainfuck/lecture/*.class brainfuck/memory/*.class brainfuck/command/*.class
 #

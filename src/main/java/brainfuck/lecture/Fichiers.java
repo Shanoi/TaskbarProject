@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  *
@@ -21,12 +23,27 @@ import java.util.Stack;
  */
 public class Fichiers {
 
-    protected static final List<EnumCommands> list = new ArrayList<>();
+    protected static List<EnumCommands> list = new ArrayList<>();
+    protected static Map<Integer, Integer> jumpBack = new HashMap<>();
     protected int i = 0;
 
     protected ComputationalModel cm;
 
     protected String path;
+
+
+    /**
+     *
+     *
+     */
+    public void setTableLoop() {
+       	for( int i = 0; i < list.size(); i++) {
+	    if( list.get(i) == JUMP )
+      		jumpBack.put(i, jumpAssoc(i));
+	    /*	    if( list.get(i) == BACK )
+		    jumpBack.put(i, jumpAssoc(i));*/
+	}
+    }
 
     public Fichiers(String path) {
 
@@ -79,7 +96,8 @@ public class Fichiers {
     public int jumpAssoc(int i) {
 
         Stack<EnumCommands> stack = new Stack<>();
-        int o = cm.getI();
+	//        int o = cm.getI();
+	int o = i;
 
         stack.push(list.get(o));
 
@@ -110,7 +128,8 @@ public class Fichiers {
     public int backAssoc(int i) {
 
         Stack<EnumCommands> stack = new Stack<>();
-        int o = cm.getI();
+	//        int o = cm.getI();
+	int o = i;
 
         stack.push(list.get(o));
 
