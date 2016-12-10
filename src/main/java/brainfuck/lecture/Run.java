@@ -99,7 +99,11 @@ public class Run {
     }
 
 
-
+    /**
+     * This method allows to execute the program
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
     public void execute() throws IOException, FileNotFoundException {
         String str = ""; // the execution step number (starting at one), the location of the execution pointer after the execution of this step, the location of the data pointer at the very same time, and a snapshot of the memory.
         System.out.println("EXEC");

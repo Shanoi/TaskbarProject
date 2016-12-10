@@ -33,7 +33,7 @@ public class Fichiers {
 
 
     /**
-     *
+     * This method allows to set the table loop
      *
      */
     public void setTableLoop() {
@@ -44,8 +44,13 @@ public class Fichiers {
 		    jumpBack.put(i, backAssoc(i));
 	}
     }
-    
 
+
+    /**
+     * This method allows to retrieve the cipher of the associated loop instruction
+     * @param i
+     * @return
+     */
     public int getTableLoopAssoc(int i) {
 	return jumpBack.get(i);
     }
@@ -65,36 +70,8 @@ public class Fichiers {
     }
 
 
-    //=================
-    //Getter and Setter
-    //=================
-
     /**
-     * Getter of the size of the list, NbI
-     * @return
-     */
-    public int getNbI() {
-        return list.size();
-    }
-
-    /**
-     * Getter of the instructions
-     * @return
-     */
-    public List<EnumCommands> getInstructions() {
-        return list;
-    }
-
-    /**
-     * Getter of the computational model
-     * @return
-     */
-    public ComputationalModel getCm() {
-        return cm;
-    }
-
-    /**
-     * Getter of the associated Jump
+     * This method allows to get the cipher of the associated Jump
      * @param i
      * @return
      */
@@ -126,7 +103,7 @@ public class Fichiers {
     }
 
     /**
-     * This method allows to retrieve the associated back
+     * This method allows to retrieve the associated back (cipher of the instruction)
      * @param i
      * @return
      */
@@ -155,8 +132,36 @@ public class Fichiers {
         }
         return o;
     }
-    
 
-    
+
+
+    //=================
+    //Getter and Setter
+    //=================
+
+    /**
+     * Getter of the size of the list, NbI
+     * @return
+     */
+    public int getNbI() {
+        return list.size();
+    }
+
+    /**
+     * Getter of the instructions
+     * @return
+     */
+    public List<EnumCommands> getInstructions() {
+        return list;
+    }
+
+    /**
+     * Getter of the computational model
+     * @return
+     */
+    public ComputationalModel getCm() {
+        return cm;
+    }
+
 
 }
