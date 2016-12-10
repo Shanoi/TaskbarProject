@@ -31,23 +31,23 @@ public class Fichiers {
 
     protected String path;
 
-
     /**
      *
      *
      */
     public void setTableLoop() {
-       	for( int i = 0; i < list.size(); i++) {
-	    if( list.get(i) == JUMP )
-      		jumpBack.put(i, jumpAssoc(i));
-	    if( list.get(i) == BACK )
-		    jumpBack.put(i, backAssoc(i));
-	}
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) == JUMP) {
+                jumpBack.put(i, jumpAssoc(i));
+            }
+            if (list.get(i) == BACK) {
+                jumpBack.put(i, backAssoc(i));
+            }
+        }
     }
-    
 
     public int getTableLoopAssoc(int i) {
-	return jumpBack.get(i);
+        return jumpBack.get(i);
     }
 
     public Fichiers(String path) {
@@ -64,13 +64,12 @@ public class Fichiers {
 
     }
 
-
     //=================
     //Getter and Setter
     //=================
-
     /**
      * Getter of the size of the list, NbI
+     *
      * @return
      */
     public int getNbI() {
@@ -79,6 +78,7 @@ public class Fichiers {
 
     /**
      * Getter of the instructions
+     *
      * @return
      */
     public List<EnumCommands> getInstructions() {
@@ -87,6 +87,7 @@ public class Fichiers {
 
     /**
      * Getter of the computational model
+     *
      * @return
      */
     public ComputationalModel getCm() {
@@ -95,14 +96,15 @@ public class Fichiers {
 
     /**
      * Getter of the associated Jump
+     *
      * @param i
      * @return
      */
     public int jumpAssoc(int i) {
 
         Stack<EnumCommands> stack = new Stack<>();
-	//        int o = cm.getI();
-	int o = i;
+        //        int o = cm.getI();
+        int o = i;
 
         stack.push(list.get(o));
 
@@ -127,14 +129,15 @@ public class Fichiers {
 
     /**
      * This method allows to retrieve the associated back
+     *
      * @param i
      * @return
      */
     public int backAssoc(int i) {
 
         Stack<EnumCommands> stack = new Stack<>();
-	//        int o = cm.getI();
-	int o = i;
+        //        int o = cm.getI();
+        int o = i;
 
         stack.push(list.get(o));
 
@@ -155,8 +158,5 @@ public class Fichiers {
         }
         return o;
     }
-    
-
-    
 
 }

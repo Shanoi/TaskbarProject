@@ -2,6 +2,10 @@ package brainfuck.command;
 
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,6 +32,24 @@ public class Right implements Command {
 
         } else {
 
+            if (Run.ifTrace()) {
+                FileWriter file = null;
+                try {
+                    file = new FileWriter("/Users/dev/TaskbarProject/test.txt", true);
+                    file.write("Le déplacement dans la mémoire vers la droite a échoué\n"
+                            + "L'instruction n°" + tempfile.getCm().getI() + " a échouée");
+                    file.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
+                } finally {
+                    try {
+                        file.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+            
             System.exit(2);
 
         }

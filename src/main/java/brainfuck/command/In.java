@@ -6,9 +6,12 @@ import brainfuck.memory.Interpreter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class In implements Command {
 
@@ -41,6 +44,9 @@ public class In implements Command {
             if (str.length() > 0) {
                 tempfile.getCm().setCurrentCaseValue((byte) str.charAt(0));
             } else {
+
+                error(tempfile);
+
                 System.exit(3);
             }
         } else {
@@ -64,14 +70,21 @@ public class In implements Command {
                     tempfile.getCm().setCurrentCaseValue((byte) (char) text_list.get(cnt).intValue());
                     cnt++;
                 } else {
+
+                    error(tempfile);
+
                     System.exit(3);
                 }
 
             } catch (FileNotFoundException e) {
 
+                error(tempfile);
+
                 System.exit(3);
 
             } catch (IOException e) {
+
+                error(tempfile);
 
                 System.exit(3);
 
@@ -79,4 +92,27 @@ public class In implements Command {
         }
 
     }
+
+    private void error(Fichiers tempfile) {
+
+        if (Run.ifTrace()) {
+            FileWriter file = null;
+            try {
+                file = new FileWriter("/Users/dev/TaskbarProject/test.txt", true);
+                file.write("La lecture de l'entrée a échouée\n"
+                        + "L'instruction n°" + tempfile.getCm().getI() + " a échouée");
+                file.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    file.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+    }
+
 }

@@ -1,11 +1,13 @@
 package brainfuck.lecture;
 
+import brainfuck.command.Decrementer;
 import static brainfuck.command.EnumCommands.isCommand;
 import static brainfuck.command.EnumCommands.toCommand;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import static java.lang.Math.ceil;
 import static java.lang.Math.sqrt;
@@ -29,6 +31,7 @@ public class Image extends Fichiers {
 
     /**
      * This method allows to create an image from the program (.txt)
+     *
      * @param dim
      * @return
      */
@@ -71,6 +74,7 @@ public class Image extends Fichiers {
 
     /**
      * This method allows to save the image
+     *
      * @param img
      * @param path
      * @throws IOException
@@ -109,6 +113,29 @@ public class Image extends Fichiers {
 
                                 if (!pixelcolor.equals(pixelcolorBase)) {
 
+                                    if (Run.ifTrace()) {
+
+                                        int N = o + j;
+
+                                        int N2 = cpt1 + cpt2;
+
+                                        FileWriter file = null;
+                                        try {
+                                            file = new FileWriter("/Users/dev/TaskbarProject/test.txt", true);
+                                            file.write("Le pixel n'est pas composé d'une seule couleur\n"
+                                                    + "La lecture de l'instruction n°" + N + " dans le pixel " + N2 + " a échouée");
+                                            file.close();
+                                        } catch (IOException ex) {
+                                            Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
+                                        } finally {
+                                            try {
+                                                file.close();
+                                            } catch (IOException ex) {
+                                                Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
+                                    }
+
                                     System.exit(9);
 
                                 }
@@ -117,12 +144,33 @@ public class Image extends Fichiers {
 
                         }
 
-                        if (isCommand("#"+Integer.toHexString(pixelcolorBase.getRGB()).substring(2)) && pixelcolorBase != Color.BLACK) {
+                        if (isCommand("#" + Integer.toHexString(pixelcolorBase.getRGB()).substring(2)) && pixelcolorBase != Color.BLACK) {
 
-                            list.add(toCommand("#"+Integer.toHexString(pixelcolorBase.getRGB()).substring(2)));
+                            list.add(toCommand("#" + Integer.toHexString(pixelcolorBase.getRGB()).substring(2)));
 
                         } else {
-                            
+
+                            if (Run.ifTrace()) {
+
+                                int N = o + j;
+
+                                FileWriter file = null;
+                                try {
+                                    file = new FileWriter("/Users/dev/TaskbarProject/test.txt", true);
+                                    file.write("La couleur ne correspond pas à une couleur d'instruction\n"
+                                            + "La lecture de l'instruction n°" + N + " a échouée");
+                                    file.close();
+                                } catch (IOException ex) {
+                                    Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
+                                } finally {
+                                    try {
+                                        file.close();
+                                    } catch (IOException ex) {
+                                        Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                }
+                            }
+
                             System.exit(4);
 
                         }
@@ -151,7 +199,5 @@ public class Image extends Fichiers {
             Logger.getLogger(Image.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
 
 }

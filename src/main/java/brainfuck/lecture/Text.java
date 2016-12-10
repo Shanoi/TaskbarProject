@@ -5,6 +5,7 @@
  */
 package brainfuck.lecture;
 
+import brainfuck.command.Decrementer;
 import brainfuck.command.EnumCommands;
 import static brainfuck.command.EnumCommands.isCommand;
 import static brainfuck.command.EnumCommands.isShortCommand;
@@ -12,8 +13,11 @@ import static brainfuck.command.EnumCommands.toCommand;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -172,7 +176,7 @@ public class Text extends Fichiers {
      */
     private void ReadLine(String line) {
 
-        //System.out.println("READ    LINE ----- |" + line + "|-");
+        System.out.println("READ    LINE ----- |" + line + "|-");
         if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
 
             for (int j = 0; j < line.length(); j++) {
@@ -182,7 +186,9 @@ public class Text extends Fichiers {
                     list.add(toCommand((Character.toString(line.charAt(j)))));
 
                 } else {
-                    System.out.println("MARCHE PAS --- |" + line.charAt(j) + "| " + line);
+
+                    errorLecture(line);
+
                     System.exit(4);
 
                 }
@@ -196,6 +202,8 @@ public class Text extends Fichiers {
                 list.add(toCommand(line));
 
             } else {
+
+                errorLecture(line);
 
                 System.exit(4);
 
@@ -315,6 +323,28 @@ public class Text extends Fichiers {
                      System.out.println("separatedMacro.length --- " + separatedMacro.length + "        macros.get(separatedMacro[0]).getnbParam() + 1 ---- "
                      + (macros.get(separatedMacro[0]).getnbParam() + 1));*/
 
+                    if (Run.ifTrace()) {
+
+                        int N = list.size();
+
+                        FileWriter file = null;
+                        try {
+                            file = new FileWriter("/Users/dev/TaskbarProject/test.txt", true);
+                            file.write("La Macro n'a pas le bon nombre de paramètres\n"
+                                    + macro.getCommands().get(j)
+                                    + "La lecture de l'instruction n°" + N + " a échouée");
+                            file.close();
+                        } catch (IOException ex) {
+                            Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
+                        } finally {
+                            try {
+                                file.close();
+                            } catch (IOException ex) {
+                                Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+
                     System.exit(10);
 
                 }
@@ -345,6 +375,32 @@ public class Text extends Fichiers {
             }
 
         }
+    }
+
+    private void errorLecture(String line) {
+
+        if (Run.ifTrace()) {
+
+            int N = list.size();
+
+            FileWriter file = null;
+            try {
+                file = new FileWriter("/Users/dev/TaskbarProject/test.txt", true);
+                file.write("La lecture de l'instruction a échouée\n"
+                        + line
+                        + "La lecture de l'instruction n°" + N + " a échouée");
+                file.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    file.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
     }
 
 }

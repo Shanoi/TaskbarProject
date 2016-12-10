@@ -34,7 +34,6 @@ public class Run {
     //=================
     //Counters
     //=================
-
     /**
      * Counter of the execution time of the program, in milliseconds
      */
@@ -43,22 +42,24 @@ public class Run {
     }
 
     /**
-     * Counter of the number of time the data pointer was moved to execute this program
+     * Counter of the number of time the data pointer was moved to execute this
+     * program
      */
     public static void IncrDATA_MOVE() {
         Run.DATA_MOVE++;
     }
 
     /**
-     * Counter of the number of time the memory was accessed to change its contents
-     * while executing this program
+     * Counter of the number of time the memory was accessed to change its
+     * contents while executing this program
      */
     public static void IncrDATA_WRITE() {
         Run.DATA_WRITE++;
     }
 
     /**
-     * Counter of the number of times the memory was accessed to read its contents
+     * Counter of the number of times the memory was accessed to read its
+     * contents
      */
     public static void IncrDATA_READ() {
         Run.DATA_READ++;
@@ -66,6 +67,7 @@ public class Run {
 
     /**
      * This method allows to load the given file
+     *
      * @throws IOException
      * @throws FileNotFoundException
      */
@@ -94,11 +96,9 @@ public class Run {
         }
 
         fichier.Read();
-	fichier.setTableLoop();
+        fichier.setTableLoop();
 
     }
-
-
 
     public void execute() throws IOException, FileNotFoundException {
         String str = ""; // the execution step number (starting at one), the location of the execution pointer after the execution of this step, the location of the data pointer at the very same time, and a snapshot of the memory.
@@ -110,18 +110,21 @@ public class Run {
         //FileWriter file = new FileWriter();
 
         /*if (trace) {
-            FileWriter file;
+         FileWriter file;
 
-            file = new FileWriter("/Users/dev/TaskbarProject/test.txt ", true);
+         file = new FileWriter("/Users/dev/TaskbarProject/test.txt ", true);
 
-        }*/
-
+         }*/
         while (cm.getI() < Fichiers.list.size()) {
 
             Fichiers.list.get(i).getCommand().execute();
             if (trace) {
                 FileWriter file = new FileWriter("/Users/dev/TaskbarProject/test.txt", true);
-                file.write("Execution step number: " + EXEC_MOVE + " \nPointer of the execution: " + cm.getI() + " \nLocation of the data pointer: " + cm.getCurrentIndice() + "\n Affichage de la mémoire\n" + cm.toString() + "\n");
+                file.write("Execution step number: " + EXEC_MOVE + " \n"
+                        + "Pointer of the execution: " + cm.getI() + " \n"
+                        + "Location of the data pointer: " + cm.getCurrentIndice() + "\n"
+                        + "Affichage de la mémoire\n"
+                        + cm.toString() + "\n");
                 file.close();
             }
 
@@ -131,11 +134,9 @@ public class Run {
 
         /*if (trace) {
             
-            file.close();
+         file.close();
             
-        }*/
-        
-
+         }*/
         /*File file = new File("D:/res.txt");
          PrintWriter writer = new PrintWriter("D:/res.txt", "UTF-8");
          writer.println(str);*/
@@ -159,11 +160,9 @@ public class Run {
 
     }
 
-
     //=================
     //Getter and Setter
     //=================
-
     /**
      * Setter of the Trace
      */
@@ -172,8 +171,15 @@ public class Run {
         trace = trace1;
     }
 
+    public static boolean ifTrace(){
+        
+        return trace;
+        
+    }
+    
     /**
      * Getter of the file (fichiers)
+     *
      * @return
      */
     public Fichiers getFichier() {
@@ -181,9 +187,9 @@ public class Run {
         return this.fichier;
     }
 
-
     /**
      * Getter of the object computational model
+     *
      * @return
      */
     public ComputationalModel getCm() {
