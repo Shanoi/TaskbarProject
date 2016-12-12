@@ -13,7 +13,7 @@ import java.util.Observable;
  * @author Olivier
  */
 public class StatProg implements Observateur {
-    
+
     private static long EXEC_TIME = 0;
     private static int EXEC_MOVE = 0;
     private static int DATA_MOVE = 0;
@@ -42,21 +42,35 @@ public class StatProg implements Observateur {
 
     @Override
     public void actualiser(Observer.Observable o) {
-        
+
     }
 
     @Override
-    public void actualiserIncr() {
-        
+    public void updateExec_Move() {
+
         EXEC_MOVE++;
-        DATA_WRITE++;
-        
-        System.out.println("Update from Incr");
-        
+
     }
 
-    
-    
+    @Override
+    public void updateData_Write() {
 
+        DATA_WRITE++;
+
+    }
+
+    @Override
+    public void updateData_Read() {
+
+        DATA_READ++;
+
+    }
+
+    @Override
+    public void updateData_Move() {
+
+        DATA_MOVE++;
+
+    }
 
 }

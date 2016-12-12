@@ -1,16 +1,20 @@
 package brainfuck.command;
 
+import Observer.Observable;
+import Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
+import java.util.ArrayList;
 
 /**
  *
  * @author TeamTaskbar
  */
-public class Back implements Command {
+public class Back implements Command, Observable {
 
     int i = 0;
 
+    private ArrayList observers;// Tableau d'observateurs.
 
     /**
      * This method allows to execute the command BACK
@@ -27,6 +31,31 @@ public class Back implements Command {
 
             tempfile.getCm().setI(tempfile.backAssoc(tempfile.getCm().getI()));
 
+        }
+
+    }
+    
+    @Override
+    public void addObserver(Observateur o) {
+
+        observers.add(o);
+
+    }
+
+    @Override
+    public void delObserver(Observateur o) {
+
+        observers.remove(0);
+
+    }
+
+    @Override
+    public void notifyObservers() {
+
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.updateExec_Move();// On utilise la méthode "tiré".
+            o.updateData_Write();// On utilise la méthode "tiré".
         }
 
     }

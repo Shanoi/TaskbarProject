@@ -12,13 +12,13 @@ package Observer;
 public interface Observable {
 
     // Méthode permettant d'ajouter (abonner) un observateur.
-    public void ajouterObservateur(Observateur o);
+    public void addObserver(Observateur o);
 
     // Méthode permettant de supprimer (résilier) un observateur.
 
-    public void supprimerObservateur(Observateur o);
+    public void delObserver(Observateur o);
 
     // Méthode qui permet d'avertir tous les observateurs lors d'un changement d'état.
 
-    public void notifierObservateurs();
+    public void notifyObservers();
 }

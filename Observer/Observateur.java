@@ -14,6 +14,12 @@ public interface Observateur {
     // Méthode appelée automatiquement lorsque l'état (position ou précision) du GPS change.
     public void actualiser(Observable o);
 
-    public void actualiserIncr();
+    public void updateExec_Move();
+    
+    public void updateData_Write();
+    
+    public void updateData_Read();
+    
+    public void updateData_Move();
 
 }

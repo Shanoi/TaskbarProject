@@ -21,8 +21,8 @@ public enum EnumCommands {
     INCR("INCR", "+", "#ffffff", new Incrementer()),
     DECR("DECR", "-", "#4b0082", new Decrementer()),
     IN("IN", ",", "#ffff00", new In()),
-    LEFT("LEFT", ">", "#9400d3", new Left()),
-    RIGHT("RIGHT", "<", "#0000ff", new Right()),
+    LEFT("LEFT", "<", "#9400d3", new Left()),
+    RIGHT("RIGHT", ">", "#0000ff", new Right()),
     OUT("OUT", ".", "#00ff00", new Out()),
     JUMP("JUMP", "[", "#ff7f00", new Jump()),
     BACK("BACK", "]", "#ff0000", new Back());

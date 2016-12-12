@@ -1,7 +1,10 @@
 package brainfuck.command;
 
+import Observer.Observable;
+import Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
+import brainfuck.lecture.StatProg;
 import brainfuck.memory.Interpreter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class In implements Command {
+public final class In implements Command, Observable {
 
     private String file;
     private String str;
@@ -20,6 +23,19 @@ public class In implements Command {
     private static int state = 0;
     private static ArrayList<Integer> text_list = new ArrayList<>();
 
+    private ArrayList observers;// Tableau d'observateurs.
+
+    public In() {
+
+        StatProg observer = new StatProg();
+
+        observers = new ArrayList();
+
+        this.addObserver(observer);
+        
+        //this.addObserver(observer);
+    }
+    
     public void In(String file) {
         this.file = file;
     }
@@ -79,4 +95,30 @@ public class In implements Command {
         }
 
     }
+    
+    @Override
+    public void addObserver(Observateur o) {
+
+        observers.add(o);
+
+    }
+
+    @Override
+    public void delObserver(Observateur o) {
+
+        observers.remove(0);
+
+    }
+
+    @Override
+    public void notifyObservers() {
+
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.updateExec_Move();// On utilise la méthode "tiré".
+            o.updateData_Write();// On utilise la méthode "tiré".
+        }
+
+    }
+    
 }

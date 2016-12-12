@@ -13,15 +13,15 @@ import java.util.ArrayList;
  */
 public final class Incrementer implements Command, Observable {
 
-    private ArrayList tabObservateur;// Tableau d'observateurs.
+    private ArrayList observers;// Tableau d'observateurs.
 
     public Incrementer() {
 
         StatProg observer = new StatProg();
 
-        tabObservateur = new ArrayList();
+        observers = new ArrayList();
 
-        this.ajouterObservateur(observer);
+        this.addObserver(observer);
         
         //this.addObserver(observer);
     }
@@ -49,31 +49,32 @@ public final class Incrementer implements Command, Observable {
             System.exit(1);
         }
         System.out.println("coucou");
-        notifierObservateurs();
+        notifyObservers();
         
         //notifyObs();
     }
 
     @Override
-    public void ajouterObservateur(Observateur o) {
+    public void addObserver(Observateur o) {
 
-        tabObservateur.add(o);
-
-    }
-
-    @Override
-    public void supprimerObservateur(Observateur o) {
-
-        tabObservateur.remove(0);
+        observers.add(o);
 
     }
 
     @Override
-    public void notifierObservateurs() {
+    public void delObserver(Observateur o) {
 
-        for (int i = 0; i < tabObservateur.size(); i++) {
-            Observateur o = (Observateur) tabObservateur.get(i);
-            o.actualiserIncr();// On utilise la méthode "tiré".
+        observers.remove(0);
+
+    }
+
+    @Override
+    public void notifyObservers() {
+
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.updateExec_Move();// On utilise la méthode "tiré".
+            o.updateData_Write();// On utilise la méthode "tiré".
         }
 
     }
