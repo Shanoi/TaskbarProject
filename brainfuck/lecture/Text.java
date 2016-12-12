@@ -51,7 +51,7 @@ public class Text extends Fichiers {
         //////////////////////////////////////////////////////////
         if (line.equals("---- MACRO")) {
 
-            while (!((line = file.readLine())).equals("---- ENDMACRO") && line  != null) {
+            while (!((line = file.readLine())).equals("---- ENDMACRO") && line != null) {
 
                 line = deleteCom(line, file);
 
@@ -100,7 +100,7 @@ public class Text extends Fichiers {
          } while ((line = file.readLine()) != null);*/
         while (line != null) {
 
-            System.out.println("LINE -------------------------------------+++++++ " + line);
+            //System.out.println("LINE -------------------------------------+++++++ " + line);
 
             line = deleteCom(line, file);
 
@@ -120,7 +120,7 @@ public class Text extends Fichiers {
 
             }
 
-            System.out.println("LINE ------------------------------------- " + line);
+            //System.out.println("LINE ------------------------------------- " + line);
 
             line = file.readLine();
 
@@ -153,7 +153,7 @@ public class Text extends Fichiers {
      */
     private String deleteCom(String line, BufferedReader file) throws IOException {
 
-        System.out.println("LINE --- " + line);
+        //System.out.println("LINE --- " + line);
         String str2 = "";
 
         char prevChar = ' ';
@@ -161,15 +161,14 @@ public class Text extends Fichiers {
         //System.out.println("LINE LENGTH -- " + line.length());
         /*for (int j = 0; j < line.length() && line.charAt(j) != ' ' && line.charAt(j) != '\t'; j++) {
 
-            if (line.charAt(j) == '#') {
+         if (line.charAt(j) == '#') {
 
-                //return deleteCom(file.readLine(), file);
-                return "";
+         //return deleteCom(file.readLine(), file);
+         return "";
 
-            }
+         }
 
-        }*/
-
+         }*/
         for (int k = 0; k < line.length(); k++) {
 
             //System.out.println("BOUCLE + charAt -- |" + line.charAt(k) + "|");
@@ -214,6 +213,8 @@ public class Text extends Fichiers {
         if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
 
             for (int j = 0; j < line.length(); j++) {
+                //System.out.println(line + " ----------------------------------------------------------------------------------------------------------- " + line.charAt(1));
+                //System.out.println("TO STRING -- " + Character.toString(line.charAt(j)) + isCommand(Character.toString(line.charAt(j))));
 
                 if (isCommand(Character.toString(line.charAt(j)))) {
 
@@ -221,7 +222,7 @@ public class Text extends Fichiers {
                     list.add(toCommand((Character.toString(line.charAt(j)))));
 
                 } else {
-                    System.out.println("MARCHE PAS --- |" + line.charAt(j) + "| " + line);
+                    System.out.println("MARCHE PAS --- |" + line.charAt(j) + "| \n" + line + "     " + j);
                     System.exit(4);
 
                 }
@@ -238,7 +239,7 @@ public class Text extends Fichiers {
             } else {
 
                 System.out.println("nOPE -- " + line);
-                
+
                 System.exit(4);
 
             }

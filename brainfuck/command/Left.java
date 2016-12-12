@@ -25,6 +25,7 @@ public class Left implements Command {
         if (tempfile.getCm().getCurrentIndice() > 0) {
             tempfile.getCm().setCurrentIndice(tempfile.getCm().getCurrentIndice() - 1);
         } else {
+            System.out.println("LEFT");
             System.exit(2);
         }
     }

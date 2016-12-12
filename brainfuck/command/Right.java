@@ -27,7 +27,7 @@ public class Right implements Command {
             tempfile.getCm().setCurrentIndice(tempfile.getCm().getCurrentIndice() + 1);
 
         } else {
-
+            System.out.println("RIGHT");
             System.exit(2);
 
         }

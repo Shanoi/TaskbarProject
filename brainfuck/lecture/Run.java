@@ -1,11 +1,15 @@
 package brainfuck.lecture;
 
+import brainfuck.command.Command;
+import brainfuck.command.Incrementer;
 import brainfuck.memory.ComputationalModel;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Observable;
+import java.util.Observer;
 
 public class Run {
 
@@ -24,8 +28,16 @@ public class Run {
     //protected static final List<EnumCommands> list = new ArrayList<>();
     private int i = 0;
 
+    public Run() {
+
+        path = "";
+        cm = new ComputationalModel();
+
+    }
+
     /**
      * Allows to run the path
+     *
      * @param path
      */
     public Run(String path) {
@@ -38,7 +50,6 @@ public class Run {
     //=================
     //Counters
     //=================
-
     /**
      * Counter of the EXEC MOVE
      */
@@ -69,6 +80,7 @@ public class Run {
 
     /**
      * Allows to read a fichier whether it's a .txt or .bmp(converted to .txt)
+     *
      * @throws IOException
      * @throws FileNotFoundException
      */
@@ -102,6 +114,7 @@ public class Run {
 
     /**
      * Allows to calculate the different stats related to the executed program
+     *
      * @throws IOException
      * @throws FileNotFoundException
      */
@@ -113,18 +126,21 @@ public class Run {
         cm.init();
 
         FileWriter file;
-        
+
         if (true) {
-            
+
             file = new FileWriter("D:/monFichier.txt", true);
-            
+
         }
-        
+
         while (cm.getI() < Fichiers.list.size()) {
 
             Fichiers.list.get(i).getCommand().execute();
             if (true) {
-                file.write("Execution step number: " + EXEC_MOVE + " \nPointer of the execution: " + cm.getI() + " \nLocation of the data pointer: " + cm.getCurrentIndice() + "\n Affichage de la mémoire\n" + cm.toString() + "\n");
+                file.write("Execution step number: " + EXEC_MOVE + " \n"
+                        + "Pointer of the execution: " + cm.getI() + " \n"
+                        + "Location of the data pointer: " + cm.getCurrentIndice() + "\n"
+                        + "Affichage de la mémoire\n" + cm.toString() + "\n");
             }
 
             i = (cm.getI() + 1);
@@ -132,7 +148,6 @@ public class Run {
         }
 
         System.out.println("STR --- " + str);
-        
 
         file.close();
 
@@ -162,9 +177,9 @@ public class Run {
     //=================
     //Getter and Setter
     //=================
-
     /**
      * Setter of the trace
+     *
      * @param trace1
      */
     public void setTrace(boolean trace1) {
@@ -174,6 +189,7 @@ public class Run {
 
     /**
      * Getter of fichier
+     *
      * @return
      */
     public Fichiers getFichier() {
@@ -183,10 +199,23 @@ public class Run {
 
     /**
      * Getter of the cm
+     *
      * @return
      */
     public ComputationalModel getCm() {
         return cm;
     }
 
+    /*@Override
+     public void update(Observable o, Object o1) {
+        
+     if (o instanceof Incrementer){
+            
+     System.out.println("Updated");
+            
+     }
+        
+        
+        
+     }*/
 }
