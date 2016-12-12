@@ -45,6 +45,9 @@ public final class Left implements Command, Observable {
             System.out.println("LEFT");
             System.exit(2);
         }
+        
+        notifyObservers();
+        
     }
 
     @Override
@@ -67,7 +70,7 @@ public final class Left implements Command, Observable {
         for (int i = 0; i < observers.size(); i++) {
             Observateur o = (Observateur) observers.get(i);
             o.updateExec_Move();// On utilise la méthode "tiré".
-            o.updateData_Write();// On utilise la méthode "tiré".
+            o.updateData_Move();// On utilise la méthode "tiré".
         }
 
     }

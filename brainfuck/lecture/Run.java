@@ -1,5 +1,7 @@
 package brainfuck.lecture;
 
+import Observer.Observable;
+import Observer.Observateur;
 import brainfuck.command.Command;
 import brainfuck.command.Incrementer;
 import brainfuck.memory.ComputationalModel;
@@ -8,10 +10,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.ArrayList;
 
-public class Run {
+public final class Run implements Observable {
 
     private static long EXEC_TIME = 0;
     private static int EXEC_MOVE = 0;
@@ -27,6 +28,8 @@ public class Run {
 
     //protected static final List<EnumCommands> list = new ArrayList<>();
     private int i = 0;
+
+    private ArrayList observers;// Tableau d'observateurs.
 
     public Run() {
 
@@ -44,6 +47,12 @@ public class Run {
 
         cm = new ComputationalModel();
         this.path = path;
+
+        StatProg observer = new StatProg();
+
+        observers = new ArrayList();
+
+        this.addObserver(observer);
 
     }
 
@@ -122,7 +131,7 @@ public class Run {
         String str = ""; // the execution step number (starting at one), the location of the execution pointer after the execution of this step, the location of the data pointer at the very same time, and a snapshot of the memory.
         System.out.println("EXEC");
         long instantA = System.currentTimeMillis();
-
+        notifyObservers();
         cm.init();
 
         FileWriter file;
@@ -155,7 +164,11 @@ public class Run {
          PrintWriter writer = new PrintWriter("D:/res.txt", "UTF-8");
          writer.println(str);*/
         long instantB = System.currentTimeMillis();
+        notifyObservers();
         EXEC_TIME = instantB - instantA;
+
+        System.out.println(new StatProg());
+
         afficheStats();
 
     }
@@ -218,4 +231,28 @@ public class Run {
         
         
      }*/
+    @Override
+    public void addObserver(Observateur o) {
+
+        observers.add(o);
+
+    }
+
+    @Override
+    public void delObserver(Observateur o) {
+
+        observers.remove(0);
+
+    }
+
+    @Override
+    public void notifyObservers() {
+
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.updateTime();// On utilise la méthode "tiré".
+
+        }
+
+    }
 }

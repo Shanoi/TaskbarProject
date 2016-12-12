@@ -65,6 +65,8 @@ public final class Out implements Command, Observable {
                 System.exit(3);
             }
         }
+        
+        notifyObservers();
 
     }
     
@@ -88,7 +90,7 @@ public final class Out implements Command, Observable {
         for (int i = 0; i < observers.size(); i++) {
             Observateur o = (Observateur) observers.get(i);
             o.updateExec_Move();// On utilise la méthode "tiré".
-            o.updateData_Write();// On utilise la méthode "tiré".
+            o.updateData_Read();// On utilise la méthode "tiré".
         }
 
     }

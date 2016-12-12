@@ -41,6 +41,17 @@ public class StatProg implements Observateur {
     }
 
     @Override
+    public String toString() {
+
+        return "Nombre de déplacements du pointeur d'instruction: " + EXEC_MOVE + "\n"
+                + "Nombre de déplacements dans la mémoire: " + DATA_MOVE + "\n"
+                + "Nombre d'écritures dans la mémoire: " + DATA_WRITE + "\n"
+                + "Nombre de lectures dans la mémoire: " + DATA_READ + "\n"
+                + "Temps d'exécution: " + EXEC_TIME;
+
+    }
+
+    @Override
     public void actualiser(Observer.Observable o) {
 
     }
@@ -70,6 +81,13 @@ public class StatProg implements Observateur {
     public void updateData_Move() {
 
         DATA_MOVE++;
+
+    }
+
+    @Override
+    public void updateTime() {
+
+        EXEC_TIME = Math.abs(EXEC_TIME - System.currentTimeMillis());
 
     }
 

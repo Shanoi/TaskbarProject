@@ -21,5 +21,7 @@ public interface Observateur {
     public void updateData_Read();
     
     public void updateData_Move();
+    
+    public void updateTime();
 
 }

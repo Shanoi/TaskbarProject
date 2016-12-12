@@ -93,6 +93,8 @@ public final class In implements Command, Observable {
 
             }
         }
+        
+        notifyObservers();
 
     }
     

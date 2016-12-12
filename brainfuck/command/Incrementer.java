@@ -22,16 +22,10 @@ public final class Incrementer implements Command, Observable {
         observers = new ArrayList();
 
         this.addObserver(observer);
-        
+
         //this.addObserver(observer);
     }
 
-    /*public void notifyObs() {
-
-     setChanged();
-     notifyObservers();
-
-     }*/
     /**
      * Increment the value of the current cell of the memory This method allows
      * to execute the command INCR
@@ -48,10 +42,9 @@ public final class Incrementer implements Command, Observable {
         } else {
             System.exit(1);
         }
-        System.out.println("coucou");
+
         notifyObservers();
-        
-        //notifyObs();
+
     }
 
     @Override
