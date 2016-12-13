@@ -73,11 +73,11 @@ public final class Decrementer implements Command, Observable, ObservableLogs {
 
     @Override
     public void notifyForLogs() {
-        System.out.println("NOTIFY");
+
         for (int i = 0; i < observers.size(); i++) {
             Observateur o = (Observateur) observers.get(i);
             o.logsDecr();// On utilise la méthode "tiré".
-            //o.traceLog();
+
         }
 
     }

@@ -33,10 +33,10 @@ public final class In implements Command, Observable, ObservableLogs {
         observers = new ArrayList();
 
         this.addObserver(observer);
-        
+
         //this.addObserver(observer);
     }
-    
+
     public void In(String file) {
         this.file = file;
     }
@@ -48,8 +48,7 @@ public final class In implements Command, Observable, ObservableLogs {
     public void execute() {
 
         /*Run.IncrEXEC_MOVE();
-        Run.IncrDATA_WRITE();*/
-
+         Run.IncrDATA_WRITE();*/
         file = Interpreter.getFileIn();
         if (file.equals("")) {
             Fichiers tempfile = new Fichiers("");
@@ -58,6 +57,7 @@ public final class In implements Command, Observable, ObservableLogs {
             if (str.length() > 0) {
                 tempfile.getCm().setCurrentCaseValue((byte) str.charAt(0));
             } else {
+                notifyForLogs();
                 System.exit(3);
             }
         } else {
@@ -85,20 +85,22 @@ public final class In implements Command, Observable, ObservableLogs {
                 }
 
             } catch (FileNotFoundException e) {
-
+                
+                notifyForLogs();
                 System.exit(3);
 
             } catch (IOException e) {
-
+                
+                notifyForLogs();
                 System.exit(3);
 
             }
         }
-        
+
         notifyObservers();
 
     }
-    
+
     @Override
     public void addObserver(Observateur o) {
 
@@ -126,7 +128,13 @@ public final class In implements Command, Observable, ObservableLogs {
 
     @Override
     public void notifyForLogs() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.logsDecr();// On utilise la méthode "tiré".
+
+        }
+
     }
-    
+
 }

@@ -23,21 +23,19 @@ public final class Right implements Command, Observable, ObservableLogs {
         observers = new ArrayList();
 
         this.addObserver(observer);
-        
+
         //this.addObserver(observer);
     }
-    
+
     /**
      * Change the current cell of the memory, taking the cell at the right of
-     * the current cell
-     * This method allows to execute the command RIGHT
+     * the current cell This method allows to execute the command RIGHT
      */
     @Override
     public void execute() {
 
         /*Run.IncrEXEC_MOVE();
-        Run.IncrDATA_MOVE();*/
-
+         Run.IncrDATA_MOVE();*/
         Fichiers tempfile = new Fichiers("");
 
         if (tempfile.getCm().getCurrentIndice() < tempfile.getCm().getMemorySize()) {
@@ -45,15 +43,16 @@ public final class Right implements Command, Observable, ObservableLogs {
             tempfile.getCm().setCurrentIndice(tempfile.getCm().getCurrentIndice() + 1);
 
         } else {
-            System.out.println("RIGHT");
+
+            notifyForLogs();
             System.exit(2);
 
         }
-        
+
         notifyObservers();
-        
+
     }
-    
+
     @Override
     public void addObserver(Observateur o) {
 
@@ -81,7 +80,13 @@ public final class Right implements Command, Observable, ObservableLogs {
 
     @Override
     public void notifyForLogs() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.logsDecr();// On utilise la méthode "tiré".
+
+        }
+
     }
 
 }

@@ -41,6 +41,7 @@ public final class Incrementer implements Command, Observable, ObservableLogs {
         if (tempfile.getCm().getCurrentCaseValue() < 255) {
             tempfile.getCm().setCurrentCaseValue((byte) (tempfile.getCm().getCurrentCaseValue() + 1));
         } else {
+            notifyForLogs();
             System.exit(1);
         }
 
@@ -75,7 +76,13 @@ public final class Incrementer implements Command, Observable, ObservableLogs {
 
     @Override
     public void notifyForLogs() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.logsDecr();// On utilise la méthode "tiré".
+
+        }
+
     }
 
 }
