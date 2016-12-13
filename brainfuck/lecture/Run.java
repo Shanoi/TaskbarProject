@@ -15,6 +15,9 @@ import java.util.ArrayList;
 public final class Run implements Observable {
 
     private static boolean trace = false;
+
+    private boolean time = true;
+
     protected final String path;
 
     private final ComputationalModel cm;
@@ -99,6 +102,7 @@ public final class Run implements Observable {
         System.out.println("EXEC");
 
         notifyObservers();
+
         cm.init();
 
         FileWriter file;
@@ -119,8 +123,6 @@ public final class Run implements Observable {
              + "Affichage de la mémoire\n" + cm.toString() + "\n");
              }*/
 
-            notifyObservers();
-
             i = (cm.getI() + 1);
             cm.setI(i);
         }
@@ -131,7 +133,7 @@ public final class Run implements Observable {
          PrintWriter writer = new PrintWriter("D:/res.txt", "UTF-8");
          writer.println(str);*/
         notifyObservers();
-        afficheStats();
+        //afficheStats();
         System.out.println(new StatProg());
 
     }
@@ -139,11 +141,11 @@ public final class Run implements Observable {
     /**
      * Allows to display the differents stats related to the executed program
      */
-    public void afficheStats() {
+    /*public void afficheStats() {
 
-        System.out.println("Nombre d'instructions: " + fichier.getNbI());
+        System.out.println("Nombre d'instructions file : " + fichier.getNbI());
 
-    }
+    }*/
 
     //=================
     //Getter and Setter
@@ -197,6 +199,7 @@ public final class Run implements Observable {
         for (int i = 0; i < observers.size(); i++) {
             Observateur o = (Observateur) observers.get(i);
             o.updateTime();// On utilise la méthode "tiré".
+            o.updateNb_Instr(Fichiers.list.size());// On utilise la méthode "tiré".
 
         }
 
