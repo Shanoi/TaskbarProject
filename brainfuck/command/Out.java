@@ -37,8 +37,8 @@ public final class Out implements Command, Observable {
     @Override
     public void execute() {
 
-        Run.IncrEXEC_MOVE();
-        Run.IncrDATA_READ();
+        /*Run.IncrEXEC_MOVE();
+        Run.IncrDATA_READ();*/
 
         Fichiers tempfile = new Fichiers("");
         file = Interpreter.getFileOut();

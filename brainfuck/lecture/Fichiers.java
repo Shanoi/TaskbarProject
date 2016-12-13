@@ -42,13 +42,12 @@ public class Fichiers {
 
     }
 
-
     //=================
     //Getter and Setter
     //=================
-
     /**
      * Getter of the size of the list, NbI
+     *
      * @return
      */
     public int getNbI() {
@@ -57,6 +56,7 @@ public class Fichiers {
 
     /**
      * Getter of the instructions
+     *
      * @return
      */
     public List<EnumCommands> getInstructions() {
@@ -65,6 +65,7 @@ public class Fichiers {
 
     /**
      * Getter of the computational model
+     *
      * @return
      */
     public ComputationalModel getCm() {
@@ -73,6 +74,7 @@ public class Fichiers {
 
     /**
      * Getter of the associated Jump
+     *
      * @param i
      * @return
      */
@@ -104,6 +106,7 @@ public class Fichiers {
 
     /**
      * This method allows to retrieve the associated back
+     *
      * @param i
      * @return
      */
@@ -131,8 +134,5 @@ public class Fichiers {
         }
         return o;
     }
-    
-
-    
 
 }

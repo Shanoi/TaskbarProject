@@ -6,7 +6,11 @@
 package brainfuck.lecture;
 
 import Observer.Observateur;
-import java.util.Observable;
+import brainfuck.memory.ComputationalModel;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,30 +18,28 @@ import java.util.Observable;
  */
 public class StatProg implements Observateur {
 
+    private static int NB_INSTR = 0;
     private static long EXEC_TIME = 0;
     private static int EXEC_MOVE = 0;
     private static int DATA_MOVE = 0;
     private static int DATA_WRITE = 0;
     private static int DATA_READ = 0;
+    private FileWriter file;
 
-    public long getEXEC_TIME() {
-        return EXEC_TIME;
+    private final ComputationalModel cm;
+
+    public StatProg(String file) throws IOException {
+        this.file = new FileWriter(file, true);
+        cm = new ComputationalModel();
+
+        cm.init();
+
     }
 
-    public int getEXEC_MOVE() {
-        return EXEC_MOVE;
-    }
+    public StatProg() {
 
-    public int getDATA_MOVE() {
-        return DATA_MOVE;
-    }
+        cm = new ComputationalModel();
 
-    public int getDATA_WRITE() {
-        return DATA_WRITE;
-    }
-
-    public int getDATA_READ() {
-        return DATA_READ;
     }
 
     @Override
@@ -88,6 +90,20 @@ public class StatProg implements Observateur {
     public void updateTime() {
 
         EXEC_TIME = Math.abs(EXEC_TIME - System.currentTimeMillis());
+
+    }
+
+    @Override
+    public void traceLog() {
+
+        try {
+            file.write("Execution step number: " + EXEC_MOVE + " \n"
+                    + "Pointer of the execution: " + cm.getI() + " \n"
+                    + "Location of the data pointer: " + cm.getCurrentIndice() + "\n"
+                    + "Affichage de la mémoire\n" + cm.toString() + "\n");
+        } catch (IOException ex) {
+            Logger.getLogger(StatProg.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

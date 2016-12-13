@@ -34,8 +34,8 @@ public final class Incrementer implements Command, Observable {
     public void execute() {
         Fichiers tempfile = new Fichiers("");
 
-        Run.IncrEXEC_MOVE();
-        Run.IncrDATA_WRITE();
+       /* Run.IncrEXEC_MOVE();
+        Run.IncrDATA_WRITE();*/
 
         if (tempfile.getCm().getCurrentCaseValue() < 255) {
             tempfile.getCm().setCurrentCaseValue((byte) (tempfile.getCm().getCurrentCaseValue() + 1));

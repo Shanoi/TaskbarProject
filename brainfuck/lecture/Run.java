@@ -14,11 +14,6 @@ import java.util.ArrayList;
 
 public final class Run implements Observable {
 
-    private static long EXEC_TIME = 0;
-    private static int EXEC_MOVE = 0;
-    private static int DATA_MOVE = 0;
-    private static int DATA_WRITE = 0;
-    private static int DATA_READ = 0;
     private static boolean trace = false;
     protected final String path;
 
@@ -34,7 +29,7 @@ public final class Run implements Observable {
     public Run() {
 
         path = "";
-        cm = new ComputationalModel();
+        cm = new ComputationalModel(); //Passer le cm dans StatProg
 
     }
 
@@ -54,37 +49,6 @@ public final class Run implements Observable {
 
         this.addObserver(observer);
 
-    }
-
-    //=================
-    //Counters
-    //=================
-    /**
-     * Counter of the EXEC MOVE
-     */
-    public static void IncrEXEC_MOVE() {
-        Run.EXEC_MOVE++;
-    }
-
-    /**
-     * Counter of the DATA MOVE
-     */
-    public static void IncrDATA_MOVE() {
-        Run.DATA_MOVE++;
-    }
-
-    /**
-     * Counter of the DATA WRITE
-     */
-    public static void IncrDATA_WRITE() {
-        Run.DATA_WRITE++;
-    }
-
-    /**
-     * Counter of the DATA READ
-     */
-    public static void IncrDATA_READ() {
-        Run.DATA_READ++;
     }
 
     /**
@@ -128,9 +92,12 @@ public final class Run implements Observable {
      * @throws FileNotFoundException
      */
     public void execute() throws IOException, FileNotFoundException {
-        String str = ""; // the execution step number (starting at one), the location of the execution pointer after the execution of this step, the location of the data pointer at the very same time, and a snapshot of the memory.
+        String str = "";    //the execution step number (starting at one), 
+        //the location of the execution pointer after the execution of this step, 
+        //the location of the data pointer at the very same time, and a snapshot of the memory.
+
         System.out.println("EXEC");
-        long instantA = System.currentTimeMillis();
+
         notifyObservers();
         cm.init();
 
@@ -145,31 +112,27 @@ public final class Run implements Observable {
         while (cm.getI() < Fichiers.list.size()) {
 
             Fichiers.list.get(i).getCommand().execute();
-            if (true) {
-                file.write("Execution step number: " + EXEC_MOVE + " \n"
-                        + "Pointer of the execution: " + cm.getI() + " \n"
-                        + "Location of the data pointer: " + cm.getCurrentIndice() + "\n"
-                        + "Affichage de la mémoire\n" + cm.toString() + "\n");
-            }
+            /*if (true) {
+             file.write("Execution step number: " + EXEC_MOVE + " \n"
+             + "Pointer of the execution: " + cm.getI() + " \n"
+             + "Location of the data pointer: " + cm.getCurrentIndice() + "\n"
+             + "Affichage de la mémoire\n" + cm.toString() + "\n");
+             }*/
+
+            notifyObservers();
 
             i = (cm.getI() + 1);
             cm.setI(i);
         }
-
-        System.out.println("STR --- " + str);
 
         file.close();
 
         /*File file = new File("D:/res.txt");
          PrintWriter writer = new PrintWriter("D:/res.txt", "UTF-8");
          writer.println(str);*/
-        long instantB = System.currentTimeMillis();
         notifyObservers();
-        EXEC_TIME = instantB - instantA;
-
-        System.out.println(new StatProg());
-
         afficheStats();
+        System.out.println(new StatProg());
 
     }
 
@@ -179,11 +142,6 @@ public final class Run implements Observable {
     public void afficheStats() {
 
         System.out.println("Nombre d'instructions: " + fichier.getNbI());
-        System.out.println("Temps d'executions: " + EXEC_TIME);
-        System.out.println("Nombre de déplacements du pointeur d'instruction: " + EXEC_MOVE);
-        System.out.println("Nombre de déplacements dans la mémoire: " + DATA_MOVE);
-        System.out.println("Nombre d'écritures dans la mémoire: " + DATA_WRITE);
-        System.out.println("Nombre de lectures dans la mémoire: " + DATA_READ);
 
     }
 
@@ -219,18 +177,6 @@ public final class Run implements Observable {
         return cm;
     }
 
-    /*@Override
-     public void update(Observable o, Object o1) {
-        
-     if (o instanceof Incrementer){
-            
-     System.out.println("Updated");
-            
-     }
-        
-        
-        
-     }*/
     @Override
     public void addObserver(Observateur o) {
 

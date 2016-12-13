@@ -46,8 +46,8 @@ public final class In implements Command, Observable {
     @Override
     public void execute() {
 
-        Run.IncrEXEC_MOVE();
-        Run.IncrDATA_WRITE();
+        /*Run.IncrEXEC_MOVE();
+        Run.IncrDATA_WRITE();*/
 
         file = Interpreter.getFileIn();
         if (file.equals("")) {

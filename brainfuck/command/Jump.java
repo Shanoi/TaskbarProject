@@ -33,8 +33,8 @@ public final class Jump implements Command, Observable {
 
         Fichiers tempfile = new Fichiers("");
 
-        Run.IncrEXEC_MOVE();
-        Run.IncrDATA_READ();
+        /*Run.IncrEXEC_MOVE();
+        Run.IncrDATA_READ();*/
 
         if (tempfile.getCm().getCurrentCaseValue() == 0) {
 

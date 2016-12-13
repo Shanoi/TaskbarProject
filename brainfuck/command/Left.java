@@ -36,8 +36,8 @@ public final class Left implements Command, Observable {
 
         Fichiers tempfile = new Fichiers("");
 
-        Run.IncrEXEC_MOVE();
-        Run.IncrDATA_MOVE();
+        /*Run.IncrEXEC_MOVE();
+        Run.IncrDATA_MOVE();*/
 
         if (tempfile.getCm().getCurrentIndice() > 0) {
             tempfile.getCm().setCurrentIndice(tempfile.getCm().getCurrentIndice() - 1);

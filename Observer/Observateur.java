@@ -23,5 +23,7 @@ public interface Observateur {
     public void updateData_Move();
     
     public void updateTime();
+    
+    public void traceLog();
 
 }

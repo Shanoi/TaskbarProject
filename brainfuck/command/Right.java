@@ -34,8 +34,8 @@ public final class Right implements Command, Observable {
     @Override
     public void execute() {
 
-        Run.IncrEXEC_MOVE();
-        Run.IncrDATA_MOVE();
+        /*Run.IncrEXEC_MOVE();
+        Run.IncrDATA_MOVE();*/
 
         Fichiers tempfile = new Fichiers("");
 
