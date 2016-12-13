@@ -29,5 +29,15 @@ public interface Observateur {
     public void traceLog();
     
     public void logsDecr();
+    
+    public void logsIncr();
+
+    public void logsIn();
+    
+    public void logsLeft();
+
+    public void logsOut();
+    
+    public void logsRight();
 
 }

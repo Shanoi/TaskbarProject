@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author Olivier
  */
-public class StatProg implements Observateur {
+public class Monitor implements Observateur {
 
     private static int NB_INSTR = 0;
     private static long EXEC_TIME = 0;
@@ -28,18 +28,17 @@ public class StatProg implements Observateur {
     private static int DATA_WRITE = 0;
     private static int DATA_READ = 0;
     private static PrintWriter file;
-    
-    private String fileuh;
+
+    private static String fileuh;
 
     private final ComputationalModel cm;
 
-    public StatProg(String fileuh) throws IOException {
+    public Monitor(String fileuh) throws IOException {
         //StatProg.file = new FileWriter(file, true);
 
         //File f = new File(file);
-
         this.fileuh = fileuh;
-        
+
         file = new PrintWriter(new FileWriter(fileuh));
 
         //StatProg.file = new FileWriter(f, true);
@@ -49,7 +48,7 @@ public class StatProg implements Observateur {
 
     }
 
-    public StatProg() {
+    public Monitor() {
 
         cm = new ComputationalModel();
 
@@ -117,26 +116,71 @@ public class StatProg implements Observateur {
     @Override
     public void traceLog() {
 
-        try {
-            file = new PrintWriter(new FileWriter(fileuh, true), true);
-        } catch (IOException ex) {
-            Logger.getLogger(StatProg.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        file.write("Execution step number: " + EXEC_MOVE + " \n"
+        writer("Execution step number: " + EXEC_MOVE + " \n"
                 + "Pointer of the execution: " + cm.getI() + " \n"
                 + "Location of the data pointer: " + cm.getCurrentIndice() + "\n"
-                + "Affichage de la mémoire\n" + cm.toString() + "\n");
-        
-        file.close();
-
+                + "Affichage de la mémoire\n" + cm.toString() + "\n\n");
     }
 
     @Override
     public void logsDecr() {
 
-        file.write("Décrémenter la cellule courante a échoué\n"
+        writer("Décrémenter la cellule courante a échoué\n"
                 + "L'instruction n°" + EXEC_MOVE + " a échouée");
+
+    }
+
+    @Override
+    public void logsIncr() {
+
+        writer("Incrémenter la cellule courante a échoué\n"
+                + "L'instruction n°" + EXEC_MOVE + " a échouée");
+
+    }
+
+    @Override
+    public void logsIn() {
+
+        writer("La lecture de l'entrée a échouée\n"
+                + "L'instruction n°" + EXEC_MOVE + " a échouée");
+
+    }
+
+    @Override
+    public void logsLeft() {
+
+        writer("Le déplacement dans la mémoire vers la gauche a échoué\n"
+                + "L'instruction n°" + EXEC_MOVE + " a échouée");
+
+    }
+
+    @Override
+    public void logsOut() {
+
+        writer("L'écriture dans la sortie a échouée\n"
+                + "L'instruction n°" + EXEC_MOVE + " a échouée");
+
+    }
+
+    @Override
+    public void logsRight() {
+
+        writer("Le déplacement dans la mémoire vers la droite a échoué\n"
+                + "L'instruction n°" + EXEC_MOVE + " a échouée");
+
+    }
+
+    private void writer(String logs) {
+
+        try {
+            file = new PrintWriter(new FileWriter(fileuh, true), true);
+        } catch (IOException ex) {
+            Logger.getLogger(Monitor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        file.write(logs);
+
+        file.close();
 
     }
 

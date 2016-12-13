@@ -4,7 +4,7 @@ import Observer.Observable;
 import Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
-import brainfuck.lecture.StatProg;
+import brainfuck.lecture.Monitor;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +19,7 @@ public final class Back implements Command, Observable {
 
     public Back() {
 
-        StatProg observer = new StatProg();
+        Monitor observer = new Monitor();
 
         observers = new ArrayList();
 

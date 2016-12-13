@@ -5,7 +5,7 @@ import Observer.ObservableLogs;
 import Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
-import brainfuck.lecture.StatProg;
+import brainfuck.lecture.Monitor;
 import brainfuck.memory.Interpreter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,7 +23,7 @@ public final class Out implements Command, Observable, ObservableLogs {
 
     public Out() {
 
-        StatProg observer = new StatProg();
+        Monitor observer = new Monitor();
 
         observers = new ArrayList();
 

@@ -5,7 +5,7 @@ import Observer.ObservableLogs;
 import Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
-import brainfuck.lecture.StatProg;
+import brainfuck.lecture.Monitor;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +18,7 @@ public final class Decrementer implements Command, Observable, ObservableLogs {
 
     public Decrementer() {
 
-        StatProg observer = new StatProg();
+        Monitor observer = new Monitor();
 
         observers = new ArrayList();
 

@@ -33,7 +33,7 @@ public final class Run implements Observable, ObservableLogs {
     public Run() {
 
         path = "";
-        cm = new ComputationalModel(); //Passer le cm dans StatProg
+        cm = new ComputationalModel(); //Passer le cm dans Monitor
 
     }
 
@@ -47,7 +47,7 @@ public final class Run implements Observable, ObservableLogs {
         cm = new ComputationalModel();
         this.path = path;
 
-        StatProg observer = new StatProg(path + ".log");
+        Monitor observer = new Monitor(path + ".log");
 
         observers = new ArrayList();
 
@@ -137,7 +137,7 @@ public final class Run implements Observable, ObservableLogs {
          writer.println(str);*/
         notifyObservers();
         //afficheStats();
-        System.out.println(new StatProg());
+        System.out.println(new Monitor());
 
     }
 
