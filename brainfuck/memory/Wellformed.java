@@ -1,5 +1,7 @@
 package brainfuck.memory;
 
+import Observer.ObservableLogs;
+import Observer.Observateur;
 import brainfuck.command.EnumCommands;
 import static brainfuck.command.EnumCommands.BACK;
 import static brainfuck.command.EnumCommands.JUMP;
@@ -8,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Wellformed {
+public class Wellformed implements ObservableLogs {
 
     private Stack<String> stack = new Stack<>();
 
@@ -80,6 +82,21 @@ public class Wellformed {
 
         this.commands = commands;
 
+    }
+
+    @Override
+    public void addObserver(Observateur o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delObserver(Observateur o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void notifyForLogs() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

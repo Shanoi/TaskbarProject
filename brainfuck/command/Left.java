@@ -1,6 +1,7 @@
 package brainfuck.command;
 
 import Observer.Observable;
+import Observer.ObservableLogs;
 import Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author TeamTaskbar
  */
-public final class Left implements Command, Observable {
+public final class Left implements Command, Observable, ObservableLogs {
 
     private ArrayList observers;// Tableau d'observateurs.
 
@@ -73,6 +74,11 @@ public final class Left implements Command, Observable {
             o.updateData_Move();// On utilise la méthode "tiré".
         }
 
+    }
+
+    @Override
+    public void notifyForLogs() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

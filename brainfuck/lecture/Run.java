@@ -1,6 +1,7 @@
 package brainfuck.lecture;
 
 import Observer.Observable;
+import Observer.ObservableLogs;
 import Observer.Observateur;
 import brainfuck.command.Command;
 import brainfuck.command.Incrementer;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-public final class Run implements Observable {
+public final class Run implements Observable, ObservableLogs {
 
     private static boolean trace = false;
 
@@ -41,12 +42,12 @@ public final class Run implements Observable {
      *
      * @param path
      */
-    public Run(String path) {
+    public Run(String path) throws IOException {
 
         cm = new ComputationalModel();
         this.path = path;
 
-        StatProg observer = new StatProg();
+        StatProg observer = new StatProg(path + ".log");
 
         observers = new ArrayList();
 
@@ -105,13 +106,13 @@ public final class Run implements Observable {
 
         cm.init();
 
-        FileWriter file;
+        /*FileWriter file;
 
         if (true) {
 
             file = new FileWriter("D:/monFichier.txt", true);
 
-        }
+        }*/
 
         while (cm.getI() < Fichiers.list.size()) {
 
@@ -123,11 +124,13 @@ public final class Run implements Observable {
              + "Affichage de la mémoire\n" + cm.toString() + "\n");
              }*/
 
+            notifyForLogs();
+
             i = (cm.getI() + 1);
             cm.setI(i);
         }
 
-        file.close();
+        //file.close();
 
         /*File file = new File("D:/res.txt");
          PrintWriter writer = new PrintWriter("D:/res.txt", "UTF-8");
@@ -143,10 +146,9 @@ public final class Run implements Observable {
      */
     /*public void afficheStats() {
 
-        System.out.println("Nombre d'instructions file : " + fichier.getNbI());
+     System.out.println("Nombre d'instructions file : " + fichier.getNbI());
 
-    }*/
-
+     }*/
     //=================
     //Getter and Setter
     //=================
@@ -201,6 +203,16 @@ public final class Run implements Observable {
             o.updateTime();// On utilise la méthode "tiré".
             o.updateNb_Instr(Fichiers.list.size());// On utilise la méthode "tiré".
 
+        }
+
+    }
+
+    @Override
+    public void notifyForLogs() {
+
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.traceLog();
         }
 
     }

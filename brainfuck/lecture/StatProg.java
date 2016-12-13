@@ -6,9 +6,12 @@
 package brainfuck.lecture;
 
 import Observer.Observateur;
+import brainfuck.command.Decrementer;
 import brainfuck.memory.ComputationalModel;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,12 +27,22 @@ public class StatProg implements Observateur {
     private static int DATA_MOVE = 0;
     private static int DATA_WRITE = 0;
     private static int DATA_READ = 0;
-    private FileWriter file;
+    private static PrintWriter file;
+    
+    private String fileuh;
 
     private final ComputationalModel cm;
 
-    public StatProg(String file) throws IOException {
-        this.file = new FileWriter(file, true);
+    public StatProg(String fileuh) throws IOException {
+        //StatProg.file = new FileWriter(file, true);
+
+        //File f = new File(file);
+
+        this.fileuh = fileuh;
+        
+        file = new PrintWriter(new FileWriter(fileuh));
+
+        //StatProg.file = new FileWriter(f, true);
         cm = new ComputationalModel();
 
         cm.init();
@@ -45,7 +58,7 @@ public class StatProg implements Observateur {
     @Override
     public String toString() {
 
-        return  "Nombre d'instructions: " + NB_INSTR + "\n"
+        return "Nombre d'instructions: " + NB_INSTR + "\n"
                 + "Nombre de déplacements du pointeur d'instruction: " + EXEC_MOVE + "\n"
                 + "Nombre de déplacements dans la mémoire: " + DATA_MOVE + "\n"
                 + "Nombre d'écritures dans la mémoire: " + DATA_WRITE + "\n"
@@ -86,7 +99,7 @@ public class StatProg implements Observateur {
         DATA_MOVE++;
 
     }
-    
+
     @Override
     public void updateNb_Instr(int i) {
 
@@ -105,13 +118,25 @@ public class StatProg implements Observateur {
     public void traceLog() {
 
         try {
-            file.write("Execution step number: " + EXEC_MOVE + " \n"
-                    + "Pointer of the execution: " + cm.getI() + " \n"
-                    + "Location of the data pointer: " + cm.getCurrentIndice() + "\n"
-                    + "Affichage de la mémoire\n" + cm.toString() + "\n");
+            file = new PrintWriter(new FileWriter(fileuh, true), true);
         } catch (IOException ex) {
             Logger.getLogger(StatProg.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        file.write("Execution step number: " + EXEC_MOVE + " \n"
+                + "Pointer of the execution: " + cm.getI() + " \n"
+                + "Location of the data pointer: " + cm.getCurrentIndice() + "\n"
+                + "Affichage de la mémoire\n" + cm.toString() + "\n");
+        
+        file.close();
+
+    }
+
+    @Override
+    public void logsDecr() {
+
+        file.write("Décrémenter la cellule courante a échoué\n"
+                + "L'instruction n°" + EXEC_MOVE + " a échouée");
 
     }
 

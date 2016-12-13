@@ -5,6 +5,8 @@
  */
 package brainfuck.lecture;
 
+import Observer.ObservableLogs;
+import Observer.Observateur;
 import brainfuck.command.EnumCommands;
 import static brainfuck.command.EnumCommands.isCommand;
 import static brainfuck.command.EnumCommands.isShortCommand;
@@ -19,7 +21,7 @@ import java.util.HashMap;
  *
  * @author TeamTaskbar
  */
-public class Text extends Fichiers {
+public class Text extends Fichiers implements ObservableLogs {
 
     private HashMap<String, Macro> macros;
 
@@ -400,6 +402,21 @@ public class Text extends Fichiers {
             }
 
         }
+    }
+
+    @Override
+    public void addObserver(Observateur o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delObserver(Observateur o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void notifyForLogs() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

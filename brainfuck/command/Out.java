@@ -1,6 +1,7 @@
 package brainfuck.command;
 
 import Observer.Observable;
+import Observer.ObservableLogs;
 import Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
@@ -13,7 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public final class Out implements Command, Observable {
+public final class Out implements Command, Observable, ObservableLogs {
 
     private String file;
     private static String tempString = "";
@@ -93,6 +94,11 @@ public final class Out implements Command, Observable {
             o.updateData_Read();// On utilise la méthode "tiré".
         }
 
+    }
+
+    @Override
+    public void notifyForLogs() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

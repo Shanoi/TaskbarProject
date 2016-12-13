@@ -1,6 +1,7 @@
 package brainfuck.command;
 
 import Observer.Observable;
+import Observer.ObservableLogs;
 import Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author TeamTaskbar
  */
-public final class Decrementer implements Command, Observable {
+public final class Decrementer implements Command, Observable, ObservableLogs {
 
     private ArrayList observers;// Tableau d'observateurs.
 
@@ -34,12 +35,10 @@ public final class Decrementer implements Command, Observable {
 
         Fichiers tempfile = new Fichiers("");
 
-       /* Run.IncrEXEC_MOVE();
-        Run.IncrDATA_WRITE();*/
-
         if (tempfile.getCm().getCurrentCaseValue() > 0) {
             tempfile.getCm().setCurrentCaseValue((byte) (tempfile.getCm().getCurrentCaseValue() - 1));
         } else {
+            notifyForLogs();
             System.exit(1);
         }
 
@@ -68,6 +67,17 @@ public final class Decrementer implements Command, Observable {
             Observateur o = (Observateur) observers.get(i);
             o.updateExec_Move();// On utilise la méthode "tiré".
             o.updateData_Write();// On utilise la méthode "tiré".
+        }
+
+    }
+
+    @Override
+    public void notifyForLogs() {
+        System.out.println("NOTIFY");
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.logsDecr();// On utilise la méthode "tiré".
+            //o.traceLog();
         }
 
     }

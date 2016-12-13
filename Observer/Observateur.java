@@ -15,17 +15,19 @@ public interface Observateur {
     public void actualiser(Observable o);
 
     public void updateExec_Move();
-    
+
     public void updateData_Write();
-    
+
     public void updateData_Read();
-    
+
     public void updateData_Move();
-    
+
     public void updateNb_Instr(int i);
-    
+
     public void updateTime();
-    
+
     public void traceLog();
+    
+    public void logsDecr();
 
 }

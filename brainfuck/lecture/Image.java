@@ -5,6 +5,8 @@
  */
 package brainfuck.lecture;
 
+import Observer.ObservableLogs;
+import Observer.Observateur;
 import static brainfuck.command.EnumCommands.isCommand;
 import static brainfuck.command.EnumCommands.toCommand;
 import java.awt.Color;
@@ -22,7 +24,7 @@ import javax.imageio.ImageIO;
  *
  * @author TeamTaskbar
  */
-public class Image extends Fichiers {
+public class Image extends Fichiers implements ObservableLogs {
 
     private final int pixelSize = 3;
 
@@ -155,6 +157,21 @@ public class Image extends Fichiers {
         } catch (IOException ex) {
             Logger.getLogger(Image.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public void addObserver(Observateur o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delObserver(Observateur o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void notifyForLogs() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
