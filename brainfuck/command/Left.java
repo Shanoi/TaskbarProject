@@ -6,6 +6,7 @@ import Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
 import brainfuck.lecture.Monitor;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.util.ArrayList;
 
 /**
@@ -23,14 +24,13 @@ public final class Left implements Command, Observable, ObservableLogs {
         observers = new ArrayList();
 
         this.addObserver(observer);
-        
+
         //this.addObserver(observer);
     }
-    
+
     /**
      * Change the current cell of the memory, taking the cell at the left of the
-     * current cell
-     * This method allows to execute the command LEFT
+     * current cell This method allows to execute the command LEFT
      */
     @Override
     public void execute() {
@@ -38,18 +38,19 @@ public final class Left implements Command, Observable, ObservableLogs {
         Fichiers tempfile = new Fichiers("");
 
         /*Run.IncrEXEC_MOVE();
-        Run.IncrDATA_MOVE();*/
-
+         Run.IncrDATA_MOVE();*/
         if (tempfile.getCm().getCurrentIndice() > 0) {
             tempfile.getCm().setCurrentIndice(tempfile.getCm().getCurrentIndice() - 1);
         } else {
-            
-            notifyForLogs();
+
+            if (FLAG_trace) {
+                notifyForLogs();
+            }
             System.exit(2);
         }
-        
+
         notifyObservers();
-        
+
     }
 
     @Override
@@ -87,5 +88,5 @@ public final class Left implements Command, Observable, ObservableLogs {
         }
 
     }
-    
+
 }

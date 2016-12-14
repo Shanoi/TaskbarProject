@@ -170,20 +170,6 @@ public class Monitor implements Observateur {
 
     }
 
-    private void writer(String logs) {
-
-        try {
-            file = new PrintWriter(new FileWriter(fileuh, true), true);
-        } catch (IOException ex) {
-            Logger.getLogger(Monitor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        file.write(logs);
-
-        file.close();
-
-    }
-
     @Override
     public void logsImage(int N) {
 
@@ -199,6 +185,37 @@ public class Monitor implements Observateur {
         writer("La lecture de l'instruction a échouée\n"
                 + string + "\n"
                 + "La lecture de l'instruction n°" + i + " a échouée");
+
+    }
+
+    @Override
+    public void logsWellformed(int i, boolean BACK) {
+
+        if (BACK) {
+
+            writer("Le programme est mal parenthésé\n"
+                    + "Il manque un JUMP associé au BACK n°" + i);
+
+        } else {
+
+            writer("Le programme est mal parenthésé\n"
+                    + "Il manque " + i + " BACK au programme ");
+
+        }
+
+    }
+
+    private void writer(String logs) {
+
+        try {
+            file = new PrintWriter(new FileWriter(fileuh, true), true);
+        } catch (IOException ex) {
+            Logger.getLogger(Monitor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        file.write(logs);
+
+        file.close();
 
     }
 

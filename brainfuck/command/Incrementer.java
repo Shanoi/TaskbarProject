@@ -6,6 +6,7 @@ import Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
 import brainfuck.lecture.Monitor;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.util.ArrayList;
 
 /**
@@ -35,13 +36,14 @@ public final class Incrementer implements Command, Observable, ObservableLogs {
     public void execute() {
         Fichiers tempfile = new Fichiers("");
 
-       /* Run.IncrEXEC_MOVE();
-        Run.IncrDATA_WRITE();*/
-
+        /* Run.IncrEXEC_MOVE();
+         Run.IncrDATA_WRITE();*/
         if (tempfile.getCm().getCurrentCaseValue() < 255) {
             tempfile.getCm().setCurrentCaseValue((byte) (tempfile.getCm().getCurrentCaseValue() + 1));
         } else {
-            notifyForLogs();
+            if (FLAG_trace) {
+                notifyForLogs();
+            }
             System.exit(1);
         }
 

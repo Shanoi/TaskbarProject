@@ -7,6 +7,7 @@ import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
 import brainfuck.lecture.Monitor;
 import brainfuck.memory.Interpreter;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -28,10 +29,10 @@ public final class Out implements Command, Observable, ObservableLogs {
         observers = new ArrayList();
 
         this.addObserver(observer);
-        
+
         //this.addObserver(observer);
     }
-    
+
     /**
      * This method allows to execute the command OUT
      */
@@ -39,8 +40,7 @@ public final class Out implements Command, Observable, ObservableLogs {
     public void execute() {
 
         /*Run.IncrEXEC_MOVE();
-        Run.IncrDATA_READ();*/
-
+         Run.IncrDATA_READ();*/
         Fichiers tempfile = new Fichiers("");
         file = Interpreter.getFileOut();
         if (file.equals("")) {
@@ -60,21 +60,25 @@ public final class Out implements Command, Observable, ObservableLogs {
                 tampon.close();
 
             } catch (FileNotFoundException e) {
-                
-                notifyForLogs();
+
+                if (FLAG_trace) {
+                    notifyForLogs();
+                }
                 System.exit(3);
 
             } catch (IOException e) {
-                
-                notifyForLogs();
+
+                if (FLAG_trace) {
+                    notifyForLogs();
+                }
                 System.exit(3);
             }
         }
-        
+
         notifyObservers();
 
     }
-    
+
     @Override
     public void addObserver(Observateur o) {
 

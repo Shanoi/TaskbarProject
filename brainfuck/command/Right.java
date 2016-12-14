@@ -6,6 +6,7 @@ import Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
 import brainfuck.lecture.Monitor;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.util.ArrayList;
 
 /**
@@ -44,7 +45,9 @@ public final class Right implements Command, Observable, ObservableLogs {
 
         } else {
 
-            notifyForLogs();
+            if (FLAG_trace) {
+                notifyForLogs();
+            }
             System.exit(2);
 
         }

@@ -7,6 +7,7 @@ import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
 import brainfuck.lecture.Monitor;
 import brainfuck.memory.Interpreter;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -57,7 +58,10 @@ public final class In implements Command, Observable, ObservableLogs {
             if (str.length() > 0) {
                 tempfile.getCm().setCurrentCaseValue((byte) str.charAt(0));
             } else {
-                notifyForLogs();
+
+                if (FLAG_trace) {
+                    notifyForLogs();
+                }
                 System.exit(3);
             }
         } else {
@@ -85,12 +89,12 @@ public final class In implements Command, Observable, ObservableLogs {
                 }
 
             } catch (FileNotFoundException e) {
-                
+
                 notifyForLogs();
                 System.exit(3);
 
             } catch (IOException e) {
-                
+
                 notifyForLogs();
                 System.exit(3);
 

@@ -10,6 +10,7 @@ import Observer.ObservableLogsImage;
 import Observer.Observateur;
 import static brainfuck.command.EnumCommands.isCommand;
 import static brainfuck.command.EnumCommands.toCommand;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
@@ -128,7 +129,9 @@ public final class Image extends Fichiers implements ObservableLogsImage {
 
                                 if (!pixelcolor.equals(pixelcolorBase)) {
 
-                                    notifyForLogs(o + j);
+                                    if (FLAG_trace) {
+                                        notifyForLogs(o + j);
+                                    }
                                     System.exit(9);
 
                                 }
@@ -143,7 +146,9 @@ public final class Image extends Fichiers implements ObservableLogsImage {
 
                         } else {
 
-                            notifyForLogs(o + j);
+                            if (FLAG_trace) {
+                                notifyForLogs(o + j);
+                            }
                             System.exit(4);
 
                         }

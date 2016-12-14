@@ -13,6 +13,7 @@ import static brainfuck.command.EnumCommands.isCommand;
 import static brainfuck.command.EnumCommands.isShortCommand;
 import static brainfuck.command.EnumCommands.toCommand;
 import static brainfuck.lecture.DelComms.deleteCom;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -152,9 +153,11 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
                 } else {
                     System.out.println("MARCHE PAS --- |" + line.charAt(j) + "| \n" + line + "     " + j);
-                    
-                    notifyForLogs(line, list.size());
-                    
+
+                    if (FLAG_trace) {
+                        notifyForLogs(line, list.size());
+                    }
+
                     System.exit(4);
 
                 }
@@ -171,8 +174,10 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
                 System.out.println("nOPE -- " + line);
 
-                notifyForLogs(line, list.size());
-                
+                if (FLAG_trace) {
+                    notifyForLogs(line, list.size());
+                }
+
                 System.exit(4);
 
             }
@@ -253,8 +258,10 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
                 } else {
 
-                    notifyForLogs( macro.getCommands().get(j), list.size());
-                    
+                    if (FLAG_trace) {
+                        notifyForLogs(macro.getCommands().get(j), list.size());
+                    }
+
                     System.exit(10);
 
                 }

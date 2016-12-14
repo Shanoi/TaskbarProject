@@ -1,17 +1,20 @@
 package brainfuck.memory;
 
 import Observer.ObservableLogs;
+import Observer.ObservableLogsImage;
+import Observer.ObservableLogsWF;
 import Observer.Observateur;
 import brainfuck.command.EnumCommands;
 import static brainfuck.command.EnumCommands.BACK;
 import static brainfuck.command.EnumCommands.JUMP;
 import brainfuck.lecture.Monitor;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Wellformed implements ObservableLogs {
+public class Wellformed implements ObservableLogsWF {
 
     private Stack<String> stack = new Stack<>();
 
@@ -33,6 +36,10 @@ public class Wellformed implements ObservableLogs {
             }
             if (get == BACK && IsemptyStack()) {
 
+                if (FLAG_trace) {
+                    notifyForLogs(i, true);
+                }
+
                 System.exit(4);
             }
             if (get == BACK) {
@@ -42,6 +49,10 @@ public class Wellformed implements ObservableLogs {
         }
 
         if (!IsemptyStack()) {
+
+            if (FLAG_trace) {
+                notifyForLogs(stack.size(), false);
+            }
 
             System.exit(4);
 
@@ -109,8 +120,14 @@ public class Wellformed implements ObservableLogs {
     }
 
     @Override
-    public void notifyForLogs() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void notifyForLogs(int i, boolean BACK) {
+
+        for (int j = 0; j < observers.size(); j++) {
+            Observateur o = (Observateur) observers.get(j);
+            o.logsWellformed(i, BACK);// On utilise la méthode "tiré".
+
+        }
+
     }
 
 }

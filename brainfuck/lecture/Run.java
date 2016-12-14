@@ -6,6 +6,7 @@ import Observer.Observateur;
 import brainfuck.command.Command;
 import brainfuck.command.Incrementer;
 import brainfuck.memory.ComputationalModel;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,8 +15,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public final class Run implements Observable, ObservableLogs {
-
-    private static boolean trace = false;
 
     private boolean time = true;
 
@@ -108,12 +107,11 @@ public final class Run implements Observable, ObservableLogs {
 
         /*FileWriter file;
 
-        if (true) {
+         if (true) {
 
-            file = new FileWriter("D:/monFichier.txt", true);
+         file = new FileWriter("D:/monFichier.txt", true);
 
-        }*/
-
+         }*/
         while (cm.getI() < Fichiers.list.size()) {
 
             Fichiers.list.get(i).getCommand().execute();
@@ -124,7 +122,11 @@ public final class Run implements Observable, ObservableLogs {
              + "Affichage de la mémoire\n" + cm.toString() + "\n");
              }*/
 
-            notifyForLogs();
+            if (FLAG_trace) {
+
+                notifyForLogs();
+
+            }
 
             i = (cm.getI() + 1);
             cm.setI(i);
@@ -157,10 +159,10 @@ public final class Run implements Observable, ObservableLogs {
      *
      * @param trace1
      */
-    public void setTrace(boolean trace1) {
+    /*public void setTrace(boolean trace1) {
 
-        trace = trace1;
-    }
+        FLAG_trace = trace1;
+    }*/
 
     /**
      * Getter of fichier
