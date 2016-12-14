@@ -93,6 +93,10 @@ public class In implements Command {
 
     }
 
+    /**
+     * This method allows to report input errors
+     * @param tempfile
+     */
     private void error(Fichiers tempfile) {
 
         if (Run.ifTrace()) {

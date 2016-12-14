@@ -58,7 +58,11 @@ public class Out implements Command {
         }
 
     }
-    
+
+    /**
+     * This method allows to report output errors
+     * @param tempfile
+     */
     private void error(Fichiers tempfile) {
 
         if (Run.ifTrace()) {
