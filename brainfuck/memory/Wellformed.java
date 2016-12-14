@@ -5,6 +5,7 @@ import Observer.Observateur;
 import brainfuck.command.EnumCommands;
 import static brainfuck.command.EnumCommands.BACK;
 import static brainfuck.command.EnumCommands.JUMP;
+import brainfuck.lecture.Monitor;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Wellformed implements ObservableLogs {
 
     private ArrayList<EnumCommands> commands;
 
+    private ArrayList observers;// Tableau d'observateurs.
 
     /**
      *
@@ -55,7 +57,8 @@ public class Wellformed implements ObservableLogs {
     }
 
     /**
-     *This method allows to push the stack
+     * This method allows to push the stack
+     *
      * @param line
      */
     private void pushStack(String line) {
@@ -64,6 +67,7 @@ public class Wellformed implements ObservableLogs {
 
     /**
      * Boolean checking whether the stack is empty or not
+     *
      * @return
      */
     private boolean IsemptyStack() {
@@ -73,25 +77,35 @@ public class Wellformed implements ObservableLogs {
     //=================
     //Getter and Setter
     //=================
-
     /**
      * Setter of the ArrayList EnumCommands
+     *
      * @param commands
      */
     public Wellformed(ArrayList<EnumCommands> commands) {
 
         this.commands = commands;
 
+        Monitor observer = new Monitor();
+
+        observers = new ArrayList();
+
+        this.addObserver(observer);
+
     }
 
     @Override
     public void addObserver(Observateur o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        observers.add(o);
+
     }
 
     @Override
     public void delObserver(Observateur o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        observers.remove(0);
+
     }
 
     @Override

@@ -6,6 +6,7 @@
 package brainfuck.lecture;
 
 import Observer.ObservableLogs;
+import Observer.ObservableLogsImage;
 import Observer.Observateur;
 import static brainfuck.command.EnumCommands.isCommand;
 import static brainfuck.command.EnumCommands.toCommand;
@@ -16,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import static java.lang.Math.ceil;
 import static java.lang.Math.sqrt;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -24,18 +26,27 @@ import javax.imageio.ImageIO;
  *
  * @author TeamTaskbar
  */
-public class Image extends Fichiers implements ObservableLogs {
+public final class Image extends Fichiers implements ObservableLogsImage {
 
     private final int pixelSize = 3;
+
+    private ArrayList observers;// Tableau d'observateurs.
 
     public Image(String path) {
 
         super(path);
 
+        Monitor observer = new Monitor();
+
+        observers = new ArrayList();
+
+        this.addObserver(observer);
+
     }
 
     /**
      * This method allows to create an image from the program (.txt)
+     *
      * @param dim
      * @return
      */
@@ -78,6 +89,7 @@ public class Image extends Fichiers implements ObservableLogs {
 
     /**
      * This method allows to save the image
+     *
      * @param img
      * @param path
      * @throws IOException
@@ -116,6 +128,7 @@ public class Image extends Fichiers implements ObservableLogs {
 
                                 if (!pixelcolor.equals(pixelcolorBase)) {
 
+                                    notifyForLogs(o + j);
                                     System.exit(9);
 
                                 }
@@ -124,12 +137,13 @@ public class Image extends Fichiers implements ObservableLogs {
 
                         }
 
-                        if (isCommand("#"+Integer.toHexString(pixelcolorBase.getRGB()).substring(2)) && pixelcolorBase != Color.BLACK) {
+                        if (isCommand("#" + Integer.toHexString(pixelcolorBase.getRGB()).substring(2)) && pixelcolorBase != Color.BLACK) {
 
-                            list.add(toCommand("#"+Integer.toHexString(pixelcolorBase.getRGB()).substring(2)));
+                            list.add(toCommand("#" + Integer.toHexString(pixelcolorBase.getRGB()).substring(2)));
 
                         } else {
-                            
+
+                            notifyForLogs(o + j);
                             System.exit(4);
 
                         }
@@ -161,19 +175,26 @@ public class Image extends Fichiers implements ObservableLogs {
 
     @Override
     public void addObserver(Observateur o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        observers.add(o);
+
     }
 
     @Override
     public void delObserver(Observateur o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        observers.remove(0);
+
     }
 
     @Override
-    public void notifyForLogs() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void notifyForLogs(int i) {
+
+        for (int j = 0; j < observers.size(); j++) {
+            Observateur o = (Observateur) observers.get(j);
+            o.logsImage(i);// On utilise la méthode "tiré".
+
+        }
     }
-    
-    
 
 }

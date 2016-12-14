@@ -40,4 +40,6 @@ public interface Observateur {
     
     public void logsRight();
 
+    public void logsImage(int N);
+
 }

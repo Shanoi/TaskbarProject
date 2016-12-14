@@ -184,4 +184,13 @@ public class Monitor implements Observateur {
 
     }
 
+    @Override
+    public void logsImage(int N) {
+
+        writer("La couleur ne correspond pas à une couleur d'instruction\n"
+                + "La lecture de l'instruction n°" + N + " a échouée\n"
+                + "Voir le code d'erreur pour plus d'informations\n");
+
+    }
+
 }

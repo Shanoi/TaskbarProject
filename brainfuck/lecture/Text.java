@@ -6,28 +6,40 @@
 package brainfuck.lecture;
 
 import Observer.ObservableLogs;
+import Observer.ObservableLogstxt;
 import Observer.Observateur;
 import brainfuck.command.EnumCommands;
 import static brainfuck.command.EnumCommands.isCommand;
 import static brainfuck.command.EnumCommands.isShortCommand;
 import static brainfuck.command.EnumCommands.toCommand;
+import static brainfuck.lecture.DelComms.deleteCom;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  *
  * @author TeamTaskbar
  */
-public class Text extends Fichiers implements ObservableLogs {
+public final class Text extends Fichiers implements ObservableLogstxt {
 
     private HashMap<String, Macro> macros;
+
+    private ArrayList observers;// Tableau d'observateurs.
 
     public Text(String path) {
         super(path);
         macros = new HashMap<>();
+
+        Monitor observer = new Monitor();
+
+        observers = new ArrayList();
+
+        this.addObserver(observer);
+
     }
 
     /**
@@ -103,7 +115,6 @@ public class Text extends Fichiers implements ObservableLogs {
         while (line != null) {
 
             //System.out.println("LINE -------------------------------------+++++++ " + line);
-
             line = deleteCom(line, file);
 
             if (!line.equals("")) {
@@ -123,7 +134,6 @@ public class Text extends Fichiers implements ObservableLogs {
             }
 
             //System.out.println("LINE ------------------------------------- " + line);
-
             line = file.readLine();
 
         }
@@ -142,65 +152,6 @@ public class Text extends Fichiers implements ObservableLogs {
             System.out.println(get.getShort());
 
         }
-
-    }
-
-    /**
-     * This method allows to support commentaries in a program
-     *
-     * @param line
-     * @param file
-     * @return
-     * @throws IOException
-     */
-    private String deleteCom(String line, BufferedReader file) throws IOException {
-
-        //System.out.println("LINE --- " + line);
-        String str2 = "";
-
-        char prevChar = ' ';
-
-        //System.out.println("LINE LENGTH -- " + line.length());
-        /*for (int j = 0; j < line.length() && line.charAt(j) != ' ' && line.charAt(j) != '\t'; j++) {
-
-         if (line.charAt(j) == '#') {
-
-         //return deleteCom(file.readLine(), file);
-         return "";
-
-         }
-
-         }*/
-        for (int k = 0; k < line.length(); k++) {
-
-            //System.out.println("BOUCLE + charAt -- |" + line.charAt(k) + "|");
-            if (line.charAt(k) == '#') {
-
-                //System.out.println("LINE AVEC COMM --- |" + line + "|");
-                //System.out.println("LINE SANS COMM --- |" + str2 + "|");
-                return str2;
-
-            }
-
-            if (line.charAt(k) != '\t' && line.charAt(k) != ' ') {
-
-                //System.out.println(" ------------------------------------------ |" + line.charAt(k) + "|");
-                str2 += line.charAt(k);
-
-            }
-
-            if (line.charAt(k) == ' ' && (prevChar != ' ' && prevChar != '\t' && !isShortCommand(Character.toString(prevChar)))) {
-
-                str2 += line.charAt(k);
-
-            }
-
-            prevChar = line.charAt(k);
-
-        }
-
-        //System.out.println("LINE SANS COMM2 --- |" + str2 + "|");
-        return str2;
 
     }
 
@@ -406,16 +357,20 @@ public class Text extends Fichiers implements ObservableLogs {
 
     @Override
     public void addObserver(Observateur o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        observers.add(o);
+
     }
 
     @Override
     public void delObserver(Observateur o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        observers.remove(0);
+
     }
 
     @Override
-    public void notifyForLogs() {
+    public void notifyForLogs(int i, String str) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
