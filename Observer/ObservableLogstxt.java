@@ -17,6 +17,6 @@ public interface ObservableLogstxt {
     // Méthode permettant de supprimer (résilier) un observateur.
     public void delObserver(Observateur o);
     
-    public void notifyForLogs(int i, String str);
+    public void notifyForLogs(String str, int i);
     
 }

@@ -75,7 +75,6 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
                     System.out.println("NOM --- " + separated[1]);
 
-                    //macro = new Macro(separated[1]);
                     macro = new Macro(separated);
 
                     macros.put(separated[1], macro);
@@ -95,26 +94,8 @@ public final class Text extends Fichiers implements ObservableLogstxt {
         //////////////////////////////////////////////////////////
         ////////////////////Lecture du programme//////////////////
         //////////////////////////////////////////////////////////
-        /*do {
-
-         line = deleteCom(line, file);
-
-         separated = line.split(" ");
-
-         if (macros.containsKey(separated[0])) {
-         //System.out.println("LIT MACRO --- " + line);
-         ReadMacro(separated);
-
-         } else {
-         //System.out.println("LIT LINE --- " + line);
-         ReadLine(line);
-
-         }
-
-         } while ((line = file.readLine()) != null);*/
         while (line != null) {
 
-            //System.out.println("LINE -------------------------------------+++++++ " + line);
             line = deleteCom(line, file);
 
             if (!line.equals("")) {
@@ -122,7 +103,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
                 separated = line.split(" ");
 
                 if (macros.containsKey(separated[0])) {
-                    //System.out.println("LIT MACRO --- " + line);
+
                     ReadMacro(separated);
 
                 } else {
@@ -133,7 +114,6 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
             }
 
-            //System.out.println("LINE ------------------------------------- " + line);
             line = file.readLine();
 
         }
@@ -162,20 +142,19 @@ public final class Text extends Fichiers implements ObservableLogstxt {
      */
     private void ReadLine(String line) {
 
-        //System.out.println("READ    LINE ----- |" + line + "|-");
         if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
 
             for (int j = 0; j < line.length(); j++) {
-                //System.out.println(line + " ----------------------------------------------------------------------------------------------------------- " + line.charAt(1));
-                //System.out.println("TO STRING -- " + Character.toString(line.charAt(j)) + isCommand(Character.toString(line.charAt(j))));
 
                 if (isCommand(Character.toString(line.charAt(j)))) {
 
-                    //line = this.deleteCom(line);
                     list.add(toCommand((Character.toString(line.charAt(j)))));
 
                 } else {
                     System.out.println("MARCHE PAS --- |" + line.charAt(j) + "| \n" + line + "     " + j);
+                    
+                    notifyForLogs(line, list.size());
+                    
                     System.exit(4);
 
                 }
@@ -186,13 +165,14 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
             if (isCommand(line)) {
 
-                //line = this.deleteCom(line);
                 list.add(toCommand(line));
 
             } else {
 
                 System.out.println("nOPE -- " + line);
 
+                notifyForLogs(line, list.size());
+                
                 System.exit(4);
 
             }
@@ -227,20 +207,6 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
                 MacroOrLine(macro, j, separated);
 
-                /*if (numParam >= separated.length) {
-
-                 MacroOrLine(macro, j);
-
-                 } else {
-
-                 for (int k = 0; k < Integer.parseInt(separated[numParam]); k++) {
-
-                 MacroOrLine(macro, j);
-
-                 }
-
-                 numParam++;
-                 }*/
             }
 
         }
@@ -249,17 +215,8 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
     private void MacroOrLine(Macro macro, int j, String[] separated) {
 
-        //System.out.println("MACRO --- " + macro.getNom());
-
-        /*for (int k = 0; k < separated.length; k++) {
-         String separated1 = separated[k];
-
-         System.out.println("SEPARATED -------------------------------------------------------------------- " + separated1);
-
-         }*/
         String[] separatedMacro = macro.getCommands().get(j).split(" ");
 
-        //System.out.println(separatedMacro.length + " ------- LIGNE COMMAND  ---- " + macro.getCommands().get(j));
         int repete = 1;
 
         String tmp = "";
@@ -267,22 +224,13 @@ public final class Text extends Fichiers implements ObservableLogstxt {
         //if (macro.isParam(separatedMacro[0].split(":")[0])) {
         if (macro.isParam(macro.getCommands().get(j).split(":")[0])) {
 
-            //System.out.println("SEPA ---------------- " + macro.getCommands().get(j).split(":")[0]);
             //Récupérer la valeur du paramètre associé
             repete = macro.getNumParam(separatedMacro[0].split(":")[0]);
-            /*System.out.println("NULL ---------------------------------------------------- " + separated[repete]);
-
-             if (macro.isParam(separated[repete])) {
-
-             System.out.println(" ----------------------------------------------------------------------------------- PARAM");
-
-             }*/
 
             repete = Integer.parseInt(separated[repete]);   //Danger d'erreur si on sort du tableau
 
         }
 
-        //System.out.println("REPETE ----------------- " + repete);
         //Répéter la ligne autant de fois que le paramètre, sinon la faire qu'une seule fois
         if (repete == 1) {
 
@@ -290,36 +238,23 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
                 if (separatedMacro.length == macros.get(separatedMacro[0]).getnbParam() + 1) {
 
-                    //System.out.println("NOM MACRO APPELANTE ------------------------------------------------------------" + macro.getNom());
                     for (int k = 0; k < separatedMacro.length; k++) {
                         String separatedMacro1 = separatedMacro[k];
-                        /*System.out.println("------------------------------------------------------------------------------------ " + separatedMacro1);
-                         System.out.println("PARAM MACRO APPELANTE --------------------------------------------------------------------- " + macro.isParam(separatedMacro1));*/
 
                         if (macro.isParam(separatedMacro1)) {
 
-                            //System.out.println("PARAM MACRO APPELANTE --------------------------------------------------------------------- " + macro.getNumParam(separatedMacro1));
-                            //System.out.println(k + " VALUE MACRO APPELANTE --------------------------------------------------------------------- " + separated[macro.getNumParam(separatedMacro1)]);
                             separatedMacro[k] = separated[macro.getNumParam(separatedMacro1)];
 
                         }
 
                     }
 
-                    /* for (int k = 0; k < separatedMacro.length; k++) {
-                     String separatedMacro1 = separatedMacro[k];
-                        
-                     System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " + separatedMacro1);
-                        
-                     }*/
                     ReadMacro(separatedMacro);
 
                 } else {
-                    /*System.out.println(separatedMacro.length + " ------- LIGNE COMMAND ------  ---- " + macro.getCommands().get(j));
-                     System.out.println(" ---------------------------------------------------------------------------------------------------------------- ");
-                     System.out.println("separatedMacro.length --- " + separatedMacro.length + "        macros.get(separatedMacro[0]).getnbParam() + 1 ---- "
-                     + (macros.get(separatedMacro[0]).getnbParam() + 1));*/
 
+                    notifyForLogs( macro.getCommands().get(j), list.size());
+                    
                     System.exit(10);
 
                 }
@@ -334,12 +269,10 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
             for (int k = 0; k < repete; k++) {
 
-                //System.out.println("------------------------------------------------------------------------ " + macro.getCommands().get(j).split(": ")[1]);
                 tmp = macro.getCommands().get(j).split(": ")[1];
 
                 separatedMacro = tmp.split(" ");
 
-                //System.out.println("+++++++++++++++++++++++++++++" + separatedMacro[0]);
                 if (macros.containsKey(separatedMacro[0])) {
 
                     ReadMacro(separatedMacro);
@@ -370,8 +303,14 @@ public final class Text extends Fichiers implements ObservableLogstxt {
     }
 
     @Override
-    public void notifyForLogs(int i, String str) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void notifyForLogs(String string, int i) {
+
+        for (int j = 0; j < observers.size(); j++) {
+            Observateur o = (Observateur) observers.get(j);
+            o.logsTxt(string, i);// On utilise la méthode "tiré".
+
+        }
+
     }
 
 }

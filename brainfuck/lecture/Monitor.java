@@ -193,4 +193,13 @@ public class Monitor implements Observateur {
 
     }
 
+    @Override
+    public void logsTxt(String string, int i) {
+
+        writer("La lecture de l'instruction a échouée\n"
+                + string + "\n"
+                + "La lecture de l'instruction n°" + i + " a échouée");
+
+    }
+
 }

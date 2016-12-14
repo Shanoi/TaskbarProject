@@ -42,4 +42,6 @@ public interface Observateur {
 
     public void logsImage(int N);
 
+    public void logsTxt(String string, int i);
+
 }
