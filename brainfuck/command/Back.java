@@ -1,7 +1,7 @@
 package brainfuck.command;
 
-import Observer.Observable;
-import Observer.Observateur;
+import brainfuck.Observer.Observable;
+import brainfuck.Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Run;
 import brainfuck.lecture.Monitor;

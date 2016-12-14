@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Observer;
+package brainfuck.Observer;
 
 /**
  *
  * @author Olivier
  */
-public interface ObservableLogsWF {
+public interface ObservableLogsImage {
     
     // Méthode permettant d'ajouter (abonner) un observateur.
     public void addObserver(Observateur o);
@@ -17,6 +17,6 @@ public interface ObservableLogsWF {
     // Méthode permettant de supprimer (résilier) un observateur.
     public void delObserver(Observateur o);
     
-    public void notifyForLogs(int i, boolean bool);
+    public void notifyForLogs(int i);
     
 }

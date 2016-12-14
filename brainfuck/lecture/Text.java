@@ -5,9 +5,9 @@
  */
 package brainfuck.lecture;
 
-import Observer.ObservableLogs;
-import Observer.ObservableLogstxt;
-import Observer.Observateur;
+import brainfuck.Observer.ObservableLogs;
+import brainfuck.Observer.ObservableLogstxt;
+import brainfuck.Observer.Observateur;
 import brainfuck.command.EnumCommands;
 import static brainfuck.command.EnumCommands.isCommand;
 import static brainfuck.command.EnumCommands.isShortCommand;
@@ -112,7 +112,6 @@ public final class Text extends Fichiers implements ObservableLogstxt {
                     ReadLine(line);
 
                 }
-
             }
 
             line = file.readLine();
@@ -258,8 +257,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
                 } else {
 
-                    if (FLAG_trace) {
-                        notifyForLogs(macro.getCommands().get(j), list.size());
+                    if (FLAG_trace) {notifyForLogs(macro.getCommands().get(j), list.size());
                     }
 
                     System.exit(10);

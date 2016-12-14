@@ -1,8 +1,8 @@
 package brainfuck.lecture;
 
-import Observer.Observable;
-import Observer.ObservableLogs;
-import Observer.Observateur;
+import brainfuck.Observer.Observable;
+import brainfuck.Observer.ObservableLogs;
+import brainfuck.Observer.Observateur;
 import brainfuck.command.Command;
 import brainfuck.command.Incrementer;
 import brainfuck.memory.ComputationalModel;

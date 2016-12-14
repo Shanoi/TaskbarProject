@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Interpreter {
 
-    public static boolean FLAG_trace = false;
+    public static boolean FLAG_trace = true;
     
     //private ComputationalModel cm = new ComputationalModel();
     private String path = new String();

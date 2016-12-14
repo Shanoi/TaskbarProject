@@ -1,9 +1,9 @@
 package brainfuck.memory;
 
-import Observer.ObservableLogs;
-import Observer.ObservableLogsImage;
-import Observer.ObservableLogsWF;
-import Observer.Observateur;
+import brainfuck.Observer.ObservableLogs;
+import brainfuck.Observer.ObservableLogsImage;
+import brainfuck.Observer.ObservableLogsWF;
+import brainfuck.Observer.Observateur;
 import brainfuck.command.EnumCommands;
 import static brainfuck.command.EnumCommands.BACK;
 import static brainfuck.command.EnumCommands.JUMP;

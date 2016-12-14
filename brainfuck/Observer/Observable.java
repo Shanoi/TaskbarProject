@@ -3,20 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Observer;
+package brainfuck.Observer;
 
 /**
  *
  * @author Olivier
  */
-public interface ObservableLogs {
-    
+public interface Observable {
+
     // Méthode permettant d'ajouter (abonner) un observateur.
     public void addObserver(Observateur o);
 
     // Méthode permettant de supprimer (résilier) un observateur.
     public void delObserver(Observateur o);
-    
-    public void notifyForLogs();
-    
+
+    // Méthode qui permet d'avertir tous les observateurs lors d'un changement d'état.
+    public void notifyObservers();
+
 }

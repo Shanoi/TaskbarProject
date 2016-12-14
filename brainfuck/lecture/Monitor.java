@@ -5,7 +5,7 @@
  */
 package brainfuck.lecture;
 
-import Observer.Observateur;
+import brainfuck.Observer.Observateur;
 import brainfuck.command.Decrementer;
 import brainfuck.memory.ComputationalModel;
 import java.io.File;
@@ -67,7 +67,7 @@ public class Monitor implements Observateur {
     }
 
     @Override
-    public void actualiser(Observer.Observable o) {
+    public void actualiser(brainfuck.Observer.Observable o) {
 
     }
 

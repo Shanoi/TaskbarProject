@@ -5,9 +5,9 @@
  */
 package brainfuck.lecture;
 
-import Observer.ObservableLogs;
-import Observer.ObservableLogsImage;
-import Observer.Observateur;
+import brainfuck.Observer.ObservableLogs;
+import brainfuck.Observer.ObservableLogsImage;
+import brainfuck.Observer.Observateur;
 import static brainfuck.command.EnumCommands.isCommand;
 import static brainfuck.command.EnumCommands.toCommand;
 import static brainfuck.memory.Interpreter.FLAG_trace;
