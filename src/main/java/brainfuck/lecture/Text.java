@@ -57,8 +57,12 @@ public class Text extends Fichiers {
 
             while (!((line = file.readLine())).equals("---- ENDMACRO") && line != null) {
 
+                System.out.println("LECT --- |" + line + "|");
+                
                 line = deleteCom(line);
 
+                System.out.println("LECT --- |" + line + "|");
+                
                 if (line.charAt(0) == '*') {
 
                     separated = line.split(" ");
@@ -176,7 +180,7 @@ public class Text extends Fichiers {
      */
     private void ReadLine(String line) {
 
-        System.out.println("READ    LINE ----- |" + line + "|-");
+        //System.out.println("READ    LINE ----- |" + line + "|-");
         if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
 
             for (int j = 0; j < line.length(); j++) {
