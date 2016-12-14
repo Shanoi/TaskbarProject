@@ -381,6 +381,10 @@ public class Text extends Fichiers {
         }
     }
 
+    /**
+     * This method allows to report input errors
+     * @param line
+     */
     private void errorLecture(String line) {
 
         if (Run.ifTrace()) {
