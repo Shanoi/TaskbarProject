@@ -9,6 +9,8 @@ import java.io.IOException;
 
 public class Interpreter {
 
+    public static boolean FLAG_trace = false;
+    
     //private ComputationalModel cm = new ComputationalModel();
     private String path = new String();
     private String[] args;
@@ -45,8 +47,7 @@ public class Interpreter {
 
             if (args[i].equals("--trace")) {
 
-                run.setTrace(true);
-
+                FLAG_trace = true;
                 return;
             }
 

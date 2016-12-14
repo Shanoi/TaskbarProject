@@ -1,30 +1,44 @@
 package brainfuck.command;
 
+import brainfuck.Observer.Observable;
+import brainfuck.Observer.ObservableLogs;
+import brainfuck.Observer.Observateur;
 import brainfuck.lecture.Fichiers;
-import brainfuck.lecture.Run;
+import brainfuck.lecture.Monitor;
 import brainfuck.memory.Interpreter;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 
-public class Out implements Command {
+public class Out implements Command, Observable, ObservableLogs {
 
     private String file;
     private static String tempString = "";
 
+    private ArrayList observers;// Tableau d'observateurs.
+
+    public Out() {
+
+        Monitor observer = new Monitor();
+
+        observers = new ArrayList();
+
+        this.addObserver(observer);
+
+    }
+    
     /**
      * This method allows to execute the command OUT
      */
     @Override
     public void execute() {
 
-        Run.IncrEXEC_MOVE();
-        Run.IncrDATA_READ();
-
+        /*Run.IncrEXEC_MOVE();
+         Run.IncrDATA_READ();*/
         Fichiers tempfile = new Fichiers("");
         file = Interpreter.getFileOut();
         if (file.equals("")) {
@@ -44,43 +58,57 @@ public class Out implements Command {
                 tampon.close();
 
             } catch (FileNotFoundException e) {
-                
-                error(tempfile);
-                
+
+                if (FLAG_trace) {
+                    notifyForLogs();
+                }
                 System.exit(3);
 
             } catch (IOException e) {
-                
-                error(tempfile);
-                
+
+                if (FLAG_trace) {
+                    notifyForLogs();
+                }
                 System.exit(3);
             }
         }
 
+        notifyObservers();
+
     }
 
-    /**
-     * This method allows to report output errors
-     * @param tempfile
-     */
-    private void error(Fichiers tempfile) {
+    @Override
+    public void addObserver(Observateur o) {
 
-        if (Run.ifTrace()) {
-            FileWriter file = null;
-            try {
-                file = new FileWriter("/Users/dev/TaskbarProject/test.txt", true);
-                file.write("L'écriture dans la sortie a échouée\n"
-                        + "L'instruction n°" + tempfile.getCm().getI() + " a échouée");
-                file.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    file.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+        observers.add(o);
+
+    }
+
+    @Override
+    public void delObserver(Observateur o) {
+
+        observers.remove(0);
+
+    }
+
+    @Override
+    public void notifyObservers() {
+
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.updateExec_Move();// On utilise la méthode "tiré".
+            o.updateData_Read();// On utilise la méthode "tiré".
+        }
+
+    }
+
+    @Override
+    public void notifyForLogs() {
+
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.logsDecr();// On utilise la méthode "tiré".
+
         }
 
     }

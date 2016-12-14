@@ -1,8 +1,13 @@
 package brainfuck.command;
 
+import brainfuck.Observer.Observable;
+import brainfuck.Observer.ObservableLogs;
+import brainfuck.Observer.Observateur;
 import brainfuck.lecture.Fichiers;
+import brainfuck.lecture.Monitor;
 import brainfuck.lecture.Run;
 import brainfuck.memory.Interpreter;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,9 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class In implements Command {
+public final class In implements Command, Observable, ObservableLogs {
 
     private String file;
     private String str;
@@ -23,6 +27,18 @@ public class In implements Command {
     private static int state = 0;
     private static ArrayList<Integer> text_list = new ArrayList<>();
 
+    private ArrayList observers;// Tableau d'observateurs.
+    
+     public In() {
+
+        Monitor observer = new Monitor();
+
+        observers = new ArrayList();
+
+        this.addObserver(observer);
+
+    }
+    
     public void In(String file) {
         this.file = file;
     }
@@ -33,9 +49,8 @@ public class In implements Command {
     @Override
     public void execute() {
 
-        Run.IncrEXEC_MOVE();
-        Run.IncrDATA_WRITE();
-
+        /*Run.IncrEXEC_MOVE();
+         Run.IncrDATA_WRITE();*/
         file = Interpreter.getFileIn();
         if (file.equals("")) {
             Fichiers tempfile = new Fichiers("");
@@ -45,8 +60,9 @@ public class In implements Command {
                 tempfile.getCm().setCurrentCaseValue((byte) str.charAt(0));
             } else {
 
-                error(tempfile);
-
+                if (FLAG_trace) {
+                    notifyForLogs();
+                }
                 System.exit(3);
             }
         } else {
@@ -70,51 +86,58 @@ public class In implements Command {
                     tempfile.getCm().setCurrentCaseValue((byte) (char) text_list.get(cnt).intValue());
                     cnt++;
                 } else {
-
-                    error(tempfile);
-
                     System.exit(3);
                 }
 
             } catch (FileNotFoundException e) {
 
-                error(tempfile);
-
+                notifyForLogs();
                 System.exit(3);
 
             } catch (IOException e) {
 
-                error(tempfile);
-
+                notifyForLogs();
                 System.exit(3);
 
             }
         }
 
+        notifyObservers();
+
     }
 
-    /**
-     * This method allows to report input errors
-     * @param tempfile
-     */
-    private void error(Fichiers tempfile) {
+    @Override
+    public void addObserver(Observateur o) {
 
-        if (Run.ifTrace()) {
-            FileWriter file = null;
-            try {
-                file = new FileWriter("/Users/dev/TaskbarProject/test.txt", true);
-                file.write("La lecture de l'entrée a échouée\n"
-                        + "L'instruction n°" + tempfile.getCm().getI() + " a échouée");
-                file.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    file.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+        observers.add(o);
+
+    }
+
+    @Override
+    public void delObserver(Observateur o) {
+
+        observers.remove(0);
+
+    }
+
+    @Override
+    public void notifyObservers() {
+
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.updateExec_Move();// On utilise la méthode "tiré".
+            o.updateData_Write();// On utilise la méthode "tiré".
+        }
+
+    }
+
+    @Override
+    public void notifyForLogs() {
+
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.logsDecr();// On utilise la méthode "tiré".
+
         }
 
     }

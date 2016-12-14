@@ -1,68 +1,49 @@
 package brainfuck.lecture;
 
+import brainfuck.Observer.Observable;
+import brainfuck.Observer.ObservableLogs;
+import brainfuck.Observer.Observateur;
 import brainfuck.memory.ComputationalModel;
-import java.io.File;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 
-public class Run {
+public final class Run implements Observable, ObservableLogs {
 
-    private static long EXEC_TIME = 0;
-    private static int EXEC_MOVE = 0;
-    private static int DATA_MOVE = 0;
-    private static int DATA_WRITE = 0;
-    private static int DATA_READ = 0;
-    private static boolean trace = false;
     protected final String path;
 
     private final ComputationalModel cm;
 
     private Fichiers fichier;
 
-    //protected static final List<EnumCommands> list = new ArrayList<>();
     private int i = 0;
 
-    public Run(String path) {
+    private ArrayList observers;// Tableau d'observateurs.
+
+    public Run() {
+
+        path = "";
+        cm = new ComputationalModel(); //Passer le cm dans Monitor
+
+    }
+
+    /**
+     * Allows to run the path
+     *
+     * @param path
+     */
+    public Run(String path) throws IOException {
 
         cm = new ComputationalModel();
         this.path = path;
 
-    }
+        Monitor observer = new Monitor(path + ".log");
 
-    //=================
-    //Counters
-    //=================
-    /**
-     * Counter of the execution time of the program, in milliseconds
-     */
-    public static void IncrEXEC_MOVE() {
-        Run.EXEC_MOVE++;
-    }
+        observers = new ArrayList();
 
-    /**
-     * Counter of the number of time the data pointer was moved to execute this
-     * program
-     */
-    public static void IncrDATA_MOVE() {
-        Run.DATA_MOVE++;
-    }
+        this.addObserver(observer);
 
-    /**
-     * Counter of the number of time the memory was accessed to change its
-     * contents while executing this program
-     */
-    public static void IncrDATA_WRITE() {
-        Run.DATA_WRITE++;
-    }
-
-    /**
-     * Counter of the number of times the memory was accessed to read its
-     * contents
-     */
-    public static void IncrDATA_READ() {
-        Run.DATA_READ++;
     }
 
     /**
@@ -100,89 +81,42 @@ public class Run {
 
     }
 
-
     /**
      * This method allows to execute the program
+     *
      * @throws IOException
      * @throws FileNotFoundException
      */
     public void execute() throws IOException, FileNotFoundException {
         String str = ""; // the execution step number (starting at one), the location of the execution pointer after the execution of this step, the location of the data pointer at the very same time, and a snapshot of the memory.
         System.out.println("EXEC");
-        long instantA = System.currentTimeMillis();
+        notifyObservers();
 
         cm.init();
 
-        //FileWriter file = new FileWriter();
-
-        /*if (trace) {
-         FileWriter file;
-
-         file = new FileWriter("/Users/dev/TaskbarProject/test.txt ", true);
-
-         }*/
         while (cm.getI() < Fichiers.list.size()) {
 
             Fichiers.list.get(i).getCommand().execute();
-            if (trace) {
-                FileWriter file = new FileWriter("/Users/dev/TaskbarProject/test.txt", true);
-                file.write("Execution step number: " + EXEC_MOVE + " \n"
-                        + "Pointer of the execution: " + cm.getI() + " \n"
-                        + "Location of the data pointer: " + cm.getCurrentIndice() + "\n"
-                        + "Affichage de la mémoire\n"
-                        + cm.toString() + "\n");
-                file.close();
+
+            if (FLAG_trace) {
+
+                notifyForLogs();
+
             }
 
             i = (cm.getI() + 1);
             cm.setI(i);
         }
 
-        /*if (trace) {
-            
-         file.close();
-            
-         }*/
-        /*File file = new File("D:/res.txt");
-         PrintWriter writer = new PrintWriter("D:/res.txt", "UTF-8");
-         writer.println(str);*/
-        long instantB = System.currentTimeMillis();
-        EXEC_TIME = instantB - instantA;
-        afficheStats();
+        notifyObservers();
 
-    }
-
-    /**
-     * This method allows to display the differents stats(counters) of a program
-     */
-    public void afficheStats() {
-
-        System.out.println("Nombre d'instructions: " + fichier.getNbI());
-        System.out.println("Temps d'executions: " + EXEC_TIME);
-        System.out.println("Nombre de déplacements du pointeur d'instruction: " + EXEC_MOVE);
-        System.out.println("Nombre de déplacements dans la mémoire: " + DATA_MOVE);
-        System.out.println("Nombre d'écritures dans la mémoire: " + DATA_WRITE);
-        System.out.println("Nombre de lectures dans la mémoire: " + DATA_READ);
+        System.out.println(new Monitor());
 
     }
 
     //=================
     //Getter and Setter
     //=================
-    /**
-     * Setter of the Trace
-     */
-    public void setTrace(boolean trace1) {
-
-        trace = trace1;
-    }
-
-    public static boolean ifTrace(){
-        
-        return trace;
-        
-    }
-    
     /**
      * Getter of the file (fichiers)
      *
@@ -200,6 +134,42 @@ public class Run {
      */
     public ComputationalModel getCm() {
         return cm;
+    }
+    
+    @Override
+    public void addObserver(Observateur o) {
+
+        observers.add(o);
+
+    }
+
+    @Override
+    public void delObserver(Observateur o) {
+
+        observers.remove(0);
+
+    }
+
+    @Override
+    public void notifyObservers() {
+
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.updateTime();// On utilise la méthode "tiré".
+            o.updateNb_Instr(Fichiers.list.size());// On utilise la méthode "tiré".
+
+        }
+
+    }
+
+    @Override
+    public void notifyForLogs() {
+
+        for (int i = 0; i < observers.size(); i++) {
+            Observateur o = (Observateur) observers.get(i);
+            o.traceLog();
+        }
+
     }
 
 }

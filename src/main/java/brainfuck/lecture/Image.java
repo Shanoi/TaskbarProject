@@ -1,8 +1,12 @@
 package brainfuck.lecture;
 
+import brainfuck.Observer.ObservableLogsImage;
+import brainfuck.Observer.Observateur;
 import brainfuck.command.Decrementer;
 import static brainfuck.command.EnumCommands.isCommand;
 import static brainfuck.command.EnumCommands.toCommand;
+import static brainfuck.lecture.Fichiers.list;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
@@ -11,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import static java.lang.Math.ceil;
 import static java.lang.Math.sqrt;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -19,13 +24,21 @@ import javax.imageio.ImageIO;
  *
  * @author TeamTaskbar
  */
-public class Image extends Fichiers {
+public final class Image extends Fichiers implements ObservableLogsImage {
 
     private final int pixelSize = 3;
+
+    private ArrayList observers;// Tableau d'observateurs.
 
     public Image(String path) {
 
         super(path);
+
+        Monitor observer = new Monitor();
+
+        observers = new ArrayList();
+
+        this.addObserver(observer);
 
     }
 
@@ -113,29 +126,9 @@ public class Image extends Fichiers {
 
                                 if (!pixelcolor.equals(pixelcolorBase)) {
 
-                                    if (Run.ifTrace()) {
-
-                                        int N = o + j;
-
-                                        int N2 = cpt1 + cpt2;
-
-                                        FileWriter file = null;
-                                        try {
-                                            file = new FileWriter("/Users/dev/TaskbarProject/test.txt", true);
-                                            file.write("Le pixel n'est pas composé d'une seule couleur\n"
-                                                    + "La lecture de l'instruction n°" + N + " dans le pixel " + N2 + " a échouée");
-                                            file.close();
-                                        } catch (IOException ex) {
-                                            Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
-                                        } finally {
-                                            try {
-                                                file.close();
-                                            } catch (IOException ex) {
-                                                Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
+                                    if (FLAG_trace) {
+                                        notifyForLogs(o + j);
                                     }
-
                                     System.exit(9);
 
                                 }
@@ -150,27 +143,9 @@ public class Image extends Fichiers {
 
                         } else {
 
-                            if (Run.ifTrace()) {
-
-                                int N = o + j;
-
-                                FileWriter file = null;
-                                try {
-                                    file = new FileWriter("/Users/dev/TaskbarProject/test.txt", true);
-                                    file.write("La couleur ne correspond pas à une couleur d'instruction\n"
-                                            + "La lecture de l'instruction n°" + N + " a échouée");
-                                    file.close();
-                                } catch (IOException ex) {
-                                    Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
-                                } finally {
-                                    try {
-                                        file.close();
-                                    } catch (IOException ex) {
-                                        Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
-                                }
+                            if (FLAG_trace) {
+                                notifyForLogs(o + j);
                             }
-
                             System.exit(4);
 
                         }
@@ -197,6 +172,30 @@ public class Image extends Fichiers {
             saveImg(createImg(dim), path + ".bmp");
         } catch (IOException ex) {
             Logger.getLogger(Image.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void addObserver(Observateur o) {
+
+        observers.add(o);
+
+    }
+
+    @Override
+    public void delObserver(Observateur o) {
+
+        observers.remove(0);
+
+    }
+
+    @Override
+    public void notifyForLogs(int i) {
+
+        for (int j = 0; j < observers.size(); j++) {
+            Observateur o = (Observateur) observers.get(j);
+            o.logsImage(i);// On utilise la méthode "tiré".
+
         }
     }
 

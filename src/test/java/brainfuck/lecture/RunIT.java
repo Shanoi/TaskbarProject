@@ -53,7 +53,7 @@ public class RunIT {
     @Test
     public void testIncrEXEC_MOVE() {
         System.out.println("IncrEXEC_MOVE");
-        Run.IncrEXEC_MOVE();
+        //Run.IncrEXEC_MOVE();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -64,7 +64,7 @@ public class RunIT {
     @Test
     public void testIncrDATA_MOVE() {
         System.out.println("IncrDATA_MOVE");
-        Run.IncrDATA_MOVE();
+        //Run.IncrDATA_MOVE();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -75,7 +75,7 @@ public class RunIT {
     @Test
     public void testIncrDATA_WRITE() {
         System.out.println("IncrDATA_WRITE");
-        Run.IncrDATA_WRITE();
+        //Run.IncrDATA_WRITE();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -86,7 +86,7 @@ public class RunIT {
     @Test
     public void testIncrDATA_READ() {
         System.out.println("IncrDATA_READ");
-        Run.IncrDATA_READ();
+        //Run.IncrDATA_READ();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -122,7 +122,7 @@ public class RunIT {
     public void testAfficheStats() {
         System.out.println("afficheStats");
         Run instance = null;
-        instance.afficheStats();
+        //instance.afficheStats();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -135,7 +135,7 @@ public class RunIT {
         System.out.println("setTrace");
         boolean trace1 = false;
         Run instance = null;
-        instance.setTrace(trace1);
+        //instance.setTrace(trace1);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

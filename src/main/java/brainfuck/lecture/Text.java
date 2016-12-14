@@ -5,16 +5,22 @@
  */
 package brainfuck.lecture;
 
+import brainfuck.Observer.ObservableLogstxt;
+import brainfuck.Observer.Observateur;
 import brainfuck.command.Decrementer;
 import brainfuck.command.EnumCommands;
 import static brainfuck.command.EnumCommands.isCommand;
 import static brainfuck.command.EnumCommands.isShortCommand;
 import static brainfuck.command.EnumCommands.toCommand;
+import static brainfuck.lecture.DelComms.deleteCom;
+import static brainfuck.lecture.Fichiers.list;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,17 +29,26 @@ import java.util.logging.Logger;
  *
  * @author TeamTaskbar
  */
-public class Text extends Fichiers {
+public final class Text extends Fichiers implements ObservableLogstxt {
 
     private HashMap<String, Macro> macros;
+
+    private ArrayList observers;// Tableau d'observateurs.
 
     public Text(String path) {
         super(path);
         macros = new HashMap<>();
+
+        Monitor observer = new Monitor();
+
+        observers = new ArrayList();
+
+        this.addObserver(observer);
+
     }
 
     /**
-     * This method allows to read a program(.txt)
+     * This method allows to read a program(.txt) or other
      *
      * @throws FileNotFoundException
      * @throws IOException
@@ -57,12 +72,8 @@ public class Text extends Fichiers {
 
             while (!((line = file.readLine())).equals("---- ENDMACRO") && line != null) {
 
-                System.out.println("LECT --- |" + line + "|");
-                
-                line = deleteCom(line);
+                line = deleteCom(line, file);
 
-                System.out.println("LECT --- |" + line + "|");
-                
                 if (line.charAt(0) == '*') {
 
                     separated = line.split(" ");
@@ -90,7 +101,7 @@ public class Text extends Fichiers {
         //////////////////////////////////////////////////////////
         while (line != null) {
 
-            line = deleteCom(line);
+            line = deleteCom(line, file);
 
             if (!line.equals("")) {
 
@@ -101,11 +112,10 @@ public class Text extends Fichiers {
                     ReadMacro(separated);
 
                 } else {
-
+                    System.out.println("LIT LINE --- " + line);
                     ReadLine(line);
 
                 }
-
             }
 
             line = file.readLine();
@@ -130,57 +140,12 @@ public class Text extends Fichiers {
     }
 
     /**
-     * This method allows to support commentaries in a program
-     *
-     * @param line
-     * @param file
-     * @return
-     * @throws IOException
-     */
-    private String deleteCom(String line) throws IOException {
-        System.out.println(" LINE ---------------- " + line);
-        String str2 = "";
-
-        char prevChar = ' ';
-
-        for (int k = 0; k < line.length(); k++) {
-
-            if (line.charAt(k) == '#') {
-
-                return str2;
-
-            }
-
-            if (line.charAt(k) != '\t' && line.charAt(k) != ' ') {
-
-                str2 += line.charAt(k);
-
-            }
-
-            if (line.charAt(k) == ' ' && (prevChar != ' ' && prevChar != '\t' && !isShortCommand(Character.toString(prevChar)))) {
-
-                str2 += line.charAt(k);
-
-            }
-
-            prevChar = line.charAt(k);
-
-        }
-
-        System.out.println(" LINE ---------------- " + str2);
-
-        return str2;
-
-    }
-
-    /**
      * This method allows to read line per line a program //to check
      *
      * @param line
      */
     private void ReadLine(String line) {
 
-        //System.out.println("READ    LINE ----- |" + line + "|-");
         if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
 
             for (int j = 0; j < line.length(); j++) {
@@ -190,8 +155,11 @@ public class Text extends Fichiers {
                     list.add(toCommand((Character.toString(line.charAt(j)))));
 
                 } else {
+                    System.out.println("MARCHE PAS --- |" + line.charAt(j) + "| \n" + line + "     " + j);
 
-                    errorLecture(line);
+                    if (FLAG_trace) {
+                        notifyForLogs(line, list.size());
+                    }
 
                     System.exit(4);
 
@@ -207,7 +175,11 @@ public class Text extends Fichiers {
 
             } else {
 
-                errorLecture(line);
+                System.out.println("nOPE -- " + line);
+
+                if (FLAG_trace) {
+                    notifyForLogs(line, list.size());
+                }
 
                 System.exit(4);
 
@@ -249,47 +221,24 @@ public class Text extends Fichiers {
 
     }
 
-    /**
-     * This method allows to
-     *
-     * @param macro
-     * @param j
-     * @param separated
-     */
     private void MacroOrLine(Macro macro, int j, String[] separated) {
 
-        //System.out.println("MACRO --- " + macro.getNom());
-
-        /*for (int k = 0; k < separated.length; k++) {
-         String separated1 = separated[k];
-
-         System.out.println("SEPARATED -------------------------------------------------------------------- " + separated1);
-
-         }*/
         String[] separatedMacro = macro.getCommands().get(j).split(" ");
 
-        //System.out.println(separatedMacro.length + " ------- LIGNE COMMAND  ---- " + macro.getCommands().get(j));
         int repete = 1;
+
+        String tmp = "";
 
         //if (macro.isParam(separatedMacro[0].split(":")[0])) {
         if (macro.isParam(macro.getCommands().get(j).split(":")[0])) {
 
-            //System.out.println("SEPA ---------------- " + macro.getCommands().get(j).split(":")[0]);
             //Récupérer la valeur du paramètre associé
             repete = macro.getNumParam(separatedMacro[0].split(":")[0]);
-            /*System.out.println("NULL ---------------------------------------------------- " + separated[repete]);
-
-             if (macro.isParam(separated[repete])) {
-
-             System.out.println(" ----------------------------------------------------------------------------------- PARAM");
-
-             }*/
 
             repete = Integer.parseInt(separated[repete]);   //Danger d'erreur si on sort du tableau
 
         }
 
-        //System.out.println("REPETE ----------------- " + repete);
         //Répéter la ligne autant de fois que le paramètre, sinon la faire qu'une seule fois
         if (repete == 1) {
 
@@ -297,56 +246,23 @@ public class Text extends Fichiers {
 
                 if (separatedMacro.length == macros.get(separatedMacro[0]).getnbParam() + 1) {
 
-                    //System.out.println("NOM MACRO APPELANTE ------------------------------------------------------------" + macro.getNom());
                     for (int k = 0; k < separatedMacro.length; k++) {
                         String separatedMacro1 = separatedMacro[k];
-                        /*System.out.println("------------------------------------------------------------------------------------ " + separatedMacro1);
-                         System.out.println("PARAM MACRO APPELANTE --------------------------------------------------------------------- " + macro.isParam(separatedMacro1));*/
 
                         if (macro.isParam(separatedMacro1)) {
 
-                            //System.out.println("PARAM MACRO APPELANTE --------------------------------------------------------------------- " + macro.getNumParam(separatedMacro1));
-                            //System.out.println(k + " VALUE MACRO APPELANTE --------------------------------------------------------------------- " + separated[macro.getNumParam(separatedMacro1)]);
                             separatedMacro[k] = separated[macro.getNumParam(separatedMacro1)];
 
                         }
 
                     }
 
-                    /* for (int k = 0; k < separatedMacro.length; k++) {
-                     String separatedMacro1 = separatedMacro[k];
-                        
-                     System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " + separatedMacro1);
-                        
-                     }*/
                     ReadMacro(separatedMacro);
 
                 } else {
-                    /*System.out.println(separatedMacro.length + " ------- LIGNE COMMAND ------  ---- " + macro.getCommands().get(j));
-                     System.out.println(" ---------------------------------------------------------------------------------------------------------------- ");
-                     System.out.println("separatedMacro.length --- " + separatedMacro.length + "        macros.get(separatedMacro[0]).getnbParam() + 1 ---- "
-                     + (macros.get(separatedMacro[0]).getnbParam() + 1));*/
 
-                    if (Run.ifTrace()) {
-
-                        int N = list.size();
-
-                        FileWriter file = null;
-                        try {
-                            file = new FileWriter("/Users/dev/TaskbarProject/test.txt", true);
-                            file.write("La Macro n'a pas le bon nombre de paramètres\n"
-                                    + macro.getCommands().get(j)
-                                    + "La lecture de l'instruction n°" + N + " a échouée");
-                            file.close();
-                        } catch (IOException ex) {
-                            Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
-                        } finally {
-                            try {
-                                file.close();
-                            } catch (IOException ex) {
-                                Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
+                    if (FLAG_trace) {
+                        notifyForLogs(macro.getCommands().get(j), list.size());
                     }
 
                     System.exit(10);
@@ -363,8 +279,9 @@ public class Text extends Fichiers {
 
             for (int k = 0; k < repete; k++) {
 
-                //System.out.println("------------------------------------------------------------------------ " + macro.getCommands().get(j).split(": ")[1]);
-                separatedMacro = macro.getCommands().get(j).split(": ")[1].split(" ");
+                tmp = macro.getCommands().get(j).split(": ")[1];
+
+                separatedMacro = tmp.split(" ");
 
                 if (macros.containsKey(separatedMacro[0])) {
 
@@ -381,32 +298,27 @@ public class Text extends Fichiers {
         }
     }
 
-    /**
-     * This method allows to report input errors
-     * @param line
-     */
-    private void errorLecture(String line) {
+    @Override
+    public void addObserver(Observateur o) {
 
-        if (Run.ifTrace()) {
+        observers.add(o);
 
-            int N = list.size();
+    }
 
-            FileWriter file = null;
-            try {
-                file = new FileWriter("/Users/dev/TaskbarProject/test.txt", true);
-                file.write("La lecture de l'instruction a échouée\n"
-                        + line
-                        + "La lecture de l'instruction n°" + N + " a échouée");
-                file.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    file.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(Decrementer.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+    @Override
+    public void delObserver(Observateur o) {
+
+        observers.remove(0);
+
+    }
+
+    @Override
+    public void notifyForLogs(String string, int i) {
+
+        for (int j = 0; j < observers.size(); j++) {
+            Observateur o = (Observateur) observers.get(j);
+            o.logsTxt(string, i);// On utilise la méthode "tiré".
+
         }
 
     }
