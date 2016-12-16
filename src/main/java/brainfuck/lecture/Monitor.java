@@ -67,11 +67,6 @@ public class Monitor implements Observateur {
     }
 
     @Override
-    public void actualiser(brainfuck.Observer.Observable o) {
-
-    }
-
-    @Override
     public void updateExec_Move() {
 
         EXEC_MOVE++;
