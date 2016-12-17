@@ -4,7 +4,7 @@ import brainfuck.Observer.Observable;
 import brainfuck.Observer.ObservableLogs;
 import brainfuck.Observer.Observateur;
 import brainfuck.memory.ComputationalModel;
-import static brainfuck.memory.Interpreter.FLAG_trace;
+import static brainfuck.memory.Launcher.FLAG_trace;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;

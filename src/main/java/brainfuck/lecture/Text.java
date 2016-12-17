@@ -14,7 +14,7 @@ import static brainfuck.command.EnumCommands.isShortCommand;
 import static brainfuck.command.EnumCommands.toCommand;
 import static brainfuck.lecture.DelComms.deleteCom;
 import static brainfuck.lecture.Fichiers.list;
-import static brainfuck.memory.Interpreter.FLAG_trace;
+import static brainfuck.memory.Launcher.FLAG_trace;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
