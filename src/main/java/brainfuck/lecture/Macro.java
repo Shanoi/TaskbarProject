@@ -1,10 +1,10 @@
 package brainfuck.lecture;
 //test
 //test2
+
 import java.util.ArrayList;
 
 /**
- *
  * @author Team Taskbar
  */
 public class Macro {
@@ -32,13 +32,13 @@ public class Macro {
         this.nom = separated[1];
         this.commands = new ArrayList<>();
         this.params = new ArrayList<>();
-        
+
         for (int i = 2; i < separated.length; i++) {
-            
+
             params.add(separated[i]);
-            
+
         }
-        
+
     }
 
 
@@ -48,6 +48,7 @@ public class Macro {
 
     /**
      * Getter of the name
+     *
      * @return
      */
     public String getNom() {
@@ -56,48 +57,52 @@ public class Macro {
 
     /**
      * This method allows to know whether it's a parameter or not
+     *
      * @param param
      * @return
      */
-    public boolean isParam(String param){
-        
+    public boolean isParam(String param) {
+
         return params.contains(param);
-        
+
     }
 
     /**
      * Getter of the quantity of parameters
+     *
      * @return
      */
-    public int getnbParam(){
-        
+    public int getnbParam() {
+
         return params.size();
-        
+
     }
 
     /**
      * Getter of the number of the parameters
+     *
      * @param param
      * @return
      */
-    public int getNumParam(String param){
-        
+    public int getNumParam(String param) {
+
         for (int i = 0; i < params.size(); i++) {
-            
-            if(param.equals(params.get(i))){
-                
+
+            if (param.equals(params.get(i))) {
+
                 return i + 1;
-                
+
             }
-            
+
         }
-        
+
         return 1;
-        
+
     }
 
     /**
      * Getter of the commands
+     *
      * @return
      */
     public ArrayList<String> getCommands() {
@@ -106,6 +111,7 @@ public class Macro {
 
     /**
      * This method allows to fill the commands / Should change its location
+     *
      * @param command
      */
     public void fillCommands(String command) {

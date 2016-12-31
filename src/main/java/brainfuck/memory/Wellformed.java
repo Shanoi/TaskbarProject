@@ -2,20 +2,17 @@ package brainfuck.memory;
 
 import brainfuck.Observer.ObservableLogsWF;
 import brainfuck.Observer.Observateur;
-import brainfuck.command.Decrementer;
 import brainfuck.command.EnumCommands;
-import static brainfuck.command.EnumCommands.BACK;
-import static brainfuck.command.EnumCommands.JUMP;
 import brainfuck.lecture.Monitor;
-import brainfuck.lecture.Run;
-import static brainfuck.memory.Launcher.FLAG_trace;
-import java.io.IOException;
+
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import static brainfuck.command.EnumCommands.BACK;
+import static brainfuck.command.EnumCommands.JUMP;
+import static brainfuck.memory.Launcher.FLAG_trace;
 
 public class Wellformed implements ObservableLogsWF {
 

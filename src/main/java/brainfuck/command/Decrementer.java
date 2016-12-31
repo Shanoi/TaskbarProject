@@ -5,11 +5,12 @@ import brainfuck.Observer.ObservableLogs;
 import brainfuck.Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Monitor;
-import static brainfuck.memory.Launcher.FLAG_trace;
+
 import java.util.ArrayList;
 
+import static brainfuck.memory.Launcher.FLAG_trace;
+
 /**
- *
  * @author TeamTaskbar
  */
 public final class Decrementer implements Command, Observable, ObservableLogs {
@@ -25,6 +26,7 @@ public final class Decrementer implements Command, Observable, ObservableLogs {
         this.addObserver(observer);
 
     }
+
     /**
      * Decrement the value of the current cell of the memory This method allows
      * to execute the command DECR

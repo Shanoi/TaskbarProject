@@ -4,10 +4,12 @@ import brainfuck.Observer.Observable;
 import brainfuck.Observer.ObservableLogs;
 import brainfuck.Observer.Observateur;
 import brainfuck.memory.ComputationalModel;
-import static brainfuck.memory.Launcher.FLAG_trace;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static brainfuck.memory.Launcher.FLAG_trace;
 
 public final class Run implements Observable, ObservableLogs {
 
@@ -93,10 +95,12 @@ public final class Run implements Observable, ObservableLogs {
         notifyObservers();
 
         cm.init();
-
+        i = cm.getI();
         while (cm.getI() < Fichiers.list.size()) {
-
+            System.out.println("I:" +cm.getI() + Fichiers.list.get(0).getLong());
             Fichiers.list.get(i).getCommand().execute();
+
+            //Fichiers.list.get(i).getLong();
 
             if (FLAG_trace) {
 
@@ -117,6 +121,7 @@ public final class Run implements Observable, ObservableLogs {
     //=================
     //Getter and Setter
     //=================
+
     /**
      * Getter of the file (fichiers)
      *
@@ -135,7 +140,7 @@ public final class Run implements Observable, ObservableLogs {
     public ComputationalModel getCm() {
         return cm;
     }
-    
+
     @Override
     public void addObserver(Observateur o) {
 

@@ -2,26 +2,25 @@ package brainfuck.lecture;
 
 import brainfuck.Observer.ObservableLogsImage;
 import brainfuck.Observer.Observateur;
-import brainfuck.command.Decrementer;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static brainfuck.command.EnumCommands.isCommand;
 import static brainfuck.command.EnumCommands.toCommand;
 import static brainfuck.lecture.Fichiers.list;
 import static brainfuck.memory.Launcher.FLAG_trace;
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import static java.lang.Math.ceil;
 import static java.lang.Math.sqrt;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 
 /**
- *
  * @author TeamTaskbar
  */
 public final class Image extends Fichiers implements ObservableLogsImage {

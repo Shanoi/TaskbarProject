@@ -6,7 +6,6 @@
 package brainfuck.Observer;
 
 /**
- *
  * @author Olivier
  */
 public interface Observable {

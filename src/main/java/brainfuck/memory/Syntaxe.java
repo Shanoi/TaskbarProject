@@ -6,6 +6,7 @@ public class Syntaxe {
 
     /**
      * This method allows to know whether it's a short syntaxe or not.
+     *
      * @param line
      * @return
      */

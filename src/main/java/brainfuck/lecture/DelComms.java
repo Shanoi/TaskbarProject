@@ -5,16 +5,16 @@
  */
 package brainfuck.lecture;
 
-import static brainfuck.command.EnumCommands.isShortCommand;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import static brainfuck.command.EnumCommands.isShortCommand;
+
 /**
- *
  * @author Olivier
  */
 public class DelComms {
-    
+
     /**
      * This method allows to support commentaries in a program
      *
@@ -73,5 +73,5 @@ public class DelComms {
         return str2;
 
     }
-    
+
 }

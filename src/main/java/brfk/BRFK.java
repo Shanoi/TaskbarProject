@@ -4,16 +4,14 @@
  * and open the template in the editor.
  */
 package brfk;
-import brainfuck.memory.Interpreter;
-import brainfuck.lecture.Image;
+
 import brainfuck.lecture.Run;
-import brainfuck.lecture.Text;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author TeamTaskbar
  */
 public class BRFK {
@@ -38,7 +36,7 @@ public class BRFK {
          Image img = new Image("D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt");
 
          img.Encod();*/
-        
+
         Run run = new Run("/Users/dev/Desktop/test.txt");
 
         try {
