@@ -7,7 +7,7 @@ import brainfuck.lecture.Run;
 import brainfuck.lecture.Text;
 import java.io.IOException;
 
-public class Launcher {
+public class Interpreter {
 
     public static boolean FLAG_trace = false;
     
@@ -25,7 +25,7 @@ public class Launcher {
      * @param path
      * @param args
      */
-    public Launcher(String path, String[] args) {
+    public Interpreter(String path, String[] args) {
 
         this.path = path;
         this.args = args;

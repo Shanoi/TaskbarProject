@@ -5,7 +5,7 @@ import brainfuck.Observer.ObservableLogs;
 import brainfuck.Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Monitor;
-import static brainfuck.memory.Launcher.FLAG_trace;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.util.ArrayList;
 
 /**

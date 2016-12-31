@@ -6,7 +6,7 @@ import brainfuck.command.Decrementer;
 import static brainfuck.command.EnumCommands.isCommand;
 import static brainfuck.command.EnumCommands.toCommand;
 import static brainfuck.lecture.Fichiers.list;
-import static brainfuck.memory.Launcher.FLAG_trace;
+import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
