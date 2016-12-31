@@ -1,14 +1,8 @@
 package brainfuck.command;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
- *
  * @author TeamTaskbar
  */
 public enum EnumCommands {
@@ -20,7 +14,11 @@ public enum EnumCommands {
     RIGHT("RIGHT", ">", "#0000ff", new Right()),
     OUT("OUT", ".", "#00ff00", new Out()),
     JUMP("JUMP", "[", "#ff7f00", new Jump()),
-    BACK("BACK", "]", "#ff0000", new Back());
+    BACK("BACK", "]", "#ff0000", new Back()),
+    CALL("CALL","","",new Call()),
+    RET("RET","","",new Ret()),
+    RETURN("RETURN","","",new Return()),
+    ARG("ARG","","",new Arg());
 
     private final String Long;
     private final String Short;
@@ -107,9 +105,10 @@ public enum EnumCommands {
         return false;
 
     }
-    
+
     /**
      * This method allows to know whether it's a short command or not
+     *
      * @param aString
      * @return
      */
@@ -140,6 +139,7 @@ public enum EnumCommands {
 
     /**
      * Getter of the Long
+     *
      * @return
      */
     public String getLong() {
@@ -148,6 +148,7 @@ public enum EnumCommands {
 
     /**
      * Getter of the Short
+     *
      * @return
      */
     public String getShort() {
@@ -156,6 +157,7 @@ public enum EnumCommands {
 
     /**
      * Getter of the Color
+     *
      * @return
      */
     public String getColor() {
@@ -164,6 +166,7 @@ public enum EnumCommands {
 
     /**
      * Getter of the Command
+     *
      * @return
      */
     public Command getCommand() {
@@ -174,6 +177,7 @@ public enum EnumCommands {
 
     /**
      * Getter of AllSyntaxe
+     *
      * @return
      */
     private ArrayList<String> getAllSyntaxe() {

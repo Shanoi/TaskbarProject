@@ -6,25 +6,33 @@
 package brainfuck.lecture;
 
 import brainfuck.command.EnumCommands;
-import static brainfuck.command.EnumCommands.BACK;
-import static brainfuck.command.EnumCommands.JUMP;
+import brainfuck.command.uByte;
 import brainfuck.memory.ComputationalModel;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
+
+import static brainfuck.command.EnumCommands.BACK;
+import static brainfuck.command.EnumCommands.JUMP;
 
 /**
- *
  * @author Team Taskbar
  */
 public class Fichiers {
 
-    protected static List<EnumCommands> list = new ArrayList<>();
+
     protected static Map<Integer, Integer> jumpBack = new HashMap<>();
+    protected static Map<Integer, String> fonction = new HashMap<>();
+    protected static Map<String, Integer> fonction2 = new HashMap<>();
+    protected static Map<String, Integer> nbArgFonction = new HashMap<>();
+
+    protected static List<EnumCommands> list = new ArrayList<>();
+    protected static Queue<String> fonctionName = new LinkedList<>();
+    protected static Queue<Integer> arguments = new LinkedList<>();
+    protected static Stack<Integer> retAdress = new Stack<>();
+
+
     protected int i = 0;
 
     protected ComputationalModel cm;
@@ -33,7 +41,6 @@ public class Fichiers {
 
     /**
      * This method allows to set the table loop
-     *
      */
     public void setTableLoop() {
         for (int i = 0; i < list.size(); i++) {
@@ -49,6 +56,7 @@ public class Fichiers {
 
     /**
      * This method allows to retrieve the cipher of the associated loop instruction
+     *
      * @param i
      * @return
      */
@@ -73,6 +81,7 @@ public class Fichiers {
 
     /**
      * This method allows to get the cipher of the associated Jump
+     *
      * @param i
      * @return
      */
@@ -105,6 +114,7 @@ public class Fichiers {
 
     /**
      * This method allows to retrieve the associated back (cipher of the instruction)
+     *
      * @param i
      * @return
      */
@@ -135,13 +145,13 @@ public class Fichiers {
     }
 
 
-
     //=================
     //Getter and Setter
     //=================
 
     /**
      * Getter of the size of the list, NbI
+     *
      * @return
      */
     public int getNbI() {
@@ -150,6 +160,7 @@ public class Fichiers {
 
     /**
      * Getter of the instructions
+     *
      * @return
      */
     public List<EnumCommands> getInstructions() {
@@ -158,11 +169,37 @@ public class Fichiers {
 
     /**
      * Getter of the computational model
+     *
      * @return
      */
     public ComputationalModel getCm() {
         return cm;
     }
 
+    public static Queue<String> getQueueFonction() {
+        return fonctionName;
+    }
+
+    public static void setRetAdress(int adress) {
+        retAdress.push(adress);
+    }
+
+    public static int getFonction2(String line) {
+        return fonction2.get(line);
+    }
+
+    public static Stack<Integer> getRetAdress() {
+        return retAdress;
+    }
+
+    public static String getFonction(int a) {
+        return fonction.get(a);
+    }
+
+    public static int getArguments() { return  arguments.poll(); }
+
+    public static void setArguments(int a) {  arguments.add(a); }
+
+    public static int getNbArgFonction(String fonction) {  return nbArgFonction.get(fonction); }
 
 }

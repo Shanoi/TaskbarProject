@@ -6,7 +6,6 @@
 package brainfuck.Observer;
 
 /**
- *
  * @author Olivier
  */
 public interface Observateur {
@@ -24,23 +23,23 @@ public interface Observateur {
     public void updateTime();
 
     public void traceLog();
-    
+
     public void logsDecr();
-    
+
     public void logsIncr();
 
     public void logsIn();
-    
+
     public void logsLeft();
 
     public void logsOut();
-    
+
     public void logsRight();
 
     public void logsImage(int N);
 
     public void logsTxt(String string, int i);
-    
+
     public void logsWellformed(int i, boolean BACK);
 
 }

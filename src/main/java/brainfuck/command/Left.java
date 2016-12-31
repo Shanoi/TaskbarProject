@@ -5,11 +5,11 @@ import brainfuck.Observer.ObservableLogs;
 import brainfuck.Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Monitor;
-import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.util.ArrayList;
 
+import static brainfuck.memory.Launcher.FLAG_trace;
+
 /**
- *
  * @author TeamTaskbar
  */
 public final class Left implements Command, Observable, ObservableLogs {
@@ -36,9 +36,14 @@ public final class Left implements Command, Observable, ObservableLogs {
 
         Fichiers tempfile = new Fichiers("");
 
-        if (tempfile.getCm().getCurrentIndice() > 0) {
+        System.out.println("tempfile.getCm().getCurrentIndice() : " + tempfile.getCm().getCurrentIndice() +  "tempfile.getCm().getLastP()" + tempfile.getCm().getLastP());
+        if (tempfile.getCm().getCurrentIndice() > 0 && !(tempfile.getCm().getExecFonction()) ) {
             tempfile.getCm().setCurrentIndice(tempfile.getCm().getCurrentIndice() - 1);
-        } else {
+        }
+        else if (tempfile.getCm().getCurrentIndice() > 0 && tempfile.getCm().getExecFonction() && tempfile.getCm().getCurrentIndice()-1 > tempfile.getCm().getLastP()) {
+            tempfile.getCm().setCurrentIndice(tempfile.getCm().getCurrentIndice() - 1);
+        }
+        else {
 
             if (FLAG_trace) {
                 notifyForLogs();

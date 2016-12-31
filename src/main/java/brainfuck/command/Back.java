@@ -4,10 +4,10 @@ import brainfuck.Observer.Observable;
 import brainfuck.Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Monitor;
+
 import java.util.ArrayList;
 
 /**
- *
  * @author TeamTaskbar
  */
 public final class Back implements Command, Observable {

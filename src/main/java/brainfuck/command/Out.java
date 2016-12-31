@@ -5,14 +5,15 @@ import brainfuck.Observer.ObservableLogs;
 import brainfuck.Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Monitor;
-import brainfuck.memory.Interpreter;
-import static brainfuck.memory.Interpreter.FLAG_trace;
+import brainfuck.memory.Launcher;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static brainfuck.memory.Launcher.FLAG_trace;
 
 public class Out implements Command, Observable, ObservableLogs {
 
@@ -30,7 +31,7 @@ public class Out implements Command, Observable, ObservableLogs {
         this.addObserver(observer);
 
     }
-    
+
     /**
      * This method allows to execute the command OUT
      */
@@ -40,11 +41,11 @@ public class Out implements Command, Observable, ObservableLogs {
         /*Run.IncrEXEC_MOVE();
          Run.IncrDATA_READ();*/
         Fichiers tempfile = new Fichiers("");
-        file = Interpreter.getFileOut();
+        file = Launcher.getFileOut();
         if (file.equals("")) {
             System.out.println((char) tempfile.getCm().getCurrentCaseValue());
         } else {
-            file = Interpreter.getFileOut();
+            file = Launcher.getFileOut();
             try {
                 FileWriter inputFile = new FileWriter(new File(file));
                 FileReader tampon = new FileReader(new File(file));

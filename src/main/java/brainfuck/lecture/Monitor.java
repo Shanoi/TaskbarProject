@@ -6,9 +6,8 @@
 package brainfuck.lecture;
 
 import brainfuck.Observer.Observateur;
-import brainfuck.command.Decrementer;
 import brainfuck.memory.ComputationalModel;
-import java.io.File;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author Olivier
  */
 public class Monitor implements Observateur {

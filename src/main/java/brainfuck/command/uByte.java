@@ -19,6 +19,7 @@ public class uByte {
 
     /**
      * Setter of n
+     *
      * @param n
      */
     public void set(byte n) {
@@ -27,6 +28,7 @@ public class uByte {
 
     /**
      * This method allows to cast a byte to an int
+     *
      * @return
      */
     public int byteToInt() {

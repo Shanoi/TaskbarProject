@@ -5,17 +5,16 @@ import brainfuck.Observer.ObservableLogs;
 import brainfuck.Observer.Observateur;
 import brainfuck.lecture.Fichiers;
 import brainfuck.lecture.Monitor;
-import brainfuck.lecture.Run;
-import brainfuck.memory.Interpreter;
-import static brainfuck.memory.Interpreter.FLAG_trace;
+import brainfuck.memory.Launcher;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
+
+import static brainfuck.memory.Launcher.FLAG_trace;
 
 public final class In implements Command, Observable, ObservableLogs {
 
@@ -28,8 +27,8 @@ public final class In implements Command, Observable, ObservableLogs {
     private static ArrayList<Integer> text_list = new ArrayList<>();
 
     private ArrayList observers;// Tableau d'observateurs.
-    
-     public In() {
+
+    public In() {
 
         Monitor observer = new Monitor();
 
@@ -38,7 +37,7 @@ public final class In implements Command, Observable, ObservableLogs {
         this.addObserver(observer);
 
     }
-    
+
     public void In(String file) {
         this.file = file;
     }
@@ -51,7 +50,7 @@ public final class In implements Command, Observable, ObservableLogs {
 
         /*Run.IncrEXEC_MOVE();
          Run.IncrDATA_WRITE();*/
-        file = Interpreter.getFileIn();
+        file = Launcher.getFileIn();
         if (file.equals("")) {
             Fichiers tempfile = new Fichiers("");
             Scanner sc = new Scanner(System.in);

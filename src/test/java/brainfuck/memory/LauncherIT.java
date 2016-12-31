@@ -11,9 +11,9 @@ import static org.junit.Assert.*;
  *
  * @author TeamTaskbar
  */
-public class InterpreterIT {
+public class LauncherIT {
     
-    public InterpreterIT() {
+    public LauncherIT() {
     }
     
     @BeforeClass
@@ -38,7 +38,7 @@ public class InterpreterIT {
     @Test
     public void testLauchInterpreter() throws Exception {
         System.out.println("lauchInterpreter");
-        Interpreter instance = null;
+        Launcher instance = null;
         instance.lauchInterpreter();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -51,7 +51,7 @@ public class InterpreterIT {
     public void testGetFileIn() {
         System.out.println("getFileIn");
         String expResult = "";
-        String result = Interpreter.getFileIn();
+        String result = Launcher.getFileIn();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -64,7 +64,7 @@ public class InterpreterIT {
     public void testGetFileOut() {
         System.out.println("getFileOut");
         String expResult = "";
-        String result = Interpreter.getFileOut();
+        String result = Launcher.getFileOut();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

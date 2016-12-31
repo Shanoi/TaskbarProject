@@ -7,26 +7,24 @@ package brainfuck.lecture;
 
 import brainfuck.Observer.ObservableLogstxt;
 import brainfuck.Observer.Observateur;
-import brainfuck.command.Decrementer;
 import brainfuck.command.EnumCommands;
+
+import java.util.StringTokenizer;
+
 import static brainfuck.command.EnumCommands.isCommand;
-import static brainfuck.command.EnumCommands.isShortCommand;
 import static brainfuck.command.EnumCommands.toCommand;
 import static brainfuck.lecture.DelComms.deleteCom;
 import static brainfuck.lecture.Fichiers.list;
-import static brainfuck.memory.Interpreter.FLAG_trace;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static brainfuck.memory.Launcher.FLAG_trace;
+import static brainfuck.command.EnumCommands.CALL;
 
 /**
- *
  * @author TeamTaskbar
  */
 public final class Text extends Fichiers implements ObservableLogstxt {
@@ -96,6 +94,51 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
         }
 
+        if (line.equals("---- FONCTION")) {
+
+            while (!((line = file.readLine())).equals("---- ENDFONCTION") && line != null) {
+
+                line = deleteCom(line, file);
+                System.out.println("AFFICHE LINE --- " + line);
+
+                if (line.charAt(0) == '*') {
+                    String str = new String("");
+                    int i = 0;
+                    for (i = 0; i < line.length() && line.charAt(i)!=' '; i++) {
+                        if(line.charAt(i) != '*') {
+                            str += line.charAt(i);
+                        }
+                    }
+                    if (i < line.length() && line.charAt(i)==' ') {
+                        StringTokenizer str2 = new StringTokenizer(line);
+                        str2.nextToken();
+                        if (str2.hasMoreTokens()) {
+                            nbArgFonction.put(str,Integer.parseInt(str2.nextToken()));
+                        }
+
+                    }
+                    else {
+                        nbArgFonction.put(str,0);
+                    }
+
+                    fonction2.put(str, list.size());
+                    System.out.println("ADD LINE --- " + str);
+
+                } else {
+
+                    ReadLine(line);
+
+                }
+
+            }
+
+            line = file.readLine();
+            System.out.println(list.size());
+            System.out.println("DEBUT LINE --- " + list.size());
+            cm.setI(list.size());
+
+        }
+
         //////////////////////////////////////////////////////////
         ////////////////////Lecture du programme//////////////////
         //////////////////////////////////////////////////////////
@@ -124,6 +167,11 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
         file.close();
 
+        //affichafe de la liste
+        for (int i = 0; i < list.size() ; i++) {
+            System.out.println("LIST LINE --- " + list.get(i));
+        }
+
     }
 
     @Override
@@ -146,7 +194,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
      */
     private void ReadLine(String line) {
 
-        if ((line.charAt(0) <= 'A') || (line.charAt(0) >= 'Z')) {
+        if ((line.charAt(0) < 'A') || (line.charAt(0) > 'Z')) { //modif le 25/12 >= et <= avant
 
             for (int j = 0; j < line.length(); j++) {
 
@@ -154,7 +202,8 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
                     list.add(toCommand((Character.toString(line.charAt(j)))));
 
-                } else {
+                }
+                else {
                     System.out.println("MARCHE PAS --- |" + line.charAt(j) + "| \n" + line + "     " + j);
 
                     if (FLAG_trace) {
@@ -167,7 +216,16 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
             }
 
-        } else {
+        }
+        else if (fonction2.containsKey(line)) {
+            list.add(CALL); //a ajouter dans enum command
+            System.out.println("ligne " + line + ":" + list.size());
+            fonction.put(list.size(), line);
+            //mettre une liste à l aplace d'une stack pourl 'ordre
+
+
+        }
+        else {
 
             if (isCommand(line)) {
 

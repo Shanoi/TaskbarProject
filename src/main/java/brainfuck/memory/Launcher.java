@@ -1,16 +1,17 @@
 package brainfuck.memory;
 
-import brainfuck.lecture.*;
-import java.util.ArrayList;
 import brainfuck.command.EnumCommands;
+import brainfuck.lecture.*;
 import brainfuck.lecture.Run;
 import brainfuck.lecture.Text;
-import java.io.IOException;
 
-public class Interpreter {
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class Launcher {
 
     public static boolean FLAG_trace = false;
-    
+
     //private ComputationalModel cm = new ComputationalModel();
     private String path = new String();
     private String[] args;
@@ -25,7 +26,7 @@ public class Interpreter {
      * @param path
      * @param args
      */
-    public Interpreter(String path, String[] args) {
+    public Launcher(String path, String[] args) {
 
         this.path = path;
         this.args = args;
@@ -34,11 +35,12 @@ public class Interpreter {
 
     /**
      * This method allows to launch the interpreter
+     *
      * @throws IOException
      */
     public void lauchInterpreter() throws IOException {
 
-         //this.args = new ArrayList(Arrays.asList(args));
+        //this.args = new ArrayList(Arrays.asList(args));
         Run run = new Run(path);
 
         run.load();
@@ -110,6 +112,7 @@ public class Interpreter {
 
     /**
      * Getter of the input File
+     *
      * @return
      */
     public static String getFileIn() {
@@ -118,6 +121,7 @@ public class Interpreter {
 
     /**
      * Getter of the output File
+     *
      * @return
      */
     public static String getFileOut() {
