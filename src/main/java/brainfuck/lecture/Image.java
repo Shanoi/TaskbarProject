@@ -21,7 +21,9 @@ import static java.lang.Math.ceil;
 import static java.lang.Math.sqrt;
 
 /**
- * @author TeamTaskbar
+ * This class represents the images of the Brainf*ck langage in .bmp format.
+ *
+ * @author Team Taskbar
  */
 public final class Image extends Fichiers implements ObservableLogsImage {
 

@@ -3,7 +3,10 @@ package brainfuck.command;
 import brainfuck.memory.ComputationalModel;
 import brainfuck.lecture.Fichiers;
 
-
+/**
+ * This class allows to call the different functions in a Brainf*ck program.
+ * @author TeamTaskbar
+ */
 public class Call implements Command {
 
     @Override

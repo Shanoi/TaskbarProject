@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import static brainfuck.memory.Launcher.FLAG_trace;
 
 /**
+ * This class represents the command DECR of the Brainf*ck.
  * @author TeamTaskbar
  */
 public final class Decrementer implements Command, Observable, ObservableLogs {
@@ -28,7 +29,7 @@ public final class Decrementer implements Command, Observable, ObservableLogs {
 
     /**
      * Decrement the value of the current cell of the memory This method allows
-     * to execute the command DECR
+     * to execute the command DECR.
      */
     @Override
     public void execute() {
@@ -50,6 +51,9 @@ public final class Decrementer implements Command, Observable, ObservableLogs {
     }
 
     @Override
+    /**
+     * This method allows to add an observer.
+     */
     public void addObserver(Observateur o) {
 
         observers.add(o);
@@ -57,6 +61,9 @@ public final class Decrementer implements Command, Observable, ObservableLogs {
     }
 
     @Override
+    /**
+     * This method allows to delete an observer previously added.
+     */
     public void delObserver(Observateur o) {
 
         observers.remove(0);
@@ -64,6 +71,9 @@ public final class Decrementer implements Command, Observable, ObservableLogs {
     }
 
     @Override
+    /**
+     * This method allows the observers to update their information.
+     */
     public void notifyObservers() {
 
         for (int i = 0; i < observers.size(); i++) {

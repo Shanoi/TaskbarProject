@@ -15,6 +15,11 @@ import java.util.ArrayList;
 
 import static brainfuck.memory.Launcher.FLAG_trace;
 
+/**
+ * This class represents the command OUT of the Brainf*ck langage.
+ *
+ * @author TeamTaskbar
+ */
 public class Out implements Command, Observable, ObservableLogs {
 
     private String file;
@@ -33,7 +38,7 @@ public class Out implements Command, Observable, ObservableLogs {
     }
 
     /**
-     * This method allows to execute the command OUT
+     * This method allows to execute the command OUT.
      */
     @Override
     public void execute() {
@@ -79,6 +84,9 @@ public class Out implements Command, Observable, ObservableLogs {
     }
 
     @Override
+    /**
+     * This method allows to add an observer.
+     */
     public void addObserver(Observateur o) {
 
         observers.add(o);
@@ -86,6 +94,9 @@ public class Out implements Command, Observable, ObservableLogs {
     }
 
     @Override
+    /**
+     * This method allows to delete an observer previously added.
+     */
     public void delObserver(Observateur o) {
 
         observers.remove(0);
@@ -93,6 +104,9 @@ public class Out implements Command, Observable, ObservableLogs {
     }
 
     @Override
+    /**
+     * This method allows the observers to update their information.
+     */
     public void notifyObservers() {
 
         for (int i = 0; i < observers.size(); i++) {
@@ -104,6 +118,9 @@ public class Out implements Command, Observable, ObservableLogs {
     }
 
     @Override
+    /**
+     * This method allows to update the observers for the log command.
+     */
     public void notifyForLogs() {
 
         for (int i = 0; i < observers.size(); i++) {

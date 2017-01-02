@@ -1,9 +1,9 @@
 package brainfuck.command;
 
 /**
- * This class convert a signed Byte to an unsigned byte
+ * This class convert a signed Byte to an unsigned byte.
  *
- * @author TeamTaskbar
+ * @author Team Taskbar
  */
 public class uByte {
 

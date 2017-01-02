@@ -3,7 +3,11 @@ package brainfuck.command;
 import brainfuck.memory.ComputationalModel;
 import brainfuck.lecture.Fichiers;
 
-
+/**
+ * This class represents the arguments in functions or procedures.
+ *
+ * @author Team Taskbar
+ */
 public class Arg implements Command {
 
     @Override

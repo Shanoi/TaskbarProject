@@ -11,7 +11,8 @@ import java.io.IOException;
 import static brainfuck.command.EnumCommands.isShortCommand;
 
 /**
- * @author Olivier
+ * This class represents the delete of a commentary.
+ * @author Team Taskbar
  */
 public class DelComms {
 

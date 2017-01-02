@@ -17,6 +17,8 @@ import static brainfuck.command.EnumCommands.BACK;
 import static brainfuck.command.EnumCommands.JUMP;
 
 /**
+ * This class represents the text files of the Brainf*ck langage.
+ *
  * @author Team Taskbar
  */
 public class Fichiers {
@@ -40,7 +42,7 @@ public class Fichiers {
     protected String path;
 
     /**
-     * This method allows to set the table loop
+     * This method allows to set the table loop.
      */
     public void setTableLoop() {
         for (int i = 0; i < list.size(); i++) {
@@ -55,10 +57,10 @@ public class Fichiers {
 
 
     /**
-     * This method allows to retrieve the cipher of the associated loop instruction
+     * This method allows to retrieve the cipher of the associated loop instruction.
      *
      * @param i
-     * @return
+     * @return the cipher of the associated loop instruction.
      */
     public int getTableLoopAssoc(int i) {
         return jumpBack.get(i);
@@ -71,19 +73,27 @@ public class Fichiers {
 
     }
 
+    /**
+     * This method allows to read a file.
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public void Read() throws FileNotFoundException, IOException {
     }
 
+    /**
+     * This method allows to encode a file.
+     */
     public void Encod() {
 
     }
 
 
     /**
-     * This method allows to get the cipher of the associated Jump
+     * This method allows to get the cipher of the associated Jump.
      *
      * @param i
-     * @return
+     * @return the cipher of the associated Jump.
      */
     public int jumpAssoc(int i) {
 
@@ -113,10 +123,10 @@ public class Fichiers {
     }
 
     /**
-     * This method allows to retrieve the associated back (cipher of the instruction)
+     * This method allows to retrieve the associated back (cipher of the instruction).
      *
      * @param i
-     * @return
+     * @return the cipher of the associated back.
      */
     public int backAssoc(int i) {
 
@@ -150,56 +160,91 @@ public class Fichiers {
     //=================
 
     /**
-     * Getter of the size of the list, NbI
+     * Getter of the size of the list, NbI.
      *
-     * @return
+     * @return the size of the list.
      */
     public int getNbI() {
         return list.size();
     }
 
     /**
-     * Getter of the instructions
+     * Getter of the instructions.
      *
-     * @return
+     * @return the list of the different commands.
      */
     public List<EnumCommands> getInstructions() {
         return list;
     }
 
     /**
-     * Getter of the computational model
+     * Getter of the computational model.
      *
-     * @return
+     * @return the object ComputationalModel.
      */
     public ComputationalModel getCm() {
         return cm;
     }
 
+    /**
+     * Getter of the name of the function.
+     * @return a queue of the name.
+     */
     public static Queue<String> getQueueFonction() {
         return fonctionName;
     }
 
+    /**
+     * Setter of the RetAdress.
+     * @param adress
+     */
     public static void setRetAdress(int adress) {
         retAdress.push(adress);
     }
 
+    /**
+     * Getter of the line of the function.
+     * @param line
+     * @return the cipher of the line considered.(function)
+     */
     public static int getFonction2(String line) {
         return fonction2.get(line);
     }
 
+    /**
+     * Getter of the RetAdress.
+     * @return a stack of Integer representing the adress.
+     */
     public static Stack<Integer> getRetAdress() {
         return retAdress;
     }
 
+    /**
+     * Getter of the function.
+     * @param a
+     * @return a string representing the function.
+     */
     public static String getFonction(int a) {
         return fonction.get(a);
     }
 
+    /**
+     * Getter of the different arguments.
+     * @return the cipher of the different arguments.
+     */
     public static int getArguments() { return  arguments.poll(); }
 
+    /**
+     * Setter of the arguments.
+     * @param a
+     */
     public static void setArguments(int a) {  arguments.add(a); }
 
+    /**
+     * Getter of the cipher of arguments in a function.
+     * @param fonction
+     * @return the cipher of arguments.
+     */
     public static int getNbArgFonction(String fonction) {  return nbArgFonction.get(fonction); }
 
 }

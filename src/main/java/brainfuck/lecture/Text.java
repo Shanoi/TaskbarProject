@@ -25,6 +25,8 @@ import static brainfuck.memory.Launcher.FLAG_trace;
 import static brainfuck.command.EnumCommands.CALL;
 
 /**
+ * This class represents the text file. It allows to read a Brainf*ck text program (.txt).
+ *
  * @author TeamTaskbar
  */
 public final class Text extends Fichiers implements ObservableLogstxt {
@@ -46,7 +48,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
     }
 
     /**
-     * This method allows to read a program(.txt) or other
+     * This method allows to read a program(.txt) or other.
      *
      * @throws FileNotFoundException
      * @throws IOException
@@ -175,6 +177,9 @@ public final class Text extends Fichiers implements ObservableLogstxt {
     }
 
     @Override
+    /**
+     * This method allows to encod a text file.
+     */
     public void Encod() {
 
         for (int j = 0; j < list.size(); j++) {
@@ -247,8 +252,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
     }
 
     /**
-     * This method allows to support macro in the program
-     *
+     * This method allows to support macro in the program.
      * @param separated
      */
     private void ReadMacro(String[] separated) {
@@ -357,6 +361,9 @@ public final class Text extends Fichiers implements ObservableLogstxt {
     }
 
     @Override
+    /**
+     * This method allows to add an observer.
+     */
     public void addObserver(Observateur o) {
 
         observers.add(o);
@@ -364,6 +371,9 @@ public final class Text extends Fichiers implements ObservableLogstxt {
     }
 
     @Override
+    /**
+     * This method allows to delete an observer previously added.
+     */
     public void delObserver(Observateur o) {
 
         observers.remove(0);
@@ -371,6 +381,9 @@ public final class Text extends Fichiers implements ObservableLogstxt {
     }
 
     @Override
+    /**
+     *  This method allows to update te observers for the log command.
+     */
     public void notifyForLogs(String string, int i) {
 
         for (int j = 0; j < observers.size(); j++) {

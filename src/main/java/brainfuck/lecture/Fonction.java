@@ -1,5 +1,10 @@
 package brainfuck.lecture;
 
+/**
+ * This class represents the function. It allows to create functions in a program.
+ *
+ * @author Team Taskbar
+ */
 public class Fonction {
 
     /*private static List<EnumCommands> list = new ArrayList<>();

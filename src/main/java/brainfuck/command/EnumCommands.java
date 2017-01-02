@@ -3,6 +3,7 @@ package brainfuck.command;
 import java.util.*;
 
 /**
+ * This class is an enumeration of the different commands of the Brainf*ck langage.
  * @author TeamTaskbar
  */
 public enum EnumCommands {
@@ -107,10 +108,10 @@ public enum EnumCommands {
     }
 
     /**
-     * This method allows to know whether it's a short command or not
+     * This method allows to know whether it's a short command or not.
      *
      * @param aString
-     * @return
+     * @return true or false.
      */
     public static boolean isShortCommand(String aString) {
 
@@ -138,36 +139,36 @@ public enum EnumCommands {
     //=================
 
     /**
-     * Getter of the Long
+     * Getter of the Long.
      *
-     * @return
+     * @return the string long.
      */
     public String getLong() {
         return Long;
     }
 
     /**
-     * Getter of the Short
+     * Getter of the Short.
      *
-     * @return
+     * @return the string short.
      */
     public String getShort() {
         return Short;
     }
 
     /**
-     * Getter of the Color
+     * Getter of the Color.
      *
-     * @return
+     * @return the color. (string)
      */
     public String getColor() {
         return color;
     }
 
     /**
-     * Getter of the Command
+     * Getter of the Command.
      *
-     * @return
+     * @return the object Command.
      */
     public Command getCommand() {
 
@@ -176,9 +177,9 @@ public enum EnumCommands {
     }
 
     /**
-     * Getter of AllSyntaxe
+     * Getter of AllSyntaxe.
      *
-     * @return
+     * @return an arraylist of string of all syntaxes.
      */
     private ArrayList<String> getAllSyntaxe() {
 

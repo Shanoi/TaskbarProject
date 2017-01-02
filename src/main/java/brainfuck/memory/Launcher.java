@@ -8,6 +8,12 @@ import brainfuck.lecture.Text;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
+/**
+ *
+ *
+ * @author Team Taskbar
+ */
 public class Launcher {
 
     public static boolean FLAG_trace = false;

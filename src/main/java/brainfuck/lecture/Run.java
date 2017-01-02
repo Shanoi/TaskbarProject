@@ -11,6 +11,11 @@ import java.util.ArrayList;
 
 import static brainfuck.memory.Launcher.FLAG_trace;
 
+/**
+ * This class represents the running process. It allows to run a program (textual or an image).
+ *
+ * @author Team Taskbar
+ */
 public final class Run implements Observable, ObservableLogs {
 
     protected final String path;
@@ -31,7 +36,7 @@ public final class Run implements Observable, ObservableLogs {
     }
 
     /**
-     * Allows to run the path
+     * Allowing to run the path.
      *
      * @param path
      */
@@ -49,7 +54,7 @@ public final class Run implements Observable, ObservableLogs {
     }
 
     /**
-     * This method allows to load the given file
+     * This method allows to load the given file.
      *
      * @throws IOException
      * @throws FileNotFoundException
@@ -84,7 +89,7 @@ public final class Run implements Observable, ObservableLogs {
     }
 
     /**
-     * This method allows to execute the program
+     * This method allows to execute the program.
      *
      * @throws IOException
      * @throws FileNotFoundException
@@ -123,9 +128,8 @@ public final class Run implements Observable, ObservableLogs {
     //=================
 
     /**
-     * Getter of the file (fichiers)
-     *
-     * @return
+     * Getter of the file (fichiers).
+     * @return a file.
      */
     public Fichiers getFichier() {
 
@@ -133,15 +137,17 @@ public final class Run implements Observable, ObservableLogs {
     }
 
     /**
-     * Getter of the object computational model
-     *
-     * @return
+     * Getter of the object computational model.
+     * @return a ComputationalModel object.
      */
     public ComputationalModel getCm() {
         return cm;
     }
 
     @Override
+    /**
+     * This method allows to add an observer.
+     */
     public void addObserver(Observateur o) {
 
         observers.add(o);
@@ -149,6 +155,9 @@ public final class Run implements Observable, ObservableLogs {
     }
 
     @Override
+    /**
+     * This method allows to delete an observer previously added.
+     */
     public void delObserver(Observateur o) {
 
         observers.remove(0);
@@ -156,6 +165,9 @@ public final class Run implements Observable, ObservableLogs {
     }
 
     @Override
+    /**
+     * This method allows the observers to update their information.
+     */
     public void notifyObservers() {
 
         for (int i = 0; i < observers.size(); i++) {
@@ -168,6 +180,9 @@ public final class Run implements Observable, ObservableLogs {
     }
 
     @Override
+    /**
+     * This method allows to update the observers for the log command.
+     */
     public void notifyForLogs() {
 
         for (int i = 0; i < observers.size(); i++) {

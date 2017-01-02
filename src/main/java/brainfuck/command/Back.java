@@ -8,6 +8,7 @@ import brainfuck.lecture.Monitor;
 import java.util.ArrayList;
 
 /**
+ * This class represents the command Back of the Brainf*ck.
  * @author TeamTaskbar
  */
 public final class Back implements Command, Observable {
@@ -46,6 +47,9 @@ public final class Back implements Command, Observable {
     }
 
     @Override
+    /**
+     * This method allows to add an observer.
+     */
     public void addObserver(Observateur o) {
 
         observers.add(o);
@@ -53,6 +57,9 @@ public final class Back implements Command, Observable {
     }
 
     @Override
+    /**
+     * This method allows to delete an observer previously added.
+     */
     public void delObserver(Observateur o) {
 
         observers.remove(0);
@@ -60,6 +67,9 @@ public final class Back implements Command, Observable {
     }
 
     @Override
+    /**
+     * This method allows the observers to update their information.
+     */
     public void notifyObservers() {
 
         for (int i = 0; i < observers.size(); i++) {

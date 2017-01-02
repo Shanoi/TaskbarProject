@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import static brainfuck.memory.Launcher.FLAG_trace;
 
 /**
+ * This class represents the command RIGHT of the Brainf*ck langage.
+ *
  * @author TeamTaskbar
  */
 public final class Right implements Command, Observable, ObservableLogs {
@@ -29,7 +31,7 @@ public final class Right implements Command, Observable, ObservableLogs {
 
     /**
      * Change the current cell of the memory, taking the cell at the right of
-     * the current cell This method allows to execute the command RIGHT
+     * the current cell This method allows to execute the command RIGHT.
      */
     @Override
     public void execute() {
@@ -54,6 +56,9 @@ public final class Right implements Command, Observable, ObservableLogs {
     }
 
     @Override
+    /**
+     * This method allows to add an observer.
+     */
     public void addObserver(Observateur o) {
 
         observers.add(o);
@@ -61,6 +66,9 @@ public final class Right implements Command, Observable, ObservableLogs {
     }
 
     @Override
+    /**
+     * This method allows to delete an observer previously added.
+     */
     public void delObserver(Observateur o) {
 
         observers.remove(0);
@@ -68,6 +76,9 @@ public final class Right implements Command, Observable, ObservableLogs {
     }
 
     @Override
+    /**
+     * This method allows the observers to update their information.
+     */
     public void notifyObservers() {
 
         for (int i = 0; i < observers.size(); i++) {
@@ -79,6 +90,9 @@ public final class Right implements Command, Observable, ObservableLogs {
     }
 
     @Override
+    /**
+     * This method allows to update the observers for the log command.
+     */
     public void notifyForLogs() {
 
         for (int i = 0; i < observers.size(); i++) {

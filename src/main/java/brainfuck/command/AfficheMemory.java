@@ -5,7 +5,7 @@ import brainfuck.memory.ComputationalModel;
 public class AfficheMemory implements Command {
 
     /**
-     * This method allows to display the memory
+     * This method allows to display the memory.
      */
     @Override
     public void execute() {

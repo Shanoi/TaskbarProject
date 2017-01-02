@@ -8,6 +8,7 @@ import brainfuck.lecture.Monitor;
 import java.util.ArrayList;
 
 /**
+ * This class represents the command JUMP of the Brainf*ck langage.
  * @author TeamTaskbar
  */
 public final class Jump implements Command, Observable {
@@ -26,7 +27,7 @@ public final class Jump implements Command, Observable {
     }
 
     /**
-     * This method allows to execute the command JUMP
+     * This method allows to execute the command JUMP.
      */
     @Override
     public void execute() {
@@ -44,6 +45,9 @@ public final class Jump implements Command, Observable {
     }
 
     @Override
+    /**
+     * This method allows to add an observer.
+     */
     public void addObserver(Observateur o) {
 
         observers.add(o);
@@ -51,6 +55,9 @@ public final class Jump implements Command, Observable {
     }
 
     @Override
+    /**
+     * This method allows to delete an observer previously added.
+     */
     public void delObserver(Observateur o) {
 
         observers.remove(0);
@@ -58,6 +65,9 @@ public final class Jump implements Command, Observable {
     }
 
     @Override
+    /**
+     * This method allows the observers to update their information.
+     */
     public void notifyObservers() {
 
         for (int i = 0; i < observers.size(); i++) {

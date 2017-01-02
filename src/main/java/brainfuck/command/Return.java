@@ -3,7 +3,11 @@ package brainfuck.command;
 import brainfuck.lecture.Fichiers;
 import brainfuck.memory.ComputationalModel;
 
-
+/**
+ * This class represents the Return of the Functions. It allows to return a value in a program.
+ *
+ * @author Team Taskbar
+ */
 public class Return implements Command {
 
     @Override
