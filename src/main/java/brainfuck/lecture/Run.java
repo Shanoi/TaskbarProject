@@ -38,7 +38,7 @@ public final class Run implements Observable, ObservableLogs {
     /**
      * Allowing to run the path.
      *
-     * @param path
+     * @param path the path of the file.
      */
     public Run(String path) throws IOException {
 

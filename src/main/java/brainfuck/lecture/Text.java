@@ -193,9 +193,9 @@ public final class Text extends Fichiers implements ObservableLogstxt {
     }
 
     /**
-     * This method allows to read line per line a program //to check
+     * This method allows to read line per line a program.
      *
-     * @param line
+     * @param line the line considered.
      */
     private void ReadLine(String line) {
 
@@ -283,6 +283,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
     }
 
+    //TODO doc
     private void MacroOrLine(Macro macro, int j, String[] separated) {
 
         String[] separatedMacro = macro.getCommands().get(j).split(" ");

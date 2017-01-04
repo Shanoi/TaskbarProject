@@ -6,7 +6,7 @@
 package brainfuck.Observer;
 
 /**
- * @author Olivier
+ * @author teamTaskbar
  */
 public interface Observable {
 
