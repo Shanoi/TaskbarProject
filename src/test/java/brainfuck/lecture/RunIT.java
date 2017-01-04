@@ -41,7 +41,7 @@ public class RunIT {
     public void testRead() throws Exception{
         String path=new File("").getAbsolutePath();
         System.out.println(path);
-        Run run=new Run(path+"/src/test/java/brainfuck/lecture/test.txt");
+        Run run=new Run(path+"/src/test/java/brainfuck/lecture/FichierTestUnit.txt");
         run.load();
         assertEquals(run.getFichier().list.size(),1);
     }
