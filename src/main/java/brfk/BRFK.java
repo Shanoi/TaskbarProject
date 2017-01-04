@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package brfk;
-import brainfuck.memory.Interpreter;
+import brainfuck.memory.Launcher;
 import brainfuck.lecture.Image;
 import brainfuck.lecture.Run;
 import brainfuck.lecture.Text;
