@@ -4,7 +4,7 @@ import brainfuck.memory.ComputationalModel;
 import brainfuck.lecture.Fichiers;
 
 /**
- * This class represents the arguments in functions or procedures.
+ * This class represents the command ARG in a Brainf*ck langage. It's used in procedures and functions.
  *
  * @author Team Taskbar
  */

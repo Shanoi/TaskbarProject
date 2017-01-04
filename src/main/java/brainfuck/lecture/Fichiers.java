@@ -17,7 +17,10 @@ import static brainfuck.command.EnumCommands.BACK;
 import static brainfuck.command.EnumCommands.JUMP;
 
 /**
- * This class represents the text files of the Brainf*ck langage.
+ * This class stores the different information related to the read file
+ * such as the path. It manages the memory. It also stores
+ * in a list the commands of the Brainf*ck code and a table which
+ * send back respectively the associated BACK and the associated JUMP.
  *
  * @author Team Taskbar
  */

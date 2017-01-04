@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * This class manages the input file and the input commands.
  * It gives the path of the file for the IN/OUT command.
- * It launches the Run.
+ * It launches the Run. It also executes the considered commands.
  *
  * @author Team Taskbar
  */

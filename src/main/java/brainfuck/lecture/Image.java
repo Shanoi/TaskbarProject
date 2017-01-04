@@ -21,7 +21,8 @@ import static java.lang.Math.ceil;
 import static java.lang.Math.sqrt;
 
 /**
- * This class represents the images of the Brainf*ck langage in .bmp format.
+ * This class reads an .bmp image and stores the instructions in a list.
+ * It also translates the image instructions into a text one.
  *
  * @author Team Taskbar
  */

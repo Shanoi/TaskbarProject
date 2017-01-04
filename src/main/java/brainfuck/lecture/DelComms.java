@@ -11,7 +11,8 @@ import java.io.IOException;
 import static brainfuck.command.EnumCommands.isShortCommand;
 
 /**
- * This class allows the delete of a commentary.
+ * This class allows the deletion of commentaries, tabsand spaces in
+ * a Brainf*ck program without modifying the syntax of the macros.
  * @author TeamTaskbar
  */
 public class DelComms {

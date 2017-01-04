@@ -14,7 +14,8 @@ import static brainfuck.command.EnumCommands.JUMP;
 import static brainfuck.memory.Launcher.FLAG_trace;
 
 /**
- * This class allows to check whether a Brainf*ck program is well-parenthesized or not.
+ * This class allows to check whether a Brainf*ck program is well-parenthesized  and
+ * correctly written or not.
  *
  * @author TeamTaskbar
  */

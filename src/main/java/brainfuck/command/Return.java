@@ -4,7 +4,8 @@ import brainfuck.lecture.Fichiers;
 import brainfuck.memory.ComputationalModel;
 
 /**
- * This class represents the Return of the Functions. It allows to return a value in a program.
+ * This class represents the RETURN command of the Brainf*ck langage.
+ * It allows to return a value in a function.
  *
  * @author Team Taskbar
  */

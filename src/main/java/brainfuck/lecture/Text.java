@@ -25,7 +25,9 @@ import static brainfuck.memory.Launcher.FLAG_trace;
 import static brainfuck.command.EnumCommands.CALL;
 
 /**
- * This class represents the text file. It allows to read a Brainf*ck text program (.txt).
+ * This class reads a Brainf*ck text program (.txt). (same actions as the Image class
+ * but with the textual instructions) It reads the instructions and stores them.
+ * It manages the reading of the macros and the creation of them.
  *
  * @author TeamTaskbar
  */
