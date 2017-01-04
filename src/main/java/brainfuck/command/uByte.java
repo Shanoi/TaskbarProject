@@ -29,7 +29,7 @@ public class uByte {
     /**
      * This method allows to cast a byte to an int
      *
-     * @return
+     * @return the integer.
      */
     public int byteToInt() {
         return ((int) a) & 0xFF;

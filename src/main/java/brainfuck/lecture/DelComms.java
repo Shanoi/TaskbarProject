@@ -11,17 +11,17 @@ import java.io.IOException;
 import static brainfuck.command.EnumCommands.isShortCommand;
 
 /**
- * This class represents the delete of a commentary.
- * @author Team Taskbar
+ * This class allows the delete of a commentary.
+ * @author TeamTaskbar
  */
 public class DelComms {
 
     /**
      * This method allows to support commentaries in a program
      *
-     * @param line
-     * @param file
-     * @return
+     * @param line the line considered.
+     * @param file the file considered.
+     * @return the line without the com.
      * @throws IOException
      */
     public static String deleteCom(String line, BufferedReader file) throws IOException {

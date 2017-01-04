@@ -59,7 +59,7 @@ public class Fichiers {
     /**
      * This method allows to retrieve the cipher of the associated loop instruction.
      *
-     * @param i
+     * @param i the cipher of the instruction considered.
      * @return the cipher of the associated loop instruction.
      */
     public int getTableLoopAssoc(int i) {
@@ -92,7 +92,7 @@ public class Fichiers {
     /**
      * This method allows to get the cipher of the associated Jump.
      *
-     * @param i
+     * @param i the cipher of the instruction considered.
      * @return the cipher of the associated Jump.
      */
     public int jumpAssoc(int i) {
@@ -125,7 +125,7 @@ public class Fichiers {
     /**
      * This method allows to retrieve the associated back (cipher of the instruction).
      *
-     * @param i
+     * @param i the cipher of the instruction considered.
      * @return the cipher of the associated back.
      */
     public int backAssoc(int i) {
@@ -196,7 +196,7 @@ public class Fichiers {
 
     /**
      * Setter of the RetAdress.
-     * @param adress
+     * @param adress the adress considered.
      */
     public static void setRetAdress(int adress) {
         retAdress.push(adress);
@@ -204,7 +204,7 @@ public class Fichiers {
 
     /**
      * Getter of the line of the function.
-     * @param line
+     * @param line the line considered.
      * @return the cipher of the line considered.(function)
      */
     public static int getFonction2(String line) {
