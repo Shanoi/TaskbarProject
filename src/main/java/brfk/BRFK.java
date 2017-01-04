@@ -39,7 +39,7 @@ public class BRFK {
 
          img.Encod();*/
         
-        Run run = new Run("/Users/dev/Desktop/test.txt");
+        Run run = new Run("D:\\Polytech\\Projet_semestre_1\\test.txt");
 
         try {
             run.load();
