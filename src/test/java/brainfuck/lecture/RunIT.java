@@ -61,6 +61,7 @@ public class RunIT {
     }
     @Test
     public  void testReadFonction() throws Exception{
-
+        String path=new File("").getAbsolutePath();
+        Run run=new Run(path+"/src/test/java/brainfuck/lecture/FichierTestUnit4.txt");
     }
 }
