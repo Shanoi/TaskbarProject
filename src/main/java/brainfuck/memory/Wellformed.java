@@ -13,6 +13,11 @@ import static brainfuck.command.EnumCommands.BACK;
 import static brainfuck.command.EnumCommands.JUMP;
 import static brainfuck.memory.Launcher.FLAG_trace;
 
+/**
+ * This class allows to check whether a Brainf*ck program is well-parenthesized or not.
+ *
+ * @author TeamTaskbar
+ */
 public class Wellformed implements ObservableLogsWF {
 
     private Stack<String> stack = new Stack<>();
@@ -67,14 +72,14 @@ public class Wellformed implements ObservableLogsWF {
     }
 
     /**
-     * This method allows to pop the stack
+     * This method allows to pop the stack.
      */
     private void popStack() {
         stack.pop();
     }
 
     /**
-     * This method allows to push the stack
+     * This method allows to push the stack.
      *
      * @param line
      */
@@ -83,15 +88,18 @@ public class Wellformed implements ObservableLogsWF {
     }
 
     /**
-     * This method allows to know whether the stack is empty or not
+     * This method allows to know whether the stack is empty or not.
      *
-     * @return
+     * @return true or false.
      */
     private boolean IsemptyStack() {
         return stack.empty();
     }
 
     @Override
+    /**
+     * This method allows to add an observer.
+     */
     public void addObserver(Observateur o) {
 
         observers.add(o);
@@ -99,6 +107,9 @@ public class Wellformed implements ObservableLogsWF {
     }
 
     @Override
+    /**
+     * This method allows to delete an observer previously added.
+     */
     public void delObserver(Observateur o) {
 
         observers.remove(0);
@@ -106,6 +117,9 @@ public class Wellformed implements ObservableLogsWF {
     }
 
     @Override
+    /**
+     * This method allows to update the observers for the log command.
+     */
     public void notifyForLogs(int i, boolean BACK) {
 
         for (int j = 0; j < observers.size(); j++) {

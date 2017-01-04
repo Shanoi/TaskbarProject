@@ -10,7 +10,9 @@ import java.util.ArrayList;
 
 
 /**
- *
+ * This class manages the input file and the input commands.
+ * It gives the path of the file for the IN/OUT command.
+ * It launches the Run.
  *
  * @author Team Taskbar
  */
@@ -27,9 +29,9 @@ public class Launcher {
     private static String fileout = "";
 
     /**
-     * Initialize the different command
+     * Initialize the different command.
      *
-     * @param path
+     * @param path the path of the file.
      * @param args
      */
     public Launcher(String path, String[] args) {
@@ -40,7 +42,7 @@ public class Launcher {
     }
 
     /**
-     * This method allows to launch the interpreter
+     * This method allows to launch the interpreter.
      *
      * @throws IOException
      */
@@ -117,18 +119,16 @@ public class Launcher {
 
 
     /**
-     * Getter of the input File
-     *
-     * @return
+     * Getter of the input File.
+     * @return the input file.
      */
     public static String getFileIn() {
         return filein;
     }
 
     /**
-     * Getter of the output File
-     *
-     * @return
+     * Getter of the output File.
+     * @return the output file
      */
     public static String getFileOut() {
         return fileout;

@@ -158,7 +158,7 @@ public class ComputationalModel {
 
     /**
      * This method allows to know whether it can execute the function or not.
-     * @return
+     * @return true or false.
      */
     public static boolean getExecFonction() {
         return execFonction;

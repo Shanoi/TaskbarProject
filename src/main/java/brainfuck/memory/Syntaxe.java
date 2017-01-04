@@ -7,8 +7,8 @@ public class Syntaxe {
     /**
      * This method allows to know whether it's a short syntaxe or not.
      *
-     * @param line
-     * @return
+     * @param line the line considered.
+     * @return true or false.
      */
     public static boolean isShort(String line) {
         if ((line.charAt(0) >= 'A') && (line.charAt(0) <= 'Z')) {
