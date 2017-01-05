@@ -29,9 +29,10 @@ public class RunIT {
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
+
     }
     @Rule
     public final ExpectedSystemExit exit = ExpectedSystemExit.none();
@@ -42,8 +43,10 @@ public class RunIT {
         String path=new File("").getAbsolutePath();
         Run run=new Run(path+"/src/test/java/brainfuck/lecture/FichierTestUnit.txt");
         run.load();
-        assertEquals(run.getFichier().list.size(),1);
+        run.execute();
+        assertEquals(run.getFichier().list.size(),2);
     }
+
     @Test
     public void testReadError() throws Exception{
         String path=new File("").getAbsolutePath();
@@ -55,13 +58,21 @@ public class RunIT {
     public void testReadMacro() throws Exception{
         String path=new File("").getAbsolutePath();
         Run run=new Run(path+"/src/test/java/brainfuck/lecture/FichierTestUnit3.txt");
+        run.load();
         for(int i=0;i<run.getFichier().list.size();i++){
             assertEquals(run.getFichier().list.get(i), EnumCommands.INCR);
         }
+        run.execute();
+        assertEquals(run.getCm().getCurrentCaseValue(),4);
     }
+
     @Test
     public  void testReadFonction() throws Exception{
         String path=new File("").getAbsolutePath();
         Run run=new Run(path+"/src/test/java/brainfuck/lecture/FichierTestUnit4.txt");
+        run.load();
+        run.execute();
+        assertEquals(run.getCm().getCurrentCaseValue(),3);
     }
+
 }

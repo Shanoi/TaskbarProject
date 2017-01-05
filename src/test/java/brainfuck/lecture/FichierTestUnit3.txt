@@ -1,5 +1,5 @@
 ---- MACRO
-*test A
+* test A
 A: INCR
 ---- ENDMACRO
 test 4
