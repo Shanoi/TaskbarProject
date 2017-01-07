@@ -1,24 +1,19 @@
-package brainfuck.lecture;
+package brainfuck.command;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.io.FileNotFoundException;
-import java.io.Reader;
-import java.io.StringReader;
-
 import static org.junit.Assert.*;
 
 /**
  *
  * @author TeamTaskbar
  */
-public class TextTest {
+public class BackIT {
     
-    public TextTest() {
+    public BackIT() {
     }
     
     @BeforeClass
@@ -38,15 +33,15 @@ public class TextTest {
     }
 
     /**
-     * Test of Read method, of class Text.
+     * Test of execute method, of class Back.
      */
     @Test
-    public void testRead() throws Exception {
-
+    public void testExecute() {
+        System.out.println("execute");
+        Back instance = new Back();
+        instance.execute();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of Encod method, of class Text.
-     */
     
 }
