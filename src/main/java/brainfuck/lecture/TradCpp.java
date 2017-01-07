@@ -95,6 +95,7 @@ public class TradCpp implements ObservableLogstxt {
 
         writeEnd();
 
+        writeMemory();
     }
 
     private void writeHeader() {
@@ -117,6 +118,8 @@ public class TradCpp implements ObservableLogstxt {
             Header.append("#include \"Out.h\"\n");
 
         }
+
+        Header.append("#include \"Memory.h\"\n");
 
         Header.append("\nusing namespace std;\n\n"
                 + "void checkSegFault(int i);\n\n");
@@ -153,7 +156,7 @@ public class TradCpp implements ObservableLogstxt {
 
         }
 
-        writer("\n");
+        writer("Memory *mem = new Memory();\n\n");
 
         int cpt = 0;
 
@@ -225,7 +228,8 @@ public class TradCpp implements ObservableLogstxt {
         }
 
         //writeInstr(pos, cpt, prevInstr);
-        writer("\n\treturn 0;"
+        writer("delete(mem)"
+                + "\n\treturn 0;"
                 + "\n\n}\n\n");
 
     }
@@ -236,25 +240,23 @@ public class TradCpp implements ObservableLogstxt {
 
             case INCR:
 
-                writer("\tm[position]+= " + cpt + ";\n");
+                writer("\tmem->add( " + cpt + ");\n");
                 break;
 
             case DECR:
 
-                writer("\tm[position]-= " + cpt + ";\n");
+                writer("\tmem->sub(" + cpt + ");\n");
                 break;
 
             case RIGHT:
 
-                writer("\n\tcheckSegFault(position, " + cpt + ");\n\n"
-                        + "\tposition += " + cpt + ";\n");
+                writer("\n\tmem->decaleRight(" + cpt + ");\n");
 
                 break;
 
             case LEFT:
 
-                writer("\n\tcheckSegFault(position, " + -cpt + ");\n\n"
-                        + "\tposition -= " + cpt + ";\n");
+                writer("\n\tmem->decaleLeft(" + cpt + ");\n");
 
                 break;
 
@@ -265,7 +267,8 @@ public class TradCpp implements ObservableLogstxt {
     private void writeOut() {
 
         //writer("\n\tcout << (char) m[" + pos + "] << endl;\n\n");
-        writer("\n\tfOut->Output(m[position]);\n");
+        //writer("\n\tfOut->Output(m[position]);\n");
+        writer("\n\tfOut->Output(mem->getCurrentValue());\n");
 
     }
 
@@ -273,13 +276,14 @@ public class TradCpp implements ObservableLogstxt {
 
         /*writer("\n\tcin >> c;\n\n"
          + "m[" + pos + "]\n");*/
-        writer("\n\tfm[position] = In->Input();\n");
+        //writer("\n\tfm[position] = In->Input();\n");
+        writer("\n\tmem->setCurrentValue(In->Input());\n");
 
     }
 
     private void writeFunc() {
 
-        writer("\n\twhile(m[position] > 0){\n"
+        writer("\n\twhile(mem->getCurrentValue() > 0){\n"
                 + "\n");
 
     }
@@ -417,14 +421,14 @@ public class TradCpp implements ObservableLogstxt {
 
         separated = filename.split("/");
 
-        String fileInName = filename.replace(separated[separated.length - 1], "Out");
+        String fileOutName = filename.replace(separated[separated.length - 1], "Out");
 
-        System.out.println(" ---- " + fileInName);
+        System.out.println(" ---- " + fileOutName);
 
         PrintWriter fileIn;
 
         try {
-            fileIn = new PrintWriter(new FileWriter(fileInName + ".h"));
+            fileIn = new PrintWriter(new FileWriter(fileOutName + ".h"));
 
             fileIn.write("#pragma once\n"
                     + "\n"
@@ -453,7 +457,7 @@ public class TradCpp implements ObservableLogstxt {
 
             fileIn.close();
 
-            fileIn = new PrintWriter(new FileWriter(fileInName + ".cpp"));
+            fileIn = new PrintWriter(new FileWriter(fileOutName + ".cpp"));
 
             fileIn.write("#include \"Out.h\"\n"
                     + "\n"
@@ -520,6 +524,198 @@ public class TradCpp implements ObservableLogstxt {
                     + "	}\n"
                     + "\n"
                     + "	return fileOut;\n"
+                    + "\n"
+                    + "}");
+
+            fileIn.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(TradCpp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private void writeMemory() {
+
+        String[] separated;
+
+        separated = filename.split("/");
+
+        String fileMemory = filename.replace(separated[separated.length - 1], "Memory");
+
+        System.out.println(" ---- " + fileMemory);
+
+        PrintWriter fileIn;
+
+        try {
+            fileIn = new PrintWriter(new FileWriter(fileMemory + ".h"));
+
+            fileIn.write("#pragma once\n"
+                    + "\n"
+                    + "#include <iostream>\n"
+                    + "\n"
+                    + "const int nbCase = 30000;\n"
+                    + "\n"
+                    + "class Memory\n"
+                    + "{\n"
+                    + "\n"
+                    + "private:\n"
+                    + "\n"
+                    + "	int currentCase;\n"
+                    + "	\n"
+                    + "	unsigned char m[nbCase];\n"
+                    + "\n"
+                    + "public:\n"
+                    + "\n"
+                    + "	Memory();\n"
+                    + "	~Memory();\n"
+                    + "\n"
+                    + "	void decaleLeft(int k);\n"
+                    + "	void decaleRight(int k);\n"
+                    + "	void add(int n);\n"
+                    + "	void sub(int n);\n"
+                    + "	char getCurrentValue();\n"
+                    + "	void setCurrentValue(int n);\n"
+                    + "\n"
+                    + "	friend std::ostream& operator<<(std::ostream& flux, Memory const& p);\n"
+                    + "\n"
+                    + "};\n"
+                    + "");
+
+            fileIn.close();
+
+            fileIn = new PrintWriter(new FileWriter(fileMemory + ".cpp"));
+
+            fileIn.write("#include \"Memory.h\"\n"
+                    + "\n"
+                    + "#include <string>\n"
+                    + "#include <fstream>\n"
+                    + "#include <iostream>\n"
+                    + "#include <cstring>\n"
+                    + "#include <stdlib.h>\n"
+                    + "\n"
+                    + "using namespace std;\n"
+                    + "\n"
+                    + "Memory::Memory() :currentCase(0)\n"
+                    + "{\n"
+                    + "\n"
+                    + "	for (int i = 0; i < nbCase; i++)\n"
+                    + "	{\n"
+                    + "\n"
+                    + "		m[i] = 0;\n"
+                    + "\n"
+                    + "	}\n"
+                    + "\n"
+                    + "}\n"
+                    + "\n"
+                    + "\n"
+                    + "Memory::~Memory()\n"
+                    + "{\n"
+                    + "}\n"
+                    + "\n"
+                    + "void Memory::decaleLeft(int k){\n"
+                    + "\n"
+                    + "	if (currentCase - k < 0){\n"
+                    + "\n"
+                    + "		exit(2);\n"
+                    + "\n"
+                    + "	}\n"
+                    + "	else{\n"
+                    + "\n"
+                    + "		currentCase -= k;\n"
+                    + "\n"
+                    + "	}\n"
+                    + "\n"
+                    + "}\n"
+                    + "\n"
+                    + "void Memory::decaleRight(int k){\n"
+                    + "\n"
+                    + "	if (currentCase + k > 30000){\n"
+                    + "\n"
+                    + "		exit(2);\n"
+                    + "\n"
+                    + "	}\n"
+                    + "	else{\n"
+                    + "\n"
+                    + "		currentCase += k;\n"
+                    + "\n"
+                    + "	}\n"
+                    + "\n"
+                    + "}\n"
+                    + "\n"
+                    + "void Memory::add(int n){\n"
+                    + "\n"
+                    + "	if ((m[currentCase] + n) > 255){\n"
+                    + "\n"
+                    + "		exit(1);\n"
+                    + "\n"
+                    + "	}\n"
+                    + "	else{\n"
+                    + "\n"
+                    + "		m[currentCase] += n;\n"
+                    + "\n"
+                    + "	}\n"
+                    + "\n"
+                    + "}\n"
+                    + "\n"
+                    + "void Memory::sub(int n){\n"
+                    + "\n"
+                    + "	if ((m[currentCase] - n) < 0){\n"
+                    + "\n"
+                    + "		exit(1);\n"
+                    + "\n"
+                    + "	}\n"
+                    + "	else{\n"
+                    + "\n"
+                    + "		m[currentCase] -= n;\n"
+                    + "\n"
+                    + "	}\n"
+                    + "\n"
+                    + "}\n"
+                    + "\n"
+                    + "char Memory::getCurrentValue(){\n"
+                    + "\n"
+                    + "	return m[currentCase];\n"
+                    + "\n"
+                    + "}\n"
+                    + "\n"
+                    + "void Memory::setCurrentValue(int n){\n"
+                    + "\n"
+                    + "	m[currentCase] = n;\n"
+                    + "\n"
+                    + "}\n"
+                    + "\n"
+                    + "ostream& operator<<(ostream& flux, Memory const& p)\n"
+                    + "{\n"
+                    + "\n"
+                    + "	int cpt = 0;\n"
+                    + "\n"
+                    + "	for (int i = 0; i < nbCase; i++)\n"
+                    + "	{\n"
+                    + "\n"
+                    + "		if ((int)p.m[i] != 0){\n"
+                    + "\n"
+                    + "			if ((int)p.m[i - 1] == 0){\n"
+                    + "\n"
+                    + "				flux << \" | \" << cpt << \" cases à 0\";\n"
+                    + "\n"
+                    + "			}\n"
+                    + "\n"
+                    + "			flux << \" | \" << (int)p.m[i];\n"
+                    + "\n"
+                    + "			cpt = 0;\n"
+                    + "\n"
+                    + "		}\n"
+                    + "		else{\n"
+                    + "\n"
+                    + "			cpt++;\n"
+                    + "\n"
+                    + "		}\n"
+                    + "\n"
+                    + "		\n"
+                    + "	}\n"
+                    + "\n"
+                    + "	return flux;\n"
                     + "\n"
                     + "}");
 
