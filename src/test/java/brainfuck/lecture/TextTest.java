@@ -18,9 +18,9 @@ import static org.junit.Assert.*;
  *
  * @author TeamTaskbar
  */
-public class TextIT {
+public class TextTest {
     
-    public TextIT() {
+    public TextTest() {
     }
     
     @BeforeClass

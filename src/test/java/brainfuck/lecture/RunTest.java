@@ -13,9 +13,9 @@ import static org.junit.Assert.*;
  *
  * @author TeamTaskbar
  */
-public class RunIT {
+public class RunTest {
     
-    public RunIT() {
+    public RunTest() {
     }
     
     @BeforeClass

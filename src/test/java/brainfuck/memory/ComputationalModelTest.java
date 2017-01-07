@@ -11,9 +11,9 @@ import static org.junit.Assert.*;
  *
  * @author TeamTaskbar
  */
-public class ComputationalModelIT {
+public class ComputationalModelTest {
     
-    public ComputationalModelIT() {
+    public ComputationalModelTest() {
     }
     
     @BeforeClass

@@ -50,8 +50,8 @@ public class BRFK {
             Logger.getLogger(BRFK.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        new TradCpp((ArrayList<EnumCommands>) run.getFichier().getInstructions(), 
-                "D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt").execute();
+        //new TradCpp((ArrayList<EnumCommands>) run.getFichier().getInstructions(),
+        //        "D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt").execute();
         
         //System.out.println("NB : "+ run.getNbI());
         /*try {
