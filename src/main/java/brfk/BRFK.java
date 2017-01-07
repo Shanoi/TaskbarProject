@@ -4,11 +4,14 @@
  * and open the template in the editor.
  */
 package brfk;
+import brainfuck.command.EnumCommands;
 import brainfuck.memory.Launcher;
 import brainfuck.lecture.Image;
 import brainfuck.lecture.Run;
 import brainfuck.lecture.Text;
+import brainfuck.lecture.TradCpp;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,20 +42,24 @@ public class BRFK {
 
          img.Encod();*/
         
-        Run run = new Run("D:\\Polytech\\Projet_semestre_1\\test.txt");
+        Run run = new Run("D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt");
 
         try {
             run.load();
         } catch (IOException ex) {
             Logger.getLogger(BRFK.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        new TradCpp((ArrayList<EnumCommands>) run.getFichier().getInstructions(), 
+                "D:/Users/Olivier/Documents/NetBeansProjects/Brainfuck.v2/src/brainfuck/v2/instr.txt").execute();
+        
         //System.out.println("NB : "+ run.getNbI());
-        try {
+        /*try {
             run.execute();
         } catch (IOException ex) {
             Logger.getLogger(BRFK.class.getName()).log(Level.SEVERE, null, ex);
         }
-        run.getCm().affichememoire();
+        run.getCm().affichememoire();*/
         // Wellformed WF = new Wellformed((ArrayList<EnumCommands>) run.getInstructions());
         /* try {
          WF.execute();
