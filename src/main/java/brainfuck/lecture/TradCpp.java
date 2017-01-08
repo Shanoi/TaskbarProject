@@ -91,6 +91,7 @@ public class TradCpp implements ObservableLogstxt {
 
         writeHeader();
 
+        //writeMacro();
         writeInstr();
 
         writeEnd();
@@ -156,7 +157,7 @@ public class TradCpp implements ObservableLogstxt {
 
         }
 
-        writer("Memory *mem = new Memory();\n\n");
+        writer("\tMemory *mem = new Memory();\n\n");
 
         int cpt = 0;
 
@@ -168,14 +169,14 @@ public class TradCpp implements ObservableLogstxt {
 
         for (int i = 0; i < size; i++) {
 
-            //System.out.println("COMMAND -- " + commands.get(i) + " -- " + size + " --- " + i);
-            if (commands.get(i).equals(prevInstr) && i != size) {
+            System.out.println("COMMAND -- " + commands.get(i) + " -- " + size + " --- " + i);
+            if (commands.get(i).equals(prevInstr) && i != size - 1) {
 
                 cpt++;
                 nbInstrCons++;
 
             } else {
-
+                System.out.println("ESLES");
                 if (commands.get(i).equals(OUT)) {
 
                     writeInstr(cpt, prevInstr);
@@ -194,11 +195,29 @@ public class TradCpp implements ObservableLogstxt {
 
                 } else if (commands.get(i).equals(JUMP)) {
 
+                    writeInstr(cpt, prevInstr);
+
                     writeFunc();
 
                 } else if (commands.get(i).equals(BACK)) {
-
+                    
+                    writeInstr(cpt, prevInstr);
                     writer("\t\n}\n\n");
+
+                } else if (i == size - 1 && !commands.get(i).equals(prevInstr)) {
+                    System.out.println("SIZE ----------------------- ");
+                    writeInstr(cpt, prevInstr);
+
+                    cpt = 1;
+                    nbInstrCons = 1;
+
+                    // if (!commands.get(i).equals(prevInstr)) {
+                    writeInstr(cpt, commands.get(i));
+
+                    //  }
+                } else if (i == size - 1) {
+
+                    writeInstr(cpt + 1, prevInstr);
 
                 } else {
 
@@ -215,20 +234,25 @@ public class TradCpp implements ObservableLogstxt {
 
         }
 
+        /*if (i == size - 1) {
+            
+         }*/
+        writer("\n");
+
         if (in) {
 
-            writer("delete(In);\n");
+            writer("\tdelete(In);\n");
 
         }
 
         if (out) {
 
-            writer("delete(fOut);\n");
+            writer("\tdelete(fOut);\n");
 
         }
 
         //writeInstr(pos, cpt, prevInstr);
-        writer("delete(mem)"
+        writer("\tdelete(mem)\n"
                 + "\n\treturn 0;"
                 + "\n\n}\n\n");
 
@@ -240,7 +264,7 @@ public class TradCpp implements ObservableLogstxt {
 
             case INCR:
 
-                writer("\tmem->add( " + cpt + ");\n");
+                writer("\tmem->add(" + cpt + ");\n");
                 break;
 
             case DECR:
@@ -250,13 +274,13 @@ public class TradCpp implements ObservableLogstxt {
 
             case RIGHT:
 
-                writer("\n\tmem->decaleRight(" + cpt + ");\n");
+                writer("\tmem->decaleRight(" + cpt + ");\n");
 
                 break;
 
             case LEFT:
 
-                writer("\n\tmem->decaleLeft(" + cpt + ");\n");
+                writer("\tmem->decaleLeft(" + cpt + ");\n");
 
                 break;
 
@@ -288,6 +312,52 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
+//    private void writeMacro(){
+//        
+//        String[] separated;
+//        System.out.println("MACRO READ " + line);
+//
+//
+//            if (line.equals("---- MACRO")) {
+//
+//                while (!((line = progFile.readLine())).equals("---- ENDMACRO") && line != null) {
+//
+//                    line = deleteCom(line, progFile);
+//
+//                    if (!line.equals("")) {
+//
+//                        if (line.charAt(0) == '*') {
+//
+//                            separated = line.split(" ");
+//
+//                            System.out.println("NOM --- " + separated[1]);
+//
+//                            /*macro = new Macro(separated);
+//                        
+//                             macros.put(separated[1], macro);*/
+//                            writer("#define " + separated[1]);
+//
+//                            for (int i = 2; i < separated.length; i++) {
+//                                String separated1 = separated[i];
+//                                System.out.println(" ----- S " + separated1);
+//                            }
+//
+//                        } else {
+//
+//                            //macro.fillCommands(line);
+//                        }
+//
+//                    }
+//
+//                }
+//
+//                line = progFile.readLine();
+//
+//            }
+//
+//        System.out.println("LIN ---- " + line);
+//        
+//    }
     private void writeSupIn() {
 
         String[] separated;
@@ -745,24 +815,40 @@ public class TradCpp implements ObservableLogstxt {
 
     private void fillCommands() {
 
-        BufferedReader file;
+        BufferedReader progFile;
+
         try {
-            file = new BufferedReader(new FileReader(filename));
+
+            progFile = new BufferedReader(new FileReader(filename));
 
             String line = new String();
 
             while (line != null) {
+
+                //ReadMacro(line, progFile);
+                System.out.println("A MACR --- " + line);
+
+                if (line.equals("---- MACRO")) {
+
+                    while (!((line = progFile.readLine())).equals("---- ENDMACRO") && line != null) {
+
+                    }
+
+                    line = progFile.readLine();
+
+                }
 
                 line = deleteCom(line, null);
 
                 if (!line.equals("")) {
 
                     System.out.println("LIT LINE --- " + line);
+
                     ReadLine(line);
 
                 }
 
-                line = file.readLine();
+                line = progFile.readLine();
 
             }
 
@@ -823,6 +909,51 @@ public class TradCpp implements ObservableLogstxt {
             }
         }
 
+    }
+
+    private void ReadMacro(String line, BufferedReader progFile) throws IOException {
+
+        String[] separated;
+        System.out.println("MACRO READ " + line);
+
+        if (line.equals("---- MACRO")) {
+
+            while (!((line = progFile.readLine())).equals("---- ENDMACRO") && line != null) {
+
+                line = deleteCom(line, progFile);
+
+                if (!line.equals("")) {
+
+                    if (line.charAt(0) == '*') {
+
+                        separated = line.split(" ");
+
+                        System.out.println("NOM --- " + separated[1]);
+
+                        /*macro = new Macro(separated);
+                        
+                         macros.put(separated[1], macro);*/
+                        writer("#define " + separated[1]);
+
+                        for (int i = 2; i < separated.length; i++) {
+                            String separated1 = separated[i];
+                            System.out.println(" ----- S " + separated1);
+                        }
+
+                    } else {
+
+                        //macro.fillCommands(line);
+                    }
+
+                }
+
+            }
+
+            line = progFile.readLine();
+
+        }
+
+        System.out.println("LIN ---- " + line);
     }
 
     @Override
