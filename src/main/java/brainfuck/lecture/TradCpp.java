@@ -26,6 +26,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,6 +42,9 @@ public class TradCpp implements ObservableLogstxt {
 
     private ArrayList<EnumCommands> commands = new ArrayList<>();
 
+    //private ArrayList<String> macros = new ArrayList<>();
+    private HashMap<String, Macro> macros;
+
     private String filename;
 
     private PrintWriter file;
@@ -53,6 +58,8 @@ public class TradCpp implements ObservableLogstxt {
     public TradCpp(String filename) {
 
         this.filename = filename;
+
+        macros = new HashMap<>();
 
         try {
             file = new PrintWriter(new FileWriter(filename + ".cpp"));
@@ -85,6 +92,8 @@ public class TradCpp implements ObservableLogstxt {
         }
 
         writeHeader();
+
+        ReadMacro();
 
         writeMacro();
 
@@ -212,7 +221,7 @@ public class TradCpp implements ObservableLogstxt {
 
         for (int i = 0; i < size; i++) {
 
-            System.out.println("COMMAND -- " + commands.get(i) + " -- " + size + " --- " + i);
+            //System.out.println("COMMAND -- " + commands.get(i) + " -- " + size + " --- " + i);
             if (commands.get(i).equals(prevInstr) && i != size - 1) {
 
                 cpt++;
@@ -353,11 +362,13 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
-    private void writeMacro() {
+    private void ReadMacro() {
 
         String[] separated;
 
         BufferedReader progFile;
+
+        Macro macro = new Macro();
 
         try {
 
@@ -369,97 +380,115 @@ public class TradCpp implements ObservableLogstxt {
 
                 while (!((line = progFile.readLine())).equals("---- ENDMACRO") && line != null) {
 
-                    line = deleteCom(line, progFile);
-                    System.out.println("LINE --------------------------------------------" + line);
+                    line = deleteCom(line, null);
+
                     if (!line.equals("")) {
 
                         if (line.charAt(0) == '*') {
-
-                            if (!commands.isEmpty()) {
-
-                                writeInstr(true);
-
-                                commands.clear();
-
-                            }
 
                             separated = line.split(" ");
 
                             System.out.println("NOM --- " + separated[1]);
 
-                            /*macro = new Macro(separated);
-                        
-                             macros.put(separated[1], macro);*/
-                            writer("#define " + separated[1]);
+                            macro = new Macro(separated);
 
-                            if (separated.length > 2) {
-
-                                writer("(" + separated[2]);
-
-                                for (int i = 3; i < separated.length; i++) {
-                                    /*String separated1 = separated[i];
-                                     System.out.println(" ----- S " + separated1);*/
-
-                                    writer(", " + separated[i]);
-
-                                }
-
-                                writer(")");
-
-                            }
-
-                            writer("\\\n");
+                            macros.put(separated[1], macro);
 
                         } else {
 
-                            if (line.split(": ").length > 1) {
+                            macro.fillCommands(line);
 
-                                String cpt = line.split(": ")[0];
-
-                                line = line.split(": ")[1];
-
-                                if (!commands.isEmpty()) {
-
-                                    writeInstr(true);
-
-                                    commands.clear();
-
-                                }
-
-                                ReadLine(line);
-
-                                writer("for (int i = 0; i <" + cpt + "; i++){\\\n\\\n");
-
-                                writeInstr(true);
-
-                                commands.clear();
-
-                                writer("\\\n}\\\n\n");
-
-                            } else {
-
-                                ReadLine(line);
-
-                            }
-                            
                         }
-
                     }
 
                 }
-
-                writeInstr(true);
-
-                commands.clear();
-
-                line = progFile.readLine();
-                System.out.println("LIN ---- " + line);
             }
 
         } catch (IOException ex) {
             Logger.getLogger(TradCpp.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    private void writeMacro() {
+
+        String macroKey;
+
+        Macro mac;
+
+        String line;
+
+        for (Map.Entry<String, Macro> macrosS : macros.entrySet()) {
+
+            macroKey = macrosS.getKey();
+            mac = macrosS.getValue();
+
+            System.out.println("MACRO --------------------------------------- " + macroKey);
+            System.out.println("INTR -- " + mac.getCommands());
+
+            writer("#define " + macroKey);
+
+            if (mac.getnbParam() != 0) {
+
+                writer("(" + mac.getParams().get(0));
+
+                for (int i = 1; i < mac.getnbParam(); i++) {
+
+                    writer(", " + mac.getParams().get(i));
+
+                }
+
+                writer(")");
+
+            }
+
+            writer("\\\n");
+
+            for (int i = 0; i < mac.getCommands().size(); i++) {
+                //System.out.println("INSTR " + mac.getCommands());
+                line = mac.getCommands().get(i);
+
+                if (line.split(": ").length > 1) {
+
+                    String cpt = line.split(": ")[0];
+
+                    line = line.split(": ")[1];
+
+                    if (!commands.isEmpty()) {
+
+                        writeInstr(true);
+
+                        commands.clear();
+
+                    }
+
+                    ReadLine(line);
+
+                    writer("for (int i = 0; i <" + cpt + "; i++){\\\n\\\n");
+
+                    writeInstr(true);
+
+                    commands.clear();
+
+                    writer("\\\n}\\\n\n");
+
+                } else {
+
+                    ReadLine(line);
+
+                }
+
+            }
+
+            if (!commands.isEmpty()) {
+
+                writeInstr(true);
+
+                commands.clear();
+
+            }
+
+        }
     }
 
     private void writeSupIn() {
@@ -903,6 +932,8 @@ public class TradCpp implements ObservableLogstxt {
 
     private void writer(String instr) {
 
+        System.out.println("WRITER ---- " + instr);
+
         try {
             file = new PrintWriter(new FileWriter(filename + ".cpp", true), true);
 
@@ -1013,51 +1044,6 @@ public class TradCpp implements ObservableLogstxt {
             }
         }
 
-    }
-
-    private void ReadMacro(String line, BufferedReader progFile) throws IOException {
-
-        String[] separated;
-        System.out.println("MACRO READ " + line);
-
-        if (line.equals("---- MACRO")) {
-
-            while (!((line = progFile.readLine())).equals("---- ENDMACRO") && line != null) {
-
-                line = deleteCom(line, progFile);
-
-                if (!line.equals("")) {
-
-                    if (line.charAt(0) == '*') {
-
-                        separated = line.split(" ");
-
-                        System.out.println("NOM --- " + separated[1]);
-
-                        /*macro = new Macro(separated);
-                        
-                         macros.put(separated[1], macro);*/
-                        writer("#define " + separated[1]);
-
-                        for (int i = 2; i < separated.length; i++) {
-                            String separated1 = separated[i];
-                            System.out.println(" ----- S " + separated1);
-                        }
-
-                    } else {
-
-                        //macro.fillCommands(line);
-                    }
-
-                }
-
-            }
-
-            line = progFile.readLine();
-
-        }
-
-        System.out.println("LIN ---- " + line);
     }
 
     @Override

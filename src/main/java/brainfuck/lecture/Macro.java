@@ -5,9 +5,10 @@ package brainfuck.lecture;
 import java.util.ArrayList;
 
 /**
- * This class represents the macro. It allows to create Macro in a Brainf*ck langage
- * at the beginning of a program. The instructions are put in a list and, when the macro is called,
- * it will textually replace it by the instructions when the program is executed.
+ * This class represents the macro. It allows to create Macro in a Brainf*ck
+ * langage at the beginning of a program. The instructions are put in a list
+ * and, when the macro is called, it will textually replace it by the
+ * instructions when the program is executed.
  *
  * @author Team Taskbar
  */
@@ -45,21 +46,25 @@ public class Macro {
 
     }
 
-
     //=================
     //Getter and Setter
     //=================
-
     /**
      * Getter of the name.
+     *
      * @return the string of the name.
      */
     public String getNom() {
         return nom;
     }
 
+    public ArrayList<String> getParams() {
+        return params;
+    }
+
     /**
      * This method allows to know whether it's a parameter or not.
+     *
      * @param param
      * @return true or false.
      */
@@ -71,6 +76,7 @@ public class Macro {
 
     /**
      * Getter of the quantity of parameters.
+     *
      * @return the number of the parameters.
      */
     public int getnbParam() {
@@ -81,6 +87,7 @@ public class Macro {
 
     /**
      * Getter of the number of the parameters.
+     *
      * @param param
      * @return the number of parameters.
      */
@@ -102,6 +109,7 @@ public class Macro {
 
     /**
      * Getter of the commands.
+     *
      * @return an arraylist of string containing the commands.
      */
     public ArrayList<String> getCommands() {
@@ -110,6 +118,7 @@ public class Macro {
 
     /**
      * This method allows to fill the commands / Should change its location.
+     *
      * @param command
      */
     public void fillCommands(String command) {
