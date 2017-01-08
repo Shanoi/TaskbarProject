@@ -1,6 +1,9 @@
 package brainfuck.lecture;
 
 import brainfuck.command.EnumCommands;
+import brainfuck.memory.ComputationalModel;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -8,6 +11,25 @@ import static org.junit.Assert.*;
  * Created by sebde on 08/01/2017.
  */
 public class FichiersTest {
+
+    @Before
+    public void setUp(){
+        ComputationalModel cmReset=new ComputationalModel();
+        Fichiers fileReset=new Fichiers("");
+        Monitor monitorReset=new Monitor();
+        cmReset.Reset();
+        fileReset.Reset();
+        monitorReset.Reset();
+    }
+    @After
+    public void tearDown(){
+        ComputationalModel cmReset=new ComputationalModel();
+        Fichiers fileReset=new Fichiers("");
+        Monitor monitorReset=new Monitor();
+        cmReset.Reset();
+        fileReset.Reset();
+        monitorReset.Reset();
+    }
     @Test
     public void setTableLoopTest(){
         Fichiers file=new Fichiers("");

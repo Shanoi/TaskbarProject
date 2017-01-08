@@ -1,5 +1,7 @@
 package brainfuck.memory;
 
+import brainfuck.lecture.Fichiers;
+import brainfuck.lecture.Monitor;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -23,13 +25,25 @@ public class ComputationalModelTest {
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
+        ComputationalModel cmReset=new ComputationalModel();
+        Fichiers fileReset=new Fichiers("");
+        Monitor monitorReset=new Monitor();
+        cmReset.Reset();
+        fileReset.Reset();
+        monitorReset.Reset();
     }
-    
+
     @After
     public void tearDown() {
+        ComputationalModel cmReset=new ComputationalModel();
+        Fichiers fileReset=new Fichiers("");
+        Monitor monitorReset=new Monitor();
+        cmReset.Reset();
+        fileReset.Reset();
+        monitorReset.Reset();
     }
 
     @Test
