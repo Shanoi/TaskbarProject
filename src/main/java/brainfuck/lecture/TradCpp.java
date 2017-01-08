@@ -50,11 +50,8 @@ public class TradCpp implements ObservableLogstxt {
 
     private boolean out = false;
 
-    private int cptboucle = 0;
+    public TradCpp(String filename) {
 
-    public TradCpp(/*ArrayList<EnumCommands> commands,*/String filename) {
-
-        //this.commands = commands;
         this.filename = filename;
 
         try {
@@ -68,8 +65,6 @@ public class TradCpp implements ObservableLogstxt {
         observers = new ArrayList();
 
         this.addObserver(observer);
-
-        fillCommands();
 
     }
 
@@ -91,8 +86,13 @@ public class TradCpp implements ObservableLogstxt {
 
         writeHeader();
 
-        //writeMacro();
-        writeInstr();
+        writeMacro();
+
+        fillCommands();
+
+        writeInitVar();
+
+        writeInstr(false);
 
         writeEnd();
 
@@ -129,114 +129,33 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
-    private void writeEnd() {
+    private void writeInitVar() {
 
-        writer("void checkSegFault(int i, int k){\n\n"
-                + "\tif (i + k > 30000 || i + k < 0){\n\n"
-                + "\t\texit(1);\n\n"
-                + "\t}\n"
-                + "}\n");
-
-    }
-
-    private void writeInstr() {
-
-        writer("int main(int n, char *params[]){\n\n"
+        StringBuilder Header = new StringBuilder();
+        Header.append("\nint main(int n, char *params[]){\n\n"
                 + "\tunsigned char m[30000];\n\n"
                 + "\tint position = 0;\n\n");
 
         if (in) {
 
-            writer("In *fIn = new In(argv);\n");
+            Header.append("In *fIn = new In(argv);\n");
 
         }
 
         if (out) {
 
-            writer("Out *fOut = new Out(argv);\n");
+            Header.append("Out *fOut = new Out(argv);\n");
 
         }
 
-        writer("\tMemory *mem = new Memory();\n\n");
+        Header.append("\tMemory *mem = new Memory();\n\n");
 
-        int cpt = 0;
+        writer(Header.toString());
 
-        int nbInstrCons = 0;
+    }
 
-        EnumCommands prevInstr = commands.get(0);
+    private void writeEnd() {
 
-        int size = commands.size();
-
-        for (int i = 0; i < size; i++) {
-
-            System.out.println("COMMAND -- " + commands.get(i) + " -- " + size + " --- " + i);
-            if (commands.get(i).equals(prevInstr) && i != size - 1) {
-
-                cpt++;
-                nbInstrCons++;
-
-            } else {
-                System.out.println("ESLES");
-                if (commands.get(i).equals(OUT)) {
-
-                    writeInstr(cpt, prevInstr);
-
-                    writeOut();
-
-                    cpt = 1;
-
-                } else if (commands.get(i).equals(IN)) {
-
-                    writeInstr(cpt, prevInstr);
-
-                    writeIn();
-
-                    cpt = 1;
-
-                } else if (commands.get(i).equals(JUMP)) {
-
-                    writeInstr(cpt, prevInstr);
-
-                    writeFunc();
-
-                } else if (commands.get(i).equals(BACK)) {
-                    
-                    writeInstr(cpt, prevInstr);
-                    writer("\t\n}\n\n");
-
-                } else if (i == size - 1 && !commands.get(i).equals(prevInstr)) {
-                    System.out.println("SIZE ----------------------- ");
-                    writeInstr(cpt, prevInstr);
-
-                    cpt = 1;
-                    nbInstrCons = 1;
-
-                    // if (!commands.get(i).equals(prevInstr)) {
-                    writeInstr(cpt, commands.get(i));
-
-                    //  }
-                } else if (i == size - 1) {
-
-                    writeInstr(cpt + 1, prevInstr);
-
-                } else {
-
-                    writeInstr(cpt, prevInstr);
-
-                    cpt = 1;
-                    nbInstrCons = 1;
-
-                }
-
-            }
-
-            prevInstr = commands.get(i);
-
-        }
-
-        /*if (i == size - 1) {
-            
-         }*/
         writer("\n");
 
         if (in) {
@@ -256,35 +175,157 @@ public class TradCpp implements ObservableLogstxt {
                 + "\n\treturn 0;"
                 + "\n\n}\n\n");
 
+        writer("void checkSegFault(int i, int k){\n\n"
+                + "\tif (i + k > 30000 || i + k < 0){\n\n"
+                + "\t\texit(1);\n\n"
+                + "\t}\n"
+                + "}\n");
+
     }
 
-    private void writeInstr(int cpt, EnumCommands prevInstr) {
+    private void writeInstr(boolean macro) {
+
+        /*writer("int main(int n, char *params[]){\n\n"
+         + "\tunsigned char m[30000];\n\n"
+         + "\tint position = 0;\n\n");
+
+         if (in) {
+
+         writer("In *fIn = new In(argv);\n");
+
+         }
+
+         if (out) {
+
+         writer("Out *fOut = new Out(argv);\n");
+
+         }
+
+         writer("\tMemory *mem = new Memory();\n\n");*/
+        int cpt = 0;
+
+        int nbInstrCons = 0;
+
+        EnumCommands prevInstr = commands.get(0);
+
+        int size = commands.size();
+
+        for (int i = 0; i < size; i++) {
+
+            System.out.println("COMMAND -- " + commands.get(i) + " -- " + size + " --- " + i);
+            if (commands.get(i).equals(prevInstr) && i != size - 1) {
+
+                cpt++;
+                nbInstrCons++;
+
+            } else {
+                System.out.println("ESLES");
+
+                if (commands.get(i).equals(OUT)) {
+
+                    writeInstr(cpt, prevInstr, macro);
+
+                    writeOut();
+
+                    cpt = 1;
+
+                } else if (commands.get(i).equals(IN)) {
+
+                    writeInstr(cpt, prevInstr, macro);
+
+                    writeIn();
+
+                    cpt = 1;
+
+                } else if (commands.get(i).equals(JUMP)) {
+
+                    writeInstr(cpt, prevInstr, macro);
+
+                    writeWhile();
+
+                } else if (commands.get(i).equals(BACK)) {
+
+                    writeInstr(cpt, prevInstr, macro);
+
+                    writer("\t\n}");
+
+                    if (macro) {
+
+                        writer("\\");
+
+                    }
+
+                    writer("\n\n");
+
+                } else if (i == size - 1 && !commands.get(i).equals(prevInstr)) {
+                    System.out.println("SIZE ----------------------- ");
+                    writeInstr(cpt, prevInstr, macro);
+
+                    cpt = 1;
+                    nbInstrCons = 1;
+
+                    // if (!commands.get(i).equals(prevInstr)) {
+                    writeInstr(cpt, commands.get(i), macro);
+
+                    //  }
+                } else if (i == size - 1) {
+
+                    writeInstr(cpt + 1, prevInstr, macro);
+
+                } else {
+
+                    writeInstr(cpt, prevInstr, macro);
+
+                    cpt = 1;
+                    nbInstrCons = 1;
+
+                }
+
+            }
+
+            prevInstr = commands.get(i);
+
+        }
+
+    }
+
+    private void writeInstr(int cpt, EnumCommands prevInstr, boolean macro) {
+
+        StringBuilder Instr = new StringBuilder();
 
         switch (prevInstr) {
 
             case INCR:
 
-                writer("\tmem->add(" + cpt + ");\n");
+                Instr.append("\tmem->add(" + cpt + ");");
                 break;
 
             case DECR:
 
-                writer("\tmem->sub(" + cpt + ");\n");
+                Instr.append("\tmem->sub(" + cpt + ");");
                 break;
 
             case RIGHT:
 
-                writer("\tmem->decaleRight(" + cpt + ");\n");
+                Instr.append("\tmem->decaleRight(" + cpt + ");");
 
                 break;
 
             case LEFT:
 
-                writer("\tmem->decaleLeft(" + cpt + ");\n");
+                Instr.append("\tmem->decaleLeft(" + cpt + ");");
 
                 break;
 
         }
+
+        if (macro) {
+            Instr.append("\\");
+        }
+
+        Instr.append("\n");
+
+        writer(Instr.toString());
 
     }
 
@@ -305,59 +346,122 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
-    private void writeFunc() {
+    private void writeWhile() {
 
         writer("\n\twhile(mem->getCurrentValue() > 0){\n"
                 + "\n");
 
     }
 
-//    private void writeMacro(){
-//        
-//        String[] separated;
-//        System.out.println("MACRO READ " + line);
-//
-//
-//            if (line.equals("---- MACRO")) {
-//
-//                while (!((line = progFile.readLine())).equals("---- ENDMACRO") && line != null) {
-//
-//                    line = deleteCom(line, progFile);
-//
-//                    if (!line.equals("")) {
-//
-//                        if (line.charAt(0) == '*') {
-//
-//                            separated = line.split(" ");
-//
-//                            System.out.println("NOM --- " + separated[1]);
-//
-//                            /*macro = new Macro(separated);
-//                        
-//                             macros.put(separated[1], macro);*/
-//                            writer("#define " + separated[1]);
-//
-//                            for (int i = 2; i < separated.length; i++) {
-//                                String separated1 = separated[i];
-//                                System.out.println(" ----- S " + separated1);
-//                            }
-//
-//                        } else {
-//
-//                            //macro.fillCommands(line);
-//                        }
-//
-//                    }
-//
-//                }
-//
-//                line = progFile.readLine();
-//
-//            }
-//
-//        System.out.println("LIN ---- " + line);
-//        
-//    }
+    private void writeMacro() {
+
+        String[] separated;
+
+        BufferedReader progFile;
+
+        try {
+
+            progFile = new BufferedReader(new FileReader(filename));
+
+            String line = progFile.readLine();
+
+            if (line.equals("---- MACRO")) {
+
+                while (!((line = progFile.readLine())).equals("---- ENDMACRO") && line != null) {
+
+                    line = deleteCom(line, progFile);
+                    System.out.println("LINE --------------------------------------------" + line);
+                    if (!line.equals("")) {
+
+                        if (line.charAt(0) == '*') {
+
+                            if (!commands.isEmpty()) {
+
+                                writeInstr(true);
+
+                                commands.clear();
+
+                            }
+
+                            separated = line.split(" ");
+
+                            System.out.println("NOM --- " + separated[1]);
+
+                            /*macro = new Macro(separated);
+                        
+                             macros.put(separated[1], macro);*/
+                            writer("#define " + separated[1]);
+
+                            if (separated.length > 2) {
+
+                                writer("(" + separated[2]);
+
+                                for (int i = 3; i < separated.length; i++) {
+                                    /*String separated1 = separated[i];
+                                     System.out.println(" ----- S " + separated1);*/
+
+                                    writer(", " + separated[i]);
+
+                                }
+
+                                writer(")");
+
+                            }
+
+                            writer("\\\n");
+
+                        } else {
+
+                            if (line.split(": ").length > 1) {
+
+                                String cpt = line.split(": ")[0];
+
+                                line = line.split(": ")[1];
+
+                                if (!commands.isEmpty()) {
+
+                                    writeInstr(true);
+
+                                    commands.clear();
+
+                                }
+
+                                ReadLine(line);
+
+                                writer("for (int i = 0; i <" + cpt + "; i++){\\\n\\\n");
+
+                                writeInstr(true);
+
+                                commands.clear();
+
+                                writer("\\\n}\\\n\n");
+
+                            } else {
+
+                                ReadLine(line);
+
+                            }
+                            
+                        }
+
+                    }
+
+                }
+
+                writeInstr(true);
+
+                commands.clear();
+
+                line = progFile.readLine();
+                System.out.println("LIN ---- " + line);
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(TradCpp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     private void writeSupIn() {
 
         String[] separated;
