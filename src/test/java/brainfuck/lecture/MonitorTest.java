@@ -1,6 +1,9 @@
 package brainfuck.lecture;
 
 import org.junit.Test;
+
+import java.lang.reflect.Field;
+
 import static org.junit.Assert.*;
 
 /**
@@ -8,8 +11,9 @@ import static org.junit.Assert.*;
  */
 public class MonitorTest {
     @Test
-    public void MonitorTest(){
+    public void MonitorTest() throws  Exception{
         Monitor monitor=new Monitor();
+        monitor.Reset();
         monitor.updateData_Move();
         monitor.updateData_Read();
         monitor.updateData_Write();
@@ -21,6 +25,7 @@ public class MonitorTest {
                 "Nombre d'écritures dans la mémoire: 1\n" +
                 "Nombre de lectures dans la mémoire: 1\n" +
                 "Temps d'exécution: 0");
+        monitor.Reset();
     }
 
 }

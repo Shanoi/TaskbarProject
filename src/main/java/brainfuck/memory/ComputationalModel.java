@@ -210,4 +210,9 @@ public class ComputationalModel {
         return tmpP;
     }
 
+    public void Reset(){
+        p=0;
+        i=0;
+        init();
+    }
 }

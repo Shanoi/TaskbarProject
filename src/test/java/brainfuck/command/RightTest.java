@@ -1,5 +1,6 @@
 package brainfuck.command;
 
+import brainfuck.lecture.Monitor;
 import brainfuck.memory.ComputationalModel;
 import org.junit.*;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
@@ -44,6 +45,14 @@ public class RightTest {
         for(int i=0;i<30000;i++)command.execute();
         exit.expectSystemExit();
         command.execute();
+
+    }
+    @Test
+    public void Reset(){
+        ComputationalModel cm=new ComputationalModel();
+        cm.Reset();
+        Monitor monitor=new Monitor();
+        monitor.Reset();
     }
     
 }
