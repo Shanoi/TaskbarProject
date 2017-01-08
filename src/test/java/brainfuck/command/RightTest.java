@@ -1,5 +1,7 @@
 package brainfuck.command;
 
+import brainfuck.lecture.Fichiers;
+import brainfuck.lecture.Monitor;
 import brainfuck.memory.ComputationalModel;
 import org.junit.*;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
@@ -25,10 +27,22 @@ public class RightTest {
     
     @Before
     public void setUp() {
+        ComputationalModel cmReset=new ComputationalModel();
+        Fichiers fileReset=new Fichiers("");
+        Monitor monitorReset=new Monitor();
+        cmReset.Reset();
+        fileReset.Reset();
+        monitorReset.Reset();
     }
     
     @After
     public void tearDown() {
+        ComputationalModel cmReset=new ComputationalModel();
+        Fichiers fileReset=new Fichiers("");
+        Monitor monitorReset=new Monitor();
+        cmReset.Reset();
+        fileReset.Reset();
+        monitorReset.Reset();
     }
     @Rule
     public final ExpectedSystemExit exit = ExpectedSystemExit.none();
@@ -44,6 +58,14 @@ public class RightTest {
         for(int i=0;i<30000;i++)command.execute();
         exit.expectSystemExit();
         command.execute();
+
+    }
+    @Test
+    public void Reset(){
+        ComputationalModel cm=new ComputationalModel();
+        cm.Reset();
+        Monitor monitor=new Monitor();
+        monitor.Reset();
     }
     
 }

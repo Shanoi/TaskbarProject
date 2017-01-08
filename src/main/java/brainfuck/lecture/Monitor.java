@@ -271,5 +271,13 @@ public class Monitor implements Observateur {
         file.close();
 
     }
+    public void Reset(){
+        NB_INSTR=0;
+        EXEC_MOVE=0;
+        EXEC_TIME=0;
+        DATA_MOVE=0;
+        DATA_READ=0;
+        DATA_WRITE=0;
+    }
 
 }

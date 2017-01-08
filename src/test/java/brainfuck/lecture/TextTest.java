@@ -1,6 +1,7 @@
 package brainfuck.lecture;
 
 import brainfuck.command.EnumCommands;
+import brainfuck.memory.ComputationalModel;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -30,13 +31,25 @@ public class TextTest {
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
+        ComputationalModel cmReset=new ComputationalModel();
+        Fichiers fileReset=new Fichiers("");
+        Monitor monitorReset=new Monitor();
+        cmReset.Reset();
+        fileReset.Reset();
+        monitorReset.Reset();
     }
-    
+
     @After
     public void tearDown() {
+        ComputationalModel cmReset=new ComputationalModel();
+        Fichiers fileReset=new Fichiers("");
+        Monitor monitorReset=new Monitor();
+        cmReset.Reset();
+        fileReset.Reset();
+        monitorReset.Reset();
     }
 
     /**

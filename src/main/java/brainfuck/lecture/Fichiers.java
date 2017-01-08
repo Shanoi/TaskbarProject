@@ -250,4 +250,8 @@ public class Fichiers {
      */
     public static int getNbArgFonction(String fonction) {  return nbArgFonction.get(fonction); }
 
+    public void Reset(){
+        list.clear();
+    }
+
 }

@@ -25,14 +25,25 @@ public class RunTest {
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
+        ComputationalModel cmReset=new ComputationalModel();
+        Fichiers fileReset=new Fichiers("");
+        Monitor monitorReset=new Monitor();
+        cmReset.Reset();
+        fileReset.Reset();
+        monitorReset.Reset();
     }
 
     @After
     public void tearDown() {
-
+        ComputationalModel cmReset=new ComputationalModel();
+        Fichiers fileReset=new Fichiers("");
+        Monitor monitorReset=new Monitor();
+        cmReset.Reset();
+        fileReset.Reset();
+        monitorReset.Reset();
     }
     @Rule
     public final ExpectedSystemExit exit = ExpectedSystemExit.none();
@@ -42,6 +53,8 @@ public class RunTest {
     public void testRead() throws Exception{
         String path=new File("").getAbsolutePath();
         Run run=new Run(path+"/src/test/java/brainfuck/lecture/FichierTestUnit.txt");
+        run.getFichier().list.clear();
+        run.getCm().Reset();
         run.load();
         run.execute();
         assertEquals(run.getFichier().list.size(),2);
@@ -56,16 +69,19 @@ public class RunTest {
         run.load();
         run.getFichier().list.clear();
     }
+
     @Test
     public void testReadMacro() throws Exception{
         String path=new File("").getAbsolutePath();
         Run run=new Run(path+"/src/test/java/brainfuck/lecture/FichierTestUnit3.txt");
+        run.getFichier().list.clear();
+        run.getCm().Reset();
         run.load();
         for(int i=0;i<run.getFichier().list.size();i++){
             assertEquals(run.getFichier().list.get(i), EnumCommands.INCR);
         }
         run.execute();
-        assertEquals(run.getCm().getCurrentCaseValue(),2);
+        assertEquals(run.getCm().getCurrentCaseValue(),4);
         run.getFichier().list.clear();
     }
 
@@ -73,6 +89,7 @@ public class RunTest {
     public  void testReadFonction() throws Exception{
         String path=new File("").getAbsolutePath();
         Run run=new Run(path+"/src/test/java/brainfuck/lecture/FichierTestUnit4.txt");
+        run.getCm().Reset();
         run.load();
         run.execute();
         assertEquals(run.getCm().getCurrentCaseValue(),3);
@@ -83,6 +100,7 @@ public class RunTest {
     public void testLoadTexte() throws Exception{
         String path=new File("").getAbsolutePath();
         Run run=new Run(path+"/src/test/java/brainfuck/lecture/FichierTestUnit.txt");
+        run.getCm().Reset();
         run.load();
         assertEquals(run.getFichier().getClass(),Text.class);
     }
@@ -90,8 +108,10 @@ public class RunTest {
     public void testLoadImage() throws Exception{
         String path=new File("").getAbsolutePath();
         Run run=new Run(path+"/src/test/java/brainfuck/lecture/FichierImageTest.bmp");
+        run.getCm().Reset();
         run.load();
         assertEquals(run.getFichier().getClass(),Image.class);
+        run.getCm().Reset();
     }
 
 }

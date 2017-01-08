@@ -1,5 +1,7 @@
 package brainfuck.command;
 
+import brainfuck.lecture.Fichiers;
+import brainfuck.lecture.Monitor;
 import brainfuck.memory.ComputationalModel;
 import org.junit.*;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
@@ -25,10 +27,22 @@ public class DecrementerTest {
 
     @Before
     public void setUp() {
+        ComputationalModel cmReset=new ComputationalModel();
+        Fichiers fileReset=new Fichiers("");
+        Monitor monitorReset=new Monitor();
+        cmReset.Reset();
+        fileReset.Reset();
+        monitorReset.Reset();
     }
 
     @After
     public void tearDown() {
+        ComputationalModel cmReset=new ComputationalModel();
+        Fichiers fileReset=new Fichiers("");
+        Monitor monitorReset=new Monitor();
+        cmReset.Reset();
+        fileReset.Reset();
+        monitorReset.Reset();
     }
     @Rule
     public final ExpectedSystemExit exit = ExpectedSystemExit.none();
