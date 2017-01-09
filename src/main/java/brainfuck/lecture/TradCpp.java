@@ -45,7 +45,7 @@ public class TradCpp implements ObservableLogstxt {
     //private ArrayList<String> macros = new ArrayList<>();
     private HashMap<String, Macro> macros;
 
-    private HashMap<Integer, String> macroProg = new HashMap<>();
+    private HashMap<Integer, ArrayList<String>> macroProg = new HashMap<>();
 
     private String filename;
 
@@ -96,10 +96,9 @@ public class TradCpp implements ObservableLogstxt {
             out = true;
 
         }
-
-        writeHeader();
-
         ReadMacro();
+        
+        writeHeader();
 
         writeMacro();
 
@@ -149,9 +148,7 @@ public class TradCpp implements ObservableLogstxt {
     private void writeInitVar() {
 
         StringBuilder Header = new StringBuilder();
-        Header.append("\nint main(int n, char *params[]){\n\n"
-                + "\tunsigned char m[30000];\n\n"
-                + "\tint position = 0;\n\n");
+        Header.append("\nint main(int n, char *params[]){\n\n");
 
         if (in) {
 
@@ -232,13 +229,18 @@ public class TradCpp implements ObservableLogstxt {
                 System.out.println(" *** " + commands.get(i));
 
                 if (i != 0) {
-                    System.out.println("DEB ET FIN " + commands.get(i) + "  " + size + "  " + i);
+
                     writeInstr(i, cpt, prevInstr, macro, size);
 
                 }
 
-                writer("\t" + macroProg.get(i) + "; \n");
+                for (int j = 0; j < macroProg.get(i).size(); j++) {
 
+                    writer("\t" + macroProg.get(i).get(j) + "; \n");
+
+                }
+
+                //writer("\t" + macroProg.get(i) + "; \n");
                 cpt = 1;
 
             } else if (commands.get(i).equals(prevInstr) && i != size - 1) {
@@ -267,8 +269,7 @@ public class TradCpp implements ObservableLogstxt {
 
     private void writeInstr(int i, int cpt, EnumCommands prevInstr, boolean macro, int size) {
 
-        System.out.println("MACROPROG -- " + macroProg);
-
+        //System.out.println("MACROPROG -- " + macroProg);
         if (commands.get(i).equals(OUT)) {
 
             writeInstr(cpt, prevInstr, macro);
@@ -1081,6 +1082,10 @@ public class TradCpp implements ObservableLogstxt {
 
         String[] separated;
 
+        ArrayList<String> instrMacro;
+
+        StringBuilder paramsMacro;
+
         try {
 
             progFile = new BufferedReader(new FileReader(filename));
@@ -1104,6 +1109,8 @@ public class TradCpp implements ObservableLogstxt {
 
                 if (!line.equals("")) {
 
+                    instrMacro = new ArrayList<>();
+
                     separated = line.split(" ");
 
                     if (macros.containsKey(separated[0])) {
@@ -1113,11 +1120,77 @@ public class TradCpp implements ObservableLogstxt {
                         //Mais on ne peut pas faire ça comme ça, stocker le bazar dans une liste pour pouvoir y appeler plus tard au moment
                         //de l'écriture
 
-                        if (macros.get(separated[0]).getnbParam() == separated.length - 1) {
+                        if (macros.get(separated[0]).getnbParam() == 0) {
+                            System.out.println("LIGNE MACRO POWER 1 ------------------------- " + line);
+
+                            if (!macroProg.containsKey(cptInstr)) {
+
+                                if (separated.length == 1) {
+
+                                    instrMacro.add(line + "(1)");
+
+                                    macroProg.put(cptInstr, instrMacro);
+
+                                } else if (separated.length == 2) {
+
+                                    instrMacro.add(separated[0] + "(" + separated[1] + ")");
+
+                                    macroProg.put(cptInstr, instrMacro);
+
+                                } else {
+                                    System.out.println("PLANTE");
+                                    System.exit(10);
+
+                                }
+
+                            } else {
+
+                                if (separated.length == 1) {
+
+                                    macroProg.get(cptInstr).add(line + "(1)");
+
+                                    //macroProg.put(cptInstr, line + "(1)");
+                                } else if (separated.length == 2) {
+
+                                    macroProg.get(cptInstr).add(separated[0] + "(" + separated[1] + ")");
+
+                                } else {
+                                    System.out.println("PLANTE 2");
+                                    System.exit(10);
+
+                                }
+
+                            }
+
+                        } else/* if (macros.get(separated[0]).getnbParam() == separated.length - 1)*/ {
 
                             System.out.println("LIGNE MACRO POWER ------------------------- " + line);
 
-                            macroProg.put(cptInstr, line);
+                            paramsMacro = new StringBuilder();
+
+                            paramsMacro.append(separated[0])
+                                    .append("(")
+                                    .append(separated[1]);
+
+                            for (int i = 2; i < separated.length; i++) {
+                                paramsMacro.append(", ").append(separated[i]);
+
+                            }
+
+                            paramsMacro.append(")");
+
+                            //macroProg.put(cptInstr, line);
+                            if (!macroProg.containsKey(cptInstr)) {
+
+                                instrMacro.add(paramsMacro.toString());
+
+                                macroProg.put(cptInstr, instrMacro);
+
+                            } else {
+
+                                macroProg.get(cptInstr).add(paramsMacro.toString());
+
+                            }
 
                         }
 
