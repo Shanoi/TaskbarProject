@@ -103,6 +103,8 @@ public class TradCpp implements ObservableLogstxt {
 
         writeInitVar();
 
+        System.out.println("PROGRAMME CORE -- " + commands);
+        
         writeInstr(false);
 
         writeEnd();
@@ -492,16 +494,32 @@ public class TradCpp implements ObservableLogstxt {
                             //ReadMacro(line.split(" "));
                             writer("\t" + line.split(" ")[0]);
 
-                            for (int j = 1; j < line.split(" ").length; j++) {
+                            if (line.split(" ").length > 1) {
+                                
+                                writer("(" + line.split(" ")[1]);
+                                
+                                for (int j = 2; j < line.split(" ").length; j++) {
 
-                                if (mac.isParam(line.split(" ")[1])) {
+                                    if (mac.isParam(line.split(" ")[1])) {
 
-                                    writer(line.split(" ")[j]);
+                                        writer(", " + line.split(" ")[j]);
+
+                                    } else {
+
+                                        System.exit(10);
+
+                                    }
 
                                 }
 
+                                writer(")");
+                                
+                            }else{
+                                
+                                writer("(1)");
+                                
                             }
-                            
+
                             writer("\\\n");
 
                         } else {
@@ -533,7 +551,7 @@ public class TradCpp implements ObservableLogstxt {
 
                         System.out.println("////////////////////////// ELSE");
 
-                        writer("\t" + line.split(" ")[0] + "\\\n");
+                        writer("\t" + line.split(" ")[0] + "(1)\\\n");
 
                     } else {
                         System.out.println("LIT LINE --+++- " + line);
@@ -1050,7 +1068,7 @@ public class TradCpp implements ObservableLogstxt {
 
                     if (macros.containsKey(separated[0])) {
                         System.out.println("LIT Macro --- " + line);
-                        ReadMacro(separated);
+                        //ReadMacro(separated);
 
                     } else {
                         System.out.println("LIT LINE --- " + line);
