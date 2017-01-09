@@ -45,6 +45,8 @@ public class TradCpp implements ObservableLogstxt {
     //private ArrayList<String> macros = new ArrayList<>();
     private HashMap<String, Macro> macros;
 
+    private HashMap<Integer, String> macroProg = new HashMap<>();
+
     private String filename;
 
     private PrintWriter file;
@@ -56,6 +58,8 @@ public class TradCpp implements ObservableLogstxt {
     private boolean out = false;
 
     private int cptBoucle = 0;
+
+    private int cptInstr = 0;
 
     public TradCpp(String filename) {
 
@@ -104,7 +108,7 @@ public class TradCpp implements ObservableLogstxt {
         writeInitVar();
 
         System.out.println("PROGRAMME CORE -- " + commands);
-        
+
         writeInstr(false);
 
         writeEnd();
@@ -217,85 +221,122 @@ public class TradCpp implements ObservableLogstxt {
          writer("\tMemory *mem = new Memory();\n\n");*/
         int cpt = 0;
 
-        int nbInstrCons = 0;
-
         EnumCommands prevInstr = commands.get(0);
 
         int size = commands.size();
 
         for (int i = 0; i < size; i++) {
 
+            if (macroProg.containsKey(i)) {
+
+                System.out.println(" *** " + commands.get(i));
+
+                if (i != 0) {
+
+                    writeInstr(i, cpt - 1, prevInstr, macro, size);
+
+                }
+
+                writer("\t" + macroProg.get(i) + "; \n");
+
+                cpt = 1;
+
+            }
+
             //System.out.println("COMMAND -- " + commands.get(i) + " -- " + size + " --- " + i);
             if (commands.get(i).equals(prevInstr) && i != size - 1) {
 
                 cpt++;
-                nbInstrCons++;
 
             } else {
 
-                if (commands.get(i).equals(OUT)) {
+                writeInstr(i, cpt, prevInstr, macro, size);
 
-                    writeInstr(cpt, prevInstr, macro);
-
-                    writeOut();
-
-                    cpt = 1;
-
-                } else if (commands.get(i).equals(IN)) {
-
-                    writeInstr(cpt, prevInstr, macro);
-
-                    writeIn();
-
-                    cpt = 1;
-
-                } else if (commands.get(i).equals(JUMP)) {
-
-                    writeInstr(cpt, prevInstr, macro);
-
-                    writeWhile();
-
-                } else if (commands.get(i).equals(BACK)) {
-
-                    writeInstr(cpt, prevInstr, macro);
-
-                    writer("\t\n}");
-
-                    if (macro) {
-
-                        writer("\\");
-
-                    }
-
-                    writer("\n\n");
-
-                } else if (i == size - 1 && !commands.get(i).equals(prevInstr)) {
-
-                    writeInstr(cpt, prevInstr, macro);
-
-                    cpt = 1;
-                    nbInstrCons = 1;
-
-                    // if (!commands.get(i).equals(prevInstr)) {
-                    writeInstr(cpt, commands.get(i), macro);
-
-                    //  }
-                } else if (i == size - 1) {
-
-                    writeInstr(cpt + 1, prevInstr, macro);
-
-                } else {
-
-                    writeInstr(cpt, prevInstr, macro);
-
-                    cpt = 1;
-                    nbInstrCons = 1;
-
-                }
+                cpt = 1;
 
             }
 
             prevInstr = commands.get(i);
+
+        }
+
+        if (macroProg.containsKey(size)) {
+
+            writer("\t" + macroProg.get(size) + "; \n");
+
+        }
+
+    }
+
+    private void writeInstr(int i, int cpt, EnumCommands prevInstr, boolean macro, int size) {
+
+        System.out.println("MACROPROG -- " + macroProg);
+
+        if (commands.get(i).equals(OUT)) {
+
+            writeInstr(cpt, prevInstr, macro);
+
+            writeOut();
+
+            cpt = 1;
+
+        } else if (commands.get(i).equals(IN)) {
+
+            writeInstr(cpt, prevInstr, macro);
+
+            writeIn();
+
+            cpt = 1;
+
+        } else if (commands.get(i).equals(JUMP)) {
+
+            writeInstr(cpt, prevInstr, macro);
+
+            writeWhile();
+
+            cpt = 1; ////////////////////////////////// AJOUT A TESTER
+
+        } else if (commands.get(i).equals(BACK)) {
+
+            writeInstr(cpt, prevInstr, macro);
+
+            writer("\t\n}");
+
+            if (macro) {
+
+                writer("\\");
+
+            }
+
+            writer("\n\n");
+
+            cpt = 1;    ////////////////////////////////// AJOUT A TESTER
+
+        } /*else if (macroProg.containsKey(i)) {
+
+         writer("\t" + macroProg.get(i) + "; \n");
+
+         cpt = 1;
+
+         }*/ else if (i == size - 1 && !commands.get(i).equals(prevInstr)) {
+
+            writeInstr(cpt, prevInstr, macro);
+
+            cpt = 1;
+
+            // if (!commands.get(i).equals(prevInstr)) {
+            writeInstr(cpt, commands.get(i), macro);
+
+            //  }
+        } else if (i == size - 1) {
+
+            writeInstr(cpt + 1, prevInstr, macro);
+
+        } else {
+
+            writeInstr(cpt, prevInstr, macro);
+
+            cpt = 1;
 
         }
 
@@ -495,9 +536,9 @@ public class TradCpp implements ObservableLogstxt {
                             writer("\t" + line.split(" ")[0]);
 
                             if (line.split(" ").length > 1) {
-                                
+
                                 writer("(" + line.split(" ")[1]);
-                                
+
                                 for (int j = 2; j < line.split(" ").length; j++) {
 
                                     if (mac.isParam(line.split(" ")[1])) {
@@ -513,11 +554,11 @@ public class TradCpp implements ObservableLogstxt {
                                 }
 
                                 writer(")");
-                                
-                            }else{
-                                
+
+                            } else {
+
                                 writer("(1)");
-                                
+
                             }
 
                             writer("\\\n");
@@ -1037,6 +1078,8 @@ public class TradCpp implements ObservableLogstxt {
 
     private void fillCommands() {
 
+        cptInstr = 0;
+
         BufferedReader progFile;
 
         String[] separated;
@@ -1067,8 +1110,19 @@ public class TradCpp implements ObservableLogstxt {
                     separated = line.split(" ");
 
                     if (macros.containsKey(separated[0])) {
-                        System.out.println("LIT Macro --- " + line);
+                        System.out.println("LIT Macro --- " + line + " -- " + macros.get(separated[0]).getnbParam());
                         //ReadMacro(separated);
+                        //Juste à écrire la macro avec ses paramètres
+                        //Mais on ne peut pas faire ça comme ça, stocker le bazar dans une liste pour pouvoir y appeler plus tard au moment
+                        //de l'écriture
+
+                        if (macros.get(separated[0]).getnbParam() == separated.length - 1) {
+
+                            System.out.println("LIGNE MACRO POWER ------------------------- " + line);
+
+                            macroProg.put(cptInstr, line);
+
+                        }
 
                     } else {
                         System.out.println("LIT LINE --- " + line);
@@ -1118,6 +1172,8 @@ public class TradCpp implements ObservableLogstxt {
 
                 }
 
+                cptInstr++;
+
             }
 
         } else {
@@ -1125,6 +1181,8 @@ public class TradCpp implements ObservableLogstxt {
             if (isCommand(line)) {
 
                 commands.add(toCommand(line));
+
+                cptInstr++;
 
             } else {
 
@@ -1138,126 +1196,6 @@ public class TradCpp implements ObservableLogstxt {
 
             }
         }
-
-    }
-
-    /**
-     * This method allows to support macro in the program.
-     *
-     * @param separated
-     */
-    private void ReadMacro(String[] separated) {
-
-        Macro macro = macros.get(separated[0]);
-
-        if (separated.length == 2 && macro.getnbParam() == 0) {
-
-            writer("for (int i" + cptBoucle + " = 0; i" + cptBoucle + " < " + separated[1] + "; i++){\n"
-                    + "\n");
-
-            cptBoucle++;
-
-            for (int j = 0; j < macro.getCommands().size(); j++) {
-
-                MacroOrLine(macro, j, separated);
-
-            }
-            writer("\n"
-                    + "		}\n");
-
-            /*for (int k = 0; k < Integer.parseInt(separated[1]); k++) {
-
-             for (int j = 0; j < macro.getCommands().size(); j++) {
-
-             MacroOrLine(macro, j, separated);
-
-             }
-
-             }*/
-        } else {
-
-            System.out.println("LOL");
-            writer("LOL");
-            /*for (int j = 0; j < macro.getCommands().size(); j++) {
-
-             MacroOrLine(macro, j, separated);
-
-             }*/
-
-        }
-
-    }
-
-    private void MacroOrLine(Macro macro, int j, String[] separated) {
-
-        String[] separatedMacro = macro.getCommands().get(j).split(" ");
-
-        int repete = 1;
-
-        String tmp = "";
-
-        Macro mac;
-
-        //Répéter la ligne autant de fois que le paramètre, sinon la faire qu'une seule fois
-        if (repete == 1) {
-
-            if (macros.containsKey(separatedMacro[0])) {
-
-                if (separatedMacro.length == macros.get(separatedMacro[0]).getnbParam() + 1) {
-
-                    mac = macros.get(separatedMacro[0]);
-
-                    writer(mac.getNom());
-
-                    if (mac.getnbParam() != 0) {
-
-                        writer("(" + separatedMacro[1]);
-
-                        for (int i = 2; i < mac.getnbParam(); i++) {
-
-                            writer(", " + separatedMacro[0]);
-
-                        }
-
-                        writer(")");
-
-                    }
-
-                    writer("");
-
-                } else {
-
-                    System.exit(10);
-
-                }
-
-            } else {
-
-                ReadLine(macro.getCommands().get(j));
-
-            }
-
-        } /*else {
-
-         for (int k = 0; k < repete; k++) {
-
-         tmp = macro.getCommands().get(j).split(": ")[1];
-
-         separatedMacro = tmp.split(" ");
-
-         if (macros.containsKey(separatedMacro[0])) {
-
-         ReadMacro(separatedMacro);
-
-         } else {
-
-         ReadLine(macro.getCommands().get(j).split(": ")[1]);
-
-         }
-
-         }
-
-         }*/
 
     }
 
