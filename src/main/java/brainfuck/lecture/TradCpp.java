@@ -232,8 +232,8 @@ public class TradCpp implements ObservableLogstxt {
                 System.out.println(" *** " + commands.get(i));
 
                 if (i != 0) {
-
-                    writeInstr(i, cpt - 1, prevInstr, macro, size);
+                    System.out.println("DEB ET FIN " + commands.get(i) + "  " + size + "  " + i);
+                    writeInstr(i, cpt, prevInstr, macro, size);
 
                 }
 
@@ -241,10 +241,7 @@ public class TradCpp implements ObservableLogstxt {
 
                 cpt = 1;
 
-            }
-
-            //System.out.println("COMMAND -- " + commands.get(i) + " -- " + size + " --- " + i);
-            if (commands.get(i).equals(prevInstr) && i != size - 1) {
+            } else if (commands.get(i).equals(prevInstr) && i != size - 1) {
 
                 cpt++;
 
