@@ -65,7 +65,7 @@ public class Fichiers {
      * @param i the cipher of the instruction considered.
      * @return the cipher of the associated loop instruction.
      */
-    public int getTableLoopAssoc(int i) {
+    public static int getTableLoopAssoc(int i) {
         return jumpBack.get(i);
     }
 
@@ -176,7 +176,7 @@ public class Fichiers {
      *
      * @return the list of the different commands.
      */
-    public List<EnumCommands> getInstructions() {
+    public static List<EnumCommands> getInstructions() {
         return list;
     }
 
