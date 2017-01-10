@@ -83,6 +83,34 @@ public class TradCpp implements ObservableLogstxt {
 
     public void execute() {
 
+        /*if (commands.contains(IN)) {
+
+         writeSupIn();
+         in = true;
+
+         }
+
+         if (commands.contains(OUT)) {
+
+         writeSupOut();
+         out = true;
+
+         }*/
+        ReadMacro();
+
+        if (in) {
+            System.out.println("IN");
+            writeSupIn();
+
+        }
+
+        if (out) {
+
+            writeSupOut();
+
+        }
+
+        fillCommands();
         if (commands.contains(IN)) {
 
             writeSupIn();
@@ -96,20 +124,17 @@ public class TradCpp implements ObservableLogstxt {
             out = true;
 
         }
-        ReadMacro();
-        
+
         writeHeader();
 
         writeMacro();
 
-        fillCommands();
-
+        //fillCommands();
         writeInitVar();
 
         System.out.println("PROGRAMME CORE -- " + commands);
 
-        writeInstr(false);
-
+        writeInstr(false, commands);
         writeEnd();
 
         writeMemory();
@@ -152,13 +177,13 @@ public class TradCpp implements ObservableLogstxt {
 
         if (in) {
 
-            Header.append("In *fIn = new In(argv);\n");
+            Header.append("\tIn *fIn = new In(argv);\n");
 
         }
 
         if (out) {
 
-            Header.append("Out *fOut = new Out(argv);\n");
+            Header.append("\tOut *fOut = new Out(argv);\n");
 
         }
 
@@ -174,18 +199,18 @@ public class TradCpp implements ObservableLogstxt {
 
         if (in) {
 
-            writer("\tdelete(In);\n");
+            writer("\tdelete In;\n");
 
         }
 
         if (out) {
 
-            writer("\tdelete(fOut);\n");
+            writer("\tdelete fOut;\n");
 
         }
 
         //writeInstr(pos, cpt, prevInstr);
-        writer("\tdelete(mem)\n"
+        writer("\tdelete mem;\n"
                 + "\n\treturn 0;"
                 + "\n\n}\n\n");
 
@@ -197,7 +222,7 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
-    private void writeInstr(boolean macro) {
+    private void writeInstr(boolean macro, ArrayList<EnumCommands> commandstoWrite) {
 
         /*writer("int main(int n, char *params[]){\n\n"
          + "\tunsigned char m[30000];\n\n"
@@ -218,19 +243,19 @@ public class TradCpp implements ObservableLogstxt {
          writer("\tMemory *mem = new Memory();\n\n");*/
         int cpt = 0;
 
-        EnumCommands prevInstr = commands.get(0);
+        EnumCommands prevInstr = commandstoWrite.get(0);
 
-        int size = commands.size();
+        int size = commandstoWrite.size();
 
         for (int i = 0; i < size; i++) {
 
             if (macroProg.containsKey(i)) {
 
-                System.out.println(" *** " + commands.get(i));
+                System.out.println(" *** " + commandstoWrite.get(i));
 
                 if (i != 0) {
 
-                    writeInstr(i, cpt, prevInstr, macro, size);
+                    writeInstr(i, cpt, prevInstr, macro, size, commandstoWrite);
 
                 }
 
@@ -243,19 +268,19 @@ public class TradCpp implements ObservableLogstxt {
                 //writer("\t" + macroProg.get(i) + "; \n");
                 cpt = 1;
 
-            } else if (commands.get(i).equals(prevInstr) && i != size - 1) {
+            } else if (commandstoWrite.get(i).equals(prevInstr) && i != size - 1) {
 
                 cpt++;
 
             } else {
 
-                writeInstr(i, cpt, prevInstr, macro, size);
+                writeInstr(i, cpt, prevInstr, macro, size, commandstoWrite);
 
                 cpt = 1;
 
             }
 
-            prevInstr = commands.get(i);
+            prevInstr = commandstoWrite.get(i);
 
         }
 
@@ -267,10 +292,10 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
-    private void writeInstr(int i, int cpt, EnumCommands prevInstr, boolean macro, int size) {
+    private void writeInstr(int i, int cpt, EnumCommands prevInstr, boolean macro, int size, ArrayList<EnumCommands> commandstoWrite) {
 
         //System.out.println("MACROPROG -- " + macroProg);
-        if (commands.get(i).equals(OUT)) {
+        if (commandstoWrite.get(i).equals(OUT)) {
 
             writeInstr(cpt, prevInstr, macro);
 
@@ -278,7 +303,7 @@ public class TradCpp implements ObservableLogstxt {
 
             cpt = 1;
 
-        } else if (commands.get(i).equals(IN)) {
+        } else if (commandstoWrite.get(i).equals(IN)) {
 
             writeInstr(cpt, prevInstr, macro);
 
@@ -286,7 +311,7 @@ public class TradCpp implements ObservableLogstxt {
 
             cpt = 1;
 
-        } else if (commands.get(i).equals(JUMP)) {
+        } else if (commandstoWrite.get(i).equals(JUMP)) {
 
             writeInstr(cpt, prevInstr, macro);
 
@@ -294,7 +319,7 @@ public class TradCpp implements ObservableLogstxt {
 
             cpt = 1; ////////////////////////////////// AJOUT A TESTER
 
-        } else if (commands.get(i).equals(BACK)) {
+        } else if (commandstoWrite.get(i).equals(BACK)) {
 
             writeInstr(cpt, prevInstr, macro);
 
@@ -316,14 +341,14 @@ public class TradCpp implements ObservableLogstxt {
 
          cpt = 1;
 
-         }*/ else if (i == size - 1 && !commands.get(i).equals(prevInstr)) {
+         }*/ else if (i == size - 1 && !commandstoWrite.get(i).equals(prevInstr)) {
 
             writeInstr(cpt, prevInstr, macro);
 
             cpt = 1;
 
-            // if (!commands.get(i).equals(prevInstr)) {
-            writeInstr(cpt, commands.get(i), macro);
+            // if (!commandstoWrite.get(i).equals(prevInstr)) {
+            writeInstr(cpt, commandstoWrite.get(i), macro);
 
             //  }
         } else if (i == size - 1) {
@@ -438,6 +463,18 @@ public class TradCpp implements ObservableLogstxt {
 
                         } else {
 
+                            if (line.equals(IN.getLong()) || line.contains(IN.getShort())) {
+                                System.out.println("FOIREZUX" + line);
+                                in = true;
+
+                            }
+
+                            if (line.equals(OUT.getLong()) || line.contains(OUT.getShort())) {
+
+                                out = true;
+
+                            }
+
                             macro.fillCommands(line);
 
                         }
@@ -453,6 +490,8 @@ public class TradCpp implements ObservableLogstxt {
     }
 
     private void writeMacro() {
+
+        ArrayList<EnumCommands> commandsMacro = new ArrayList<>();
 
         String macroKey;
 
@@ -512,11 +551,11 @@ public class TradCpp implements ObservableLogstxt {
 
                     if (mac.isParam(cpt)) {
 
-                        if (!commands.isEmpty()) {
+                        if (!commandsMacro.isEmpty()) {
 
-                            writeInstr(true);
+                            writeInstr(true, commandsMacro);
 
-                            commands.clear();
+                            commandsMacro.clear();
 
                         }
 
@@ -563,11 +602,13 @@ public class TradCpp implements ObservableLogstxt {
 
                         } else {
 
-                            ReadLine(line);
+                            System.out.println(" READ LINE " + line);
 
-                            writeInstr(true);
+                            ReadLine(line, commandsMacro);
 
-                            commands.clear();
+                            writeInstr(true, commandsMacro);
+
+                            commandsMacro.clear();
 
                         }
 
@@ -594,7 +635,7 @@ public class TradCpp implements ObservableLogstxt {
 
                     } else {
                         System.out.println("LIT LINE --+++- " + line);
-                        ReadLine(line);
+                        ReadLine(line, commandsMacro);
 
                     }
 
@@ -602,11 +643,11 @@ public class TradCpp implements ObservableLogstxt {
 
             }
 
-            if (!commands.isEmpty()) {
-                System.out.println("FINAL -- " + commands);
-                writeInstr(true);
+            if (!commandsMacro.isEmpty()) {
+                System.out.println("FINAL -- " + commandsMacro);
+                writeInstr(true, commandsMacro);
 
-                commands.clear();
+                commandsMacro.clear();
 
             }
 
@@ -1196,7 +1237,7 @@ public class TradCpp implements ObservableLogstxt {
 
                     } else {
                         System.out.println("LIT LINE --- " + line);
-                        ReadLine(line);
+                        ReadLine(line, commands);
 
                     }
 
@@ -1221,7 +1262,7 @@ public class TradCpp implements ObservableLogstxt {
      *
      * @param line the line considered.
      */
-    private void ReadLine(String line) {
+    private void ReadLine(String line, ArrayList<EnumCommands> commandsToFill) {
 
         if ((line.charAt(0) < 'A') || (line.charAt(0) > 'Z')) { //modif le 25/12 >= et <= avant
 
@@ -1229,13 +1270,13 @@ public class TradCpp implements ObservableLogstxt {
 
                 if (isCommand(Character.toString(line.charAt(j)))) {
 
-                    commands.add(toCommand((Character.toString(line.charAt(j)))));
+                    commandsToFill.add(toCommand((Character.toString(line.charAt(j)))));
 
                 } else {
                     System.out.println("MARCHE PAS --- |" + line.charAt(j) + "| \n" + line + "     " + j);
 
                     if (FLAG_trace) {
-                        notifyForLogs(line, commands.size());
+                        notifyForLogs(line, commandsToFill.size());
                     }
 
                     System.exit(4);
@@ -1250,7 +1291,7 @@ public class TradCpp implements ObservableLogstxt {
 
             if (isCommand(line)) {
 
-                commands.add(toCommand(line));
+                commandsToFill.add(toCommand(line));
 
                 cptInstr++;
 
@@ -1259,7 +1300,7 @@ public class TradCpp implements ObservableLogstxt {
                 System.out.println("nOPE -- " + line);
 
                 if (FLAG_trace) {
-                    notifyForLogs(line, commands.size());
+                    notifyForLogs(line, commandsToFill.size());
                 }
 
                 System.exit(4);
