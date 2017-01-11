@@ -47,6 +47,8 @@ public class TradCpp implements ObservableLogstxt {
 
     private HashMap<Integer, ArrayList<String>> macroProg = new HashMap<>();
 
+    private HashMap<String, Fonctions> functions = new HashMap<>();
+
     private String filename;
 
     private PrintWriter file;
@@ -669,6 +671,87 @@ public class TradCpp implements ObservableLogstxt {
         }
     }
 
+    private void ReadFunc() {
+
+        String[] separated;
+
+        BufferedReader progFile;
+
+        Fonctions func = new Fonctions();
+
+        try {
+
+            progFile = new BufferedReader(new FileReader(filename));
+
+            String line = progFile.readLine();
+
+            while (line != null) {
+
+                if (line.equals("---- FONCTION")) {
+
+                    while (!((line = progFile.readLine())).equals("---- ENDFONCTION") && line != null) {
+
+                        line = deleteCom(line, null);
+
+                        if (!line.equals("")) {
+
+                            if (line.charAt(0) == '*') {
+
+                                separated = line.split(" ");
+
+                                System.out.println("NOM --- " + separated[1]);
+
+                                if (separated.length == 3) {
+
+                                    func = new Fonctions(separated);
+                                    
+                                    functions.put(separated[1], func);
+
+                                } else {
+
+                                    System.exit(11);
+                                    
+                                }
+
+                                /*macro = new Macro(separated);
+
+                                 macros.put(separated[1], macro);*/
+                            } else {
+
+                                if (line.equals(IN.getLong()) || line.contains(IN.getShort())) {
+                                    System.out.println("FOIREZUX" + line);
+                                    in = true;
+
+                                }
+
+                                if (line.equals(OUT.getLong()) || line.contains(OUT.getShort())) {
+
+                                    out = true;
+
+                                }
+
+                                func.fillCommands(line);
+
+                            }
+                        }
+
+                    }
+                }
+
+                line = progFile.readLine();
+
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(TradCpp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private void writeFunc() {
+
+    }
+
     private void writeSupIn() {
 
         String[] separated;
@@ -1143,7 +1226,7 @@ public class TradCpp implements ObservableLogstxt {
             String line = new String();
 
             while (line != null) {
-                
+
                 //ReadMacro(line, progFile);
                 if (line.equals("---- MACRO")) {
 
@@ -1156,7 +1239,7 @@ public class TradCpp implements ObservableLogstxt {
                 }
 
                 System.out.println("PROG /////////////////////////////////////////////////////// " + line);
-                
+
                 line = deleteCom(line, null);
 
                 if (!line.equals("")) {

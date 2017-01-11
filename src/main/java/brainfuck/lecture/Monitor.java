@@ -7,6 +7,7 @@ package brainfuck.lecture;
 
 import brainfuck.Observer.Observateur;
 import brainfuck.memory.ComputationalModel;
+import static brainfuck.memory.Launcher.FLAG_trace;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,9 +16,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This class represents the Monitor. It allows to use the Observer Pattern and keep an eye on different classes
- * and update their information when it's needed. It also allows to use the command log which display in a file, after
- * reading a Brainf*ck program, what kind of mistake occured and where it happened.
+ * This class represents the Monitor. It allows to use the Observer Pattern and
+ * keep an eye on different classes and update their information when it's
+ * needed. It also allows to use the command log which display in a file, after
+ * reading a Brainf*ck program, what kind of mistake occured and where it
+ * happened.
  *
  * @author Team Taskbar
  */
@@ -41,7 +44,9 @@ public class Monitor implements Observateur {
         //File f = new File(file);
         this.fileuh = fileuh;
 
-        file = new PrintWriter(new FileWriter(fileuh));
+        if (FLAG_trace) {
+            file = new PrintWriter(new FileWriter(fileuh));
+        }
 
         //StatProg.file = new FileWriter(f, true);
         cm = new ComputationalModel();
@@ -145,7 +150,8 @@ public class Monitor implements Observateur {
 
     @Override
     /**
-     * This method allows to indicate when there is a decrementation of a cell and where.
+     * This method allows to indicate when there is a decrementation of a cell
+     * and where.
      */
     public void logsDecr() {
 
@@ -156,7 +162,8 @@ public class Monitor implements Observateur {
 
     @Override
     /**
-     * This method allows to indicate when there is a incrementation of a cell and where.
+     * This method allows to indicate when there is a incrementation of a cell
+     * and where.
      */
     public void logsIncr() {
 
@@ -167,7 +174,8 @@ public class Monitor implements Observateur {
 
     @Override
     /**
-     * This method allows to indicate when there is a reading failure due to an IN and where it occured.
+     * This method allows to indicate when there is a reading failure due to an
+     * IN and where it occured.
      */
     public void logsIn() {
 
@@ -178,7 +186,8 @@ public class Monitor implements Observateur {
 
     @Override
     /**
-     * This method allows to indicate when the memory failed to move left and where.
+     * This method allows to indicate when the memory failed to move left and
+     * where.
      */
     public void logsLeft() {
 
@@ -189,7 +198,8 @@ public class Monitor implements Observateur {
 
     @Override
     /**
-     * This method allows to indicate when there is a outputting failure due to an OUT and where it occured.
+     * This method allows to indicate when there is a outputting failure due to
+     * an OUT and where it occured.
      */
     public void logsOut() {
 
@@ -200,7 +210,8 @@ public class Monitor implements Observateur {
 
     @Override
     /**
-     * This method allows to indicate when the memory failed to move right and where.
+     * This method allows to indicate when the memory failed to move right and
+     * where.
      */
     public void logsRight() {
 
@@ -211,7 +222,8 @@ public class Monitor implements Observateur {
 
     @Override
     /**
-     * This method allows to indicate when a color didn't match with the specific instruction and where.
+     * This method allows to indicate when a color didn't match with the
+     * specific instruction and where.
      */
     public void logsImage(int N) {
 
@@ -223,7 +235,8 @@ public class Monitor implements Observateur {
 
     @Override
     /**
-     * This method allows to indicate when the reading of a file failed and where.
+     * This method allows to indicate when the reading of a file failed and
+     * where.
      */
     public void logsTxt(String string, int i) {
 
@@ -235,8 +248,9 @@ public class Monitor implements Observateur {
 
     @Override
     /**
-     * This method allows to indicate when a program is not well formed(parenthesis matter) and when
-     * it's missing a JUMP or BACK command and where.
+     * This method allows to indicate when a program is not well
+     * formed(parenthesis matter) and when it's missing a JUMP or BACK command
+     * and where.
      */
     public void logsWellformed(int i, boolean BACK) {
 
@@ -256,6 +270,7 @@ public class Monitor implements Observateur {
 
     /**
      * This method allows to write the log on a file.
+     *
      * @param logs
      */
     private void writer(String logs) {
@@ -271,13 +286,14 @@ public class Monitor implements Observateur {
         file.close();
 
     }
-    public void Reset(){
-        NB_INSTR=0;
-        EXEC_MOVE=0;
-        EXEC_TIME=0;
-        DATA_MOVE=0;
-        DATA_READ=0;
-        DATA_WRITE=0;
+
+    public void Reset() {
+        NB_INSTR = 0;
+        EXEC_MOVE = 0;
+        EXEC_TIME = 0;
+        DATA_MOVE = 0;
+        DATA_READ = 0;
+        DATA_WRITE = 0;
     }
 
 }

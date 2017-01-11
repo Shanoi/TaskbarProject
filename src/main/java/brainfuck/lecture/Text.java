@@ -25,9 +25,9 @@ import static brainfuck.memory.Launcher.FLAG_trace;
 import static brainfuck.command.EnumCommands.CALL;
 
 /**
- * This class reads a Brainf*ck text program (.txt). (same actions as the Image class
- * but with the textual instructions) It reads the instructions and stores them.
- * It manages the reading of the macros and the creation of them.
+ * This class reads a Brainf*ck text program (.txt). (same actions as the Image
+ * class but with the textual instructions) It reads the instructions and stores
+ * them. It manages the reading of the macros and the creation of them.
  *
  * @author TeamTaskbar
  */
@@ -76,19 +76,23 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
                 line = deleteCom(line, file);
 
-                if (line.charAt(0) == '*') {
+                if (!line.equals("")) {
 
-                    separated = line.split(" ");
+                    if (line.charAt(0) == '*') {
 
-                    System.out.println("NOM --- " + separated[1]);
+                        separated = line.split(" ");
 
-                    macro = new Macro(separated);
+                        System.out.println("NOM --- " + separated[1]);
 
-                    macros.put(separated[1], macro);
+                        macro = new Macro(separated);
 
-                } else {
+                        macros.put(separated[1], macro);
 
-                    macro.fillCommands(line);
+                    } else {
+
+                        macro.fillCommands(line);
+
+                    }
 
                 }
 
@@ -105,33 +109,35 @@ public final class Text extends Fichiers implements ObservableLogstxt {
                 line = deleteCom(line, file);
                 System.out.println("AFFICHE LINE --- " + line);
 
-                if (line.charAt(0) == '*') {
-                    String str = new String("");
-                    int i = 0;
-                    for (i = 0; i < line.length() && line.charAt(i)!=' '; i++) {
-                        if(line.charAt(i) != '*') {
-                            str += line.charAt(i);
+                if (!line.equals("")) {
+
+                    if (line.charAt(0) == '*') {
+                        String str = new String("");
+                        int i = 0;
+                        for (i = 0; i < line.length() && line.charAt(i) != ' '; i++) {
+                            if (line.charAt(i) != '*') {
+                                str += line.charAt(i);
+                            }
                         }
-                    }
-                    if (i < line.length() && line.charAt(i)==' ') {
-                        StringTokenizer str2 = new StringTokenizer(line);
-                        str2.nextToken();
-                        if (str2.hasMoreTokens()) {
-                            nbArgFonction.put(str,Integer.parseInt(str2.nextToken()));
+                        if (i < line.length() && line.charAt(i) == ' ') {
+                            StringTokenizer str2 = new StringTokenizer(line);
+                            str2.nextToken();
+                            if (str2.hasMoreTokens()) {
+                                nbArgFonction.put(str, Integer.parseInt(str2.nextToken()));
+                            }
+
+                        } else {
+                            nbArgFonction.put(str, 0);
                         }
 
+                        fonction2.put(str, list.size());
+                        System.out.println("ADD LINE --- " + str);
+
+                    } else {
+
+                        ReadLine(line);
+
                     }
-                    else {
-                        nbArgFonction.put(str,0);
-                    }
-
-                    fonction2.put(str, list.size());
-                    System.out.println("ADD LINE --- " + str);
-
-                } else {
-
-                    ReadLine(line);
-
                 }
 
             }
@@ -156,7 +162,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
                 if (macros.containsKey(separated[0])) {
 
-                    ReadMacro(separated);
+                    ReadMacro(separated, null, null);
 
                 } else {
                     System.out.println("LIT LINE --- " + line);
@@ -172,7 +178,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
         file.close();
 
         //affichafe de la liste
-        for (int i = 0; i < list.size() ; i++) {
+        for (int i = 0; i < list.size(); i++) {
             System.out.println("LIST LINE --- " + list.get(i));
         }
 
@@ -209,8 +215,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
                     list.add(toCommand((Character.toString(line.charAt(j)))));
 
-                }
-                else {
+                } else {
                     System.out.println("MARCHE PAS --- |" + line.charAt(j) + "| \n" + line + "     " + j);
 
                     if (FLAG_trace) {
@@ -223,16 +228,13 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
             }
 
-        }
-        else if (fonction2.containsKey(line)) {
+        } else if (fonction2.containsKey(line)) {
             list.add(CALL); //a ajouter dans enum command
             System.out.println("ligne " + line + ":" + list.size());
             fonction.put(list.size(), line);
             //mettre une liste à l aplace d'une stack pourl 'ordre
 
-
-        }
-        else {
+        } else {
 
             if (isCommand(line)) {
 
@@ -255,23 +257,53 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
     /**
      * This method allows to support macro in the program.
+     *
      * @param separated
      */
-    private void ReadMacro(String[] separated) {
+    private void ReadMacro(String[] separated, Macro appelante, String[] separatedApp) {
 
         Macro macro = macros.get(separated[0]);
 
+        int cptBoucle = 0;
+        
         if (separated.length == 2 && macro.getnbParam() == 0) {
 
-            for (int k = 0; k < Integer.parseInt(separated[1]); k++) {
+            System.out.println("SEPARATED --- " + separated[1] + " -- " + macro.isParam(separated[1]));
+            
+            if (appelante != null && appelante.isParam(separated[1])) {
 
-                for (int j = 0; j < macro.getCommands().size(); j++) {
+                appelante.getNumParam(separated[1]);
+                
+                System.out.println("APPELANT  ---- " + separatedApp[appelante.getNumParam(separated[1])]);
+                
+                cptBoucle = Integer.parseInt(separatedApp[appelante.getNumParam(separated[1])]);
+                
+            } else {
+                System.out.println("ELSE");
+                
+                cptBoucle = Integer.parseInt(separated[1]);
+                
+                /*for (int k = 0; k < Integer.parseInt(separated[1]); k++) {
 
-                    MacroOrLine(macro, j, separated);
+                    for (int j = 0; j < macro.getCommands().size(); j++) {
 
-                }
+                        MacroOrLine(macro, j, separated);
+
+                    }
+
+                }*/
 
             }
+            for (int k = 0; k < cptBoucle; k++) {
+
+                    for (int j = 0; j < macro.getCommands().size(); j++) {
+
+                        MacroOrLine(macro, j, separated);
+
+                    }
+
+                }
+            
 
         } else {
 
@@ -322,7 +354,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
                     }
 
-                    ReadMacro(separatedMacro);
+                    ReadMacro(separatedMacro, macro, separated);
 
                 } else {
 
@@ -350,7 +382,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
                 if (macros.containsKey(separatedMacro[0])) {
 
-                    ReadMacro(separatedMacro);
+                    ReadMacro(separatedMacro, macro, separated);
 
                 } else {
 
@@ -385,7 +417,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
     @Override
     /**
-     *  This method allows to update te observers for the log command.
+     * This method allows to update te observers for the log command.
      */
     public void notifyForLogs(String string, int i) {
 

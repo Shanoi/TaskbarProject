@@ -8,11 +8,10 @@ import brainfuck.lecture.Text;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 /**
- * This class manages the input file and the input commands.
- * It gives the path of the file for the IN/OUT command.
- * It launches the Run. It also executes the considered commands.
+ * This class manages the input file and the input commands. It gives the path
+ * of the file for the IN/OUT command. It launches the Run. It also executes the
+ * considered commands.
  *
  * @author Team Taskbar
  */
@@ -51,8 +50,6 @@ public class Launcher {
         //this.args = new ArrayList(Arrays.asList(args));
         Run run = new Run(path);
 
-        run.load();
-
         for (int i = 0; i < args.length; i++) {
 
             if (args[i].equals("--trace")) {
@@ -62,6 +59,8 @@ public class Launcher {
             }
 
         }
+
+        run.load();
 
         for (int i = 0; i < args.length; i++) {
 
@@ -116,10 +115,9 @@ public class Launcher {
     //=================
     //Getter and Setter
     //=================
-
-
     /**
      * Getter of the input File.
+     *
      * @return the input file.
      */
     public static String getFileIn() {
@@ -128,6 +126,7 @@ public class Launcher {
 
     /**
      * Getter of the output File.
+     *
      * @return the output file
      */
     public static String getFileOut() {
