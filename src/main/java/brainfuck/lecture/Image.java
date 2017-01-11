@@ -21,8 +21,8 @@ import static java.lang.Math.ceil;
 import static java.lang.Math.sqrt;
 
 /**
- * This class reads an .bmp image and stores the instructions in a list.
- * It also translates the image instructions into a text one.
+ * This class reads an .bmp image and stores the instructions in a list. It also
+ * translates the image instructions into a text one.
  *
  * @author Team Taskbar
  */
@@ -139,11 +139,11 @@ public final class Image extends Fichiers implements ObservableLogsImage {
 
                         }
 
-                        if (isCommand("#" + Integer.toHexString(pixelcolorBase.getRGB()).substring(2)) && pixelcolorBase != Color.BLACK) {
+                        if (isCommand("#" + Integer.toHexString(pixelcolorBase.getRGB()).substring(2)) && !pixelcolorBase.equals(Color.BLACK)) {
 
                             list.add(toCommand("#" + Integer.toHexString(pixelcolorBase.getRGB()).substring(2)));
 
-                        } else {
+                        } else if (!pixelcolorBase.equals(Color.BLACK)) {
 
                             if (FLAG_trace) {
                                 notifyForLogs(o + j);
