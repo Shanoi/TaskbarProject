@@ -96,13 +96,13 @@ public final class Run implements Observable, ObservableLogs {
      */
     public void execute() throws IOException, FileNotFoundException {
         String str = ""; // the execution step number (starting at one), the location of the execution pointer after the execution of this step, the location of the data pointer at the very same time, and a snapshot of the memory.
-        System.out.println("EXEC");
+        
         notifyObservers();
 
         cm.init();
         i = cm.getI();
         while (cm.getI() < Fichiers.list.size()) {
-            System.out.println("I:" +cm.getI() + Fichiers.list.get(0).getLong());
+            
             Fichiers.list.get(i).getCommand().execute();
 
             //Fichiers.list.get(i).getLong();

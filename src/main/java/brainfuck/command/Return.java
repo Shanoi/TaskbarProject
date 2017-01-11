@@ -16,7 +16,7 @@ public class Return implements Command {
      * This method allows to do the return action.
      */
     public void execute() {
-        System.out.println("NUM2 LINE --- " + Fichiers.getRetAdress().peek());
+
         ComputationalModel.setI(Fichiers.getRetAdress().pop()-1);
         ComputationalModel.setExecFonction(false);
         ComputationalModel.returnValue();

@@ -37,7 +37,7 @@ public final class Left implements Command, Observable, ObservableLogs {
 
         Fichiers tempfile = new Fichiers("");
 
-        System.out.println("tempfile.getCm().getCurrentIndice() : " + tempfile.getCm().getCurrentIndice() +  "tempfile.getCm().getLastP()" + tempfile.getCm().getLastP());
+        
         if (tempfile.getCm().getCurrentIndice() > 0 && !(tempfile.getCm().getExecFonction()) ) {
             tempfile.getCm().setCurrentIndice(tempfile.getCm().getCurrentIndice() - 1);
         }

@@ -101,7 +101,7 @@ public class TradCpp implements ObservableLogstxt {
         ReadMacro();
 
         if (in) {
-            System.out.println("IN");
+
             writeSupIn();
 
         }
@@ -133,8 +133,6 @@ public class TradCpp implements ObservableLogstxt {
 
         //fillCommands();
         writeInitVar();
-
-        System.out.println("PROGRAMME CORE -- " + commands);
 
         writeInstr(false, commands);
         writeEnd();
@@ -253,8 +251,6 @@ public class TradCpp implements ObservableLogstxt {
 
             if (macroProg.containsKey(i) && !macro) {
 
-                System.out.println(" *** " + commandstoWrite.get(i));
-
                 if (i != 0) {
 
                     writeInstr(i, cpt, prevInstr, macro, size, commandstoWrite);
@@ -296,7 +292,6 @@ public class TradCpp implements ObservableLogstxt {
 
     private void writeInstr(int i, int cpt, EnumCommands prevInstr, boolean macro, int size, ArrayList<EnumCommands> commandstoWrite) {
 
-        //System.out.println("MACROPROG -- " + macroProg);
         if (commandstoWrite.get(i).equals(OUT)) {
 
             writeInstr(cpt, prevInstr, macro);
@@ -459,8 +454,6 @@ public class TradCpp implements ObservableLogstxt {
 
                                 separated = line.split(" ");
 
-                                System.out.println("NOM --- " + separated[1]);
-
                                 macro = new Macro(separated);
 
                                 macros.put(separated[1], macro);
@@ -468,7 +461,7 @@ public class TradCpp implements ObservableLogstxt {
                             } else {
 
                                 if (line.equals(IN.getLong()) || line.contains(IN.getShort())) {
-                                    System.out.println("FOIREZUX" + line);
+
                                     in = true;
 
                                 }
@@ -512,13 +505,6 @@ public class TradCpp implements ObservableLogstxt {
             macroKey = macrosS.getKey();
             mac = macrosS.getValue();
 
-            /*System.out.println("MACRO --------------------------------------- " + macroKey);
-             System.out.println("INTR -- " + mac.getCommands());*/
-            System.out.println("//////////////////////////////////////////////////////////////////////////////////////");
-            System.out.println("------------------------ECRITURE DE MACRO------------------------" + macroKey);
-            System.out.println("------------------------ECRITURE DE MACRO------------------------" + mac.getCommands());
-            System.out.println("//////////////////////////////////////////////////////////////////////////////////////");
-
             writer("#define " + macroKey);
 
             if (mac.getnbParam() != 0) {
@@ -535,10 +521,6 @@ public class TradCpp implements ObservableLogstxt {
 
             } else {
 
-                System.out.println("//////////////////////////////////////////////////////////////////////////////////////");
-                System.out.println("------------------------SANS PARAMS------------------------" + macroKey);
-                System.out.println("//////////////////////////////////////////////////////////////////////////////////////");
-
                 writer("(A)\\\n"
                         + "for (int i" + cptBoucle + " = 0; i" + cptBoucle + " < (A); i++){\\\n");
 
@@ -549,11 +531,9 @@ public class TradCpp implements ObservableLogstxt {
             writer("\\\n");
 
             for (int i = 0; i < mac.getCommands().size(); i++) {
-                //System.out.println("INSTR " + mac.getCommands());
+
                 line = mac.getCommands().get(i);
-                System.out.println("//////////////////////////////////////////////////////////////////////////////////////");
-                System.out.println("------------------------LINE ------------------------" + line);
-                System.out.println("//////////////////////////////////////////////////////////////////////////////////////");
+
                 if (line.split(": ").length > 1) {
 
                     String cpt = line.split(": ")[0];
@@ -576,11 +556,6 @@ public class TradCpp implements ObservableLogstxt {
 
                         if (macros.containsKey(line.split(" ")[0])) {
 
-                            System.out.println("//////////////////////////////////////////////////////////////////////////////////////");
-                            System.out.println("------------------------LECTURE DE MACRO DANS UNE MACRO------------------------" + macroKey);
-                            System.out.println("//////////////////////////////////////////////////////////////////////////////////////");
-
-                            //ReadMacro(line.split(" "));
                             writer("\t" + line.split(" ")[0]);
 
                             if (line.split(" ").length > 1) {
@@ -613,8 +588,6 @@ public class TradCpp implements ObservableLogstxt {
 
                         } else {
 
-                            System.out.println(" READ LINE " + line);
-
                             ReadLine(line, commandsMacro);
 
                             writeInstr(true, commandsMacro);
@@ -640,12 +613,10 @@ public class TradCpp implements ObservableLogstxt {
 ////////////////////
                         //ReadMacro(line.split(" "));
 
-                        System.out.println("////////////////////////// ELSE");
-
                         writer("\t" + line.split(" ")[0] + "(1)\\\n");
 
                     } else {
-                        System.out.println("LIT LINE --+++- " + line);
+
                         ReadLine(line, commandsMacro);
 
                     }
@@ -655,7 +626,7 @@ public class TradCpp implements ObservableLogstxt {
             }
 
             if (!commandsMacro.isEmpty()) {
-                System.out.println("FINAL -- " + commandsMacro);
+
                 writeInstr(true, commandsMacro);
 
                 commandsMacro.clear();
@@ -699,18 +670,16 @@ public class TradCpp implements ObservableLogstxt {
 
                                 separated = line.split(" ");
 
-                                System.out.println("NOM --- " + separated[1]);
-
                                 if (separated.length == 3) {
 
                                     func = new Fonctions(separated);
-                                    
+
                                     functions.put(separated[1], func);
 
                                 } else {
 
                                     System.exit(11);
-                                    
+
                                 }
 
                                 /*macro = new Macro(separated);
@@ -719,7 +688,7 @@ public class TradCpp implements ObservableLogstxt {
                             } else {
 
                                 if (line.equals(IN.getLong()) || line.contains(IN.getShort())) {
-                                    System.out.println("FOIREZUX" + line);
+                               
                                     in = true;
 
                                 }
@@ -759,8 +728,6 @@ public class TradCpp implements ObservableLogstxt {
         separated = filename.split("/");
 
         String fileInName = filename.replace(separated[separated.length - 1], "In");
-
-        System.out.println(" ---- " + fileInName);
 
         PrintWriter fileIn;
 
@@ -887,8 +854,6 @@ public class TradCpp implements ObservableLogstxt {
 
         String fileOutName = filename.replace(separated[separated.length - 1], "Out");
 
-        System.out.println(" ---- " + fileOutName);
-
         PrintWriter fileIn;
 
         try {
@@ -1006,8 +971,6 @@ public class TradCpp implements ObservableLogstxt {
         separated = filename.split("/");
 
         String fileMemory = filename.replace(separated[separated.length - 1], "Memory");
-
-        System.out.println(" ---- " + fileMemory);
 
         PrintWriter fileIn;
 
@@ -1238,8 +1201,6 @@ public class TradCpp implements ObservableLogstxt {
 
                 }
 
-                System.out.println("PROG /////////////////////////////////////////////////////// " + line);
-
                 line = deleteCom(line, null);
 
                 if (!line.equals("")) {
@@ -1249,14 +1210,8 @@ public class TradCpp implements ObservableLogstxt {
                     separated = line.split(" ");
 
                     if (macros.containsKey(separated[0])) {
-                        System.out.println("LIT Macro --- " + line + " -- " + macros.get(separated[0]).getnbParam());
-                        //ReadMacro(separated);
-                        //Juste à écrire la macro avec ses paramètres
-                        //Mais on ne peut pas faire ça comme ça, stocker le bazar dans une liste pour pouvoir y appeler plus tard au moment
-                        //de l'écriture
-
+                  
                         if (macros.get(separated[0]).getnbParam() == 0) {
-                            System.out.println("LIGNE MACRO POWER 1 ------------------------- " + line);
 
                             if (!macroProg.containsKey(cptInstr)) {
 
@@ -1273,7 +1228,7 @@ public class TradCpp implements ObservableLogstxt {
                                     macroProg.put(cptInstr, instrMacro);
 
                                 } else {
-                                    System.out.println("PLANTE");
+                                    
                                     System.exit(10);
 
                                 }
@@ -1290,7 +1245,7 @@ public class TradCpp implements ObservableLogstxt {
                                     macroProg.get(cptInstr).add(separated[0] + "(" + separated[1] + ")");
 
                                 } else {
-                                    System.out.println("PLANTE 2");
+                                    
                                     System.exit(10);
 
                                 }
@@ -1298,8 +1253,6 @@ public class TradCpp implements ObservableLogstxt {
                             }
 
                         } else/* if (macros.get(separated[0]).getnbParam() == separated.length - 1)*/ {
-
-                            System.out.println("LIGNE MACRO POWER ------------------------- " + line);
 
                             paramsMacro = new StringBuilder();
 
@@ -1330,7 +1283,7 @@ public class TradCpp implements ObservableLogstxt {
                         }
 
                     } else {
-                        System.out.println("LIT LINE --- " + line);
+                
                         ReadLine(line, commands);
 
                     }
@@ -1367,7 +1320,6 @@ public class TradCpp implements ObservableLogstxt {
                     commandsToFill.add(toCommand((Character.toString(line.charAt(j)))));
 
                 } else {
-                    System.out.println("MARCHE PAS --- |" + line.charAt(j) + "| \n" + line + "     " + j);
 
                     if (FLAG_trace) {
                         notifyForLogs(line, commandsToFill.size());
@@ -1390,8 +1342,6 @@ public class TradCpp implements ObservableLogstxt {
                 cptInstr++;
 
             } else {
-
-                System.out.println("nOPE -- " + line);
 
                 if (FLAG_trace) {
                     notifyForLogs(line, commandsToFill.size());

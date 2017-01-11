@@ -82,8 +82,6 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
                         separated = line.split(" ");
 
-                        System.out.println("NOM --- " + separated[1]);
-
                         macro = new Macro(separated);
 
                         macros.put(separated[1], macro);
@@ -107,7 +105,6 @@ public final class Text extends Fichiers implements ObservableLogstxt {
             while (!((line = file.readLine())).equals("---- ENDFONCTION") && line != null) {
 
                 line = deleteCom(line, file);
-                System.out.println("AFFICHE LINE --- " + line);
 
                 if (!line.equals("")) {
 
@@ -131,7 +128,6 @@ public final class Text extends Fichiers implements ObservableLogstxt {
                         }
 
                         fonction2.put(str, list.size());
-                        System.out.println("ADD LINE --- " + str);
 
                     } else {
 
@@ -143,8 +139,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
             }
 
             line = file.readLine();
-            System.out.println(list.size());
-            System.out.println("DEBUT LINE --- " + list.size());
+
             cm.setI(list.size());
 
         }
@@ -165,7 +160,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
                     ReadMacro(separated, null, null);
 
                 } else {
-                    System.out.println("LIT LINE --- " + line);
+
                     ReadLine(line);
 
                 }
@@ -176,11 +171,6 @@ public final class Text extends Fichiers implements ObservableLogstxt {
         }
 
         file.close();
-
-        //affichafe de la liste
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("LIST LINE --- " + list.get(i));
-        }
 
     }
 
@@ -216,7 +206,6 @@ public final class Text extends Fichiers implements ObservableLogstxt {
                     list.add(toCommand((Character.toString(line.charAt(j)))));
 
                 } else {
-                    System.out.println("MARCHE PAS --- |" + line.charAt(j) + "| \n" + line + "     " + j);
 
                     if (FLAG_trace) {
                         notifyForLogs(line, list.size());
@@ -230,7 +219,7 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
         } else if (fonction2.containsKey(line)) {
             list.add(CALL); //a ajouter dans enum command
-            System.out.println("ligne " + line + ":" + list.size());
+
             fonction.put(list.size(), line);
             //mettre une liste à l aplace d'une stack pourl 'ordre
 
@@ -241,8 +230,6 @@ public final class Text extends Fichiers implements ObservableLogstxt {
                 list.add(toCommand(line));
 
             } else {
-
-                System.out.println("nOPE -- " + line);
 
                 if (FLAG_trace) {
                     notifyForLogs(line, list.size());
@@ -265,45 +252,29 @@ public final class Text extends Fichiers implements ObservableLogstxt {
         Macro macro = macros.get(separated[0]);
 
         int cptBoucle = 0;
-        
+
         if (separated.length == 2 && macro.getnbParam() == 0) {
 
-            System.out.println("SEPARATED --- " + separated[1] + " -- " + macro.isParam(separated[1]));
-            
             if (appelante != null && appelante.isParam(separated[1])) {
 
                 appelante.getNumParam(separated[1]);
-                
-                System.out.println("APPELANT  ---- " + separatedApp[appelante.getNumParam(separated[1])]);
-                
+
                 cptBoucle = Integer.parseInt(separatedApp[appelante.getNumParam(separated[1])]);
-                
+
             } else {
-                System.out.println("ELSE");
-                
+
                 cptBoucle = Integer.parseInt(separated[1]);
-                
-                /*for (int k = 0; k < Integer.parseInt(separated[1]); k++) {
-
-                    for (int j = 0; j < macro.getCommands().size(); j++) {
-
-                        MacroOrLine(macro, j, separated);
-
-                    }
-
-                }*/
 
             }
             for (int k = 0; k < cptBoucle; k++) {
 
-                    for (int j = 0; j < macro.getCommands().size(); j++) {
+                for (int j = 0; j < macro.getCommands().size(); j++) {
 
-                        MacroOrLine(macro, j, separated);
-
-                    }
+                    MacroOrLine(macro, j, separated);
 
                 }
-            
+
+            }
 
         } else {
 

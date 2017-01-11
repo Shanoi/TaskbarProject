@@ -4,7 +4,9 @@ import brainfuck.memory.ComputationalModel;
 import brainfuck.lecture.Fichiers;
 
 /**
- * This class represents the command CALL. It allows to call the different functions in a Brainf*ck program.
+ * This class represents the command CALL. It allows to call the different
+ * functions in a Brainf*ck program.
+ *
  * @author TeamTaskbar
  */
 public class Call implements Command {
@@ -12,13 +14,13 @@ public class Call implements Command {
     @Override
     public void execute() {
 
-        Fichiers.setRetAdress(ComputationalModel.getI()+1);
+        Fichiers.setRetAdress(ComputationalModel.getI() + 1);
         //System.out.println("NUM FONC --- " + Fichiers.getFonction(ComputationalModel.getI()+1));
-        String fct = Fichiers.getFonction(ComputationalModel.getI()+1);
+        String fct = Fichiers.getFonction(ComputationalModel.getI() + 1);
         int numLine = Fichiers.getFonction2(fct);
         //System.out.println("NUM FONC --- " + Fichiers.getFonction(ComputationalModel.getI()+1));
-        ComputationalModel.setI(numLine-1);
-        System.out.println("NUM LINE --- " + numLine);
+        ComputationalModel.setI(numLine - 1);
+
         //ici on recherche la fonction appelé dans la hashmap et stocké dans la stack
         //on stocke l'adresse de retour
         ComputationalModel.setTmpP();
@@ -32,6 +34,5 @@ public class Call implements Command {
             nbArg--;
         }
     }
-
 
 }
