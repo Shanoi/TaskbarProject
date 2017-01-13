@@ -49,33 +49,36 @@ public class Launcher {
     public void lauchInterpreter() throws IOException {
 
         //this.args = new ArrayList(Arrays.asList(args));
-        
+        boolean p = false;
 
         for (int i = 0; i < args.length; i++) {
-            
+
             if (args[i].equals("-p")) {
-                
+
+                p = true;
+
                 File f = new File(args[i + 1]);
-                
-                if(f.exists()){
-                    
+
+                if (f.exists()) {
+
                     path = args[i + 1];
-                    
+
                     break;
-                    
-                }else{
-                    
+
+                } else {
+
                     System.exit(1);
-                    
-                    }
-                
-                
+
                 }
-            
+
             }
+
+        }
+
+        if (p){
         
         Run run = new Run(path);
-        
+
         for (int i = 0; i < args.length; i++) {
 
             if (args[i].equals("--trace")) {
@@ -132,19 +135,24 @@ public class Launcher {
             }
 
         }
-        
+
         for (int i = 0; i < args.length; i++) {
-            
+
             if (args[i].equals("--TCpp")) {
 
                 new TradCpp(path).execute();
             }
 
-            
         }
 
         run.execute();
         ComputationalModel.affichememoire();
+        
+        }else{
+            
+            System.exit(1);
+            
+        }
 
     }
 
@@ -169,8 +177,8 @@ public class Launcher {
         return fileout;
     }
 
-    public static void setFileIn(String file){
-        filein=file;
+    public static void setFileIn(String file) {
+        filein = file;
     }
 
 }
