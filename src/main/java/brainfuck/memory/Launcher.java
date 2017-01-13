@@ -168,4 +168,8 @@ public class Launcher {
         return fileout;
     }
 
+    public static void setFileIn(String file){
+        filein=file;
+    }
+
 }
