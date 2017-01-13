@@ -17,6 +17,8 @@ public final class Left implements Command, Observable, ObservableLogs {
 
     private ArrayList observers;// Tableau d'observateurs.
 
+    //Constructor of Left
+
     public Left() {
 
         Monitor observer = new Monitor();

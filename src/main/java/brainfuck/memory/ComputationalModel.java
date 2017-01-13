@@ -20,6 +20,8 @@ public class ComputationalModel {
     private static int tmpSize = 0;
     private static ArrayList<uByte> _memory;
 
+    //Constructor of ComputatonalModel
+
     public ComputationalModel() {
 
     }

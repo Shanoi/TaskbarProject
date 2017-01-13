@@ -17,6 +17,8 @@ public final class Back implements Command, Observable {
 
     private ArrayList observers;// Tableau d'observateurs.
 
+    //Constructor of Back
+
     public Back() {
 
         Monitor observer = new Monitor();
@@ -29,7 +31,7 @@ public final class Back implements Command, Observable {
     }
 
     /**
-     * This method allows to execute the command BACK
+     * This method allows to execute the command BACK.
      */
     @Override
     public void execute() {

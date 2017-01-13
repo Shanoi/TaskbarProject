@@ -65,7 +65,7 @@ public class Macro {
     /**
      * This method allows to know whether it's a parameter or not.
      *
-     * @param param
+     * @param param the parameter to check.
      * @return true or false.
      */
     public boolean isParam(String param) {
@@ -88,7 +88,7 @@ public class Macro {
     /**
      * Getter of the number of the parameters.
      *
-     * @param param
+     * @param param the parameter to check.
      * @return the number of parameters.
      */
     public int getNumParam(String param) {
@@ -117,9 +117,9 @@ public class Macro {
     }
 
     /**
-     * This method allows to fill the commands / Should change its location.
+     * This method allows to fill the commands.
      *
-     * @param command
+     * @param command the mentioned command.
      */
     public void fillCommands(String command) {
 

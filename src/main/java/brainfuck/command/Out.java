@@ -27,6 +27,8 @@ public class Out implements Command, Observable, ObservableLogs {
 
     private ArrayList observers;// Tableau d'observateurs.
 
+    //Constructor of Out
+
     public Out() {
 
         Monitor observer = new Monitor();

@@ -26,7 +26,9 @@ public final class Run implements Observable, ObservableLogs {
 
     private int i = 0;
 
-    private ArrayList observers;// Tableau d'observateurs.
+    private ArrayList observers;// Tableau d'observateurs
+
+//Constructor of Run
 
     public Run() {
 
@@ -57,7 +59,7 @@ public final class Run implements Observable, ObservableLogs {
      * This method allows to load the given file.
      *
      * @throws IOException
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException when the file is not found exception.
      */
     public void load() throws IOException, FileNotFoundException {
 

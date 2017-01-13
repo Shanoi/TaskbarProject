@@ -25,7 +25,9 @@ public class Wellformed implements ObservableLogsWF {
 
     private ArrayList<EnumCommands> commands;
 
-    private ArrayList observers;// Tableau d'observateurs.
+    private ArrayList observers;// Tableau d'observateurs
+
+    //Constructor of Wellformed
 
     public Wellformed(ArrayList<EnumCommands> commands) {
 

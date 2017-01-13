@@ -10,14 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Florian on 09/01/2017.
+ * This class represents the translator ASM. From the Brainf*ck langage we can generate an ASM code.
+ * It can generate functions and macros.
+ *
+ * @author Team Taskbar
  */
 public class TradASM {
     
     private BufferedWriter writer;
     private List<EnumCommands> list = new ArrayList<>();
     
-    
+    //Constructor of TradASM
+
     public TradASM(String path) throws IOException {
         list = Fichiers.getInstructions();
         writer = new BufferedWriter(new FileWriter(path));
@@ -25,8 +29,11 @@ public class TradASM {
         writer.write("section .data\n\t_memory: TIMES 30000 db 0\n\t_i: dw 0x00\n\nsection .text\n");//pour nasm
         
     }
-    
-    
+
+    /**
+     *This method allows to run the translation.
+     * @throws IOException
+     */
     public void runTrad() throws IOException {
         boolean in_fonc = false;
         int temp = 0;

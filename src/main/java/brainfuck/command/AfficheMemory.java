@@ -2,6 +2,11 @@ package brainfuck.command;
 
 import brainfuck.memory.ComputationalModel;
 
+/**
+ * This class was created to display the memory.
+ *
+ * @author TeamTaskbar
+ */
 public class AfficheMemory implements Command {
 
 

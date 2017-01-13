@@ -9,6 +9,8 @@ public class uByte {
 
     byte a;
 
+    // Constructor of uByte
+
     public uByte() {
         this.a = 0;
     }

@@ -48,8 +48,8 @@ public enum EnumCommands {
     /**
      * Maps natural language words to enums.
      *
-     * @param word
-     * @return The enum associated with word, or null if word is not a key.
+     * @param word the used word.
+     * @return The enum associated with word, or null when word is not a key.
      */
     public static EnumCommands toCommand(String word) {
 
@@ -110,7 +110,7 @@ public enum EnumCommands {
     /**
      * This method allows to know whether it's a short command or not.
      *
-     * @param aString
+     * @param aString the mentioned string.
      * @return true or false.
      */
     public static boolean isShortCommand(String aString) {

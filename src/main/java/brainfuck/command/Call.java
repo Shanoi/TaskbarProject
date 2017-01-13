@@ -12,6 +12,9 @@ import brainfuck.lecture.Fichiers;
 public class Call implements Command {
 
     @Override
+    /**
+     * This method allows to execute the command Call.
+     */
     public void execute() {
 
         Fichiers.setRetAdress(ComputationalModel.getI() + 1);

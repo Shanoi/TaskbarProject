@@ -32,8 +32,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * This class represents the Translator in C++. From the Brainf*ck langage, we can generate
+ * code in C++. We can generate macros but not functions.
  *
- * @author Olivier
+ * @author Team Taskbar
  */
 public class TradCpp implements ObservableLogstxt {
 
@@ -57,6 +59,8 @@ public class TradCpp implements ObservableLogstxt {
     private int cptBoucle = 0;
 
     private int cptInstr = 0;
+
+    //Constructor of TradCpp
 
     public TradCpp(String filename) {
 

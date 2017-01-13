@@ -32,6 +32,8 @@ public final class Image extends Fichiers implements ObservableLogsImage {
 
     private ArrayList observers;// Tableau d'observateurs.
 
+    //Constructor of Image
+
     public Image(String path) {
 
         super(path);
@@ -47,8 +49,8 @@ public final class Image extends Fichiers implements ObservableLogsImage {
     /**
      * This method allows to create an image from the program (.txt)
      *
-     * @param dim
-     * @return
+     * @param dim the dimension of the image.
+     * @return The image from the text.
      */
     private BufferedImage createImg(int dim) {
 
@@ -88,11 +90,11 @@ public final class Image extends Fichiers implements ObservableLogsImage {
     }
 
     /**
-     * This method allows to save the image
+     * This method allows to save the image.
      *
-     * @param img
-     * @param path
-     * @throws IOException
+     * @param img the image itself.
+     * @param path the path to the image.
+     * @throws IOException the exception in case there isn't any image.
      */
     private void saveImg(final BufferedImage img, String path) throws IOException {
 
@@ -178,6 +180,9 @@ public final class Image extends Fichiers implements ObservableLogsImage {
     }
 
     @Override
+    /**
+     * This method allows to add an observer.
+     */
     public void addObserver(Observateur o) {
 
         observers.add(o);
@@ -185,6 +190,9 @@ public final class Image extends Fichiers implements ObservableLogsImage {
     }
 
     @Override
+    /**
+     * This method allows to delete an observer previously added.
+     */
     public void delObserver(Observateur o) {
 
         observers.remove(0);
@@ -192,6 +200,9 @@ public final class Image extends Fichiers implements ObservableLogsImage {
     }
 
     @Override
+    /**
+     * This method allows to update the observers for the logs.
+     */
     public void notifyForLogs(int i) {
 
         for (int j = 0; j < observers.size(); j++) {

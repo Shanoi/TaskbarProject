@@ -15,6 +15,8 @@ public final class Jump implements Command, Observable {
 
     private ArrayList observers;// Tableau d'observateurs.
 
+    //Constructor of Jump
+
     public Jump() {
 
         Monitor observer = new Monitor();

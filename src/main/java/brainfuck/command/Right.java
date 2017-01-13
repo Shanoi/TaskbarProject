@@ -18,6 +18,8 @@ public final class Right implements Command, Observable, ObservableLogs {
 
     private ArrayList observers;// Tableau d'observateurs.
 
+    //Constructor of Right
+
     public Right() {
 
         Monitor observer = new Monitor();

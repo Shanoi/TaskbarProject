@@ -78,7 +78,7 @@ public class Fichiers {
 
     /**
      * This method allows to read a file.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException when the file is not found exception.
      * @throws IOException
      */
     public void Read() throws FileNotFoundException, IOException {
@@ -250,6 +250,9 @@ public class Fichiers {
      */
     public static int getNbArgFonction(String fonction) {  return nbArgFonction.get(fonction); }
 
+    /**
+     * This method allows to clear the list of instructions.
+     */
     public void Reset(){
         list.clear();
     }

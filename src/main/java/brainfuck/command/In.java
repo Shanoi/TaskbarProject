@@ -33,6 +33,8 @@ public final class In implements Command, Observable, ObservableLogs {
 
     private ArrayList observers;// Tableau d'observateurs.
 
+    //Constructor of In
+
     public In() {
 
         Monitor observer = new Monitor();

@@ -38,6 +38,8 @@ public class Monitor implements Observateur {
 
     private final ComputationalModel cm;
 
+    //Constructor of Monitor
+
     public Monitor(String fileuh) throws IOException {
         //StatProg.file = new FileWriter(file, true);
 
@@ -271,7 +273,7 @@ public class Monitor implements Observateur {
     /**
      * This method allows to write the log on a file.
      *
-     * @param logs
+     * @param logs the concerned logs.
      */
     private void writer(String logs) {
 
@@ -287,6 +289,9 @@ public class Monitor implements Observateur {
 
     }
 
+    /**
+     *This method allows to reset all counters of the log.
+     */
     public void Reset() {
         NB_INSTR = 0;
         EXEC_MOVE = 0;

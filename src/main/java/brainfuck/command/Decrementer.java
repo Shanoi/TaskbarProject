@@ -17,6 +17,8 @@ public final class Decrementer implements Command, Observable, ObservableLogs {
 
     private ArrayList observers;// Tableau d'observateurs.
 
+    //Constructor of Decrementer
+
     public Decrementer() {
 
         Monitor observer = new Monitor();

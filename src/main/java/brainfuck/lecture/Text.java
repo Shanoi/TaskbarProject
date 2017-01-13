@@ -37,6 +37,8 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
     private ArrayList observers;// Tableau d'observateurs.
 
+    //Constructor of Text
+
     public Text(String path) {
         super(path);
         macros = new HashMap<>();
@@ -288,7 +290,12 @@ public final class Text extends Fichiers implements ObservableLogstxt {
 
     }
 
-    //TODO doc
+    /**
+     * This method allows to know whether it's a Macro line or not.
+     * @param macro the concerned macro.
+     * @param j
+     * @param separated
+     */
     private void MacroOrLine(Macro macro, int j, String[] separated) {
 
         String[] separatedMacro = macro.getCommands().get(j).split(" ");

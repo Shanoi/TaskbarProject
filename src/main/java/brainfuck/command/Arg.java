@@ -6,7 +6,7 @@ import brainfuck.lecture.Fichiers;
 /**
  * This class represents the command ARG in a Brainf*ck langage. It's used in procedures and functions.
  *
- * @author Team Taskbar
+ * @author TeamTaskbar
  */
 public class Arg implements Command {
 

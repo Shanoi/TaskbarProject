@@ -7,7 +7,7 @@ import brainfuck.memory.ComputationalModel;
  * This class represents the RETURN command of the Brainf*ck langage.
  * It allows to return a value in a function.
  *
- * @author Team Taskbar
+ * @author TeamTaskbar
  */
 public class Return implements Command {
 

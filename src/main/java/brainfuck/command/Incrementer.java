@@ -17,6 +17,8 @@ public final class Incrementer implements Command, Observable, ObservableLogs {
 
     private ArrayList observers;// Tableau d'observateurs.
 
+    //Constructor of Incrementer
+
     public Incrementer() {
 
         Monitor observer = new Monitor();
