@@ -38,7 +38,7 @@ public final class Jump implements Command, Observable {
 
         if (tempfile.getCm().getCurrentCaseValue() == 0) {
 
-            tempfile.getCm().setI(tempfile.jumpAssoc(tempfile.getCm().getI()));
+            tempfile.getCm().setI(tempfile.getTableLoopAssoc(tempfile.getCm().getI()));
 
         }
 
