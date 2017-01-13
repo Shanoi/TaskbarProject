@@ -31,9 +31,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//////////////////////////////
-///////Attention à la lecture, il faut la faire dans ce fichiers sinon on ne prend pas en compte les macros
-//////////////////////////////
 /**
  *
  * @author Olivier
@@ -81,21 +78,11 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
+    /**
+     * Execute the translation of a Brainf*ck program in C++
+     */
     public void execute() {
 
-        /*if (commands.contains(IN)) {
-
-         writeSupIn();
-         in = true;
-
-         }
-
-         if (commands.contains(OUT)) {
-
-         writeSupOut();
-         out = true;
-
-         }*/
         ReadMacro();
 
         if (in) {
@@ -138,6 +125,10 @@ public class TradCpp implements ObservableLogstxt {
         writeMemory();
     }
 
+    /**
+     * Write the header of the program Test if include of In.h and Out.h
+     *
+     */
     private void writeHeader() {
 
         StringBuilder Header = new StringBuilder();
@@ -161,13 +152,15 @@ public class TradCpp implements ObservableLogstxt {
 
         Header.append("#include \"Memory.h\"\n");
 
-        Header.append("\nusing namespace std;\n\n"
-                + "void checkSegFault(int i);\n\n");
+        Header.append("\nusing namespace std;\n\n");
 
         writer(Header.toString());
 
     }
 
+    /**
+     * Write the initialisation of the different variables of the C++ program
+     */
     private void writeInitVar() {
 
         StringBuilder Header = new StringBuilder();
@@ -191,6 +184,9 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
+    /**
+     * Write the end of the program
+     */
     private void writeEnd() {
 
         writer("\n");
@@ -207,38 +203,20 @@ public class TradCpp implements ObservableLogstxt {
 
         }
 
-        //writeInstr(pos, cpt, prevInstr);
         writer("\tdelete mem;\n"
                 + "\n\treturn 0;"
                 + "\n\n}\n\n");
 
-        writer("void checkSegFault(int i, int k){\n\n"
-                + "\tif (i + k > 30000 || i + k < 0){\n\n"
-                + "\t\texit(1);\n\n"
-                + "\t}\n"
-                + "}\n");
-
     }
 
+    /**
+     * Write the instruction of the list of commands
+     *
+     * @param macro To know if we write the commands of a macro
+     * @param commandstoWrite The commands to write
+     */
     private void writeInstr(boolean macro, ArrayList<EnumCommands> commandstoWrite) {
 
-        /*writer("int main(int n, char *params[]){\n\n"
-         + "\tunsigned char m[30000];\n\n"
-         + "\tint position = 0;\n\n");
-
-         if (in) {
-
-         writer("In *fIn = new In(argv);\n");
-
-         }
-
-         if (out) {
-
-         writer("Out *fOut = new Out(argv);\n");
-
-         }
-
-         writer("\tMemory *mem = new Memory();\n\n");*/
         int cpt = 0;
 
         EnumCommands prevInstr = commandstoWrite.get(0);
@@ -261,7 +239,6 @@ public class TradCpp implements ObservableLogstxt {
 
                 }
 
-                //writer("\t" + macroProg.get(i) + "; \n");
                 cpt = 1;
 
             } else if (commandstoWrite.get(i).equals(prevInstr) && i != size - 1) {
@@ -288,6 +265,16 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
+    /**
+     * Write the command at i of the list of command
+     *
+     * @param i the number of the command
+     * @param cpt the number of consecutive same instruction
+     * @param prevInstr the previous instructions
+     * @param macro To know if we write the commands of a macro
+     * @param size the size of the list of commands
+     * @param commandstoWrite The list of commands
+     */
     private void writeInstr(int i, int cpt, EnumCommands prevInstr, boolean macro, int size, ArrayList<EnumCommands> commandstoWrite) {
 
         if (commandstoWrite.get(i).equals(OUT)) {
@@ -312,7 +299,7 @@ public class TradCpp implements ObservableLogstxt {
 
             writeWhile();
 
-            cpt = 1; ////////////////////////////////// AJOUT A TESTER
+            cpt = 1;
 
         } else if (commandstoWrite.get(i).equals(BACK)) {
 
@@ -328,24 +315,16 @@ public class TradCpp implements ObservableLogstxt {
 
             writer("\n\n");
 
-            cpt = 1;    ////////////////////////////////// AJOUT A TESTER
+            cpt = 1;
 
-        } /*else if (macroProg.containsKey(i)) {
-
-         writer("\t" + macroProg.get(i) + "; \n");
-
-         cpt = 1;
-
-         }*/ else if (i == size - 1 && !commandstoWrite.get(i).equals(prevInstr)) {
+        } else if (i == size - 1 && !commandstoWrite.get(i).equals(prevInstr)) {
 
             writeInstr(cpt, prevInstr, macro);
 
             cpt = 1;
 
-            // if (!commandstoWrite.get(i).equals(prevInstr)) {
             writeInstr(cpt, commandstoWrite.get(i), macro);
 
-            //  }
         } else if (i == size - 1) {
 
             writeInstr(cpt + 1, prevInstr, macro);
@@ -360,6 +339,13 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
+    /**
+     * Write the rigth instruction in the file
+     *
+     * @param cpt The number of instruction
+     * @param prevInstr The previous instruction
+     * @param macro To know if we write the commands of a macro
+     */
     private void writeInstr(int cpt, EnumCommands prevInstr, boolean macro) {
 
         StringBuilder Instr = new StringBuilder();
@@ -400,23 +386,27 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
+    /**
+     * Write the line for the OUT instruction
+     */
     private void writeOut() {
 
-        //writer("\n\tcout << (char) m[" + pos + "] << endl;\n\n");
-        //writer("\n\tfOut->Output(m[position]);\n");
         writer("\n\tfOut->Output(mem->getCurrentValue());\n");
 
     }
 
+    /**
+     * Write the instruction for the IN instruction
+     */
     private void writeIn() {
 
-        /*writer("\n\tcin >> c;\n\n"
-         + "m[" + pos + "]\n");*/
-        //writer("\n\tfm[position] = In->Input();\n");
         writer("\n\tmem->setCurrentValue(In->Input());\n");
 
     }
 
+    /**
+     * Write for the JUMP instruction
+     */
     private void writeWhile() {
 
         writer("\n\twhile(mem->getCurrentValue() > 0){\n"
@@ -424,6 +414,9 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
+    /**
+     * Read the macro at the beginning of the program in brainf*ck
+     */
     private void ReadMacro() {
 
         String[] separated;
@@ -488,6 +481,9 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
+    /**
+     * Write the macro at the beginning of the C++ program
+     */
     private void writeMacro() {
 
         ArrayList<EnumCommands> commandsMacro = new ArrayList<>();
@@ -640,6 +636,9 @@ public class TradCpp implements ObservableLogstxt {
         }
     }
 
+    /**
+     * Write the files to manage the IN instruction
+     */
     private void writeSupIn() {
 
         String[] separated;
@@ -765,6 +764,9 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
+    /**
+     * Write the files to manage the OUT instruction
+     */
     private void writeSupOut() {
 
         String[] separated;
@@ -883,6 +885,9 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
+    /**
+     * Write the files to manage the Memory
+     */
     private void writeMemory() {
 
         String[] separated;
@@ -1073,6 +1078,11 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
+    /**
+     * Write the line in the main file
+     *
+     * @param instr The instruction to write
+     */
     private void writer(String instr) {
 
         try {
@@ -1089,6 +1099,9 @@ public class TradCpp implements ObservableLogstxt {
 
     }
 
+    /**
+     * Fill the list of commands by reading the program
+     */
     private void fillCommands() {
 
         cptInstr = 0;
@@ -1109,7 +1122,6 @@ public class TradCpp implements ObservableLogstxt {
 
             while (line != null) {
 
-                //ReadMacro(line, progFile);
                 if (line.equals("---- MACRO")) {
 
                     while (!((line = progFile.readLine())).equals("---- ENDMACRO") && line != null) {
@@ -1129,7 +1141,7 @@ public class TradCpp implements ObservableLogstxt {
                     separated = line.split(" ");
 
                     if (macros.containsKey(separated[0])) {
-                  
+
                         if (macros.get(separated[0]).getnbParam() == 0) {
 
                             if (!macroProg.containsKey(cptInstr)) {
@@ -1147,7 +1159,7 @@ public class TradCpp implements ObservableLogstxt {
                                     macroProg.put(cptInstr, instrMacro);
 
                                 } else {
-                                    
+
                                     System.exit(10);
 
                                 }
@@ -1158,20 +1170,19 @@ public class TradCpp implements ObservableLogstxt {
 
                                     macroProg.get(cptInstr).add(line + "(1)");
 
-                                    //macroProg.put(cptInstr, line + "(1)");
                                 } else if (separated.length == 2) {
 
                                     macroProg.get(cptInstr).add(separated[0] + "(" + separated[1] + ")");
 
                                 } else {
-                                    
+
                                     System.exit(10);
 
                                 }
 
                             }
 
-                        } else/* if (macros.get(separated[0]).getnbParam() == separated.length - 1)*/ {
+                        } else {
 
                             paramsMacro = new StringBuilder();
 
@@ -1186,7 +1197,6 @@ public class TradCpp implements ObservableLogstxt {
 
                             paramsMacro.append(")");
 
-                            //macroProg.put(cptInstr, line);
                             if (!macroProg.containsKey(cptInstr)) {
 
                                 instrMacro.add(paramsMacro.toString());
@@ -1202,7 +1212,7 @@ public class TradCpp implements ObservableLogstxt {
                         }
 
                     } else {
-                
+
                         ReadLine(line, commands);
 
                     }
