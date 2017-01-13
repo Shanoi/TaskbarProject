@@ -75,83 +75,83 @@ public class Launcher {
 
         }
 
-        if (p){
-        
-        Run run = new Run(path);
+        if (p) {
 
-        for (int i = 0; i < args.length; i++) {
+            Run run = new Run(path);
 
-            if (args[i].equals("--trace")) {
+            for (int i = 0; i < args.length; i++) {
 
-                FLAG_trace = true;
-                break;
-            }
+                if (args[i].equals("--trace")) {
 
-        }
-
-        run.load();
-
-        for (int i = 0; i < args.length; i++) {
-
-            if (args[i].equals("--rewrite")) {
-
-                new Text(path).Encod();
-
-                break;
-            }
-
-        }
-
-        for (int i = 0; i < args.length; i++) {
-
-            if (args[i].equals("--check")) {
-
-                new Wellformed((ArrayList<EnumCommands>) run.getFichier().getInstructions()).execute();
-            }
-
-        }
-
-        for (int i = 0; i < args.length; i++) {
-
-            if (args[i].equals("--translate")) {
-
-                new Image(path).Encod();
-            }
-
-        }
-
-        for (int i = 0; i < args.length; i++) {
-
-            if (args[i].equals("-o")) {
-
-                fileout = args[i + 1];
+                    FLAG_trace = true;
+                    break;
+                }
 
             }
 
-            if (args[i].equals("-i")) {
+            run.load();
 
-                filein = args[i + 1];
+            for (int i = 0; i < args.length; i++) {
+
+                if (args[i].equals("--rewrite")) {
+
+                    new Text(path).Encod();
+
+                    break;
+                }
 
             }
 
-        }
+            for (int i = 0; i < args.length; i++) {
 
-        for (int i = 0; i < args.length; i++) {
+                if (args[i].equals("--check")) {
 
-            if (args[i].equals("--TCpp")) {
+                    new Wellformed((ArrayList<EnumCommands>) run.getFichier().getInstructions()).execute();
+                }
 
-                new TradCpp(path).execute();
             }
 
-        }
+            for (int i = 0; i < args.length; i++) {
 
-        run.execute();
-        ComputationalModel.affichememoire();
-        
-        }else{
-            
+                if (args[i].equals("--translate")) {
+
+                    new Image(path).Encod();
+                }
+
+            }
+
+            for (int i = 0; i < args.length; i++) {
+
+                if (args[i].equals("-o")) {
+
+                    fileout = args[i + 1];
+
+                }
+
+                if (args[i].equals("-i")) {
+
+                    filein = args[i + 1];
+
+                }
+
+            }
+
+            for (int i = 0; i < args.length; i++) {
+
+                if (args[i].equals("--TCpp")) {
+
+                    new TradCpp(path).execute();
+                }
+
+            }
+
+            run.execute();
+            ComputationalModel.affichememoire();
+
+        } else {
+
             System.exit(1);
-            
+
         }
 
     }
