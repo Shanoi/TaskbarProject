@@ -51,11 +51,35 @@ public class Launcher {
         Run run = new Run(path);
 
         for (int i = 0; i < args.length; i++) {
+            
+            if (args[i].equals("-p")) {
+                
+                File f = new File(args[i + 1]);
+                
+                if(f.exists()){
+                    
+                    path = args[i + 1];
+                    
+                    break;
+                    
+                }else{
+                    
+                    System.exit(1);
+                    
+                    }
+                
+                
+                }
+            
+            }
+        }
+    
+        for (int i = 0; i < args.length; i++) {
 
             if (args[i].equals("--trace")) {
 
                 FLAG_trace = true;
-                return;
+                break;
             }
 
         }
@@ -68,7 +92,7 @@ public class Launcher {
 
                 new Text(path).Encod();
 
-                return;
+                break;
             }
 
         }
