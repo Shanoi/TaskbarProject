@@ -40,7 +40,7 @@ public final class Back implements Command, Observable {
 
         if (tempfile.getCm().getCurrentCaseValue() > 0) {
 
-            tempfile.getCm().setI(tempfile.backAssoc(tempfile.getCm().getI()));
+            tempfile.getCm().setI(tempfile.getTableLoopAssoc(tempfile.getCm().getI()));
 
         }
 
