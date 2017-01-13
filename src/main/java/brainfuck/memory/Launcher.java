@@ -49,7 +49,7 @@ public class Launcher {
     public void lauchInterpreter() throws IOException {
 
         //this.args = new ArrayList(Arrays.asList(args));
-        Run run = new Run(path);
+        
 
         for (int i = 0; i < args.length; i++) {
             
@@ -74,7 +74,8 @@ public class Launcher {
             
             }
         
-    
+        Run run = new Run(path);
+        
         for (int i = 0; i < args.length; i++) {
 
             if (args[i].equals("--trace")) {
